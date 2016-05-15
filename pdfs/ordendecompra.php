@@ -228,7 +228,7 @@
     $pdf->Cell(17, 4,"$".round($orden["total"],2), 1, 1,"R", 0, '', 0);     
     
     $pdf->Output('Orden de Compra.pdf', 'I');
-    
+    /*Agregado desde origen externo*/
     
     
     
