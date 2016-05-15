@@ -230,6 +230,9 @@
     $suma=$suma+4;
     $pdf->SetXY(172,$suma);
     
+    $suma=$suma+4;
+    $pdf->SetXY(172,$suma);    
+    
     
     $pdf->Output('Orden de Compra.pdf', 'I');
     
