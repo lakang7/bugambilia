@@ -2,7 +2,7 @@
     require_once('../recursos/tcpdf/tcpdf.php');
     require_once('../recursos/funciones.php');
     
-    
+    $pagina=1;
     $con=Conexion();
     $sql_orden="select * from ordendecompra where idordendecompra='".$_GET["id"]."'";
     $result_orden=mysql_query($sql_orden,$con) or die(mysql_error());
@@ -37,7 +37,19 @@
     
     // disable header and footer
     $pdf->setPrintHeader(false);
-    $pdf->setPrintFooter(false);    
+    $pdf->setPrintFooter(false);   
+    
+    // set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    // set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+
+    // set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE, 0);
+
+    // set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);    
     
     
     $pdf->AddPage('P', 'A4');
@@ -162,8 +174,9 @@
     
     $sql_pro="select * from productosordencompra where idordendecompra='".$orden["idordendecompra"]."'";
     $result_pro=mysql_query($sql_pro,$con) or die(mysql_error());
-    if(mysql_num_rows($result_pro)>0){ 
-        $cuenta=1;
+    $numerproductos=mysql_num_rows($result_pro);
+    $cuenta=1;
+    if($numerproductos<=38){
         while ($proorden = mysql_fetch_assoc($result_pro)) {
             $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
             $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
@@ -202,7 +215,120 @@
             $pdf->SetXY(186,$suma);
             $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
             $cuenta++;
-       }
+                                           
+        }        
+    }else 
+    if($numerproductos>38){
+        if($cuenta<38){
+            while (($proorden = mysql_fetch_assoc($result_pro)) && $cuenta<38) {            
+                $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
+                $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
+                $producto = mysql_fetch_assoc($resultproducto);
+                
+                $sqlmaterial="select * from material where idmaterial='".$producto["idmaterial"]."'";
+                $resultMaterial=mysql_query($sqlmaterial,$con) or die(mysql_error());
+                $material = mysql_fetch_assoc($resultMaterial);
+                
+                $sqlcolor="select * from color where idcolor='".$proorden["idcolor"]."'";
+                $resultColor=mysql_query($sqlcolor,$con) or die(mysql_error());
+                $color = mysql_fetch_assoc($resultColor);            
+            
+                $suma=$suma+4;
+                $pdf->SetFont('courier', '', 7);
+                $pdf->SetXY(10,$suma);
+                $pdf->Cell(7, 4,$cuenta, 1, 1,"R", 0, '', 0);
+                $pdf->SetXY(17,$suma);
+                $pdf->Cell(18, 4,$material["nombre"], 1, 1,"L", 0, '', 0);
+                $pdf->SetXY(35,$suma);
+                $pdf->Cell(18, 4,$producto["codigo"], 1, 1,"L", 0, '', 0); 
+                $pdf->SetXY(53,$suma);
+                $pdf->Cell(65, 4,$producto["descripcion"], 1, 1,"L", 0, '', 0); 
+                $pdf->SetXY(118,$suma);
+                $pdf->Cell(11, 4,$color["codigo"], 1, 1,"C", 0, '', 0);  
+                $pdf->SetXY(129,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionlargo"], 1, 1,"R", 0, '', 0);
+                $pdf->SetXY(140,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionancho"], 1, 1,"R", 0, '', 0); 
+                $pdf->SetXY(151,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionalto"], 1, 1,"R", 0, '', 0); 
+                $pdf->SetXY(162,$suma);
+                $pdf->Cell(10, 4,$proorden["numerodeunidades"], 1, 1,"C", 0, '', 0); 
+                $pdf->SetXY(172,$suma);
+                $pdf->Cell(14, 4,"$".$proorden["precioventa"], 1, 1,"C", 0, '', 0); 
+                $pdf->SetXY(186,$suma);
+                $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
+                $cuenta++;
+            }
+            $pdf->SetFont('courier', '', 9);
+            $pdf->Line(10, 285, 200, 285);
+            $pdf->SetXY(170,287);
+            $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;           
+            
+        }
+        if($cuenta>=38){
+            $pdf->AddPage('P', 'A4');
+            $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53,14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);    
+            $pdf->SetFont('courier', 'B', 10); 
+    
+            $pdf->SetXY(100,10);
+            $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigointerno"], 0, 1,"R", 0, '', 0);
+            $pdf->SetFont('courier', '', 10);
+            $pdf->SetXY(100,14);
+            $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  
+            $pdf->SetXY(100,18);
+            $pdf->Cell(100, 4,"Fecha de Pedido: ".$orden["fechaderegistro"], 0, 1,"R", 0, '', 0);  
+            $pdf->SetXY(100,22);
+            $pdf->Cell(100, 4,"Fecha de Entrega: ".$orden["fechadeentrega"], 0, 1,"R", 0, '', 0);     
+            $pdf->Line(10, 29, 200, 29);            
+            
+            
+            
+            
+            $suma=30;
+            while ($proorden = mysql_fetch_assoc($result_pro)) {            
+                $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
+                $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
+                $producto = mysql_fetch_assoc($resultproducto);
+                
+                $sqlmaterial="select * from material where idmaterial='".$producto["idmaterial"]."'";
+                $resultMaterial=mysql_query($sqlmaterial,$con) or die(mysql_error());
+                $material = mysql_fetch_assoc($resultMaterial);
+                
+                $sqlcolor="select * from color where idcolor='".$proorden["idcolor"]."'";
+                $resultColor=mysql_query($sqlcolor,$con) or die(mysql_error());
+                $color = mysql_fetch_assoc($resultColor);            
+            
+                $suma=$suma+4;
+                $pdf->SetFont('courier', '', 7);
+                $pdf->SetXY(10,$suma);
+                $pdf->Cell(7, 4,$cuenta, 1, 1,"R", 0, '', 0);
+                $pdf->SetXY(17,$suma);
+                $pdf->Cell(18, 4,$material["nombre"], 1, 1,"L", 0, '', 0);
+                $pdf->SetXY(35,$suma);
+                $pdf->Cell(18, 4,$producto["codigo"], 1, 1,"L", 0, '', 0); 
+                $pdf->SetXY(53,$suma);
+                $pdf->Cell(65, 4,$producto["descripcion"], 1, 1,"L", 0, '', 0); 
+                $pdf->SetXY(118,$suma);
+                $pdf->Cell(11, 4,$color["codigo"], 1, 1,"C", 0, '', 0);  
+                $pdf->SetXY(129,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionlargo"], 1, 1,"R", 0, '', 0);
+                $pdf->SetXY(140,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionancho"], 1, 1,"R", 0, '', 0); 
+                $pdf->SetXY(151,$suma);
+                $pdf->Cell(11, 4,$producto["dimensionalto"], 1, 1,"R", 0, '', 0); 
+                $pdf->SetXY(162,$suma);
+                $pdf->Cell(10, 4,$proorden["numerodeunidades"], 1, 1,"C", 0, '', 0); 
+                $pdf->SetXY(172,$suma);
+                $pdf->Cell(14, 4,"$".$proorden["precioventa"], 1, 1,"C", 0, '', 0); 
+                $pdf->SetXY(186,$suma);
+                $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
+                $cuenta++;
+            }             
+        }
+    
+ 
+
+       
     }     
     
          
@@ -226,6 +352,15 @@
     $pdf->Cell(14, 4,"Total", 0, 1,"R", 0, '', 0); 
     $pdf->SetXY(186,$suma);
     $pdf->Cell(17, 4,"$".round($orden["total"],2), 1, 1,"R", 0, '', 0);     
+    
+    
+   
+    
+    $pdf->SetFont('courier', '', 9);
+    $pdf->Line(10, 285, 200, 285);
+    $pdf->SetXY(170,287);
+    $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);    
+    
     
     $pdf->Output('Orden de Compra.pdf', 'I');
     /*Agregado desde origen externo*/
