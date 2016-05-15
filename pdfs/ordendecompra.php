@@ -227,20 +227,6 @@
     $pdf->SetXY(186,$suma);
     $pdf->Cell(17, 4,"$".round($orden["total"],2), 1, 1,"R", 0, '', 0);     
     
-    $suma=$suma+4;
-    $pdf->SetXY(172,$suma);
-    
-    $suma=$suma+4;
-    $pdf->SetXY(172,$suma);  
-        $suma=$suma+4;
-    $pdf->SetXY(172,$suma); 
-    
-        $suma=$suma+4;
-    $pdf->SetXY(172,$suma);  
-        $suma=$suma+4;
-    $pdf->SetXY(172,$suma); 
-    
-    
     $pdf->Output('Orden de Compra.pdf', 'I');
     
     
