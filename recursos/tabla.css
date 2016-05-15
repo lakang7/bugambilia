@@ -1,0 +1,54 @@
+.titulo_tabla{
+    background-color: #438eb9;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #ffffff;
+    padding-left: 1.7ex; 
+    font-weight: bold; 
+    font-size: 2ex    
+}
+
+.filtros_tabla{
+    background-color: #ffffff;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    color: #ffffff;
+    padding-left: 1.4ex; 
+    border-right: 1px solid #CCC; 
+    border-left: 1px solid #CCC;
+}
+
+.cabecera_tabla{
+    background-color: #ededed;
+    padding-top: 7px;
+    padding-bottom: 7px; 
+    font-weight: bold; 
+    border: 1px solid #CCC;    
+}
+
+.columna_cabecera{
+    border-right: 1px solid #CCC;
+    cursor: pointer;
+}
+
+.linea_tabla{
+    border-bottom: 1px solid #CCC;
+    padding-top: 3px;
+    padding-bottom: 3px; 
+    border-right: 1px solid #CCC; 
+    border-left: 1px solid #CCC    
+}
+
+.columna_linea{
+    font-size: 1.6ex;
+}
+
+.pie_tabla{
+    background-color: #ededed;
+    padding-top: 7px;
+    padding-bottom: 7px; 
+    padding-left: 1.7ex; 
+    border-right: 1px solid #CCC; 
+    border-left: 1px solid #CCC; 
+    border-bottom: 1px solid #CCC;    
+}

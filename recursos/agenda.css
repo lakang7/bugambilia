@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/03/2016, 05:38:57 PM
+    Author     : Lakhsmi Angarita
+*/
+
+.contienefiltros{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #CCC;    
+}
+
+.contieneletras{
+    border-bottom: 1px solid #CCC; 
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #CCC;    
+}
+
+.letra{
+    float: left;
+    border-right: 1px solid #CCC; 
+    padding: 1ex;
+    padding-left: 1.5ex;
+    padding-right: 1.5ex;
+    cursor: pointer;
+}
+
+.letra_selecciona{
+    float: left;
+    border-right: 1px solid #CCC; 
+    padding: 1ex;
+    padding-left: 1.5ex;
+    padding-right: 1.5ex;
+    cursor: pointer;
+    background-color: #009ceb;
+    color: #FFF;
+}
+
+.contacto{
+    border-bottom: 1px solid #CCC;
+    padding-top: 1.5ex;
+    padding-bottom: 1.5ex;
+}
+
+.indice{
+    font-size: 3ex;
+    border-bottom: 1px solid #CCC;
+    padding-top: 1ex;
+    padding-bottom: 1ex;    
+}

@@ -1,0 +1,549 @@
+CREATE TABLE pais (
+    idpais mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    identificador varchar(2) not null,
+    PRIMARY KEY (idpais)
+);
+
+INSERT INTO pais(nombre,identificador) VALUES ("México","MX");
+INSERT INTO pais(nombre,identificador) VALUES ("Estados Unidos","US");
+INSERT INTO pais(nombre,identificador) VALUES ("Panama","PA");
+
+CREATE TABLE estado (
+    idestado mediumint(8) unsigned auto_increment,
+    idpais mediumint(8) unsigned not null,
+    nombre varchar(60) not null,
+    PRIMARY KEY (idestado),
+    FOREIGN KEY (idpais) REFERENCES pais(idpais) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+INSERT INTO estado(idpais,nombre) VALUES (1,"Aguascalientes");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Baja California");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Baja California Sur");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Campeche");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Chiapas");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Chihuahua");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Coahuila");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Colima");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Distrito Federal");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Durango");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Estado de México");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Guanajuato");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Guerrero");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Hidalgo");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Jalisco");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Michoacán");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Morelos");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Nayarit");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Nuevo León");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Oaxaca");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Puebla");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Querétaro");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Quintana Roo");
+INSERT INTO estado(idpais,nombre) VALUES (1,"San Luis Potosí");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Sinaloa");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Sonora");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Tabasco");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Tamaulipas");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Tlaxcala");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Veracruz");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Yucatán");
+INSERT INTO estado(idpais,nombre) VALUES (1,"Zacatecas");
+
+INSERT INTO estado(idpais,nombre) VALUES (2,"Alabama");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Alaska");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Arizona");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Arkansas");
+INSERT INTO estado(idpais,nombre) VALUES (2,"California");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Colorado");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Connecticut");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Delaware");
+INSERT INTO estado(idpais,nombre) VALUES (2,"District of Columbia");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Florida");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Georgia");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Hawaii");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Idaho");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Illinois");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Indiana");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Iowa");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Kansas");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Kentucky");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Louisiana");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Maine");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Maryland");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Massachusetts");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Michigan");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Minnesota");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Mississippi");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Misuri");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Montana");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Nebraska");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Nevada");
+INSERT INTO estado(idpais,nombre) VALUES (2,"New Hampshire");
+INSERT INTO estado(idpais,nombre) VALUES (2,"New Jersey");
+INSERT INTO estado(idpais,nombre) VALUES (2,"New Mexico");
+INSERT INTO estado(idpais,nombre) VALUES (2,"New York");
+INSERT INTO estado(idpais,nombre) VALUES (2,"North Carolina");
+INSERT INTO estado(idpais,nombre) VALUES (2,"North Dakota");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Ohio");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Oklahoma");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Oregon");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Pennsylvania");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Rhode Island");
+INSERT INTO estado(idpais,nombre) VALUES (2,"South Carolina");
+INSERT INTO estado(idpais,nombre) VALUES (2,"South Dakota");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Tennessee");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Texas");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Utah");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Vermont");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Virginia");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Washington");
+INSERT INTO estado(idpais,nombre) VALUES (2,"West Virginia");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Wisconsin");
+INSERT INTO estado(idpais,nombre) VALUES (2,"Wyoming");
+
+INSERT INTO estado(idpais,nombre) VALUES (3,"Panamá");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Bocas del Toro");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Chiriquí");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Coclé");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Colón");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Darién");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Herrera");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Los Santos");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Veraguas");
+
+CREATE TABLE empresa (
+    idempresa mediumint(8) unsigned auto_increment,
+    nombreempresa varchar(120) not null,    
+    nombrecomercial varchar(120),
+    telefonoprincipal varchar(30) not null,
+    identificador varchar(40) not null,
+    idpais mediumint(8) unsigned not null,
+    fiscalcalle varchar(60),
+    fiscalexterior varchar(30),
+    fiscalinterior varchar(30),
+    fiscalcolonia varchar(60),
+    fiscalciudad varchar(30),
+    fiscalestado varchar(30),
+    fiscalpostal varchar(10),
+    entregacalle varchar(60),
+    entregaexterior varchar(30),
+    entregainterior varchar(30),
+    entregacolonia varchar(60),
+    entregaciudad varchar(30),
+    entregaestado varchar(30),
+    entregapostal varchar(10),
+    entregareferencia varchar(250),
+    codigo varchar(20),
+    registro TIMESTAMP not null,
+    iva integer not null,
+    PRIMARY KEY (idempresa),
+    FOREIGN KEY (idpais) REFERENCES pais(idpais) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE sucursal (
+    idsucursal mediumint(8) unsigned auto_increment,
+    idempresa mediumint(8) unsigned not null,   
+    nombrecomercial varchar(60),
+    registro TIMESTAMP not null,
+    regiones varchar(1000),
+    PRIMARY KEY (idsucursal),
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE estadosensucursal (
+    idestadosensucursal mediumint(8) unsigned auto_increment,
+    idsucursal mediumint(8) unsigned not null,  
+    idestado mediumint(8) unsigned not null,      
+    PRIMARY KEY (idestadosensucursal),
+    FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idestado) REFERENCES estado(idestado) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE agenda (
+    idagenda mediumint(8) unsigned auto_increment,
+    referencia varchar(60) not null,  
+    nombre varchar(60) not null,  
+    telefono1 varchar(30) not null,
+    telefono2 varchar(30),
+    email varchar(60) not null,  
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idagenda)    
+);
+
+CREATE TABLE asociacionagenda (
+    idasociacionagenda mediumint(8) unsigned auto_increment,
+    tipo integer not null,
+    idagenda mediumint(8) unsigned not null, 
+    idempresa mediumint(8) unsigned,
+    idsucursal mediumint(8) unsigned,     
+    idestado mediumint(8) unsigned,
+    PRIMARY KEY (idasociacionagenda),
+    FOREIGN KEY (idagenda) REFERENCES agenda(idagenda) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idestado) REFERENCES estado(idestado) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE color (
+    idcolor mediumint(8) unsigned auto_increment,
+    codigo varchar(30) not null, 
+    nombre varchar(30) not null,
+    foto varchar(120),
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idcolor)
+);
+
+insert into color (codigo,nombre) values("WW","Blanco");
+insert into color (codigo,nombre) values("BB","Negro");
+insert into color (codigo,nombre) values("ST","Acero");
+insert into color (codigo,nombre) values("FR","Rojo Fuego");
+insert into color (codigo,nombre) values("PC","Pacífico");
+insert into color (codigo,nombre) values("BR","Ladrillo");
+insert into color (codigo,nombre) values("CH","Chocolate");
+insert into color (codigo,nombre) values("MC","Moka");
+insert into color (codigo,nombre) values("LT","Latte");
+insert into color (codigo,nombre) values("FT","Verde Bosque");
+insert into color (codigo,nombre) values("WG","Verde Musgo");
+insert into color (codigo,nombre) values("CB","Arandano");
+insert into color (codigo,nombre) values("LM","Lima");
+insert into color (codigo,nombre) values("TG","Mandarina");
+insert into color (codigo,nombre) values("YW","Amarillo");
+insert into color (codigo,nombre) values("MW","Blanco Mármol");
+insert into color (codigo,nombre) values("GB","Negro Granito");
+insert into color (codigo,nombre) values("G","Gris");
+insert into color (codigo,nombre) values("SB","Azul Cielo");
+insert into color (codigo,nombre) values("J","Jade");
+insert into color (codigo,nombre) values("S","Arena");
+insert into color (codigo,nombre) values("T","Terracota");
+
+CREATE TABLE material (
+    idmaterial mediumint(8) unsigned auto_increment,
+    codigo varchar(30) not null, 
+    nombre varchar(120) not null,
+    colores varchar(1200),
+    registro TIMESTAMP not null,
+    dias integer not null,
+    PRIMARY KEY (idmaterial)
+);
+
+
+CREATE TABLE colorenmaterial (
+    idcolorenmaterial mediumint(8) unsigned auto_increment,
+    idmaterial mediumint(8) unsigned not null,
+    idcolor mediumint(8) unsigned not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idcolorenmaterial),
+    FOREIGN KEY (idmaterial) REFERENCES material(idmaterial) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE categoriaproducto (
+    idcategoriaproducto mediumint(8) unsigned auto_increment,
+    nombreespanol varchar(60) not null,
+    nombreingles varchar(60) not null,
+    PRIMARY KEY (idcategoriaproducto)    
+);
+
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Redondo","Round");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Cuadrado","Square");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Rectangular","Rectangle");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Triangulares","Triangle");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Ovalados","Oval");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Servicio de Ensaladas","Salad Service");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Salseras y Condimentos","Condiment Service");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Fiesta","Fiesta");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Display","Display");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Insertos","Food Pans");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Organizadores","Tile System");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Stands","Stands");
+
+CREATE TABLE patronproducto (
+    idpatronproducto mediumint(8) unsigned auto_increment,
+    idcategoriaproducto mediumint(8) unsigned not null,
+    nombreespanol varchar(60) not null,
+    nombreingles varchar(60) not null,
+    foto varchar(120),
+    materiales varchar(1200),
+    registro TIMESTAMP not null,   
+    PRIMARY KEY (idpatronproducto) 
+);
+
+CREATE TABLE materialespatron (
+    idmaterialespatron mediumint(8) unsigned auto_increment,
+    idpatronproducto mediumint(8) unsigned not null,
+    idmaterial mediumint(8) unsigned not null,    
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idmaterialespatron),
+    FOREIGN KEY (idpatronproducto) REFERENCES patronproducto(idpatronproducto) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idmaterial) REFERENCES material(idmaterial) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE categoriatipo (
+    idcategoriatipo mediumint(8) unsigned auto_increment,
+    tipocategoria varchar(60) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idcategoriatipo)
+);
+
+insert into categoriatipo (tipocategoria) values ("Catalogo");
+insert into categoriatipo (tipocategoria) values ("Especiales");
+insert into categoriatipo (tipocategoria) values ("Anodizados");
+
+CREATE TABLE tipoproducto (
+    idtipoproducto mediumint(8) unsigned auto_increment,
+    idcategoriatipo mediumint(8) unsigned not null,
+    codig varchar(10) not null,
+    nombre varchar(60) not null,
+    portipo numeric(5,3) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idtipoproducto)
+);
+
+insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (1,"CATVIEJO15","Catalogo 2015",4.3);
+insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (1,"CATNUEVO16","Catalogo 2016",7);
+insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (3,"ANODIZADOA","Productos Anodizados",7);
+insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (2,"ESPECIALES","Productos Especiales",7);
+
+CREATE TABLE producto (
+    idproducto mediumint(8) unsigned auto_increment,  
+    idtipoproducto mediumint(8) unsigned not null,
+    idpatronproducto mediumint(8) unsigned not null,
+    idmaterial mediumint(8) unsigned not null,
+    codigo varchar(30) not null,     
+    descripcion varchar(200) not null, 
+    dimensionlargo numeric(5,2) not null,
+    dimensionancho numeric(5,2) not null,
+    dimensionalto numeric(5,2) not null,
+    peso numeric(5,2),
+    capacidad numeric(5,2),
+    preciofabrica numeric(5,2) not null,        
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idproducto),
+    FOREIGN KEY (idtipoproducto) REFERENCES tipoproducto(idtipoproducto) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idpatronproducto) REFERENCES patronproducto(idpatronproducto) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idmaterial) REFERENCES material(idmaterial) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE historicopreciofabrica (
+    idhistoricopreciofabrica mediumint(8) unsigned auto_increment,
+    idproducto mediumint(8) unsigned not null,
+    preciofabrica numeric(5,3) not null,
+    desde TIMESTAMP not null,
+    hasta TIMESTAMP null,
+    PRIMARY KEY (idhistoricopreciofabrica),
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE listadeprecios (
+    idlistadeprecios mediumint(8) unsigned auto_increment,
+    idempresa mediumint(8) unsigned not null,
+    nombre varchar(90) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idlistadeprecios),
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE listatipos (
+    idlistatipos mediumint(8) unsigned auto_increment,
+    idlistadeprecios mediumint(8) unsigned not null,
+    idtipoproducto mediumint(8) unsigned not null,
+    porcentajeganancia numeric(5,3) not null,
+    PRIMARY KEY (idlistatipos),
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idtipoproducto) REFERENCES tipoproducto(idtipoproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE historicoporcentajeganancia (
+    idhistoricoporcentajeganancia mediumint(8) unsigned auto_increment,
+    idlistatipos mediumint(8) unsigned not null,
+    porcentajeganancia numeric(5,3) not null,
+    desde TIMESTAMP not null,
+    hasta TIMESTAMP null,
+    PRIMARY KEY (idhistoricoporcentajeganancia),
+    FOREIGN KEY (idlistatipos) REFERENCES listatipos(idlistatipos) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE configuracionsistema (
+    idconfiguracionsistema mediumint(8) unsigned not null,
+    regalias numeric(5,3) not null,
+    codigoclasica varchar(30) not null,
+    poriva numeric(5,3) not null,
+    secuenciaoc mediumint(8) unsigned,
+    PRIMARY KEY (idconfiguracionsistema)
+);
+
+insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc) values(1,10,'CLASICA',16,2300);
+
+CREATE TABLE excepcionlista (
+    idexcepcionlista mediumint(8) unsigned auto_increment,
+    idlistadeprecios mediumint(8) unsigned not null,
+    idproducto mediumint(8) unsigned not null,
+    preciofinal numeric(5,3) not null,
+    estatus integer not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idexcepcionlista),
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE historicoexcepcionlista(
+    idhistoricoexcepcionlista mediumint(8) unsigned auto_increment,
+    idexcepcionlista mediumint(8) unsigned not null,
+    preciofinal numeric(5,3) not null,
+    desde TIMESTAMP not null,
+    hasta TIMESTAMP null,
+    PRIMARY KEY (idhistoricoexcepcionlista),
+    FOREIGN KEY (idexcepcionlista) REFERENCES excepcionlista(idexcepcionlista) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE ordendecompra(
+    idordendecompra mediumint(8) unsigned auto_increment,
+    codigointerno varchar(12) not null,
+    codigoexterno varchar(12) not null,
+    fechadecreacion TIMESTAMP not null,
+    fechaderegistro date not null,
+    tipo integer not null,
+    idempresa mediumint(8) unsigned null,
+    idsucursal mediumint(8) unsigned null,
+    idestado mediumint(8) unsigned null,
+    idagenda mediumint(8) unsigned null,    
+    idlistadeprecios mediumint(8) unsigned null,    
+    idusuario mediumint(8) unsigned not null,
+    subtotal numeric(10,3) not null,
+    poriva numeric(10,2) not null,
+    iva numeric(10,3) not null,
+    total numeric(10,3) not null,
+    prioridad integer not null,
+    fechadeentrega date not null,
+    PRIMARY KEY (idordendecompra),
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idestado) REFERENCES estado(idestado) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idagenda) REFERENCES agenda(idagenda) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE productosordencompra(
+    idproductosordencompra mediumint(8) unsigned auto_increment,
+    idordendecompra mediumint(8) unsigned not null,
+    idproducto mediumint(8) unsigned not null, 
+    idcolor  mediumint(8) unsigned not null, 
+    preciofabrica numeric(5,3) not null,
+    precioventa numeric(5,3) not null,
+    numerodeunidades integer not null,
+    PRIMARY KEY (idproductosordencompra),
+    FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE menu(
+    idmenu mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    descripcion varchar(120) null,
+    icono varchar(60) not null,
+    PRIMARY KEY (idmenu)
+);
+
+insert into menu (nombre,icono) values("Clientes","menu-icon fa fa-globe");
+insert into menu (nombre,icono) values("Productos","menu-icon fa fa-flask");
+insert into menu (nombre,icono) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt");
+insert into menu (nombre,icono) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags");
+
+CREATE TABLE submenu(
+    idsubmenu mediumint(8) unsigned auto_increment,
+    idmenu mediumint(8) unsigned not null,
+    nombre varchar(60) not null,
+    descripcion varchar(120) null,
+    pagina varchar(200) not null,
+    PRIMARY KEY (idsubmenu),
+    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into submenu (idmenu,nombre,pagina) values(1,"Empresas","listarempresas.php");
+insert into submenu (idmenu,nombre,pagina) values(1,"Sucursales","listarsucursales.php");
+insert into submenu (idmenu,nombre,pagina) values(1,"Contactos","listarcontactos.php");
+insert into submenu (idmenu,nombre,pagina) values(2,"Materiales","listarmateriales.php");
+insert into submenu (idmenu,nombre,pagina) values(2,"Patrones","listarpatrones.php");
+insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos.php");
+insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
+insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","insertordendecompra.php");
+
+CREATE TABLE opcionessubmenu(
+    idopcionessubmenu mediumint(8) unsigned auto_increment,
+    idsubmenu mediumint(8) unsigned not null,
+    nombre varchar(60) not null,
+    descripcion varchar(120) null,
+    pagina varchar(200) not null,
+    icono varchar(60) not null,
+    requerido integer not null,
+    PRIMARY KEY (idopcionessubmenu),
+    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(1,"Listar Registros","listarempresas.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(1,"Agregar Nuevo Registro","insertempresa.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(2,"Listar Registros","listarsucursales.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(2,"Agregar Nuevo Registro","insertsucursal.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(3,"Listar Registros","listarcontactos.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(3,"Agregar Nuevo Registro","insertcontacto.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(4,"Listar Registros","listarmateriales.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(4,"Agregar Nuevo Registro","insertmaterial.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(5,"Listar Registros","listarpatrones.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(5,"Agregar Nuevo Registro","insertpatron.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(6,"Listar Registros","listarproductos.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(6,"Agregar Nuevo Registro","insertproducto.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(7,"Listar Registros","listarlistadeprecios.php","ace-icon fa fa-list-alt bigger-120 blue",1);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(7,"Agregar Nuevo Registro","insertlistadeprecios.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(8,"Agregar Nuevo Registro","insertordendecompra.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+
+CREATE TABLE usuario (
+    idusuario mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    usuario varchar(20) not null,
+    contraseña varchar(20) not null,
+    correo varchar(60) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idusuario)    
+);
+
+insert into usuario (nombre,usuario,contraseña,correo,registro) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now());
+insert into usuario (nombre,usuario,contraseña,correo,registro) values("Daniel Angarita","daniel","123456789","lakang5@hotmail.com",now());
+
+CREATE TABLE privilegio (
+    idprivilegio mediumint(8) unsigned auto_increment,
+    idusuario mediumint(8) unsigned not null,
+    idopcionessubmenu mediumint(8) unsigned not null,
+    PRIMARY KEY (idprivilegio),
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idopcionessubmenu) REFERENCES opcionessubmenu(idopcionessubmenu) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+insert into privilegio (idusuario,idopcionessubmenu) values(1,1);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,2);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,3);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,4);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,5);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,6);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,7);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,8);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,9);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,10);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,11);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,12);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,13);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,14);
+insert into privilegio (idusuario,idopcionessubmenu) values(1,15);
+
+insert into privilegio (idusuario,idopcionessubmenu) values(2,1);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,2);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,3);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,4);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,5);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,6);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,7);
+insert into privilegio (idusuario,idopcionessubmenu) values(2,8);
+
