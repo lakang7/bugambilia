@@ -112,11 +112,36 @@
 	join material ma on ma.idmaterial=pr.idmaterial join tipoproducto tp on tp.idtipoproducto=pr.idtipoproducto
 	where pp.idpatronproducto='".$patron["ID"]."'";
 	$result_productos=mysql_query($sql_productos,$con) or die(mysql_error()); 
-	$numerproductos=mysql_num_rows($result_productos);
-	/*while($productos = mysql_fetch_assoc($result_productos)){
+	$numerproductos=mysql_num_rows($result_productos);	
+	while($productos = mysql_fetch_assoc($result_productos)){
 		$pdf->SetXY(10,$suma+=6);
 		$pdf->SetFont('courier', 'N', 10); 
-		$pdf->Cell(70, 10,"CODIGO - DESCRIPCIONS : ".$materiales["NOMMAT"], 0, 1,"L", 0, '', 0);
+		$pdf->Cell(70, 10,"CODIGO - DESCRIPCIONS : ".$productos["COD"]." - ".$productos["DES"], 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"NOMBRE DE CATALOGO : ".$productos["NOM"], 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"PRECIO FABRICA : ".$productos["PRECIO"], 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"MATERIAL : ".$productos["MAT"], 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"DIMENSION LARGO : ".$productos["LARGO"]." (cm)", 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"DIMENSION  ALTO : ".$productos["ANCHO"]." (cm)", 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"DIMENSION  ALTO : ".$productos["ALTO"]." (cm)", 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"PESO : ".$productos["PESO"]." (Kg)", 0, 1,"L", 0, '', 0);
+		$pdf->SetXY(10,$suma+=3);
+		$pdf->SetFont('courier', 'N', 10); 
+		$pdf->Cell(70, 10,"CAPACIDAD : ".$productos["CAP"]." (lt)", 0, 1,"L", 0, '', 0);
+		
 	}/**/
 	
 	
