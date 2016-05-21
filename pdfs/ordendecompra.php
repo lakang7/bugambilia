@@ -22,11 +22,23 @@
        $pais = mysql_fetch_assoc($result_pais);                                
     }   
     
-    $sql_agenda="select * from agenda where idagenda='".$orden["idagenda"]."'";
+    $sql_agenda="select * from agenda where idagenda='".$orden["idagenda01"]."'";
     $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
     if(mysql_num_rows($result_agenda)>0){
-       $agenda = mysql_fetch_assoc($result_agenda);                                
-    }       
+       $agenda01 = mysql_fetch_assoc($result_agenda);                                
+    } 
+    
+    $sql_agenda="select * from agenda where idagenda='".$orden["idagenda02"]."'";
+    $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+    if(mysql_num_rows($result_agenda)>0){
+       $agenda02 = mysql_fetch_assoc($result_agenda);                                
+    }  
+    
+    $sql_agenda="select * from agenda where idagenda='".$orden["idagenda03"]."'";
+    $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+    if(mysql_num_rows($result_agenda)>0){
+       $agenda03 = mysql_fetch_assoc($result_agenda);                                
+    }     
                 
     
     
@@ -71,7 +83,7 @@
     $suma=35;
     $pdf->SetFont('courier', 'B', 12);
     $pdf->SetXY(10,$suma-1);$suma+=4.6;
-    $pdf->Cell(144, 4,"Datos de Contacto", 0, 1,"L", 0, '', 0); 
+    $pdf->Cell(144, 4,"Contacto de Compra", 0, 1,"L", 0, '', 0); 
     $pdf->SetFont('courier', 'B', 9);
     $pdf->SetXY(10,$suma);$suma+=4.6;
     $pdf->Cell(42, 4,"Codigo del Cliente:", 0, 1,"L", 0, '', 0);      
@@ -92,16 +104,67 @@
     $pdf->SetXY(52,$suma);$suma+=4.6;
     $pdf->Cell(102, 4,$empresa["nombreempresa"], 0, 1,"L", 0, '', 0); 
     $pdf->SetXY(52,$suma);$suma+=4.6;
-    $pdf->Cell(102, 4,$agenda["nombre"], 0, 1,"L", 0, '', 0);  
+    $pdf->Cell(102, 4,$agenda01["nombre"], 0, 1,"L", 0, '', 0);  
     $pdf->SetXY(52,$suma);$suma+=4.6;
-    $pdf->Cell(102, 4,$agenda["referencia"], 0, 1,"L", 0, '', 0); 
+    $pdf->Cell(102, 4,$agenda01["referencia"], 0, 1,"L", 0, '', 0); 
     $pdf->SetXY(52,$suma);$suma+=4.6;
-    $pdf->Cell(102, 4,$agenda["email"], 0, 1,"L", 0, '', 0);
+    $pdf->Cell(102, 4,$agenda01["email"], 0, 1,"L", 0, '', 0);
     $pdf->SetXY(52,$suma);$suma+=4.6;
-    $pdf->Cell(102, 4,$agenda["telefono1"], 0, 1,"L", 0, '', 0);    
-                
-    /*Datos de Facturación*/
-    $suma=70;
+    $pdf->Cell(102, 4,$agenda01["telefono1"], 0, 1,"L", 0, '', 0);             
+    
+    $aux=$suma;
+    $suma+=5;
+    $pdf->SetFont('courier', 'B', 12);
+    $pdf->SetXY(10,$suma-1);$suma+=4.6;
+    $pdf->Cell(144, 4,"Contacto de Cuentas por Pagar", 0, 1,"L", 0, '', 0); 
+    $pdf->SetFont('courier', 'B', 9);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Contacto:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Puesto:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Email:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Telefono:", 0, 1,"L", 0, '', 0);    
+    $suma=$aux+9.6;
+    $pdf->SetFont('courier', '', 9);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda02["nombre"], 0, 1,"L", 0, '', 0);  
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda02["referencia"], 0, 1,"L", 0, '', 0); 
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda02["email"], 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda02["telefono1"], 0, 1,"L", 0, '', 0);     
+    
+    $aux=$suma;
+    $suma+=5;
+    $pdf->SetFont('courier', 'B', 12);
+    $pdf->SetXY(10,$suma-1);$suma+=4.6;
+    $pdf->Cell(144, 4,"Contacto de Entrega", 0, 1,"L", 0, '', 0); 
+    $pdf->SetFont('courier', 'B', 9);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Contacto:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Puesto:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Email:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Telefono:", 0, 1,"L", 0, '', 0);    
+    $suma=$aux+9.6;
+    $pdf->SetFont('courier', '', 9);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda03["nombre"], 0, 1,"L", 0, '', 0);  
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda03["referencia"], 0, 1,"L", 0, '', 0); 
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda03["email"], 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$agenda03["telefono1"], 0, 1,"L", 0, '', 0);     
+    
+    $aux=$suma;
+    $suma+=5;
+    
     $pdf->SetFont('courier', 'B', 12);
     $pdf->SetXY(10,$suma-1);$suma+=4.6;
     $pdf->Cell(144, 4,"Datos de Facturación", 0, 1,"L", 0, '', 0); 
@@ -123,7 +186,7 @@
     $pdf->SetXY(10,$suma);$suma+=4.6;
     $pdf->Cell(42, 4,"RFC:", 0, 1,"L", 0, '', 0);  
     
-    $suma=70+4.6;
+    $suma=$aux+5+4.6;
     $pdf->SetFont('courier', '', 9);
     $pdf->SetXY(52,$suma);$suma+=4.6;
     $pdf->Cell(102, 4,$empresa["nombreempresa"], 0, 1,"L", 0, '', 0);    
@@ -140,9 +203,81 @@
     $pdf->SetXY(52,$suma);$suma+=4.6;
     $pdf->Cell(102, 4,$empresa["fiscalestado"].", ".$pais["nombre"], 0, 1,"L", 0, '', 0);
     $pdf->SetXY(52,$suma);$suma+=4.6;
-    $pdf->Cell(102, 4,$empresa["identificador"], 0, 1,"L", 0, '', 0);     
+    $pdf->Cell(102, 4,$empresa["identificador"], 0, 1,"L", 0, '', 0);    
     
-
+    
+    
+    
+    $aux=$suma;
+    $suma+=5;
+    $pdf->SetFont('courier', 'B', 12);
+    $pdf->SetXY(10,$suma-1);$suma+=4.6;
+    $pdf->Cell(144, 4,"Datos de Entrega", 0, 1,"L", 0, '', 0); 
+    $pdf->SetFont('courier', 'B', 9);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Nombre:", 0, 1,"L", 0, '', 0);      
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Calle:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Numero Exterior::", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Numero Interior:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Colonia:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Codigo Postal:", 0, 1,"L", 0, '', 0);     
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Estado y País:", 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(10,$suma);$suma+=4.6;
+    $pdf->Cell(42, 4,"Punto de Referencia:", 0, 1,"L", 0, '', 0);  
+    
+    
+    $suma=$aux+5+4.6;
+    $pdf->SetFont('courier', '', 9);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["nombreempresa"], 0, 1,"L", 0, '', 0);    
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregacalle"], 0, 1,"L", 0, '', 0); 
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregaexterior"], 0, 1,"L", 0, '', 0);  
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregainterior"], 0, 1,"L", 0, '', 0); 
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregacolonia"], 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregapostal"], 0, 1,"L", 0, '', 0);    
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregaestado"].", ".$pais["nombre"], 0, 1,"L", 0, '', 0);
+    $pdf->SetXY(52,$suma);$suma+=4.6;
+    $pdf->Cell(102, 4,$empresa["entregareferencia"], 0, 1,"L", 0, '', 0);                              
+    
+    $pdf->SetFont('courier', '', 9);
+    $pdf->Line(10, 285, 200, 285);
+    $pdf->SetXY(170,287);
+    $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;     
+    
+    
+    $pdf->AddPage('P', 'A4');
+    $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53,14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);    
+    $pdf->SetFont('courier', 'B', 10);     
+    
+    $pdf->SetXY(100,10);
+    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigointerno"], 0, 1,"R", 0, '', 0);
+    $pdf->SetFont('courier', '', 10);
+    $pdf->SetXY(100,14);
+    $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  
+    $pdf->SetXY(100,18);
+    $pdf->Cell(100, 4,"Fecha de Pedido: ".$orden["fechaderegistro"], 0, 1,"R", 0, '', 0);  
+    $pdf->SetXY(100,22);
+    $pdf->Cell(100, 4,"Fecha de Entrega: ".$orden["fechadeentrega"], 0, 1,"R", 0, '', 0);     
+    $pdf->Line(10, 29, 200, 29);      
+    
+                                            
+    $suma=35;
+    $pdf->SetFont('courier', 'B', 12);
+    $pdf->SetXY(10,$suma);$suma+=2;
+    $pdf->Cell(144, 4,"Productos en la Orden de Compra", 0, 1,"L", 0, '', 0);     
+            
     /*Cabecera de la tabla*/
     $suma=$suma+5;
     $pdf->SetFont('courier', 'B', 7);
@@ -169,14 +304,14 @@
     $pdf->SetXY(186,$suma);
     $pdf->Cell(17, 4,"Total", 1, 1,"C", 0, '', 0);    
     
-    
+        
     /*fila de la tabla*/
     
     $sql_pro="select * from productosordencompra where idordendecompra='".$orden["idordendecompra"]."'";
     $result_pro=mysql_query($sql_pro,$con) or die(mysql_error());
     $numerproductos=mysql_num_rows($result_pro);
     $cuenta=1;
-    if($numerproductos<=38){
+    if($numerproductos<=57){
         while ($proorden = mysql_fetch_assoc($result_pro)) {
             $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
             $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
@@ -218,9 +353,9 @@
                                            
         }        
     }else 
-    if($numerproductos>38){
-        if($cuenta<38){
-            while (($proorden = mysql_fetch_assoc($result_pro)) && $cuenta<38) {            
+    if($numerproductos>57){
+        if($cuenta<57){
+            while (($proorden = mysql_fetch_assoc($result_pro)) && $cuenta<57) {            
                 $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
                 $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
                 $producto = mysql_fetch_assoc($resultproducto);
@@ -265,7 +400,7 @@
             $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;           
             
         }
-        if($cuenta>=38){
+        if($cuenta>=57){
             $pdf->AddPage('P', 'A4');
             $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53,14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);    
             $pdf->SetFont('courier', 'B', 10); 
@@ -355,7 +490,7 @@
     
     
    
-    
+                       
     $pdf->SetFont('courier', '', 9);
     $pdf->Line(10, 285, 200, 285);
     $pdf->SetXY(170,287);
