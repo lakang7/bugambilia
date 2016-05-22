@@ -45,7 +45,7 @@
 	
 	$pdf->SetXY(10,$suma+=10);
     $pdf->SetFont('courier', 'N', 10); 
-	$pdf->Cell(105, 5,$empresa["idempresa"]." - ".$empresa["nombrecomercial"], 0, 1,"L", 0, '', 0);
+	$pdf->Cell(105, 5,$empresa["codigo"]." - ".$empresa["nombrecomercial"], 0, 1,"L", 0, '', 0);
 	
 	
 	$pdf->SetXY(10,$suma+=3);

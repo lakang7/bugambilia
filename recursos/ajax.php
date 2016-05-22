@@ -463,8 +463,8 @@
     /*Actualiza el contacto asociado*/
     if($_POST["tarea"]==14){
         echo "<div style='width: 100%; margin-top: 10px'>";
-        echo "<label>Contacto</label>";
-        echo "<select class='chosen-select form-control' id='contacto' name='contacto' data-placeholder='Elija el contacto asociado' required='required'>";
+        echo "<label style='margin-top: 10px'>Contacto de Compra</label>";
+        echo "<select class='chosen-select form-control' id='contacto01' name='contacto01' data-placeholder='Elija el contacto asociado' required='required'>";
         $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$_POST["idempresa"]."'";
         $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaASOCIACION)>0){
@@ -477,6 +477,38 @@
         }
         echo "</select>";                               
         echo "</div>";
+        
+        echo "<div style='width: 100%; margin-top: 10px'>";
+        echo "<label>Contacto de Cuentas por Pagar</label>";
+        echo "<select class='chosen-select form-control' id='contacto02' name='contacto02' data-placeholder='Elija el contacto asociado' required='required'>";
+        $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$_POST["idempresa"]."'";
+        $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
+        if(mysql_num_rows($result_listaASOCIACION)>0){
+            while ($fila = mysql_fetch_assoc($result_listaASOCIACION)) {
+                $sql_agenda="select * from agenda where idagenda='".$fila["idagenda"]."'";
+                $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+                $fila02 = mysql_fetch_assoc($result_agenda);
+                echo "<option value='".$fila02["idagenda"]."'>".$fila02["nombre"]."</option>";                    
+            }
+        }
+        echo "</select>";                               
+        echo "</div>";
+        
+        echo "<div style='width: 100%; margin-top: 10px'>";
+        echo "<label>Contacto de Entrega</label>";
+        echo "<select class='chosen-select form-control' id='contacto03' name='contacto03' data-placeholder='Elija el contacto asociado' required='required'>";
+        $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$_POST["idempresa"]."'";
+        $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
+        if(mysql_num_rows($result_listaASOCIACION)>0){
+            while ($fila = mysql_fetch_assoc($result_listaASOCIACION)) {
+                $sql_agenda="select * from agenda where idagenda='".$fila["idagenda"]."'";
+                $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+                $fila02 = mysql_fetch_assoc($result_agenda);
+                echo "<option value='".$fila02["idagenda"]."'>".$fila02["nombre"]."</option>";                    
+            }
+        }
+        echo "</select>";                               
+        echo "</div>";        
     } 
     
     /*Actualiza el contacto asociado*/

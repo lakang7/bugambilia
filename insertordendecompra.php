@@ -194,8 +194,8 @@
                                                                 
                                                             </div>
                                                         </div>
-                                                        <div id="contenedor03"></div>
-                                                        <div id="contenedor04"></div>  
+                                                        <div id="contenedor03" ></div>
+                                                        <div id="contenedor04" ></div>  
                                                         <div style="width: 100%; margin-top: 10px; margin-bottom: 5px">
                                                             <label>Productos en la Orden de Compra</label>
                                                         </div>
