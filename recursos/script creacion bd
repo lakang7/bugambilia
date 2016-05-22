@@ -474,7 +474,7 @@ insert into submenu (idmenu,nombre,pagina) values(2,"Materiales","listarmaterial
 insert into submenu (idmenu,nombre,pagina) values(2,"Patrones","listarpatrones.php");
 insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos.php");
 insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
-insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","insertordendecompra.php");
+insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listarordenesdecompra.php");
 
 CREATE TABLE opcionessubmenu(
     idopcionessubmenu mediumint(8) unsigned auto_increment,
