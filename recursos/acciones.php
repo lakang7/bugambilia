@@ -508,18 +508,28 @@
     if($tarea==16){ 
         $sql_insertOrden="";
         if(isset($_POST["sucursal"]) && isset($_POST["region"])){
-            $sql_insertOrden="insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigointerno,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('".$_POST["codigoext"]."','".$_POST["tipoorden"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["empresa"]."','".$_POST["sucursal"]."','".$_POST["region"]."','".$_POST["contacto01"]."','".$_POST["contacto02"]."','".$_POST["contacto03"]."','".$_POST["lista"]."',1,'".$_POST["codigoint"]."',0,0,0,0,'".$_POST["prioridad"]."',now())";
+            $sql_insertOrden="insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('".$_POST["codigoext"]."','".$_POST["tipoorden"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["empresa"]."','".$_POST["sucursal"]."','".$_POST["region"]."','".$_POST["contacto01"]."','".$_POST["contacto02"]."','".$_POST["contacto03"]."','".$_POST["lista"]."',1,'".$_POST["codigo01"]."','".$_POST["codigo02"]."',0,0,0,0,'".$_POST["prioridad"]."',now())";
         }else{
-            $sql_insertOrden="insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigointerno,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('".$_POST["codigoext"]."','".$_POST["tipoorden"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["empresa"]."','".$_POST["contacto01"]."','".$_POST["contacto02"]."','".$_POST["contacto03"]."','".$_POST["lista"]."',1,'".$_POST["codigoint"]."',0,0,0,0,'".$_POST["prioridad"]."',now())";
+            $sql_insertOrden="insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('".$_POST["codigoext"]."','".$_POST["tipoorden"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["empresa"]."','".$_POST["contacto01"]."','".$_POST["contacto02"]."','".$_POST["contacto03"]."','".$_POST["lista"]."',1,'".$_POST["codigo01"]."','".$_POST["codigo02"]."',0,0,0,0,'".$_POST["prioridad"]."',now())";
         }
               
         $result_insertOrden = mysql_query($sql_insertOrden,$con) or die(mysql_error());
         
-        $aux=explode("-",$_POST["codigoint"]);
-        $nuevoCodigo=($aux[1]+1);
+        
+        $aux=substr($_POST["codigo01"], 1);
+        $nuevoCodigo=($aux+1);
         
         $sqlupdateConfiguracion="update configuracionsistema set secuenciaoc='".$nuevoCodigo."' where idconfiguracionsistema=1";
         $resultupdateConfiguracion=mysql_query($sqlupdateConfiguracion,$con) or die(mysql_error());
+        
+        $aux=explode("-",$_POST["codigo02"]);
+        $nuevoCodigo=($aux[1]+1);
+        
+        $sqlupdateConfiguracion="update configuracionsistema set secuenciaop='".$nuevoCodigo."' where idconfiguracionsistema=1";
+        $resultupdateConfiguracion=mysql_query($sqlupdateConfiguracion,$con) or die(mysql_error());        
+        
+        
+        
         
         $sql_ultimaOrden="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendecompra';";
         $result_ultimaOrden=mysql_query($sql_ultimaOrden,$con) or die(mysql_error());	

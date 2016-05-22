@@ -105,7 +105,7 @@
                                             <div class="container-fluid">
 						<div class="page-header"><h1>Ordenes de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
                                                 <div class="row titulo_tabla">
-                                                    Lista de Patrones
+                                                    Lista de Ordenes de Compra
                                                 </div>    
                                                 <div class="row filtros_tabla">
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
@@ -126,7 +126,7 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendecompra.codigointerno">Codigo</option>
+                                                            <option value="ordendecompra.codigooc">Codigo</option>
                                                             <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="agenda.nombre">Contacto</option>
                                                             <option value="listadeprecios.nombre">Lista de Precios</option>
@@ -136,12 +136,12 @@
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendecompra.codigointerno" >
+                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendecompra.codigooc" >
                                                 <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigointerno')">Codigo<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigooc')">Codigo<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
@@ -150,7 +150,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigointerno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.codigointerno DESC";
+                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigooc as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.codigooc DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;

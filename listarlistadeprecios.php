@@ -153,6 +153,7 @@
                                                                 echo "<a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-warning'>Editar</span></a>";
                                                                 echo "<a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-purple'>Visualizar</span></a>";
                                                                 echo "<a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-yellow'>Excepciones</span></a>";
+                                                                echo "<a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-warning'>Exportar Excel</span></a>";
                                                                 echo "<span class='label label-danger'>Eliminar</span>";
                                                                 echo "</div>";
                                                                 echo "</div>"; 

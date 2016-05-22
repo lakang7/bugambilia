@@ -370,10 +370,11 @@ CREATE TABLE configuracionsistema (
     codigoclasica varchar(30) not null,
     poriva numeric(5,3) not null,
     secuenciaoc mediumint(8) unsigned,
+    secuenciaop mediumint(8) unsigned,
     PRIMARY KEY (idconfiguracionsistema)
 );
 
-insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc) values(1,10,'CLASICA',16,2300);
+insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop) values(1,10,'CLASICA',16,2300,4000);
 
 CREATE TABLE excepcionlista (
     idexcepcionlista mediumint(8) unsigned auto_increment,
@@ -400,7 +401,8 @@ CREATE TABLE historicoexcepcionlista(
 
 CREATE TABLE ordendecompra(
     idordendecompra mediumint(8) unsigned auto_increment,
-    codigointerno varchar(12) not null,
+    codigooc varchar(12) not null,
+    codigoop varchar(12) not null,
     codigoexterno varchar(12) not null,
     fechadecreacion TIMESTAMP not null,
     fechaderegistro date not null,
