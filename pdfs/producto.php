@@ -147,7 +147,8 @@
 		$pdf->SetFont('courier', '', 7);
         $pdf->SetXY($colum+=60,$suma);
         $pdf->Cell(60, 4,$precios["PRECIO"], 1, 1,"C", 0, '', 0);
-	
+		$colum=10;
+		
 	}
 	/**LISTA DE PRECIOS*/
 	$pdf->SetFont('courier', '', 9);
@@ -155,18 +156,47 @@
 	
 	$pdf->SetXY(10,$suma);
     $pdf->SetFont('courier', 'B', 12); 
-	$pdf->Cell(105, 10,"LISTA DE PRECIOS", 0, 1,"L", 0, '', 0);
+	$pdf->Cell(105, 10,"LISTA DE PRECIOS", 0, 1,"L", 0, '', 0);	
 	
 	
+	/*Cabecera de la tabla*/
+    $suma+=10;
+	$colum=10;
 	
+    $pdf->SetFont('courier', 'B', 7);
+    $pdf->SetXY($colum,$suma);
+    $pdf->Cell(60, 4,"EMPRESA", 1, 1,"C", 0, '', 0);
+    $pdf->SetXY($colum+=60,$suma);
+    $pdf->Cell(60, 4,"LISTA DE PRECIOS", 1, 1,"C", 0, '', 0);
+    $pdf->SetXY($colum+=60,$suma);
+    $pdf->Cell(60, 4,"PRECIO DE VENTA", 1, 1,"C", 0, '', 0); 
 	
+	$sql_list="select em.nombreempresa NOMEMP, lp.nombre LISTNOM,lp.idlistadeprecios,po.precioventa PVENTA from empresa em join listadeprecios lp on em.idempresa=lp.idempresa
+    join listatipos lt on lt.idlistadeprecios=lp.idlistadeprecios join tipoproducto tp
+    on tp.idtipoproducto=lt.idtipoproducto join producto pr on pr.idtipoproducto=tp.idtipoproducto
+    join productosordencompra po on po.idproducto=pr.idproducto
+    where pr.idproducto='".$ppatron["ID"]."'";
+    $result_list=mysql_query($sql_list,$con) or die(mysql_error());
+    $numerprecios=mysql_num_rows($result_list);
+    $cuenta=1;
+	$colum=10;
+	while ($lista = mysql_fetch_assoc($result_list)) {
+		$pdf->SetFont('courier', '', 7);
+        $pdf->SetXY($colum,$suma+=4);
+        $pdf->Cell(60, 4,$lista["NOMEMP"], 1, 1,"C", 0, '', 0);
 	
+		
+		$pdf->SetFont('courier', '', 7);
+        $pdf->SetXY($colum+=60,$suma);
+		$pdf->Cell(60, 4,$lista["LISTNOM"], 1, 1,"C", 0, '', 0);
+		
+		
+		$pdf->SetFont('courier', '', 7);
+        $pdf->SetXY($colum+=60,$suma);
+        $pdf->Cell(60, 4,$lista["PVENTA"], 1, 1,"C", 0, '', 0);
+		$colum=10;
 	
-	
-	
-	
-	
-	
+	}/**/
 	
 	
 	
