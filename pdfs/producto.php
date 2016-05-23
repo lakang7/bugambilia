@@ -80,8 +80,8 @@ $pdf->SetXY(10, $suma);
 $pdf->SetFont('courier', 'B', 12);
 $pdf->Cell(105, 10, "COLORES DISPONIBLES", 0, 1, "L", 0, '', 0);
 
-$sql_colores = "select co.`nombre` NOMCOL from `tipoproducto` tp join `categoriaproducto` cp on tp.`idcategoriatipo`=cp.`idcategoriaproducto` join producto pr on pr.`idtipoproducto`=tp.`idtipoproducto` 
-	join `patronproducto` pp on pp.`idpatronproducto`=pr.`idpatronproducto` join material ma on ma.`idmaterial` =pr.`idmaterial` join `colorenmaterial` cm on cm.`idmaterial`= ma.`idmaterial` join color co on co.`idcolor`=cm.`idcolor` where pr.`idproducto`='" . $ppatron["ID"] . "'";
+$sql_colores = "select co.nombre NOMCOL from tipoproducto tp join categoriaproducto cp on tp.idcategoriatipo=cp.idcategoriaproducto join producto pr on pr.idtipoproducto=tp.idtipoproducto 
+	join patronproducto pp on pp.idpatronproducto=pr.idpatronproducto join material ma on ma.idmaterial =pr.idmaterial join colorenmaterial cm on cm.idmaterial= ma.idmaterial join color co on co.idcolor=cm.idcolor where pr.idproducto='" . $ppatron["ID"] . "'";
 $result_colores = mysql_query($sql_colores, $con) or die(mysql_error());
 $numercolores = mysql_num_rows($result_colores);
 $cuenta = 1;
