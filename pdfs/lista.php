@@ -151,7 +151,7 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
                     $sql_tipo = "select * from tipoproducto where idtipoproducto='" . $pro["idtipoproducto"] . "'";
                     $result_tipo = mysql_query($sql_tipo, $con) or die(mysql_error());
                     $tipo = mysql_fetch_assoc($result_tipo);
-                    $sqlBUSCA = "select * from listatipos where idlistadeprecios='" . $_GET["id"] . "' and idtipoproducto='" . $pro["idtipoproducto"] . "'";
+                    $sqlBUSCA = "select * from listatipos where idlistadeprecios=1 and idtipoproducto='" . $pro["idtipoproducto"] . "'";
                     $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
                     if (mysql_num_rows($resultBUSCA) > 0) {
                         $busca = mysql_fetch_assoc($resultBUSCA);
@@ -179,13 +179,33 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
                     $pdf->SetFont('courier', '', 7);
                     $pdf->SetXY($colum+=8, $suma);
                     $pdf->Cell(24, 4, $pro["preciofabrica"], 1, 1, "C", 0, '', 0);
+
                     $acumulado = $pro["preciofabrica"];
                     $acumulado = $acumulado + $acumulado * ($configuracion["regalias"] / 100);
+                    $pdf->SetXY($colum+=24, $suma);
+                    $pdf->Cell(14, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+
+                    $acumulado = $acumulado + $acumulado * ($tipo["portipo"] / 100);
+                    $pdf->SetXY($colum+=14, $suma);
+                    $pdf->Cell(22, 4,  number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+
+                    $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
+                    $pdf->SetXY($colum+=22, $suma);
+                    $sqlExcepcion = "select * from excepcionlista where idlistadeprecios=1 and idproducto='" . $pro["idproducto"] . "'";
+                    $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
+                    if (mysql_num_rows($resultExcepcion) > 0) {
+                        $excepcion = mysql_fetch_assoc($resultExcepcion);
+//                        echo "<div class='col-xs-1' style='background-color: #ff0'>" . round($excepcion["preciofinal"], 2) . "</div>";
+                        $pdf->Cell(12, 4, number_format($excepcion["preciofinal"], 4, ".", ","), 1, 1, "C", 0, '', 0);
+                    } else {
+                        $pdf->Cell(12, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+                    }
 
 
                     $colum = 10;
                 }
             }
+            $suma+=2;
         }
     }
 }
