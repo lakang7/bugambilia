@@ -125,7 +125,11 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
 
 
 
-
+                $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
+                $result_Configuracion = mysql_query($sqlConfiguracion, $con) or die(mysql_error());
+                if (mysql_num_rows($result_Configuracion) > 0) {
+                    $configuracion = mysql_fetch_assoc($result_Configuracion);
+                }
 
                 $sql_pat = "select pp.idpatronproducto IDPP from patronproducto pp where pp.idpatronproducto='" . $forma["IDCP"] . "' ";
                 $result_pat = mysql_query($sql_pat, $con) or die(mysql_error());
@@ -144,6 +148,14 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
                 $sql_pro = "select * from producto where " . $concatena . " and " . $concatena2 . " order by codigo  ";
                 $result_pro = mysql_query($sql_pro, $con) or die(mysql_error());
                 while ($pro = mysql_fetch_assoc($result_pro)) {
+                    $sql_tipo = "select * from tipoproducto where idtipoproducto='" . $pro["idtipoproducto"] . "'";
+                    $result_tipo = mysql_query($sql_tipo, $con) or die(mysql_error());
+                    $tipo = mysql_fetch_assoc($result_tipo);
+                    $sqlBUSCA = "select * from listatipos where idlistadeprecios='" . $_GET["id"] . "' and idtipoproducto='" . $pro["idtipoproducto"] . "'";
+                    $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
+                    if (mysql_num_rows($resultBUSCA) > 0) {
+                        $busca = mysql_fetch_assoc($resultBUSCA);
+                    }
                     $pdf->SetFont('courier', '', 7);
                     $pdf->SetXY($colum, $suma+=4);
                     $pdf->Cell(12, 4, $pro["codigo"], 1, 1, "L", 0, '', 0);
@@ -167,7 +179,8 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
                     $pdf->SetFont('courier', '', 7);
                     $pdf->SetXY($colum+=8, $suma);
                     $pdf->Cell(24, 4, $pro["preciofabrica"], 1, 1, "C", 0, '', 0);
-
+                    $acumulado = $pro["preciofabrica"];
+                    $acumulado = $acumulado + $acumulado * ($configuracion["regalias"] / 100);
 
 
                     $colum = 10;
