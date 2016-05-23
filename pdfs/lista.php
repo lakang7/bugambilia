@@ -151,7 +151,7 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
                     $sql_tipo = "select * from tipoproducto where idtipoproducto='" . $pro["idtipoproducto"] . "'";
                     $result_tipo = mysql_query($sql_tipo, $con) or die(mysql_error());
                     $tipo = mysql_fetch_assoc($result_tipo);
-                    $sqlBUSCA = "select * from listatipos where idlistadeprecios=1 and idtipoproducto='" . $pro["idtipoproducto"] . "'";
+                    $sqlBUSCA = "select * from listatipos where idlistadeprecios=2 and idtipoproducto='" . $pro["idtipoproducto"] . "'";
                     $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
                     if (mysql_num_rows($resultBUSCA) > 0) {
                         $busca = mysql_fetch_assoc($resultBUSCA);
@@ -191,7 +191,7 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
 
                     $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
                     $pdf->SetXY($colum+=22, $suma);
-                    $sqlExcepcion = "select * from excepcionlista where idlistadeprecios=1 and idproducto='" . $pro["idproducto"] . "'";
+                    $sqlExcepcion = "select * from excepcionlista where idlistadeprecios=2 and idproducto='" . $pro["idproducto"] . "'";
                     $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
                     if (mysql_num_rows($resultExcepcion) > 0) {
                         $excepcion = mysql_fetch_assoc($resultExcepcion);
@@ -209,5 +209,5 @@ while ($categoriatipo = mysql_fetch_assoc($result_categoriatipo)) {
         }
     }
 }
-$pdf->Output('Orden de Compra.pdf', 'I');
+$pdf->Output('Llista de Precios.pdf', 'I');
 ?>
