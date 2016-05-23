@@ -69,7 +69,7 @@
     $pdf->SetFont('courier', 'B', 10); 
     
     $pdf->SetXY(100,10);
-    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigointerno"], 0, 1,"R", 0, '', 0);
+    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigooc"], 0, 1,"R", 0, '', 0);
     $pdf->SetFont('courier', '', 10);
     $pdf->SetXY(100,14);
     $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  
@@ -262,7 +262,7 @@
     $pdf->SetFont('courier', 'B', 10);     
     
     $pdf->SetXY(100,10);
-    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigointerno"], 0, 1,"R", 0, '', 0);
+    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigooc"], 0, 1,"R", 0, '', 0);
     $pdf->SetFont('courier', '', 10);
     $pdf->SetXY(100,14);
     $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  
@@ -406,7 +406,7 @@
             $pdf->SetFont('courier', 'B', 10); 
     
             $pdf->SetXY(100,10);
-            $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigointerno"], 0, 1,"R", 0, '', 0);
+            $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigooc"], 0, 1,"R", 0, '', 0);
             $pdf->SetFont('courier', '', 10);
             $pdf->SetXY(100,14);
             $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  

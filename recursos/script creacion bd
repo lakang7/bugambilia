@@ -553,3 +553,44 @@ insert into privilegio (idusuario,idopcionessubmenu) values(2,6);
 insert into privilegio (idusuario,idopcionessubmenu) values(2,7);
 insert into privilegio (idusuario,idopcionessubmenu) values(2,8);
 
+CREATE TABLE tabla (
+    idtabla mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    descripcion varchar(200) null,
+    PRIMARY KEY (idtabla)  
+);
+
+insert into tabla (nombre) values("Empresas");
+insert into tabla (nombre) values("Sucursales");
+insert into tabla (nombre) values("Contactos");
+insert into tabla (nombre) values("Materiales");
+insert into tabla (nombre) values("Patrones");
+insert into tabla (nombre) values("Productos");
+
+CREATE TABLE accion (
+    idaccion mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    descripcion varchar(200) null,
+    PRIMARY KEY (idaccion)  
+);
+
+insert into accion (nombre, descripcion) values("Inicio de Sessión","Un usuario del sistema inicia sesión en el mismo.");
+insert into accion (nombre, descripcion) values("Cierre de Sessión","Un usuario del sistema finaliza su sesión en el mismo.");
+insert into accion (nombre, descripcion) values("Creación de Registro","Se inserta un nuevo registro en la base de datos.");
+insert into accion (nombre, descripcion) values("Edición de Registro","Se edita un registro ya existente en la base de datos.");
+insert into accion (nombre, descripcion) values("Eliminación de Registro","Se elimina un registro de la base de datos.");
+insert into accion (nombre, descripcion) values("Exportar en PDF","Se genera y exporta un reporte del sistema en fomato PDF.");
+insert into accion (nombre, descripcion) values("Exportar en Excel","Se genera y exporta un reporte del sistema en fomato excel.");
+
+CREATE TABLE bitacora (
+    idbitacora mediumint(8) unsigned auto_increment,
+    idusuario mediumint(8) unsigned not null,
+    idaccion mediumint(8) unsigned not null,
+    idtabla mediumint(8) unsigned null,
+    momento TIMESTAMP not null,
+    descripcion varchar(1200) not null,
+    PRIMARY KEY (idbitacora),
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idaccion) REFERENCES accion(idaccion) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idtabla) REFERENCES tabla(idtabla) ON UPDATE CASCADE ON DELETE RESTRICT
+);
