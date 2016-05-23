@@ -5,7 +5,7 @@ require_once('../recursos/funciones.php');
 
 $pagina = 1;
 $con = Conexion();
-$sql_empresa = "select * from empresa join pais on empresa.idpais=pais.idpais  where idempresa=2";
+$sql_empresa = "select * from empresa join pais on empresa.idpais=pais.idpais  where idempresa='" . $_GET["id"] . "'";
 $result_empresa = mysql_query($sql_empresa, $con) or die(mysql_error());
 if (mysql_num_rows($result_empresa) > 0) {
     $empresa = mysql_fetch_assoc($result_empresa);

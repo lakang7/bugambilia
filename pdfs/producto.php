@@ -1,4 +1,5 @@
 <?php
+
 require_once('../recursos/tcpdf/tcpdf.php');
 require_once('../recursos/funciones.php');
 
@@ -8,7 +9,7 @@ $sql_propatron = "select pr.idproducto ID, pr.descripcion DES, pr.preciofabrica 
 	from tipoproducto tp join categoriaproducto cp on tp.idcategoriatipo=cp.idcategoriaproducto
 	join producto pr on pr.idtipoproducto=tp.idtipoproducto join patronproducto pp on
 	pp.idpatronproducto=pr.idpatronproducto	join material ma on ma.idmaterial=pr.idmaterial
-	where pr.idproducto=1";
+	where pr.idproducto='" . $_GET["id"] . "'";
 $result_ppatron = mysql_query($sql_propatron, $con) or die(mysql_error());
 if (mysql_num_rows($result_ppatron) > 0) {
     $ppatron = mysql_fetch_assoc($result_ppatron);
@@ -129,7 +130,15 @@ $result_hist = mysql_query($sql_hist, $con) or die(mysql_error());
 $numerprecios = mysql_num_rows($result_hist);
 $cuenta = 1;
 $colum = 10;
+$bool = 0;
 while ($precios = mysql_fetch_assoc($result_hist)) {
+    if ($suma > 250 && $bool == 0) {
+        $bool = 1;
+        $pdf->AddPage('P', 'A4');
+        $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+        $pdf->SetFont('courier', 'B', 10);
+        $suma = 30;
+    }
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum, $suma+=4);
     $pdf->Cell(60, 4, date("d / m / Y", strtotime($precios["DESDE"])), 1, 1, "C", 0, '', 0);
@@ -178,7 +187,15 @@ $result_list = mysql_query($sql_list, $con) or die(mysql_error());
 $numerprecios = mysql_num_rows($result_list);
 $cuenta = 1;
 $colum = 10;
+$bool = 0;
 while ($lista = mysql_fetch_assoc($result_list)) {
+    if ($suma > 250 && $bool == 0) {
+        $bool = 1;
+        $pdf->AddPage('P', 'A4');
+        $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+        $pdf->SetFont('courier', 'B', 10);
+        $suma = 30;
+    }
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum, $suma+=4);
     $pdf->Cell(60, 4, $lista["NOMEMP"], 1, 1, "C", 0, '', 0);
@@ -198,6 +215,6 @@ while ($lista = mysql_fetch_assoc($result_list)) {
 
 
 
-$pdf->Output('Orden de Compra.pdf', 'I');
+$pdf->Output('Productos.pdf', 'I');
 /* Agregado desde origen externo */
 ?>
