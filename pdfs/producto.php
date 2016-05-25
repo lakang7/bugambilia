@@ -2,9 +2,64 @@
 
 require_once('../recursos/tcpdf/tcpdf.php');
 require_once('../recursos/funciones.php');
+$con = Conexion();
+
+function calcularprecio($idproducto, $idlistadeprecios) {
+    $lista = "";
+    $producto = "";
+    $tipo = "";
+    $configuracion = "";
+    $busca = "";
+    $acumulado = 0;
+    $con = Conexion();
+    $sql_LISTA = "select * from listadeprecios where idlistadeprecios='" . $idlistadeprecios . "'";
+    $result_LISTA = mysql_query($sql_LISTA, $con) or die(mysql_error());
+    if (mysql_num_rows($result_LISTA) > 0) {
+        $lista = mysql_fetch_assoc($result_LISTA);
+    }
+
+    $sqlProducto = "select * from producto where idproducto='" . $idproducto . "'";
+    $resultProducto = mysql_query($sqlProducto, $con) or die(mysql_error());
+    if (mysql_num_rows($resultProducto) > 0) {
+        $producto = mysql_fetch_assoc($resultProducto);
+    }
+
+    $sql_tipo = "select * from tipoproducto where idtipoproducto='" . $producto["idtipoproducto"] . "'";
+    $result_tipo = mysql_query($sql_tipo, $con) or die(mysql_error());
+    if (mysql_num_rows($result_tipo) > 0) {
+        $tipo = mysql_fetch_assoc($result_tipo);
+    }
+
+    $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
+    $result_Configuracion = mysql_query($sqlConfiguracion, $con) or die(mysql_error());
+    if (mysql_num_rows($result_Configuracion) > 0) {
+        $configuracion = mysql_fetch_assoc($result_Configuracion);
+    }
+
+    $sqlBUSCA = "select * from listatipos where idlistadeprecios='" . $idlistadeprecios . "' and idtipoproducto='" . $producto["idtipoproducto"] . "'";
+    $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
+    if (mysql_num_rows($resultBUSCA) > 0) {
+        $busca = mysql_fetch_assoc($resultBUSCA);
+    }
+
+
+    $acumulado = ($producto["preciofabrica"]);
+    $acumulado = ($acumulado + ($acumulado * ($configuracion["regalias"] / 100)));
+    $acumulado = ($acumulado + ($acumulado * ($tipo["portipo"] / 100)));
+    $acumulado = ($acumulado + ($acumulado * ($busca["porcentajeganancia"] / 100)));
+
+    $sqlExcepcion = "select * from excepcionlista where idlistadeprecios='" . $idlistadeprecios . "' and idproducto='" . $producto["idproducto"] . "'";
+    $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
+    if (mysql_num_rows($resultExcepcion) > 0) {
+        $excepcion = mysql_fetch_assoc($resultExcepcion);
+        $acumulado = $excepcion["preciofinal"];
+    }
+
+    return $acumulado;
+}
 
 $pagina = 1;
-$con = Conexion();
+
 $sql_propatron = "select pr.idproducto ID, pr.descripcion DES, pr.preciofabrica PRECIO,tp.codig TPCOD,tp.nombre TPNOM, cp.nombreespanol CATNOM,	pp.nombreespanol PPNOM, ma.nombre MATNOM, pr.dimensionlargo LARGO, pr.dimensionancho ANCHO,pr.dimensionalto ALTO, pr.peso PESO, pr.capacidad CAP
 	from tipoproducto tp join categoriaproducto cp on tp.idcategoriatipo=cp.idcategoriaproducto
 	join producto pr on pr.idtipoproducto=tp.idtipoproducto join patronproducto pp on
@@ -39,6 +94,12 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 $pdf->AddPage('P', 'A4');
 $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+
+//Informe Empresa
+$pdf->SetXY(160, 18);
+$pdf->SetFont('courier', 'I', 12);
+$pdf->Cell(40, 10, "Informe Producto", 0, 1, "L", 0, '', 0);
+
 $pdf->SetFont('courier', 'B', 10);
 $pdf->Line(10, 29, 200, 29);
 
@@ -46,7 +107,7 @@ $pdf->Line(10, 29, 200, 29);
 $suma = 30;
 $pdf->SetXY(10, $suma);
 $pdf->SetFont('courier', 'B', 14);
-$pdf->Cell(105, 10, "DESCRIPCION", 0, 1, "L", 0, '', 0);
+$pdf->Cell(105, 10, "Descripcion", 0, 1, "L", 0, '', 0);
 
 $pdf->SetXY(10, $suma+=7);
 $pdf->SetFont('courier', 'N', 10);
@@ -141,13 +202,13 @@ while ($precios = mysql_fetch_assoc($result_hist)) {
     }
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum, $suma+=4);
-    $pdf->Cell(60, 4, date("d / m / Y", strtotime($precios["DESDE"])), 1, 1, "C", 0, '', 0);
+    $pdf->Cell(60, 4, date("d / m / Y", strtotime($precios["DESDE"])) . " - " . date("h:m", strtotime($precios["DESDE"])), 1, 1, "C", 0, '', 0);
 
 
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum+=60, $suma);
     if ($precios["HASTA"] != "") {
-        $pdf->Cell(60, 4, date("d / m / Y", strtotime($precios["HASTA"])), 1, 1, "C", 0, '', 0);
+        $pdf->Cell(60, 4, date("d / m / Y", strtotime($precios["HASTA"])) . " - " . date("h:m", strtotime($precios["HASTA"])), 1, 1, "C", 0, '', 0);
     } else {
         $pdf->Cell(60, 4, "Actualidad", 1, 1, "C", 0, '', 0);
     }
@@ -178,12 +239,14 @@ $pdf->Cell(60, 4, "LISTA DE PRECIOS", 1, 1, "C", 0, '', 0);
 $pdf->SetXY($colum+=60, $suma);
 $pdf->Cell(60, 4, "PRECIO DE VENTA", 1, 1, "C", 0, '', 0);
 
-$sql_list = "select em.nombreempresa NOMEMP, lp.nombre LISTNOM,lp.idlistadeprecios,po.precioventa PVENTA from empresa em join listadeprecios lp on em.idempresa=lp.idempresa
-    join listatipos lt on lt.idlistadeprecios=lp.idlistadeprecios join tipoproducto tp
-    on tp.idtipoproducto=lt.idtipoproducto join producto pr on pr.idtipoproducto=tp.idtipoproducto
-    join productosordencompra po on po.idproducto=pr.idproducto
-    where pr.idproducto='" . $ppatron["ID"] . "'";
+$sql_list = "select em.nombreempresa NOMEMP,lp.idlistadeprecios IDLISTA, lp.nombre LISTNOM,lp.idlistadeprecios 
+from empresa em join listadeprecios lp on em.idempresa=lp.idempresa";
 $result_list = mysql_query($sql_list, $con) or die(mysql_error());
+$lista = mysql_fetch_assoc($result_list);
+
+
+
+
 $numerprecios = mysql_num_rows($result_list);
 $cuenta = 1;
 $colum = 10;
@@ -198,20 +261,19 @@ while ($lista = mysql_fetch_assoc($result_list)) {
     }
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum, $suma+=4);
-    $pdf->Cell(60, 4, $lista["NOMEMP"], 1, 1, "C", 0, '', 0);
+    $pdf->Cell(60, 4, $lista["NOMEMP"], 1, 1, "L", 0, '', 0);
 
 
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum+=60, $suma);
-    $pdf->Cell(60, 4, $lista["LISTNOM"], 1, 1, "C", 0, '', 0);
+    $pdf->Cell(60, 4, $lista["LISTNOM"], 1, 1, "L", 0, '', 0);
 
 
     $pdf->SetFont('courier', '', 7);
     $pdf->SetXY($colum+=60, $suma);
-    $pdf->Cell(60, 4, $lista["PVENTA"], 1, 1, "C", 0, '', 0);
+    $pdf->Cell(60, 4, number_format(calcularprecio($_GET["id"], $lista["IDLISTA"]), 3, ".", ","), 1, 1, "C", 0, '', 0);
     $colum = 10;
-}/**/
-
+}
 
 
 

@@ -36,6 +36,12 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 $pdf->AddPage('P', 'A4');
 $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+
+//Informe Empresa
+$pdf->SetXY(140, 18);
+$pdf->SetFont('courier', 'I', 12);
+$pdf->Cell(40, 10, "Informe Patrón Producto", 0, 1, "L", 0, '', 0);
+
 $pdf->SetFont('courier', 'B', 10);
 $pdf->Line(10, 29, 200, 29);
 
@@ -49,10 +55,10 @@ $pdf->Cell(105, 10, $patron["NOMING"], 0, 1, "L", 0, '', 0);
 /* * FORMA */
 $pdf->SetXY(10, $suma+=6);
 $pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(105, 10, "Forma : " . $patron["FORMESP"], 0, 1, "L", 0, '', 0);
-$pdf->SetXY(42, $suma);
-$pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(105, 10, " - " . $patron["FORMING"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(105, 10,  $patron["FORMESP"], 0, 1, "L", 0, '', 0);
+//$pdf->SetXY(42, $suma);
+//$pdf->SetFont('courier', 'N', 10);
+//$pdf->Cell(105, 10, " - " . $patron["FORMING"], 0, 1, "L", 0, '', 0);
 
 
 /* * *MATERIALES DISPONIBLES* */
@@ -110,7 +116,10 @@ while ($materiales = mysql_fetch_assoc($result_material)) {
     $suma+=4;
 }
 
-$pdf->SetXY(10, $suma+=8);
+$pdf->SetFont('courier', '', 9);
+$pdf->Line(10, $suma+=12, 200, $suma);
+
+$pdf->SetXY(10, $suma+=4);
 $pdf->SetFont('courier', 'B', 10);
 $pdf->Cell(105, 10, "PRODUCTOS BASADOS EN EL PATRON", 0, 1, "L", 0, '', 0);
 
@@ -132,10 +141,10 @@ while ($productos = mysql_fetch_assoc($result_productos)) {
     }
     $pdf->SetXY(10, $suma+=6);
     $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(70, 10, "Codigo - Descripciones : " . $productos["COD"] . " - " . $productos["DES"], 0, 1, "L", 0, '', 0);
-    $pdf->SetXY(10, $suma+=3);
-    $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(70, 10, "Nnombre de Catalogo : " . $productos["NOM"], 0, 1, "L", 0, '', 0);
+    $pdf->Cell(70, 10,  $productos["COD"] . " - " . $productos["DES"], 0, 1, "L", 0, '', 0);
+//    $pdf->SetXY(10, $suma+=3);
+//    $pdf->SetFont('courier', 'N', 10);
+//    $pdf->Cell(70, 10,  $productos["NOM"], 0, 1, "L", 0, '', 0);
     $pdf->SetXY(10, $suma+=3);
     $pdf->SetFont('courier', 'N', 10);
     $pdf->Cell(70, 10, "Precio de Fabrica : " . $productos["PRECIO"], 0, 1, "L", 0, '', 0);
@@ -144,13 +153,13 @@ while ($productos = mysql_fetch_assoc($result_productos)) {
     $pdf->Cell(70, 10, "Material : " . $productos["MAT"], 0, 1, "L", 0, '', 0);
     $pdf->SetXY(10, $suma+=3);
     $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(70, 10, "Dimension Largo : " . $productos["LARGO"] . " (cm)", 0, 1, "L", 0, '', 0);
+    $pdf->Cell(70, 10, "Largo : " . $productos["LARGO"] . " (cm)", 0, 1, "L", 0, '', 0);
     $pdf->SetXY(10, $suma+=3);
     $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(70, 10, "Dimension Ancho : " . $productos["ANCHO"] . " (cm)", 0, 1, "L", 0, '', 0);
+    $pdf->Cell(70, 10, "Ancho : " . $productos["ANCHO"] . " (cm)", 0, 1, "L", 0, '', 0);
     $pdf->SetXY(10, $suma+=3);
     $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(70, 10, "Dimension Alto : " . $productos["ALTO"] . " (cm)", 0, 1, "L", 0, '', 0);
+    $pdf->Cell(70, 10, "Alto : " . $productos["ALTO"] . " (cm)", 0, 1, "L", 0, '', 0);
     $pdf->SetXY(10, $suma+=3);
     $pdf->SetFont('courier', 'N', 10);
     $pdf->Cell(70, 10, "Peso : " . $productos["PESO"] . " (Kg)", 0, 1, "L", 0, '', 0);

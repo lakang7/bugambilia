@@ -227,7 +227,7 @@ if (mysql_num_rows($result_cattipo) > 0) {
                                 $excepcion = mysql_fetch_assoc($resultExcepcion);
 //                        echo "<div class='col-xs-1' style='background-color: #ff0'>" . round($excepcion["preciofinal"], 2) . "</div>";
                                 $pdf->SetFillColor(255,255,0);
-                                $pdf->Cell(12, 4, number_format($excepcion["preciofinal"], 4, ".", ","), 1, 1, "C", 1, '', 0);
+                                $pdf->Cell(12, 4, number_format($excepcion["preciofinal"], 3, ".", ","), 1, 1, "C", 1, '', 0);
                             } else {
                                 $pdf->Cell(12, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
                             }
