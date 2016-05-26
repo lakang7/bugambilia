@@ -95,10 +95,64 @@
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
-                    
-                        <?php Menu($_SESSION['usuario']); ?>
+
+			<div id="sidebar" class="sidebar h-sidebar navbar-collapse collapse">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+
+				<ul class="nav nav-list">
+                                        <?php 
+                                            $con=  Conexion();
+                                            $sql_uno="select * from menualto where idusuario='".$_SESSION["usuario"]."'";
+                                            $result_uno=mysql_query($sql_uno,$con) or die(mysql_error());
+                                            if(mysql_num_rows($result_uno)>0){
+                                                while ($uno = mysql_fetch_assoc($result_uno)) {
+                                                    $sql_dos="select * from menu where idmenu='".$uno["idmenu"]."'";
+                                                    $result_dos=mysql_query($sql_dos,$con) or die(mysql_error());
+                                                    $dos = mysql_fetch_assoc($result_dos);
+                                                     ?>
+                                                        <li class="hover">
+                                                            <a href="#" class="dropdown-toggle"><i class="<?php echo $dos["icono"]; ?>"></i><span class="menu-text"><?php echo $dos["nombre"]; ?></span></a>                                                            
+                                                            <b class="arrow"></b>
+                                                            <?php
+                                                                $sql_tres="select * from privilegio where idmenualto='".$uno["idmenualto"]."'";
+                                                                $result_tres=mysql_query($sql_tres,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($result_tres)>0){
+                                                                    ?>
+                                                                    <ul class="submenu">
+                                                                        <?php
+                                                                            while ($tres = mysql_fetch_assoc($result_tres)) {
+                                                                                $sql_cuatro="select * from submenu where idsubmenu='".$tres["idsubmenu"]."'";
+                                                                                $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
+                                                                                $cuatro = mysql_fetch_assoc($result_cuatro);
+                                                                                echo "<li class='hover'>";
+                                                                                echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                echo "<i class='menu-icon fa fa-caret-right'></i>";
+                                                                                echo $cuatro["nombre"];
+                                                                                echo "</a>";                                                          
+                                                                                echo "<b class='arrow'></b>";
+                                                                                echo "</li>";                                                              
+                                                                            }
+                                                                        ?>
+                                                                    </ul>                 
+                                                                   <?php                                                   
+                                                                }
+                                                            ?>
+                                                        </li>                                    
+                                                    <?php
+                                                }   
+                                            }
+                                        ?>                                                        	                                                                                			
+				</ul><!-- /.nav-list -->
+
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+			</div>
                         
 			<div class="main-content">
+                            <input type="hidden" name="oculto" id="oculto" />
                             <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
 				<div class="main-content-inner">
 					<div class="page-content">
@@ -167,7 +221,12 @@
                                                                 echo "<div class='col-xs-2' >";
                                                                 echo "<a href='editarpatron.php?id=".$fila["idorden"]."' ><span class='label label-warning'>Editar</span></a>";
                                                                 echo "<a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank' ><span class='label label-danger'>Exportar PDF</span></a>";
-                                                                echo "<span class='label label-warning'>Ordenar Producción</span>";
+                                                                $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
+                                                                $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($resultValida)==0){
+                                                                    echo "<a href='#my-modal' role='button' data-toggle='modal'><span class='label label-warning' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</span></a>";
+                                                                }
+                                                                
                                                                 
                                                                 echo "</div>";
                                                                 echo "</div>"; 
@@ -209,6 +268,63 @@
                                     </div>
 				</div>
                             </form>
+                            
+                            
+                            
+                            
+                            
+                            <script type="text/javascript">
+                                function prueba(id){                                    
+                                    document.getElementById("oculto").value=id;
+                                }
+                            </script>
+                            <div id="my-modal" class="modal fade" tabindex="-1" onshow="hola()">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h3 class="smaller lighter blue no-margin" >Generar Orden de Producción</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="width: 100%;">
+                                                Persona Interna de Contacto para la orden de Producción
+                                            </div>
+                                            <div style="width: 100%;">
+                                                <select class="chosen-select form-control" style="width: 100%" id="persona" name="persona" data-placeholder="Seleccione el contacto" required="required">                                                    
+                                                        <?php
+                                                        $con=Conexion();
+                                                        $sql_listaUSUARIOS="select * from usuario order by nombre";
+                                                        $result_listaUSUARIOS=mysql_query($sql_listaUSUARIOS,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_listaUSUARIOS)>0){
+                                                            while ($usuario = mysql_fetch_assoc($result_listaUSUARIOS)) {
+                                                                echo "<option value='".$usuario["idusuario"]."'>".$usuario["nombre"]."</option>";                                                                                                                                                            
+                                                            }
+                                                        }
+                                                        mysql_close($con);                                                                
+                                                        ?>
+                                                </select>                                                         
+                                            </div>                                                                                                                                    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"><i class="ace-icon fa fa-times"></i>Cerrar</button>                                            
+                                            <button class="btn btn-sm btn-warning pull-right" style="margin-right: 10px" onclick="generar()"><i class="ace-icon fa fa-plus"></i>Generar</button>                                            
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                                <script type="text/javascript">
+                                    function hola(){                                                                
+                                        $("#persona_chosen").width("100%");
+                                    }
+                                    function generar(){ 
+                                        var idorden = document.getElementById("oculto").value;
+                                        var idcontacto = document.getElementById("persona").value;
+                                        //alert(idorden+" "+idcontacto);
+                                        var URL ="recursos/acciones2.php?tarea=17&idorden="+idorden+"&idcontacto="+idcontacto;
+                                        location.href=URL;
+                                    }
+                                </script>
+                            </div>                                                                                                                
+                            
 			</div>
 			
                         <div class="footer">

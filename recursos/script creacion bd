@@ -371,10 +371,18 @@ CREATE TABLE configuracionsistema (
     poriva numeric(5,3) not null,
     secuenciaoc mediumint(8) unsigned,
     secuenciaop mediumint(8) unsigned,
+    facturacionempresa varchar(60),
+    facturacioncalle varchar(60),
+    facturacionext varchar(60),
+    facturacionint varchar(60),
+    facturacioncolonia varchar(60),
+    facturacionpostal varchar(60),
+    facturacionestpais varchar(60),
+    facturacionrfc varchar(25),
     PRIMARY KEY (idconfiguracionsistema)
 );
 
-insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop) values(1,10,'CLASICA',16,2300,4000);
+insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23');
 
 CREATE TABLE excepcionlista (
     idexcepcionlista mediumint(8) unsigned auto_increment,
@@ -432,6 +440,35 @@ CREATE TABLE ordendecompra(
     FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT    
 );
 
+CREATE TABLE ordendeproduccion(
+    idordendeproduccion mediumint(8) unsigned auto_increment,
+    idordendecompra mediumint(8) unsigned null,
+    codigoop varchar(12) not null,  
+    idagenda mediumint(8) unsigned null,
+    fechaderegistro TIMESTAMP not null, 
+    subtotal numeric(10,3) not null,
+    poriva numeric(10,2) not null,
+    iva numeric(10,3) not null,
+    total numeric(10,3) not null, 
+    PRIMARY KEY (idordendeproduccion),
+    FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idagenda) REFERENCES agenda(idagenda) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE productosordenproduccion(
+    idproductosordenproduccion mediumint(8) unsigned auto_increment,
+    idordendeproduccion mediumint(8) unsigned not null,
+    idproducto mediumint(8) unsigned not null, 
+    idcolor  mediumint(8) unsigned not null, 
+    preciofabrica numeric(5,3) not null,
+    numerodeunidades integer not null,
+    PRIMARY KEY (idproductosordenproduccion),
+    FOREIGN KEY (idordendeproduccion) REFERENCES ordendeproduccion(idordendeproduccion) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
 CREATE TABLE productosordencompra(
     idproductosordencompra mediumint(8) unsigned auto_increment,
     idordendecompra mediumint(8) unsigned not null,
@@ -445,6 +482,19 @@ CREATE TABLE productosordencompra(
     FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+CREATE TABLE usuario (
+    idusuario mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    usuario varchar(20) not null,
+    contraseña varchar(20) not null,
+    correo varchar(60) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idusuario)    
+);
+
+insert into usuario (nombre,usuario,contraseña,correo,registro) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now());
+insert into usuario (nombre,usuario,contraseña,correo,registro) values("Daniel Angarita","daniel","123456789","lakang5@hotmail.com",now());
 
 CREATE TABLE menu(
     idmenu mediumint(8) unsigned auto_increment,
@@ -478,80 +528,38 @@ insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos
 insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
 insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listarordenesdecompra.php");
 
-CREATE TABLE opcionessubmenu(
-    idopcionessubmenu mediumint(8) unsigned auto_increment,
+CREATE TABLE menualto(
+    idmenualto mediumint(8) unsigned auto_increment,
+    idmenu mediumint(8) unsigned not null,
+    idusuario mediumint(8) unsigned not null,
+    PRIMARY KEY (idmenualto),
+    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into menualto (idmenu,idusuario) values(1,1);
+insert into menualto (idmenu,idusuario) values(2,1);
+insert into menualto (idmenu,idusuario) values(3,1);
+insert into menualto (idmenu,idusuario) values(4,1);
+
+CREATE TABLE privilegio(
+    idprivilegio mediumint(8) unsigned auto_increment,
+    idmenualto mediumint(8) unsigned not null, 
     idsubmenu mediumint(8) unsigned not null,
-    nombre varchar(60) not null,
-    descripcion varchar(120) null,
-    pagina varchar(200) not null,
-    icono varchar(60) not null,
-    requerido integer not null,
-    PRIMARY KEY (idopcionessubmenu),
+    PRIMARY KEY (idprivilegio),
+    FOREIGN KEY (idmenualto) REFERENCES menualto(idmenualto) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(1,"Listar Registros","listarempresas.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(1,"Agregar Nuevo Registro","insertempresa.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(2,"Listar Registros","listarsucursales.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(2,"Agregar Nuevo Registro","insertsucursal.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(3,"Listar Registros","listarcontactos.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(3,"Agregar Nuevo Registro","insertcontacto.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(4,"Listar Registros","listarmateriales.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(4,"Agregar Nuevo Registro","insertmaterial.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(5,"Listar Registros","listarpatrones.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(5,"Agregar Nuevo Registro","insertpatron.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(6,"Listar Registros","listarproductos.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(6,"Agregar Nuevo Registro","insertproducto.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(7,"Listar Registros","listarlistadeprecios.php","ace-icon fa fa-list-alt bigger-120 blue",1);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(7,"Agregar Nuevo Registro","insertlistadeprecios.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
-insert into opcionessubmenu (idsubmenu,nombre,pagina,icono,requerido) values(8,"Agregar Nuevo Registro","insertordendecompra.php","ace-icon fa fa-floppy-o bigger-120 blue",0);
+insert into privilegio (idmenualto,idsubmenu) values(1,1);
+insert into privilegio (idmenualto,idsubmenu) values(1,2);
+insert into privilegio (idmenualto,idsubmenu) values(1,3);
+insert into privilegio (idmenualto,idsubmenu) values(2,4);
+insert into privilegio (idmenualto,idsubmenu) values(2,5);
+insert into privilegio (idmenualto,idsubmenu) values(2,6);
+insert into privilegio (idmenualto,idsubmenu) values(3,7);
+insert into privilegio (idmenualto,idsubmenu) values(4,8);
 
-CREATE TABLE usuario (
-    idusuario mediumint(8) unsigned auto_increment,
-    nombre varchar(60) not null,
-    usuario varchar(20) not null,
-    contraseña varchar(20) not null,
-    correo varchar(60) not null,
-    registro TIMESTAMP not null,
-    PRIMARY KEY (idusuario)    
-);
-
-insert into usuario (nombre,usuario,contraseña,correo,registro) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now());
-insert into usuario (nombre,usuario,contraseña,correo,registro) values("Daniel Angarita","daniel","123456789","lakang5@hotmail.com",now());
-
-CREATE TABLE privilegio (
-    idprivilegio mediumint(8) unsigned auto_increment,
-    idusuario mediumint(8) unsigned not null,
-    idopcionessubmenu mediumint(8) unsigned not null,
-    PRIMARY KEY (idprivilegio),
-    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idopcionessubmenu) REFERENCES opcionessubmenu(idopcionessubmenu) ON UPDATE CASCADE ON DELETE RESTRICT    
-);
-
-insert into privilegio (idusuario,idopcionessubmenu) values(1,1);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,2);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,3);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,4);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,5);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,6);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,7);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,8);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,9);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,10);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,11);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,12);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,13);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,14);
-insert into privilegio (idusuario,idopcionessubmenu) values(1,15);
-
-insert into privilegio (idusuario,idopcionessubmenu) values(2,1);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,2);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,3);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,4);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,5);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,6);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,7);
-insert into privilegio (idusuario,idopcionessubmenu) values(2,8);
 
 CREATE TABLE tabla (
     idtabla mediumint(8) unsigned auto_increment,

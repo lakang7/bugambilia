@@ -815,7 +815,11 @@
                     echo "<div class='col-xs-2' >";
                     echo "<a href='editarpatron.php?id=".$fila["idorden"]."' ><span class='label label-warning'>Editar</span></a>";
                     echo "<span class='label label-danger'>Exportar PDF</span>";
-                    echo "<span class='label label-warning'>Ordenar Producción</span>";
+                    $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
+                    $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
+                    if(mysql_num_rows($resultValida)==0){
+                        echo "<a href='#my-modal' role='button' data-toggle='modal'><span class='label label-warning' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</span></a>";
+                    }
                     echo "</div>";
                     echo "</div>";  
                 }

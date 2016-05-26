@@ -30,7 +30,7 @@
                 ?>                 
 	</head>
 
-	<body class="no-skin">
+        <body class="no-skin">
 		<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar navbar-fixed-top">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -92,26 +92,72 @@
 		</div>
 
 		<div class="main-container" id="main-container">
+                    
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
-                    
-                        <?php Menu($_SESSION['usuario']); ?>
+
+			<div id="sidebar" class="sidebar h-sidebar navbar-collapse collapse">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+
+				<ul class="nav nav-list">
+                                        <?php 
+                                            $con=  Conexion();
+                                            $sql_uno="select * from menualto where idusuario='".$_SESSION["usuario"]."'";
+                                            $result_uno=mysql_query($sql_uno,$con) or die(mysql_error());
+                                            if(mysql_num_rows($result_uno)>0){
+                                                while ($uno = mysql_fetch_assoc($result_uno)) {
+                                                    $sql_dos="select * from menu where idmenu='".$uno["idmenu"]."'";
+                                                    $result_dos=mysql_query($sql_dos,$con) or die(mysql_error());
+                                                    $dos = mysql_fetch_assoc($result_dos);
+                                                     ?>
+                                                        <li class="hover">
+                                                            <a href="#" class="dropdown-toggle"><i class="<?php echo $dos["icono"]; ?>"></i><span class="menu-text"><?php echo $dos["nombre"]; ?></span></a>                                                            
+                                                            <b class="arrow"></b>
+                                                            <?php
+                                                                $sql_tres="select * from privilegio where idmenualto='".$uno["idmenualto"]."'";
+                                                                $result_tres=mysql_query($sql_tres,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($result_tres)>0){
+                                                                    ?>
+                                                                    <ul class="submenu">
+                                                                        <?php
+                                                                            while ($tres = mysql_fetch_assoc($result_tres)) {
+                                                                                $sql_cuatro="select * from submenu where idsubmenu='".$tres["idsubmenu"]."'";
+                                                                                $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
+                                                                                $cuatro = mysql_fetch_assoc($result_cuatro);
+                                                                                echo "<li class='hover'>";
+                                                                                echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                echo "<i class='menu-icon fa fa-caret-right'></i>";
+                                                                                echo $cuatro["nombre"];
+                                                                                echo "</a>";                                                          
+                                                                                echo "<b class='arrow'></b>";
+                                                                                echo "</li>";                                                              
+                                                                            }
+                                                                        ?>
+                                                                    </ul>                 
+                                                                   <?php                                                   
+                                                                }
+                                                            ?>
+                                                        </li>                                    
+                                                    <?php
+                                                }   
+                                            }
+                                        ?>                                                        	                                                                                			
+				</ul><!-- /.nav-list -->
+
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+			</div>
                         
 			<div class="main-content">                            
 				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
 						<div class="page-header">                                                
-                                                    <a href="insertempresa.php"><button class="btn btn-white btn-info btn-bold">
-                                                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-                                                    Agregar Nuevo Registro
-                                                    </button></a>
-                                                
-                                                    <a href="listarempresas.php"><button class="btn btn-white btn-info btn-bold" style="margin-left: 8px; ">
-                                                    <i class="ace-icon fa fa-list-alt bigger-120 blue"></i>
-                                                    Listar Registros
-                                                    </button></a>
+
                                                     
                                                     <h1 style="margin-top: 10px">Empresas<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1>
                                                 </div>
@@ -689,7 +735,9 @@
                         if(e.which ==13){
                             $("#contenedortabla").load("recursos/tablas.php", {tabla:"empresas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                         }                        
-                    });                    
+                    });  
+                    
+                    
                 </script>
 	</body>
 </html>
