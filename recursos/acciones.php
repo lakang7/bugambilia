@@ -455,11 +455,40 @@ if ($tarea == 8) {
 /* Editar Contacto */
 if ($tarea == 9) {
     echo "Editar Contacto";
+
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select referencia, nombre, telefono1, telefono2, email from agenda where idagenda='" . $_GET["id"] . "' ";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
     $sql_updateContacto = "update agenda set referencia='" . $_POST["referencia"] . "',nombre='" . $_POST["nombre"] . "',telefono1='" . $_POST["telefonouno"] . "',telefono2='" . $_POST["telefonodos"] . "',email='" . $_POST["correo"] . "' where idagenda='" . $_GET["id"] . "' ";
     $result_updateContacto = mysql_query($sql_updateContacto, $con) or die(mysql_error());
 
     $sql_eliminarASOCIACION = "delete from asociacionagenda where idagenda='" . $_GET["id"] . "'";
     $result_eliminarASOCIACION = mysql_query($sql_eliminarASOCIACION, $con) or die(mysql_error());
+
+    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
+    $sql_afterupdate = "select referencia, nombre, telefono1, telefono2, email from agenda where idagenda='" . $_GET["id"] . "' ";
+    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+    $oldregistro = mysql_fetch_row($result_beforeupdate);
+    $news = mysql_fetch_row($result_afterupdate);
+
+    $campos = array("referencia", " nombre", " telefono1", " telefono2", " email");
+    $descripcion = "'Registro de Contacto  de Empresa codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+    $linea = "";
+
+    for ($index = 0; $index < count($oldregistro); $index++) {
+        if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+            $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+        }
+    }
+    $descripcion = $descripcion . " " . $linea . "'";
+    $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,3,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+    $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+    /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
+
 
     /* Asociado a Empresa */
     if ($_POST["tipodeasociacion"] == "AE") {
@@ -481,6 +510,13 @@ if ($tarea == 9) {
 
 /* Editar Material */
 if ($tarea == 10) {
+
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select codigo, nombre, colores, registro, dias from material where idmaterial='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
+
     $sql_updateMaterial = "update material set codigo='" . $_POST["codigomaterial"] . "',nombre='" . $_POST["nombrematerial"] . "',dias='" . $_POST["dias"] . "' where idmaterial='" . $_GET["id"] . "'";
     $result_updateMaterial = mysql_query($sql_updateMaterial, $con) or die(mysql_error());
 
@@ -505,6 +541,8 @@ if ($tarea == 10) {
     $sql_update = "update material set colores='" . $colores . "' where idmaterial='" . $_GET["id"] . "'";
     $result_update = mysql_query($sql_update, $con) or die(mysql_error());
 
+
+    /*     * *******NO SE PARA QUE***** */
     $sql_selmaterial = "select * from material where idmaterial='" . $_GET["id"] . "'";
     $result_selmaterial = mysql_query($sql_selmaterial, $con) or die(mysql_error());
 
@@ -512,11 +550,44 @@ if ($tarea == 10) {
         $material = mysql_fetch_assoc($result_selmaterial);
     }
 
+    /*     * *****FIN DEL NO SABER********* */
+
+
+    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
+    $sql_afterupdate = "select codigo, nombre, colores, registro, dias from material where idmaterial='" . $_GET["id"] . "'";
+    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+    $oldregistro = mysql_fetch_row($result_beforeupdate);
+    $news = mysql_fetch_row($result_afterupdate);
+
+    $campos = array("codigo", " nombre", " colores", " registro", " dias");
+    $descripcion = "'Registro de Material con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+    $linea = "";
+
+    for ($index = 0; $index < count($oldregistro); $index++) {
+        if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+            $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+        }
+    }
+    $descripcion = $descripcion . " " . $linea . "'";
+    $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,4,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+    $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+    /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
+
+
+
     echo "Actualización Satisfactoria de Material";
 }
 
 /* Editar Patrón */
 if ($tarea == 11) {
+
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select idcategoriaproducto,nombreespanol, nombreingles,  materiales from patronproducto where idpatronproducto='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
     $sql_updatePatron = "update patronproducto set idcategoriaproducto='" . $_POST["tipo"] . "',nombreespanol='" . $_POST["espanol"] . "',nombreingles='" . $_POST["ingles"] . "' where idpatronproducto='" . $_GET["id"] . "'";
     $result_updatePatron = mysql_query($sql_updatePatron, $con) or die(mysql_error());
 
@@ -542,6 +613,27 @@ if ($tarea == 11) {
     $result_update = mysql_query($sql_update, $con) or die(mysql_error());
 
 
+    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
+    $sql_afterupdate = "select idcategoriaproducto,nombreespanol, nombreingles,  materiales from patronproducto where idpatronproducto='" . $_GET["id"] . "'";
+    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+    $oldregistro = mysql_fetch_row($result_beforeupdate);
+    $news = mysql_fetch_row($result_afterupdate);
+
+    $campos = array("idcategoriaproducto", " nombreespanol", " nombreingles", " materiales");
+    $descripcion = "'Registro de Material con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+    $linea = "";
+    for ($index = 0; $index < count($oldregistro); $index++) {
+        if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+            $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+        }
+    }
+    $descripcion = $descripcion . " " . $linea . "'";
+    $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,5,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+    $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+    /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
+
     echo "Actualización Satisfactoria de Patrón";
 }
 
@@ -561,8 +653,11 @@ if ($tarea == 12) {
     } else {
         $peso = $_POST["peso"];
     }
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select idtipoproducto, idpatronproducto, idmaterial, codigo, descripcion, dimensionlargo, dimensionancho, dimensionalto, peso, capacidad, preciofabrica from producto where idproducto='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
 
-    //$sql_insertProducto="insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica) values(".$_POST["temporada"].",".$_POST["patron"].",".$_POST["material"].",'".$_POST["codigoproducto"]."','".$_POST["descripcion"]."',".$_POST["largo"].",".$_POST["ancho"].",".$_POST["alto"].",".$peso.",".$capacidad.",".$_POST["precio"].")";        
 
     $sql_updateProducto = "update producto set idtipoproducto='" . $_POST["temporada"] . "', idpatronproducto='" . $_POST["patron"] . "', idmaterial='" . $_POST["material"] . "', codigo='" . $_POST["codigoproducto"] . "',descripcion='" . $_POST["descripcion"] . "',dimensionlargo='" . $_POST["largo"] . "',dimensionancho='" . $_POST["ancho"] . "',dimensionalto='" . $_POST["alto"] . "',peso='" . $peso . "',capacidad='" . $capacidad . "' where idproducto='" . $_GET["id"] . "'";
     $result_updateProducto = mysql_query($sql_updateProducto, $con) or die(mysql_error());
@@ -587,6 +682,28 @@ if ($tarea == 12) {
             $result_updateProducto = mysql_query($sql_updateProducto, $con) or die(mysql_error());
         }
     }
+
+    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
+    $sql_afterupdate = "select idtipoproducto, idpatronproducto, idmaterial, codigo, descripcion, dimensionlargo, dimensionancho, dimensionalto, peso, capacidad, preciofabrica from producto where idproducto='" . $_GET["id"] . "'";
+    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+    $oldregistro = mysql_fetch_row($result_beforeupdate);
+    $news = mysql_fetch_row($result_afterupdate);
+
+    $campos = array("idtipoproducto", " idpatronproducto", " idmaterial", " codigo", " descripcion", " dimensionlargo", " dimensionancho", " dimensionalto", " peso", " capacidad", " preciofabrica");
+    $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+    $linea = "";
+    for ($index = 0; $index < count($oldregistro); $index++) {
+        if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+            $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+        }
+    }
+    $descripcion = $descripcion . " " . $linea . "'";
+    $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+    $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+    /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
+
 
     echo "Producto Editado Satisfactoriamente";
 }
@@ -620,7 +737,26 @@ if ($tarea == 13) {
                 $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
             }
         }
+        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
+        $sql_afterupdate = "select idtipoproducto, idpatronproducto, idmaterial, codigo, descripcion, dimensionlargo, dimensionancho, dimensionalto, peso, capacidad, preciofabrica from producto where idproducto='" . $_GET["id"] . "'";
+        $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+        /*         * ************************************************** */
+        $oldregistro = mysql_fetch_row($result_beforeupdate);
+        $news = mysql_fetch_row($result_afterupdate);
 
+        $campos = array("idtipoproducto", " idpatronproducto", " idmaterial", " codigo", " descripcion", " dimensionlargo", " dimensionancho", " dimensionalto", " peso", " capacidad", " preciofabrica");
+        $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+        $linea = "";
+        for ($index = 0; $index < count($oldregistro); $index++) {
+            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+            }
+        }
+        $descripcion = $descripcion . " " . $linea . "'";
+        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
 
         echo "Registro Satisfactorio de la lista de precios";
     }
@@ -628,6 +764,15 @@ if ($tarea == 13) {
 
 /* editar lista de precios */
 if ($tarea == 14) {
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select idempresa, nombre from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+
+    $sql_beforesubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios=" . $_GET["id"] . "'";
+    $result_beforesubtipo = mysql_query($sql_beforesubtipo, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
+
     $sql_updateListadePrecios = "update listadeprecios set nombre='" . $_POST["nombre"] . "',idempresa='" . $_POST["empresa"] . "' where idlistadeprecios='" . $_GET["id"] . "'";
     $result_updateListadePrecios = mysql_query($sql_updateListadePrecios, $con) or die(mysql_error());
 
@@ -650,6 +795,37 @@ if ($tarea == 14) {
                 }
             }
         }
+
+        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
+        $sql_afterupdate = "select idempresa, nombre from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
+        $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+
+
+        $sql_aftersubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios=" . $_GET["id"] . "'";
+        $result_aftersubtipo = mysql_query($sql_aftersubtipo, $con) or die(mysql_error());
+
+
+        /*         * ************************************************** */
+        $oldregistro = mysql_fetch_row($result_beforeupdate);
+        $news = mysql_fetch_row($result_afterupdate);
+
+        $oldsubtipo= mysql_fetch_row($result_beforesubtipo);
+        $newsubtipo= mysql_fetch_row($result_aftersubtipo);
+        
+
+        $campos = array("idtipoproducto", " idpatronproducto", " idmaterial", " codigo", " descripcion", " dimensionlargo", " dimensionancho", " dimensionalto", " peso", " capacidad", " preciofabrica");
+        $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+        $linea = "";
+        for ($index = 0; $index < count($oldregistro); $index++) {
+            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+            }
+        }
+        $descripcion = $descripcion . " " . $linea . "'";
+        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
     }
     mysql_close($con);
 }
