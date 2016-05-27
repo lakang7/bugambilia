@@ -736,28 +736,7 @@ if ($tarea == 13) {
                 $sql_insertHistorico = "insert into historicoporcentajeganancia (idlistatipos,porcentajeganancia,desde,hasta) values(" . $indice2 . ",'" . $_POST["ganancia" . $tipo["idtipoproducto"]] . "',now(),NULL);";
                 $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
             }
-        }
-        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
-        $sql_afterupdate = "select idtipoproducto, idpatronproducto, idmaterial, codigo, descripcion, dimensionlargo, dimensionancho, dimensionalto, peso, capacidad, preciofabrica from producto where idproducto='" . $_GET["id"] . "'";
-        $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
-        /*         * ************************************************** */
-        $oldregistro = mysql_fetch_row($result_beforeupdate);
-        $news = mysql_fetch_row($result_afterupdate);
-
-        $campos = array("idtipoproducto", " idpatronproducto", " idmaterial", " codigo", " descripcion", " dimensionlargo", " dimensionancho", " dimensionalto", " peso", " capacidad", " preciofabrica");
-        $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
-        $linea = "";
-        for ($index = 0; $index < count($oldregistro); $index++) {
-            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
-                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
-            }
-        }
-        $descripcion = $descripcion . " " . $linea . "'";
-        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
-//        showRegistro($sql_insertBitacora);
-        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
-        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
-
+        }   
         echo "Registro Satisfactorio de la lista de precios";
     }
 }
