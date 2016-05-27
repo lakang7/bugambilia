@@ -328,7 +328,7 @@ if ($tarea == 6) {
                 $result_updatePRODUCTO = mysql_query($sql_updatePRODUCTO, $con) or die(mysql_error());
             }
         }
-/*         * *******insercion a bitacora****** */
+        /*         * *******insercion a bitacora****** */
         /**
          * idtabla =5 -> patron
          * idaccion =3 -> creacion
@@ -353,18 +353,58 @@ if ($tarea == 6) {
 
 /* Editar Empresa */
 if ($tarea == 7) {
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select nombreempresa, nombrecomercial, telefonoprincipal, identificador, idpais, fiscalcalle, fiscalexterior, fiscalinterior, fiscalcolonia, fiscalciudad, fiscalestado, fiscalpostal, entregacalle, entregaexterior, entregainterior, entregacolonia, entregaciudad, entregaestado, entregapostal, entregareferencia, codigo, registro, iva from empresa where idempresa='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
+
     $sql_updateEmpresa = "update empresa set nombreempresa='" . $_POST["nombre"] . "', nombrecomercial='" . $_POST["comercial"] . "', telefonoprincipal='" . $_POST["telefono"] . "', identificador='" . $_POST["rfc"] . "', fiscalcalle='" . $_POST["fiscalavenida"] . "',fiscalexterior='" . $_POST["fiscalexterior"] . "',fiscalinterior='" . $_POST["fiscalinterior"] . "',fiscalcolonia='" . $_POST["fiscalcolonia"] . "',fiscalciudad='" . $_POST["fiscalciudad"] . "',fiscalestado='" . $_POST["fiscalestado"] . "',fiscalpostal='" . $_POST["fiscalpostal"] . "',entregacalle='" . $_POST["entregaavenida"] . "',entregaexterior='" . $_POST["entregaexterior"] . "',entregainterior='" . $_POST["entregainterior"] . "',entregacolonia='" . $_POST["entregacolonia"] . "',entregaciudad='" . $_POST["entregaciudad"] . "',entregaestado='" . $_POST["entregaestado"] . "',entregapostal='" . $_POST["entregapostal"] . "',entregareferencia='" . $_POST["entregareferencia"] . "',iva='" . $_POST["iva"] . "' where idempresa='" . $_GET["id"] . "'";
     $result_updateEmpresa = mysql_query($sql_updateEmpresa, $con) or die(mysql_error());
+
+    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
+    $sql_afterupdate = "select nombreempresa, nombrecomercial, telefonoprincipal, identificador, idpais, fiscalcalle, fiscalexterior, fiscalinterior, fiscalcolonia, fiscalciudad, fiscalestado, fiscalpostal, entregacalle, entregaexterior, entregainterior, entregacolonia, entregaciudad, entregaestado, entregapostal, entregareferencia, codigo, registro, iva from empresa where idempresa='" . $_GET["id"] . "'";
+    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
     if ($result_updateEmpresa == 1) {
+        /*         * **************SLQ BITACORA DE UPDATE DE REGISTRO ***************** */
+        $oldregistro = mysql_fetch_row($result_beforeupdate);
+        $news = mysql_fetch_row($result_afterupdate);
+
+        $campos = array("nombreempresa", " nombrecomercial", " telefonoprincipal", " identificador", " idpais", " fiscalcalle", " fiscalexterior", " fiscalinterior", " fiscalcolonia", " fiscalciudad", " fiscalestado", " fiscalpostal", " entregacalle", " entregaexterior", " entregainterior", " entregacolonia", " entregaciudad", " entregaestado", " entregapostal", " entregareferencia", " codigo", " registro", " iva");
+        $descripcion = "'Registro de empresa codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+        $linea = "";
+
+        for ($index = 0; $index < count($oldregistro); $index++) {
+            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+            }
+        }
+        $descripcion = $descripcion . " " . $linea . "'";
+        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,1,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
         echo "Actualización Satisfactoria de Empresa";
     }
 }
 
 /* Editar Sucursal */
 if ($tarea == 8) {
+    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
+    $sql_beforeupdate = "select nombrecomercial,regiones from sucursal where idsucursal='" . $_GET["id"] . "'";
+    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+    /*     * ************************************************** */
+
+
     $sql_updateSucursal = "update sucursal set nombrecomercial='" . $_POST["nombresucursal"] . "' where idsucursal='" . $_GET["id"] . "'";
     $result_updateSucursal = mysql_query($sql_updateSucursal, $con) or die(mysql_error());
+
+
     if ($result_updateSucursal == 1) {
+
+
         $sql_eliminarREGIONES = "delete from estadosensucursal where idsucursal='" . $_GET["id"] . "'";
         $result_eliminarREGIONES = mysql_query($sql_eliminarREGIONES, $con) or die(mysql_error());
 
@@ -385,6 +425,29 @@ if ($tarea == 8) {
 
         $sql_update = "update sucursal set regiones='" . $regiones . "' where idsucursal='" . $_GET["id"] . "'";
         $result_update = mysql_query($sql_update, $con) or die(mysql_error());
+
+        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
+        $sql_afterupdate = "select nombrecomercial,regiones from sucursal where idsucursal='" . $_GET["id"] . "'";
+        $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
+        /*         * ************************************************** */
+
+        $oldregistro = mysql_fetch_row($result_beforeupdate);
+        $news = mysql_fetch_row($result_afterupdate);
+
+        $campos = array("nombrecomercial", "regiones");
+        $descripcion = "'Registro de sucursal de Empresa codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+        $linea = "";
+        for ($index = 0; $index < count($oldregistro); $index++) {
+            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+            }
+        }
+        $descripcion = $descripcion . " " . $linea . "'";
+        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,2,now()," . $descripcion . ")";
+//        showRegistro($sql_insertBitacora);
+        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
+
         echo "Actualización Satisfactoria de Sucursal";
     }
 }
