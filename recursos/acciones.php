@@ -768,7 +768,7 @@ if ($tarea == 14) {
     $sql_beforeupdate = "select idempresa, nombre from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
     $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
 
-    $sql_beforesubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios=" . $_GET["id"] . "'";
+    $sql_beforesubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios='" . $_GET["id"] . "'";
     $result_beforesubtipo = mysql_query($sql_beforesubtipo, $con) or die(mysql_error());
     /*     * ************************************************** */
 
@@ -801,19 +801,19 @@ if ($tarea == 14) {
         $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
 
 
-        $sql_aftersubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios=" . $_GET["id"] . "'";
+        $sql_aftersubtipo = "select lt.porcentajeganancia PORCENTAJE from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios='" . $_GET["id"] . "'";
         $result_aftersubtipo = mysql_query($sql_aftersubtipo, $con) or die(mysql_error());
 
-
+//
         /*         * ************************************************** */
         $oldregistro = mysql_fetch_row($result_beforeupdate);
         $news = mysql_fetch_row($result_afterupdate);
 
-        $oldsubtipo= mysql_fetch_row($result_beforesubtipo);
-        $newsubtipo= mysql_fetch_row($result_aftersubtipo);
-        
+        $oldsubtipo = mysql_fetch_row($result_beforesubtipo);
+        $newsubtipo = mysql_fetch_row($result_aftersubtipo);
 
-        $campos = array("idtipoproducto", " idpatronproducto", " idmaterial", " codigo", " descripcion", " dimensionlargo", " dimensionancho", " dimensionalto", " peso", " capacidad", " preciofabrica");
+
+        $campos = array("idempresa", "nombre");
         $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
         $linea = "";
         for ($index = 0; $index < count($oldregistro); $index++) {
@@ -821,9 +821,21 @@ if ($tarea == 14) {
                 $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
             }
         }
+        
+        
+        for ($index1 = 0; $index1 < count($oldsubtipo); $index1++) {
+            
+//            echo $oldsubtipo[$index1]." - ".$newsubtipo[$index1];
+            if (strcmp(md5($oldsubtipo[$index1]), md5($newsubtipo[$index1])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
+                $linea = $linea . " Porcentaje " . " Valor Original (" . $oldsubtipo[$index1] . "), Valor Nuevo (" . $newsubtipo[$index1] . ") -";
+//                echo $linea;
+                
+            }
+        }
+        
         $descripcion = $descripcion . " " . $linea . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
-//        showRegistro($sql_insertBitacora);
+        showRegistro($sql_insertBitacora);
         $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
         /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
     }
