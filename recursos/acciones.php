@@ -737,10 +737,12 @@ if ($tarea == 13) {
                 $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
             }
         }
-        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
+        
+        
+       /*
         $sql_afterupdate = "select idtipoproducto, idpatronproducto, idmaterial, codigo, descripcion, dimensionlargo, dimensionancho, dimensionalto, peso, capacidad, preciofabrica from producto where idproducto='" . $_GET["id"] . "'";
         $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
-        /*         * ************************************************** */
+
         $oldregistro = mysql_fetch_row($result_beforeupdate);
         $news = mysql_fetch_row($result_afterupdate);
 
@@ -754,9 +756,9 @@ if ($tarea == 13) {
         }
         $descripcion = $descripcion . " " . $linea . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
-//        showRegistro($sql_insertBitacora);
-        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
-        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
+
+        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());*/
+
 
         echo "Registro Satisfactorio de la lista de precios";
     }

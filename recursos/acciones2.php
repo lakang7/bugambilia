@@ -32,8 +32,18 @@
         $iva=$subTotal*($poriva/100);
         $total=$subTotal+$iva;
                         
-        $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,idagenda,fechaderegistro,subtotal,poriva,iva,total,codigoop) values ('".$_GET["idorden"]."','".$_SESSION["usuario"]."',now(),'".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["codigoop"]."');";
-	$result_insertProduccion = mysql_query($sql_insertProduccion,$con) or die(mysql_error());  
+        $auxSucursal="";
+        $auxEstado="";
+        $sql_insertProduccion = "";
+        
+        
+        if($ORDEN["idsucursal"]==NULL || $ORDEN["idsucursal"]==""){
+            $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."');";
+        }else{
+            $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idestado"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."');";
+        }               
+        echo $sql_insertProduccion."</br>";        	
+        $result_insertProduccion = mysql_query($sql_insertProduccion,$con) or die(mysql_error());  
         
         $sql_ultimoMATERIAL="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendeproduccion';";
         $result_ultimoMATERIAL=mysql_query($sql_ultimoMATERIAL,$con) or die(mysql_error());	
