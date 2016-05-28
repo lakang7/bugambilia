@@ -60,7 +60,7 @@ function calcularprecio($idproducto, $idlistadeprecios) {
 
 $pagina = 1;
 
-$sql_propatron = "select pr.idproducto ID, pr.descripcion DES, pr.preciofabrica PRECIO,tp.codig TPCOD,tp.nombre TPNOM, cp.nombreespanol CATNOM,	pp.nombreespanol PPNOM, ma.nombre MATNOM, pr.dimensionlargo LARGO, pr.dimensionancho ANCHO,pr.dimensionalto ALTO, pr.peso PESO, pr.capacidad CAP
+$sql_propatron = "select pr.idproducto ID, pr.descripcion DES, pr.preciofabrica PRECIO,pr.codigo COD,tp.codig TPCOD,tp.nombre TPNOM, cp.nombreespanol CATNOM,	pp.nombreespanol PPNOM, ma.nombre MATNOM, pr.dimensionlargo LARGO, pr.dimensionancho ANCHO,pr.dimensionalto ALTO, pr.peso PESO, pr.capacidad CAP
 	from tipoproducto tp join categoriaproducto cp on tp.idcategoriatipo=cp.idcategoriaproducto
 	join producto pr on pr.idtipoproducto=tp.idtipoproducto join patronproducto pp on
 	pp.idpatronproducto=pr.idpatronproducto	join material ma on ma.idmaterial=pr.idmaterial
@@ -107,15 +107,15 @@ $pdf->Line(10, 29, 200, 29);
 $suma = 30;
 $pdf->SetXY(10, $suma);
 $pdf->SetFont('courier', 'B', 14);
-$pdf->Cell(105, 10, "Descripcion", 0, 1, "L", 0, '', 0);
+$pdf->Cell(105, 10, $ppatron["COD"] . " ".$ppatron["DES"], 0, 1, "L", 0, '', 0);
 
 $pdf->SetXY(10, $suma+=7);
 $pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(10, 5, "Precio : " . $ppatron["PRECIO"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(10, 5, "Precio de Fabrica: " . $ppatron["PRECIO"], 0, 1, "L", 0, '', 0);
 
 $pdf->SetXY(10, $suma+=3);
 $pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(10, 5, $ppatron["TPCOD"] . " - " . $ppatron["TPNOM"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(10, 5,  $ppatron["TPNOM"], 0, 1, "L", 0, '', 0);
 
 $pdf->SetXY(10, $suma+=3);
 $pdf->SetFont('courier', 'N', 10);
