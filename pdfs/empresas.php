@@ -74,7 +74,7 @@ $pdf->SetFont('courier', 'B', 10);
 $pdf->Cell(105, 5, "Direccion Fiscal:", 0, 1, "L", 0, '', 0);
 $pdf->SetXY(10, $suma+=5);
 $pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(105, 5, "Calle " . $empresa["FCALLE"] . " Nro Exterior " . $empresa["FEXT"] . " Nro Interior " . $empresa["FINT"] . " Codigo Postal " . $empresa["FPOST"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(105, 5, "Calle " . $empresa["FCALLE"] . ", Nro Exterior " . $empresa["FEXT"] . ", Nro Interior " . $empresa["FINT"] . ", Codigo Postal " . $empresa["FPOST"], 0, 1, "L", 0, '', 0);
 $pdf->SetXY(10, $suma+=4);
 $pdf->Cell(105, 5, "Colonia " . $empresa["FCOL"] . ", " . $empresa["FCIUD"] . ", " . $empresa["FEST"] . ", " . $empresa["NOMPAIS"], 0, 1, "L", 0, '', 0);
 
@@ -84,14 +84,14 @@ $pdf->SetFont('courier', 'B', 10);
 $pdf->Cell(105, 5, "Direccion Entrega:", 0, 1, "L", 0, '', 0);
 $pdf->SetXY(10, $suma+=5);
 $pdf->SetFont('courier', 'N', 10);
-$pdf->Cell(105, 5, "Calle " . $empresa["ECALLE"] . " Nro Exterior " . $empresa["EEXT"] . " Nro Interior " . $empresa["EINT"] . " Codigo Postal " . $empresa["EPOST"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(105, 5, "Calle " . $empresa["ECALLE"] . ", Nro Exterior " . $empresa["EEXT"] . ", Nro Interior " . $empresa["EINT"] . ", Codigo Postal " . $empresa["EPOST"], 0, 1, "L", 0, '', 0);
 $pdf->SetXY(10, $suma+=4);
 $pdf->Cell(105, 5, "Colonia " . $empresa["ECOL"] . ", " . $empresa["ECIUD"] . ", " . $empresa["EEST"] . ", " . $empresa["NOMPAIS"], 0, 1, "L", 0, '', 0);
 
 $pdf->SetFont('courier', 'N', 10);
 $pdf->SetXY(10, $suma+=4);
 if (strlen($empresa["EREF"]) < 70) {
-    $pdf->Cell(175, 5, "Punto de Referencia " . $empresa["EREF"] , 0, 1, "L", 0, '', 0);
+    $pdf->Cell(175, 5, "Punto de Referencia: " . $empresa["EREF"] , 0, 1, "L", 0, '', 0);
 } else {
     $espacios = substr_count($empresa["EREF"],' ');
     $salida = explode(' ', $empresa["EREF"]);
@@ -137,7 +137,7 @@ while ($sucursales = mysql_fetch_assoc($result_sucursal)) {
 
     $pdf->SetXY(10, $suma+=4);
     $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(10, 4, "Regiones ".$sucursales["regiones"], 0, 1, "L", 0, '', 0);
+    $pdf->Cell(10, 4, "Regiones: ".$sucursales["regiones"], 0, 1, "L", 0, '', 0);
     $suma++;
 }
 
@@ -176,14 +176,15 @@ while ($contactos = mysql_fetch_assoc($result_contacto)) {
     $pdf->SetXY(10, $suma+=4);
     $pdf->SetFont('courier', 'N', 10);
     $pdf->Cell(10, 4, $contactos["AGENDAEMAIL"], 0, 1, "L", 0, '', 0);
-
-    $pdf->SetXY(10, $suma+=4);
-    $pdf->SetFont('courier', 'N', 10);
-    $pdf->Cell(10, 4, $contactos["AGENDATELEFONO1"], 0, 1, "L", 0, '', 0);
+  
     if ($contactos["AGENDATELEFONO2"] != "") {
-        $pdf->SetXY(40, $suma);
+        $pdf->SetXY(10, $suma+=4);//aqui modificar en base a la longitud de la cadena anterior
         $pdf->SetFont('courier', 'N', 10);
-        $pdf->Cell(10, 4, "/ " . $contactos["AGENDATELEFONO2"], 0, 1, "L", 0, '', 0);
+        $pdf->Cell(10, 4, $contactos["AGENDATELEFONO1"]." / " . $contactos["AGENDATELEFONO2"], 0, 1, "L", 0, '', 0);
+    }else{
+        $pdf->SetXY(10, $suma+=4);
+        $pdf->SetFont('courier', 'N', 10);
+        $pdf->Cell(16, 4, $contactos["AGENDATELEFONO1"], 0, 1, "L", 0, '', 0);
     }
     $suma++;
 }

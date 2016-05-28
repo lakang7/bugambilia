@@ -221,7 +221,7 @@ if (mysql_num_rows($result_cattipo) > 0) {
 
                             $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
                             $pdf->SetXY($colum+=22, $suma);
-                            $sqlExcepcion = "select * from excepcionlista where idlistadeprecios=2 and idproducto='" . $pro["idproducto"] . "'";
+                            $sqlExcepcion = "select * from excepcionlista where idlistadeprecios='" . $_GET["id"] . "' and idproducto='" . $pro["idproducto"] . "'";
                             $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
                             if (mysql_num_rows($resultExcepcion) > 0) {
                                 $excepcion = mysql_fetch_assoc($resultExcepcion);
