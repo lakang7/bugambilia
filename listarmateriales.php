@@ -206,8 +206,14 @@
                                                                 echo "<div class='col-xs-3 columna_linea'>".$fila["nombre"]."</div>";
                                                                 echo "<div class='col-xs-5 columna_linea'>".$fila["colores"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
-                                                                echo "<a href='editarmaterial.php?id=".$fila["idmaterial"]."' ><span class='label label-warning'>Editar</span></a>";
-                                                                echo "<span class='label label-danger'>Eliminar</span>";
+                                                                echo "<div class='btn-group'>";
+                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                                echo "</button>";
+                                                                echo "<ul class='dropdown-menu dropdown-default'>";
+                                                                echo "<li><a href='editarmaterial.php?id=".$fila["idmaterial"]."'>Editar</a></li>";                                                                
+                                                                echo "</ul>";                                                                                                                                
+                                                                echo "</div>";
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }

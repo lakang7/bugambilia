@@ -157,9 +157,9 @@
 				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
-						<div class="page-header"><h1>Ordenes de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
+						<div class="page-header"><h1>Ordenes de Producción<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
                                                 <div class="row titulo_tabla">
-                                                    Lista de Ordenes de Compra
+                                                    Lista de Ordenes de Producción
                                                 </div>    
                                                 <div class="row filtros_tabla">
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
@@ -180,31 +180,31 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendecompra.codigooc">Codigo</option>
+                                                            <option value="ordendeproduccion.codigoop">Codigo</option>
                                                             <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="agenda.nombre">Contacto</option>
                                                             <option value="listadeprecios.nombre">Lista de Precios</option>
-                                                            <option value="ordendecompra.fechaderegistro">Registro</option>
-                                                            <option value="ordendecompra.fechadeentrega">Entrega</option>
-                                                            <option value="ordendecompra.total">Total</option>                                                            
+                                                            <option value="ordendeproduccion.fechaderegistro">Registro</option>
+                                                            <option value="ordendeproduccion.fechadeentrega">Entrega</option>
+                                                            <option value="ordendeproduccion.total">Total</option>                                                            
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendecompra.fechaderegistro" >
+                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendeproduccion.fechaderegistro" >
                                                 <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
-                                                <div id="contenedortabla">                                                                                                                                                           
+                                                <div id="contenedortabla">                                                                                                                                                                                                                                                                                                                    
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigooc')">Codigo</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechadeentrega')">Entrega</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechadeentrega')">Entrega</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigooc as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendeproduccion.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
@@ -218,25 +218,16 @@
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
-                                                                echo "<div class='col-xs-2' >";
-                                                                
+                                                                echo "<div class='col-xs-2' >";                                                                                                                                                                                                
                                                                 echo "<div class='btn-group'>";
                                                                 echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
                                                                 echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                echo "<li><a href='#'>Editar</a></li>";
-                                                                echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
-                                                                
-                                                                $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
-                                                                $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($resultValida)==0){
-                                                                    echo "<li class='divider'></li>";
-                                                                    echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                                                                }                                                                
-
+                                                                echo "<li><a href='editarpatron.php?id=".$fila["idorden"]."'>Editar</a></li>";
+                                                                echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                                                                                
                                                                 echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                echo "</div>";                                                                                                                                                                                                                                                                                                                               
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }
@@ -793,25 +784,25 @@
                             document.getElementById("ordenordena").value="desc";
                         }
                                                 
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
                     }
                     
                     function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
                     }
                     
                     function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     }
                     
                     function pagina(pagina){
                         document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     } 
                     
                     $('#filtro').keypress(function (e) {
                         if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                         }                        
                     });                    
                 </script>

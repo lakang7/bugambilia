@@ -5,7 +5,7 @@
     $con=Conexion();
     $tarea=$_GET["tarea"];
     
-    /*Validar Login*/
+    /*Insertar orden de produccion desde una Orden de comrpa*/
     if($tarea==17){ 
         
         $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
@@ -42,7 +42,7 @@
         }else{
             $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idestado"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."');";
         }               
-        echo $sql_insertProduccion."</br>";        	
+        //echo $sql_insertProduccion."</br>";        	
         $result_insertProduccion = mysql_query($sql_insertProduccion,$con) or die(mysql_error());  
         
         $sql_ultimoMATERIAL="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendeproduccion';";
@@ -61,5 +61,104 @@
         }        
         
     }
+    
+    /*insertar orden de prodcucción desde el formulario*/
+    if($tarea==18){ 
+        $sql_insertOrden = "";
+        if (isset($_POST["sucursal"]) && isset($_POST["region"])) {
+            $sql_insertOrden = "insert into ordendeproduccion (fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values(now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "','".$_SESSION["usuario"]."','".$_POST["contacto"]."','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now())";
+        } else {
+            $sql_insertOrden = "insert into ordendeproduccion (fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values(now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "','".$_SESSION["usuario"]."','".$_POST["contacto"]."','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now())";
+        }
+        
+        $result_insertOrden = mysql_query($sql_insertOrden, $con) or die(mysql_error());  
+        
+        $aux = explode("-", $_POST["codigo02"]);
+        $nuevoCodigo = ($aux[1] + 1);
+        
+        $sqlupdateConfiguracion = "update configuracionsistema set secuenciaop='" . $nuevoCodigo . "' where idconfiguracionsistema=1";
+        $resultupdateConfiguracion = mysql_query($sqlupdateConfiguracion, $con) or die(mysql_error()); 
+        
+        $sql_ultimaOrden = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendeproduccion';";
+        $result_ultimaOrden = mysql_query($sql_ultimaOrden, $con) or die(mysql_error());
+        $fila = mysql_fetch_assoc($result_ultimaOrden);
+        $indice = intval($fila["AUTO_INCREMENT"]);
+        $indice--;
+        
+        $productos = $_POST["oculto01"];
+        $listaIds = explode("_", $_POST["oculto02"]);
+        $listaCodigos = explode("_", $_POST["oculto03"]);
+        $listaDescripciones = explode("_", $_POST["oculto04"]);
+        $listaColores = explode("_", $_POST["oculto05"]);
+        $listaPrecios = explode("_", $_POST["oculto06"]);
+        $listaUnidades = explode("_", $_POST["oculto07"]);
+
+
+        $subTotal = 0;
+        $poriva = 0;
+        $total = 0;
+        $iva = 0;
+
+        $materiales = array();
+
+        for ($i = 0; $i < count($listaIds); $i++) {
+            if ($listaIds[$i] != "") {
+                $sql_precio = "select preciofabrica,idmaterial from producto where idproducto='" . $listaIds[$i] . "'";
+                $result_precio = mysql_query($sql_precio, $con) or die(mysql_error());
+                if (mysql_num_rows($result_precio) > 0) {
+                    $precio = mysql_fetch_assoc($result_precio);
+                    $banderina = 0;
+                    for ($j = 0; $j < count($materiales); $j++) {
+                        if ($materiales[$j] == $precio["idmaterial"]) {
+                            $banderina = 1;
+                        }
+                    }
+                        if ($banderina == 0) {
+                        $materiales[count($materiales)] = $precio["idmaterial"];
+                    }
+                    $sql_color = "select * from color where nombre='" . $listaColores[$i] . "'";
+                    $result_color = mysql_query($sql_color, $con) or die(mysql_error());
+                    $color = mysql_fetch_assoc($result_color);
+                    $subTotal+=($listaUnidades[$i] * $listaPrecios[$i]);
+                    $sql_insProducto = "insert into productosordenproduccion (idordendeproduccion,idproducto,idcolor,preciofabrica,numerodeunidades) values('" . $indice . "','" . $listaIds[$i] . "','" . $color["idcolor"] . "','" . $precio["preciofabrica"] . "','" . $listaUnidades[$i] . "')";
+                    $result_insProducto = mysql_query($sql_insProducto, $con) or die(mysql_error());
+                }
+            }
+        }
+        
+        if ($_POST["appiva"] == "S") {
+            $poriva = $_POST["poriva"];
+            $iva = $subTotal * ($poriva / 100);
+            $total = $subTotal + $iva;
+        } else if ($_POST["appiva"] == "N") {
+            $total = $subTotal;
+        }
+
+        $sql_updateOrdenCompra = "update ordendeproduccion set subtotal='" . $subTotal . "',poriva='" . $poriva . "',iva='" . $iva . "',total='" . $total . "' where idordendeproduccion='" . $indice . "'";
+        $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());  
+        
+    /* Se suman de 28 a 42 días dependiendo de los tipos de productos */
+    if ($_POST["prioridad"] == 1) {
+        $mayor = -999999;
+        for ($j = 0; $j < count($materiales); $j++) {
+            $sqlSelMaterial = "select * from material where idmaterial='" . $materiales[$j] . "'";
+            $resultSelMaterial = mysql_query($sqlSelMaterial, $con) or die(mysql_error());
+            $material = mysql_fetch_assoc($resultSelMaterial);
+            if ($material["dias"] > $mayor) {
+                $mayor = $material["dias"];
+            }
+        }
+        $nuevafecha = new DateTime($_POST["id-date-picker-1"]);
+        $nuevafecha->modify('+' . $mayor . ' day');
+
+        $sql_updateOrdenCompra = "update ordendeproduccion set fechadeentrega='" . $nuevafecha->format('Y-m-d') . "' where idordendeproduccion='" . $indice . "'";
+        $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
+    } else if ($_POST["prioridad"] == 2) { /* Se establece una fecha fija de entrega */
+        $sql_updateOrdenCompra = "update ordendeproduccion set fechadeentrega='" . $_POST["id-date-picker-2"] . "' where idordendeproduccion='" . $indice . "'";
+        $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
+    }        
+        
+        
+    }    
     
 ?>

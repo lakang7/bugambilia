@@ -209,8 +209,15 @@
                                                                 echo "<div class='col-xs-3 columna_linea'>".$fila["ingles"]."</div>";
                                                                 echo "<div class='col-xs-3 columna_linea'>".$fila["materiales"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
-                                                                echo "<a href='editarpatron.php?id=".$fila["idpatronproducto"]."' ><span class='label label-warning'>Editar</span></a>";
-                                                                echo "<span class='label label-danger'>Eliminar</span>";
+                                                                echo "<div class='btn-group'>";
+                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                                echo "</button>";
+                                                                echo "<ul class='dropdown-menu dropdown-default'>";
+                                                                echo "<li><a href='editarpatron.php?id=".$fila["idpatronproducto"]."'>Editar</a></li>"; 
+                                                                echo "<li><a href='pdfs/patronesproducto.php?id=".$fila["idpatronproducto"]."'  target='_blank'>Informe en PDF</a></li>";
+                                                                echo "</ul>";                                                                                                                                
+                                                                echo "</div>";
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }

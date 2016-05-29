@@ -772,5 +772,31 @@
              
     }
     
+    if($_POST["tarea"]==22){
+        $sqlProducto="select * from producto where idproducto='".$_POST["idproducto"]."'";
+        $resultProducto=mysql_query($sqlProducto,$con) or die(mysql_error());
+        $concatena="";
+        if(mysql_num_rows($resultProducto)>0){
+            while ($producto = mysql_fetch_assoc($resultProducto)) {
+                $sqlcolor="select * from color where idcolor='".$_POST["idcolor"]."'";
+                $resultcolor=mysql_query($sqlcolor,$con) or die(mysql_error());
+                if(mysql_num_rows($resultcolor)>0){
+                    $color = mysql_fetch_assoc($resultcolor);
+                }
+                $precio=$producto["preciofabrica"];
+                $concatena=$producto["idproducto"]."_".$producto["codigo"]."_".$producto["descripcion"]."_".$color["nombre"]."_".$precio;
+                echo "<input type='hidden' id='devuelve' value='".$concatena."' />";
+            }   
+        }
+    }
+    
+    if($_POST["tarea"]==23){
+        $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema='1'";
+        $resultConfiguracion=mysql_query($sqlConfiguracion,$con) or die(mysql_error());
+        $configuracion = mysql_fetch_assoc($resultConfiguracion);            
+        echo "<input type='hidden' name='appiva' id='appiva' value='S'/>";
+        echo "<input type='hidden' name='poriva' id='poriva' value='".$configuracion["poriva"]."'/>";        
+    }    
+    
     mysql_close($con);    
 ?>

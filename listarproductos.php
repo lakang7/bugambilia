@@ -223,9 +223,16 @@
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["dimensionancho"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["dimensionalto"]."</div>";                                                                
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["preciofabrica"]."</div>";
-                                                                echo "<div class='col-xs-2' >";
-                                                                echo "<a href='editarproducto.php?id=".$fila["idproducto"]."' ><span class='label label-warning'>Editar</span></a>";
-                                                                echo "<span class='label label-danger'>Eliminar</span>";
+                                                                echo "<div class='col-xs-2' >";                                                                
+                                                                echo "<div class='btn-group'>";
+                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                                echo "</button>";
+                                                                echo "<ul class='dropdown-menu dropdown-default'>";
+                                                                echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";
+                                                                echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
+                                                                echo "</ul>";                                                                                                                                
+                                                                echo "</div>";                                                                                                                                
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }

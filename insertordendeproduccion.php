@@ -162,7 +162,7 @@
 			</div>
                         
 			<div class="main-content">
-                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=16">
+                            <form method="post" id="form_crearEmpresa" action="recursos/acciones2.php?tarea=18">
 				<div class="main-content-inner">
 					<div class="page-content">                                            
 						<div class="page-header"><h1>Orden de Producción<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
@@ -205,7 +205,23 @@
                                                         </div>                                                        
                                                         <div id="contenedorprioridad" >                                                                                                                                                                                                                                                
                                                         </div>
-                                                        
+                                                        <div style="width: 100%; margin-top: 10px">
+                                                            <label>(*) Persona Interna de Contacto para la orden de produccion</label> <div id="capaiva"></div>
+                                                            <select class="chosen-select form-control" id="contacto" name="contacto" data-placeholder="Elija el contacto interno" required="required">
+                                                            <option value="">  </option>
+                                                            <?php
+                                                                $con=Conexion();
+                                                                $sql_listaUSUARIO="select * from usuario order by nombre";
+                                                                $result_listaUSUARIO=mysql_query($sql_listaUSUARIO,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($result_listaUSUARIO)>0){
+                                                                    while ($fila = mysql_fetch_assoc($result_listaUSUARIO)) {
+                                                                    echo "<option value='".$fila["idusuario"]."'>".$fila["nombre"]."</option>";
+                                                                    }
+                                                                }
+                                                                mysql_close($con);                                                                
+                                                            ?>
+                                                            </select>                                                        
+                                                        </div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">
                                                             <label>(*) Empresa</label> <div id="capaiva"></div>
                                                             <select class="chosen-select form-control" id="empresa" name="empresa" data-placeholder="Elija la empresa solicitante" required="required">
@@ -386,7 +402,7 @@
                                                             
                                                             function agregar(){                                                                
                                                                 if(document.getElementById("producto").value!=="" && document.getElementById("color").value!=="" && document.getElementById("unidades").value!==""){                                                                    
-                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value }, function(){
+                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:22, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value }, function(){
                                                                         var resultado=document.getElementById("devuelve").value;
                                                                         var resp = resultado.split("_"); 
                                                                         var proid = resp[0];
@@ -1053,7 +1069,7 @@
                                     var $selectedOption = $(this).find('option:selected');
                                     var selectedValue = $selectedOption.val();
                                     
-                                    $("#capaiva").load("recursos/ajax.php", {tarea:20, idempresa: selectedValue}, function(){
+                                    $("#capaiva").load("recursos/ajax.php", {tarea:23, idempresa: selectedValue}, function(){
                                         
                                     });
                                     $("#contenedor01").load("recursos/ajax.php", {tarea:12, idempresa: selectedValue}, function(){

@@ -203,11 +203,20 @@
                                                                 echo "<div class='col-xs-4 columna_linea'>".$fila["nombrecomercial"]."</div>";
                                                                 echo "<div class='col-xs-6 columna_linea'>".$fila["nombre"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
-                                                                echo "<a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-warning'>Editar</span></a>";
-                                                                echo "<a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-purple'>Visualizar</span></a>";
-                                                                echo "<a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-yellow'>Excepciones</span></a>";
-                                                                echo "<a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' ><span class='label label-warning'>Exportar Excel</span></a>";
-                                                                echo "<span class='label label-danger'>Eliminar</span>";
+                                                                                                                                
+                                                                echo "<div class='btn-group'>";
+                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                                echo "</button>";
+                                                                echo "<ul class='dropdown-menu dropdown-default'>";
+                                                                echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
+                                                                echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
+                                                                echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
+                                                                echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
+                                                                echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
+                                                                echo "</ul>";                                                                                                                                
+                                                                echo "</div>";                                                                
+                                                                                                                                
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }

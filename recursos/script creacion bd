@@ -527,6 +527,7 @@ insert into menu (nombre,icono) values("Clientes","menu-icon fa fa-globe");
 insert into menu (nombre,icono) values("Productos","menu-icon fa fa-flask");
 insert into menu (nombre,icono) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt");
 insert into menu (nombre,icono) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags");
+insert into menu (nombre,icono) values("Ordenes de Producción","menu-icon glyphicon glyphicon-barcode");
 
 CREATE TABLE submenu(
     idsubmenu mediumint(8) unsigned auto_increment,
@@ -546,6 +547,7 @@ insert into submenu (idmenu,nombre,pagina) values(2,"Patrones","listarpatrones.p
 insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos.php");
 insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
 insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listarordenesdecompra.php");
+insert into submenu (idmenu,nombre,pagina) values(5,"Ordenes de Producción","listarordenesdeproduccion.php");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
@@ -560,6 +562,7 @@ insert into menualto (idmenu,idusuario) values(1,1);
 insert into menualto (idmenu,idusuario) values(2,1);
 insert into menualto (idmenu,idusuario) values(3,1);
 insert into menualto (idmenu,idusuario) values(4,1);
+insert into menualto (idmenu,idusuario) values(5,1);
 
 CREATE TABLE privilegio(
     idprivilegio mediumint(8) unsigned auto_increment,
@@ -578,6 +581,7 @@ insert into privilegio (idmenualto,idsubmenu) values(2,5);
 insert into privilegio (idmenualto,idsubmenu) values(2,6);
 insert into privilegio (idmenualto,idsubmenu) values(3,7);
 insert into privilegio (idmenualto,idsubmenu) values(4,8);
+insert into privilegio (idmenualto,idsubmenu) values(5,9);
 
 
 CREATE TABLE tabla (
