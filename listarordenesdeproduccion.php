@@ -225,7 +225,7 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 echo "<li><a href='editarpatron.php?id=".$fila["idorden"]."'>Editar</a></li>";
-                                                                echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                                                                                
+                                                                echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                               
                                                                 echo "</div>";
