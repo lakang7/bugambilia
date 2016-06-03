@@ -44,7 +44,7 @@
                     <a href="index.php" class="navbar-brand">
                         <small>
                             <i class="fa fa-leaf"></i>
-                            Bugambilia
+                            Bugambilia Buffet
                         </small>
                     </a>
 

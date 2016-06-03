@@ -23,9 +23,9 @@
                                                     <div class="center" style="margin-top: 15ex">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="blue">Bugambilia</span>
+									<span class="blue">Bugambilia Buffet</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Bugambilia 2016</h4>
+								<h4 class="blue" id="id-company-text">&copy; Bugambilia Buffet 2016</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -80,7 +80,7 @@
 
 										<div class="toolbar clearfix">
                                                                                     <div style="text-align: center; color: #ffffff; width: 100%; font-size: 2.2ex" >
-                                                                                            www.bugambiliamexico.com
+                                                                                            www.bugambiliabuffet.com
                                                                                     </div>
 										</div>
 									</div><!-- /.widget-body -->

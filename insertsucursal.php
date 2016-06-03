@@ -158,9 +158,7 @@
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos de la Sucursal</div>                                                        
-                                                        <div style="width: 100%;">Nombre de la Sucursal</div>
-                                                        <div style="width: 100%;"><input type="text" id="nombresucursal" name="nombresucursal" placeholder="Ingrese un nombre para la sucursal" style="width: 100%; font-size: 1.8ex;" maxlength="60" required="required" /></div>
-                                                        <div style="width: 100%; margin-top: 10px;">Empresa Matriz</div>
+                                                        <div style="width: 100%; ">Empresa Matriz</div>
                                                         <select class="chosen-select form-control" id="matriz" name="matriz" data-placeholder="Elija la empresa matriz" required="required">
                                                             <option value="">  </option>
                                                             <?php
@@ -174,7 +172,10 @@
                                                                 }
                                                                 mysql_close($con);                                                                
                                                             ?>
-                                                        </select>
+                                                        </select>                                                        
+                                                        <div style="width: 100%; margin-top: 10px;">Nombre de la Sucursal</div>
+                                                        <div style="width: 100%;"><input type="text" id="nombresucursal" name="nombresucursal" placeholder="Ingrese un nombre para la sucursal" style="width: 100%; font-size: 1.8ex;" maxlength="60" required="required" /></div>
+
                                                         <div style="width: 100%; margin-top: 10px;">Regiones</div>
                                                         <div id="contenedor" >
                                                             <select multiple class="chosen-select form-control" id="regiones" name="regiones[]" data-placeholder="Elija las regiones asociadas a esta sucursal" >
@@ -203,7 +204,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Bugambilia</span>
+							<span class="blue bolder">Bugambilia Buffet</span>
 							Application &copy; 2016
 						</span>
 

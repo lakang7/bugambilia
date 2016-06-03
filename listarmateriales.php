@@ -41,7 +41,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Bugambilia
+							Bugambilia Buffet
 						</small>
 					</a>
 
@@ -260,7 +260,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Bugambilia</span>
+							<span class="blue bolder">Bugambilia Buffet</span>
 							Application &copy; 2016
 						</span>
 

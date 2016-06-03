@@ -40,7 +40,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Bugambilia
+							Bugambilia Buffet
 						</small>
 					</a>
 
@@ -229,7 +229,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Bugambilia</span>
+							<span class="blue bolder">Bugambilia Buffet</span>
 							Application &copy; 2016
 						</span>
 
@@ -671,14 +671,22 @@
                                     var selectedValue = $selectedOption.val();     
                                     $("#contenedor01").load("recursos/ajax.php", {tarea:7, id: selectedValue}, function(){                                                                                
 					$('.chosen-select').chosen({allow_single_deselect:true});
-                                            $('#patron').change(function(){                                                
+                                            $('#patron').change(function(){
+                                                var escogio = $( "#patron option:selected" ).text();
+                                                document.getElementById("descripcion").value=escogio;
                                                 var $selectedOption = $(this).find('option:selected');
                                                 var selectedValue = $selectedOption.val();
                                                 $("#contenedor02").load("recursos/ajax.php", {tarea:8, id: selectedValue}, function(){
                                                     $('.chosen-select').chosen({allow_single_deselect:true});
                                                 });                                                                                                                                                 
-                                            });                                        
+                                            });
+
+                                    var escogio = $( "#patron option:selected" ).text();
+                                    document.getElementById("descripcion").value=escogio;                                             
+                                            
                                     });
+                                    //alert("Cambio la forma");
+                                   
                                 }); 
                                 
 

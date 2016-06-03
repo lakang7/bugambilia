@@ -284,7 +284,7 @@
     $pdf->SetXY(10,$suma);
     $pdf->Cell(7, 4,"#", 1, 1,"L", 0, '', 0);
     $pdf->SetXY(17,$suma);
-    $pdf->Cell(18, 4,"Modelo", 1, 1,"L", 0, '', 0);
+    $pdf->Cell(18, 4,"Material", 1, 1,"L", 0, '', 0);
     $pdf->SetXY(35,$suma);
     $pdf->Cell(18, 4,"Clave", 1, 1,"L", 0, '', 0); 
     $pdf->SetXY(53,$suma);

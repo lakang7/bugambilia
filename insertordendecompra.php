@@ -51,7 +51,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Bugambilia
+							Bugambilia Buffet
 						</small>
 					</a>
 
@@ -402,7 +402,7 @@
                                                                         <div style="width: 100%;">
                                                                            Número de Unidades
                                                                         </div>
-                                                                        <div style="width: 100%;"><input type="text" id="unidades" name="unidades" placeholder="Número de unidades" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px" maxlength="3" /></div>
+                                                                        <div style="width: 100%;"><input type="number" min="0" id="unidades" name="unidades" placeholder="Número de unidades" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px" maxlength="3" /></div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"><i class="ace-icon fa fa-times"></i>Cerrar</button>
@@ -458,7 +458,7 @@
                                                                             total = acumulado + iva;                                                                            
                                                                         }
 
-                                                                        $("#productosenorden").append("<div style='width: 100%; margin-bottom: 5px; border-bottom: 1px solid #CCC; font-size: 12px'><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Item Numero:</label> "+unidad+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Numero de Unidades:</label> "+prounidades+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Codigo:</label> "+procodigo+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Color:</label> "+procolor+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Descripcion:</label> "+prodescripcion+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Unitario:</label> $"+proprecio+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Total:</label> $"+parseFloat(proprecio*prounidades).toFixed(2)+"</div><div style='width: 100%'><div class='btn btn-minier btn-danger' style='margin-bottom: 5px; margin-top: 1px' onclick='eliminar("+unidad+")'>Eliminar</div></div></div>");                                                                                                                                                
+                                                                        $("#productosenorden").append("<div style='width: 100%; margin-bottom: 5px; border-bottom: 1px solid #CCC; font-size: 12px'><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Item Numero:</label> "+unidad+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Codigo:</label> "+procodigo+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Color:</label> "+procolor+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Descripcion:</label> "+prodescripcion+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Numero de Unidades:</label> "+prounidades+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Unitario:</label> $"+proprecio+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Total:</label> $"+parseFloat(proprecio*prounidades).toFixed(2)+"</div><div style='width: 100%'><div class='btn btn-minier btn-danger' style='margin-bottom: 5px; margin-top: 1px' onclick='eliminar("+unidad+")'>Eliminar</div></div></div>");                                                                                                                                                
                                                                         $("#totalizacion").html("<div class='left' style='width: 50%; float: left'>Productos: <label style='font-size: 22px; font-weight: bold'>"+unidad+"</label></div><div class='right' style='width: 50%; float: left; text-align: right'>Subtotal:   <label style='font-size: 22px; font-weight: bold'>$"+parseFloat(acumulado).toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Iva:   <label style='font-size: 22px; font-weight: bold'>$"+iva.toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Total:   <label style='font-size: 22px; font-weight: bold'>$"+total.toFixed(2)+"</label></div>");
                                                                     });                                                                                                                                        
                                                                 }else{
@@ -630,7 +630,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Bugambilia</span>
+							<span class="blue bolder">Bugambilia Buffet</span>
 							Application &copy; 2016
 						</span>
 

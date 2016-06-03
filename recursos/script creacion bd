@@ -200,7 +200,6 @@ insert into color (codigo,nombre) values("ST","Acero");
 insert into color (codigo,nombre) values("FR","Rojo Fuego");
 insert into color (codigo,nombre) values("PC","Pacífico");
 insert into color (codigo,nombre) values("BR","Ladrillo");
-insert into color (codigo,nombre) values("CH","Chocolate");
 insert into color (codigo,nombre) values("MC","Moka");
 insert into color (codigo,nombre) values("LT","Latte");
 insert into color (codigo,nombre) values("FT","Verde Bosque");
@@ -256,7 +255,7 @@ insert into categoriaproducto (nombreespanol,nombreingles) values ("Fiesta","Fie
 insert into categoriaproducto (nombreespanol,nombreingles) values ("Display","Display");
 insert into categoriaproducto (nombreespanol,nombreingles) values ("Insertos","Food Pans");
 insert into categoriaproducto (nombreespanol,nombreingles) values ("Organizadores","Tile System");
-insert into categoriaproducto (nombreespanol,nombreingles) values ("Stands","Stands");
+insert into categoriaproducto (nombreespanol,nombreingles) values ("Bases","Stands");
 
 CREATE TABLE patronproducto (
     idpatronproducto mediumint(8) unsigned auto_increment,

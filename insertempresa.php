@@ -40,7 +40,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Bugambilia
+							Bugambilia Buffet
 						</small>
 					</a>
 
@@ -251,7 +251,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Bugambilia</span>
+							<span class="blue bolder">Bugambilia Buffet</span>
 							Application &copy; 2016
 						</span>
 
@@ -320,7 +320,20 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+                
+                $( document ).ready(function() {    
+                    $("#telefono").keydown(function (e) {        
+                        if($.inArray(e.keyCode, [48,49,50,51,52,53,54,55,56,57,37,39,8,189]) !== -1){            
+                            return;
+                        }else{
+                            e.preventDefault();
+                        }
+                    });
+                });
+                        
 			jQuery(function($) {
+                            
+                            
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {
