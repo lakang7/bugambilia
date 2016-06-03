@@ -65,7 +65,7 @@ if ($tarea == 1) {
          * idtabla =1 -> empresa
          * idaccion =3 -> creacion
          */
-        $descripcion = "'Se creo la empresa " . $_POST["nombre"] . " con el identificador " . $codigo . " de nombre comercial " . $_POST["comercial"] . "'";
+        $descripcion = "'Se creo la Empresa: " . $_POST["nombre"] . ", con las siguientes caracteristicas; Identificador: " . $_POST["rfc"] . ", Nombre Comercial: " . $_POST["comercial"] . ", Telefono: " . $_POST["telefono"] . ", Pais: " . $pais["nombre"] . ", Direccion Fiscal Calle: " . $_POST["fiscalavenida"] . ", Numero Fiscal Exterior: " . $_POST["fiscalexterior"] . ", Numero Fiscal Interior: " . $_POST["fiscalinterior"] . ", Nombre Colonia: " . $_POST["fiscalcolonia"] . ", Ciudad: " . $_POST["fiscalciudad"] . ", Estado: " . $_POST["fiscalestado"] . ", Codigo Postal: " . $_POST["fiscalpostal"] . ", Calle de Entrega: " . $_POST["entregaavenida"] . ", Numero Entrega Exterior: " . $_POST["entregaexterior"] . ", Numero de Entrega Interior: " . $_POST["entregainterior"] . ", Colonia de Entrega: " . $_POST["entregacolonia"] . ", Ciudad de Entrega: " . $_POST["entregaciudad"] . ", Estado de Entrega: " . $_POST["entregaestado"] . ", Codigo Postal de Entrega: " . $_POST["entregapostal"] . ", Direccion de Referencia: " . $_POST["entregareferencia"] . ", Impuesto: " . $_POST["iva"] . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,1,now()," . $descripcion . ")";
         $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
         /*         * ******fin insercion bitacora ******** */
@@ -112,7 +112,7 @@ if ($tarea == 2) {
         $result_emp = mysql_query($sql_Emp, $con) or die(mysql_error());
         $empresa = mysql_fetch_assoc($result_emp);
 
-        $descripcion = "'Se creo la sucursal  " . $_POST["nombresucursal"] . " en las siguiente regiones " . $regiones . " de la empresa " . $empresa["NOMEM"] . " de nombre comercial " . $empresa["NOMCOM"] . "'";
+        $descripcion = "'Se creo la sucursal:  " . $_POST["nombresucursal"] . ", en las siguiente regiones: " . $regiones . "; de la Empresa: " . $empresa["NOMEM"] . ", de nombre comercial: " . $empresa["NOMCOM"] . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,2,now()," . $descripcion . ")";
 
 //        showRegistro($sql_insertBitacora);
@@ -165,7 +165,7 @@ if ($tarea == 3) {
 
 
 
-        $descripcion = "'Se creo el contacto  " . $_POST["nombre"] . " de la empresa " . $empresa["NOMEM"] . " de nombre comercial " . $empresa["NOMCOM"] . "'";
+        $descripcion = "'Se creo el contacto:  " . $_POST["nombre"] . ", de la empresa: " . $empresa["NOMEM"] . ", y de nombre comercial: " . $empresa["NOMCOM"] . ", con los telefonos: " . $_POST["telefonouno"] . " - " . $_POST["telefonodos"] . ", y con el correo: " . $_POST["correo"] . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,3,now()," . $descripcion . ")";
 
 //        showRegistro($sql_insertBitacora);
@@ -214,7 +214,7 @@ if ($tarea == 4) {
          * idtabla =4 -> material
          * idaccion =3 -> creacion
          */
-        $descripcion = "'Se creo el material  " . $_POST["nombrematerial"] . " con el codigo  " . $_POST["codigomaterial"] . " con los siguientes colores disponibles  " . $colores . " con la duracion de dias " . $_POST["dias"] . "'";
+        $descripcion = "'Se creo el material:  " . $_POST["nombrematerial"] . ", con el codigo:  " . $_POST["codigomaterial"] . ", con los siguientes colores disponibles:  " . $colores . ", y con una duracion en dias: " . $_POST["dias"] . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,4,now()," . $descripcion . ")";
 
 //        showRegistro($sql_insertBitacora);
@@ -275,7 +275,7 @@ if ($tarea == 5) {
         $material = mysql_fetch_assoc($result_material);
 
 
-        $descripcion = "'Se creo el producto  " . $_POST["descripcion"] . " con el codigo  " . $_POST["codigoproducto"] . " con las caracteristicas siguientes ( Largo " . $_POST["largo"] . ", Ancho " . $_POST["ancho"] . ", Alto " . $_POST["alto"] . ", Peso " . $peso . ", Capacidad " . $capacidad . ", Precio " . $_POST["precio"] . "), asociado al tipo de producto  " . $producto["TPNOM"] . " de codigo de tipo " . $producto["TPCOD"] . " y con  un porcentaje de tipo de producto  " . $producto["TPPORC"] . " , asociado al patron de producto " . $patron["PPNOM"] . " y con  el material del patron " . $patron["PPMAT"] . ", asociado al material " . $material["MATNOM"] . " con el codigo de material " . $material["MATCOD"] . " con los colores " . $material["MATCOL"] . "'";
+        $descripcion = "'Se creo el producto:  " . $_POST["descripcion"] . ", con el codigo:  " . $_POST["codigoproducto"] . ", con las caracteristicas siguientes; ( Largo: " . $_POST["largo"] . ", Ancho: " . $_POST["ancho"] . ", Alto: " . $_POST["alto"] . ", Peso: " . $peso . ", Capacidad: " . $capacidad . ", Precio: " . $_POST["precio"] . "), asociado al tipo de producto:  " . $producto["TPNOM"] . ", de codigo de tipo: " . $producto["TPCOD"] . " y con  un porcentaje de tipo de producto:  " . $producto["TPPORC"] . ", asociado al patron de producto: " . $patron["PPNOM"] . ", con  el material de patron: " . $patron["PPMAT"] . ", asociado al material: " . $material["MATNOM"] . ", con el codigo de material: " . $material["MATCOD"] . ", con los colores: " . $material["MATCOL"] . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,6,now()," . $descripcion . ")";
 
 //        showRegistro($sql_insertBitacora);
@@ -339,7 +339,7 @@ if ($tarea == 6) {
 
 
 
-        $descripcion = "'Se creo el patron con el nombre en Español " . $_POST["espanol"] . " y el nomrbe en Ingles " . $_POST["ingles"] . " asociado a la categoria de producto " . $catprod["NOMES"] . "'";
+        $descripcion = "'Se creo el patron con el nombre en Español: " . $_POST["espanol"] . ", el nomrbe en Ingles: " . $_POST["ingles"] . ", asociado a la categoria de producto: " . $catprod["NOMES"] . ", y asociado a los siguientes materiales: " . $materiales . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,5,now()," . $descripcion . ")";
 
 //        showRegistro($sql_insertBitacora);
@@ -372,13 +372,18 @@ if ($tarea == 7) {
         $oldregistro = mysql_fetch_row($result_beforeupdate);
         $news = mysql_fetch_row($result_afterupdate);
 
-        $campos = array("nombreempresa", " nombrecomercial", " telefonoprincipal", " identificador", " idpais", " fiscalcalle", " fiscalexterior", " fiscalinterior", " fiscalcolonia", " fiscalciudad", " fiscalestado", " fiscalpostal", " entregacalle", " entregaexterior", " entregainterior", " entregacolonia", " entregaciudad", " entregaestado", " entregapostal", " entregareferencia", " codigo", " registro", " iva");
-        $descripcion = "'Registro de empresa codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
+        $campos = array("nombre empresa", "nombre comercial", "telefono principal", " Nro identificador", "idpais", "Nro fiscal calle", "Nro fiscal exterior", "Nro fiscal interior", "Nro fiscal colonia", "ciudad", "estado", "codigo postal", "Nro entrega calle", "Nro entrega exterior", "Nro entrega interior", "Nro entrega colonia", "ciudad de entrega", "estado de entrega", "codigo postal de entrega", "punto de referencia", "codigo", "registro", "iva");
+        $descripcion = "'Edición de la Empresa codigo (" . $_GET["id"] . ") ha  presentado cambios en los siguientes atributos: ";
         $linea = "";
 
         for ($index = 0; $index < count($oldregistro); $index++) {
             if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
-                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+                if ($index > 4 && $index < 9) {
+                    if (strcmp(md5($news[$index]), md5("null")) == 0 || strcmp($news[$index],"")==0) {
+                        $news[$index] = "calle unica";
+                    }                   
+                }
+                $linea = $linea . " Cambio en el atributo: " . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
             }
         }
         $descripcion = $descripcion . " " . $linea . "'";
@@ -395,13 +400,14 @@ if ($tarea == 8) {
     /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
     $sql_beforeupdate = "select nombrecomercial,regiones from sucursal where idsucursal='" . $_GET["id"] . "'";
     $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
+   
+    
     /*     * ************************************************** */
-
 
     $sql_updateSucursal = "update sucursal set nombrecomercial='" . $_POST["nombresucursal"] . "' where idsucursal='" . $_GET["id"] . "'";
     $result_updateSucursal = mysql_query($sql_updateSucursal, $con) or die(mysql_error());
 
-
+    
     if ($result_updateSucursal == 1) {
 
 
@@ -433,6 +439,9 @@ if ($tarea == 8) {
 
         $oldregistro = mysql_fetch_row($result_beforeupdate);
         $news = mysql_fetch_row($result_afterupdate);
+        
+        $vecOldRegiones=array();
+        
 
         $campos = array("nombrecomercial", "regiones");
         $descripcion = "'Registro de sucursal de Empresa codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
@@ -736,7 +745,7 @@ if ($tarea == 13) {
                 $sql_insertHistorico = "insert into historicoporcentajeganancia (idlistatipos,porcentajeganancia,desde,hasta) values(" . $indice2 . ",'" . $_POST["ganancia" . $tipo["idtipoproducto"]] . "',now(),NULL);";
                 $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
             }
-        }   
+        }
         echo "Registro Satisfactorio de la lista de precios";
     }
 }
@@ -800,18 +809,17 @@ if ($tarea == 14) {
                 $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
             }
         }
-        
-        
+
+
         for ($index1 = 0; $index1 < count($oldsubtipo); $index1++) {
-            
+
 //            echo $oldsubtipo[$index1]." - ".$newsubtipo[$index1];
             if (strcmp(md5($oldsubtipo[$index1]), md5($newsubtipo[$index1])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
                 $linea = $linea . " Porcentaje " . " Valor Original (" . $oldsubtipo[$index1] . "), Valor Nuevo (" . $newsubtipo[$index1] . ") -";
 //                echo $linea;
-                
             }
         }
-        
+
         $descripcion = $descripcion . " " . $linea . "'";
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
         showRegistro($sql_insertBitacora);
