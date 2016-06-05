@@ -34,7 +34,7 @@ function showRegistro($sql) {
 
 /* Insertar Empresa */
 if ($tarea == 1) {
-    $sql_insertEmpresa = "insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,fiscalcalle,fiscalexterior,fiscalinterior,fiscalcolonia,fiscalciudad,fiscalestado,fiscalpostal,entregacalle,entregaexterior,entregainterior,entregacolonia,entregaciudad,entregaestado,entregapostal,entregareferencia,registro,iva) values ('" . $_POST["nombre"] . "','" . $_POST["comercial"] . "','" . $_POST["telefono"] . "','" . $_POST["rfc"] . "','" . $_POST["pais"] . "','" . $_POST["fiscalavenida"] . "','" . $_POST["fiscalexterior"] . "','" . $_POST["fiscalinterior"] . "','" . $_POST["fiscalcolonia"] . "','" . $_POST["fiscalciudad"] . "','" . $_POST["fiscalestado"] . "','" . $_POST["fiscalpostal"] . "','" . $_POST["entregaavenida"] . "','" . $_POST["entregaexterior"] . "','" . $_POST["entregainterior"] . "','" . $_POST["entregacolonia"] . "','" . $_POST["entregaciudad"] . "','" . $_POST["entregaestado"] . "','" . $_POST["entregapostal"] . "','" . $_POST["entregareferencia"] . "',now(),'" . $_POST["iva"] . "');";
+    $sql_insertEmpresa = "insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,fiscalcalle,fiscalexterior,fiscalinterior,fiscalcolonia,fiscalciudad,fiscalestado,fiscalpostal,entregacalle,entregaexterior,entregainterior,entregacolonia,entregaciudad,entregaestado,entregapostal,entregareferencia,registro,iva,metododepago,banco,ultimos) values ('" . $_POST["nombre"] . "','" . $_POST["comercial"] . "','" . $_POST["telefono"] . "','" . $_POST["rfc"] . "','" . $_POST["pais"] . "','" . $_POST["fiscalavenida"] . "','" . $_POST["fiscalexterior"] . "','" . $_POST["fiscalinterior"] . "','" . $_POST["fiscalcolonia"] . "','" . $_POST["fiscalciudad"] . "','" . $_POST["fiscalestado"] . "','" . $_POST["fiscalpostal"] . "','" . $_POST["entregaavenida"] . "','" . $_POST["entregaexterior"] . "','" . $_POST["entregainterior"] . "','" . $_POST["entregacolonia"] . "','" . $_POST["entregaciudad"] . "','" . $_POST["entregaestado"] . "','" . $_POST["entregapostal"] . "','" . $_POST["entregareferencia"] . "',now(),'" . $_POST["iva"] . "', '".$_POST["metodo"]."', '".$_POST["banco"]."', '".$_POST["ultimos"]."');";
     $result_insertEmpresa = mysql_query($sql_insertEmpresa, $con) or die(mysql_error());
     if ($result_insertEmpresa) {
         $sql_ultimaEMPRESA = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'empresa';";
@@ -359,7 +359,7 @@ if ($tarea == 7) {
     /*     * ************************************************** */
 
 
-    $sql_updateEmpresa = "update empresa set nombreempresa='" . $_POST["nombre"] . "', nombrecomercial='" . $_POST["comercial"] . "', telefonoprincipal='" . $_POST["telefono"] . "', identificador='" . $_POST["rfc"] . "', fiscalcalle='" . $_POST["fiscalavenida"] . "',fiscalexterior='" . $_POST["fiscalexterior"] . "',fiscalinterior='" . $_POST["fiscalinterior"] . "',fiscalcolonia='" . $_POST["fiscalcolonia"] . "',fiscalciudad='" . $_POST["fiscalciudad"] . "',fiscalestado='" . $_POST["fiscalestado"] . "',fiscalpostal='" . $_POST["fiscalpostal"] . "',entregacalle='" . $_POST["entregaavenida"] . "',entregaexterior='" . $_POST["entregaexterior"] . "',entregainterior='" . $_POST["entregainterior"] . "',entregacolonia='" . $_POST["entregacolonia"] . "',entregaciudad='" . $_POST["entregaciudad"] . "',entregaestado='" . $_POST["entregaestado"] . "',entregapostal='" . $_POST["entregapostal"] . "',entregareferencia='" . $_POST["entregareferencia"] . "',iva='" . $_POST["iva"] . "' where idempresa='" . $_GET["id"] . "'";
+    $sql_updateEmpresa = "update empresa set nombreempresa='" . $_POST["nombre"] . "', nombrecomercial='" . $_POST["comercial"] . "', telefonoprincipal='" . $_POST["telefono"] . "', identificador='" . $_POST["rfc"] . "', fiscalcalle='" . $_POST["fiscalavenida"] . "',fiscalexterior='" . $_POST["fiscalexterior"] . "',fiscalinterior='" . $_POST["fiscalinterior"] . "',fiscalcolonia='" . $_POST["fiscalcolonia"] . "',fiscalciudad='" . $_POST["fiscalciudad"] . "',fiscalestado='" . $_POST["fiscalestado"] . "',fiscalpostal='" . $_POST["fiscalpostal"] . "',entregacalle='" . $_POST["entregaavenida"] . "',entregaexterior='" . $_POST["entregaexterior"] . "',entregainterior='" . $_POST["entregainterior"] . "',entregacolonia='" . $_POST["entregacolonia"] . "',entregaciudad='" . $_POST["entregaciudad"] . "',entregaestado='" . $_POST["entregaestado"] . "',entregapostal='" . $_POST["entregapostal"] . "',entregareferencia='" . $_POST["entregareferencia"] . "',iva='" . $_POST["iva"] . "', metododepago='".$_POST["metodo"]."', banco='".$_POST["banco"]."', ultimos='".$_POST["ultimos"]."' where idempresa='" . $_GET["id"] . "'";
     $result_updateEmpresa = mysql_query($sql_updateEmpresa, $con) or die(mysql_error());
 
     /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
@@ -845,12 +845,18 @@ if ($tarea == 15) {
 /* insertar orden de compra dolor de cabeza */
 if ($tarea == 16) {
     $sql_insertOrden = "";
-    if (isset($_POST["sucursal"]) && isset($_POST["region"])) {
-        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now())";
-    } else {
-        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now())";
+           
+    if(isset($_POST["sucursal"]) && $_POST["sucursal"]!=NULL && $_POST["sucursal"]!=""){
+        if(isset($_POST["region"]) && $_POST["region"]!=NULL && $_POST["region"]!=""){
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+        }else {
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+        }
+    }else{
+        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
     }
 
+    //echo $sql_insertOrden."</br>";
     $result_insertOrden = mysql_query($sql_insertOrden, $con) or die(mysql_error());
 
 
@@ -951,5 +957,26 @@ if ($tarea == 16) {
         $sql_updateOrdenCompra = "update ordendecompra set fechadeentrega='" . $_POST["id-date-picker-2"] . "' where idordendecompra='" . $indice . "'";
         $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
     }
+    
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Compra Registrada Satisfactoriamente.");
+            document.location="../listarordenesdecompra.php";
+        </script>
+    <?php     
+}
+
+
+if ($tarea == 17) {
+    $sqldeleteproductos = "delete from productosordencompra where idordendecompra='".$_GET["id"]."'";
+    $resuldeleteproductos = mysql_query($sqldeleteproductos, $con) or die(mysql_error());
+    $sqldeleteorden = "delete from ordendecompra where idordendecompra='".$_GET["id"]."'";
+    $resuldeleteorden = mysql_query($sqldeleteorden, $con) or die(mysql_error());    
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Compra Eliminada Satisfactoriamente.");
+            document.location="../listarordenesdecompra.php";
+        </script>
+    <?php    
 }
 ?>

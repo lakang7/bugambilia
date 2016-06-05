@@ -423,7 +423,7 @@
         if($total["total"]>0){
             echo "<div style='width: 100%; float: left; margin-right: 10px'>";
             echo "<label>Sucursal</label>";
-            echo "<select class='chosen-select form-control' id='sucursal' name='sucursal' data-placeholder='Elija la sucursal solicitante' required='required'>";
+            echo "<select class='chosen-select form-control' id='sucursal' name='sucursal' data-placeholder='Elija la sucursal solicitante'>";
             echo "<option value=''></option>";
             $sql_listaSucursal="select * from sucursal where idempresa='".$_POST["idempresa"]."' order by nombrecomercial";
             $result_listaSucursal=mysql_query($sql_listaSucursal,$con) or die(mysql_error());
@@ -445,7 +445,8 @@
         $total = mysql_fetch_assoc($result_cuenta);         
         echo "<div style='width: 100%; margin-top: 10px'>";
         echo "<label style='margin-top: 10px'>Región</label>";
-        echo "<select class='chosen-select form-control' id='region' name='region' data-placeholder='Elija la región solicitante' required='required'>";
+        echo "<select class='chosen-select form-control' id='region' name='region' data-placeholder='Elija la región solicitante'>";
+        echo "<option value=''></option>";
         $sql_listaESTSUCURSAL="select * from estadosensucursal where idsucursal='".$_POST["idsucursal"]."'";
         $result_listaESTSUCURSAL=mysql_query($sql_listaESTSUCURSAL,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaESTSUCURSAL)>0){

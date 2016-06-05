@@ -137,6 +137,9 @@ CREATE TABLE empresa (
     codigo varchar(20),
     registro TIMESTAMP not null,
     iva integer not null,
+    metododepago integer not null,
+    banco varchar(30),
+    ultimos varchar(4),
     PRIMARY KEY (idempresa),
     FOREIGN KEY (idpais) REFERENCES pais(idpais) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -428,6 +431,9 @@ CREATE TABLE ordendecompra(
     total numeric(10,3) not null,
     prioridad integer not null,
     fechadeentrega date not null,
+    condiciones integer not null,
+    paqueteria varchar(30) not null,
+    observaciones varchar(300) not null,
     PRIMARY KEY (idordendecompra),
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,

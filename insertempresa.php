@@ -210,7 +210,23 @@
                                                             <option value="0">No Aplica</option>
                                                             <option value="1">Si Aplica</option>
                                                         </select>                                                                                                                         
-                                                        </div>                                                                                                                                                                        
+                                                        </div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">(*) Metodo de Pago usado por esta empresa</div>                                                        
+                                                        <div style="width: 100%;">
+                                                            <select class="chosen-select form-control" id="metodo" name="metodo" data-placeholder="Seleccione el metodo de pago de esta empresa" required="required">
+                                                            <option value="1" selected="selected">Transferencia</option>
+                                                            <option value="2">Deposito</option>
+                                                            <option value="3">Efectivo</option>
+                                                        </select>                                                                                                                         
+                                                        </div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">Banco del Cliente</div>
+                                                        <div style="width: 100%;"><input type="text" id="banco" name="banco" placeholder="Banco del Cliente" style="width: 100%; font-size: 1.8ex; margin-bottom: 0px"  maxlength="30" /></div>                                                                                                                
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">Últimos 4 digitos de la cuenta</div>
+                                                        <div style="width: 100%;"><input type="text" id="ultimos" name="ultimos" placeholder="Últimos cuatro digitos de la cuenta principal del cliente" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>
+                                                        
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal</div>                                                        
                                                         <div style="width: 100%">
                                                             <input type="text" id="fiscalavenida" name="fiscalavenida" placeholder="Calle o Avenida" style="width: 54%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />

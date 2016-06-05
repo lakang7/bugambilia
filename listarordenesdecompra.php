@@ -154,11 +154,11 @@
 			<div class="main-content">
                             <input type="hidden" name="oculto" id="oculto" />
                             <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
-				<div class="main-content-inner">
+				<div class="main-content-inner">                                                                                                                                            
 					<div class="page-content">
                                             <div class="container-fluid">
 						<div class="page-header"><h1>Ordenes de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
-                                                <div class="row titulo_tabla">
+                                                <div class="row titulo_tabla" id="id-btn-dialog1">
                                                     Lista de Ordenes de Compra
                                                 </div>    
                                                 <div class="row filtros_tabla">
@@ -231,9 +231,10 @@
                                                                 $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
                                                                 $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
                                                                 if(mysql_num_rows($resultValida)==0){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
                                                                     echo "<li class='divider'></li>";
                                                                     echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                                                                }                                                                
+                                                                }                                                               
 
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
@@ -401,15 +402,50 @@
 		<script src="assets/js/jquery.autosize.min.js"></script>
 		<script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script src="assets/js/jquery.maskedinput.min.js"></script>
-		<script src="assets/js/bootstrap-tag.min.js"></script>
-
-		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
-
+		<script src="assets/js/bootstrap-tag.min.js"></script>              
+                
+                
+                
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
+                            
+                            
+				$( "#id-btn-dialog1" ).on('click', function(e) {
+					e.preventDefault();
+                                        alert("hola");
+					var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
+						modal: true,
+						title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> jQuery UI Dialog</h4></div>",
+						title_html: true,
+						buttons: [ 
+							{
+								text: "Cancel",
+								"class" : "btn btn-minier",
+								click: function() {
+									$( this ).dialog( "close" ); 
+								} 
+							},
+							{
+								text: "OK",
+								"class" : "btn btn-primary btn-minier",
+								click: function() {
+									$( this ).dialog( "close" ); 
+								} 
+							}
+						]
+					});
+
+				});                            
+                            
+                            
+                            
+
+
+			                            
+                            
+                            
+                            
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {

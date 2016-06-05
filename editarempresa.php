@@ -195,7 +195,7 @@
                                                         <div style="width: 100%;">Nombre Comercial</div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $empresa["nombrecomercial"]; ?>" id="comercial" name="comercial" placeholder="nombre comercial" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="120" /></div>                                                        
                                                         <div style="width: 100%;">(*) Teléfono Principal</div>
-                                                        <div style="width: 100%;"><input type="text" value="<?php echo $empresa["telefonoprincipal"]; ?>" id="telefono" name="telefono" placeholder="teléfono principal" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px" maxlength="30" required="required" /></div>                                                                                                                
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $empresa["telefonoprincipal"]; ?>" id="telefono" name="telefono" placeholder="teléfono principal" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px" maxlength="30" required="required" /></div>                                                                                                                                                                                                                                                                                        
                                                         <div style="width: 100%;">(*) Aplica IVA para esta empresa</div>                                                        
                                                         <div style="width: 100%;">
                                                             <select class="chosen-select form-control" id="iva" name="iva" data-placeholder="Inidique si para esta empresa aplica el iva" required="required">
@@ -210,7 +210,36 @@
                                                             ?>
 
                                                         </select>                                                                                                                         
-                                                        </div>                                                        
+                                                        </div>   
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">(*) Metodo de Pago usado por esta empresa</div>                                                        
+                                                        <div style="width: 100%;">
+                                                        <select class="chosen-select form-control" id="metodo" name="metodo" data-placeholder="Seleccione el metodo de pago de esta empresa" required="required">
+                                                        <?php
+                                                            if($empresa["metododepago"]==1){
+                                                                echo "<option value='1' selected='selected'>Transferencia</option>";
+                                                                echo "<option value='2'>Deposito</option>";
+                                                                echo "<option value='3'>Efectivo</option>";                                                            
+                                                            }else if($empresa["metododepago"]==2){
+                                                                echo "<option value='1'>Transferencia</option>";
+                                                                echo "<option value='2' selected='selected'>Deposito</option>";
+                                                                echo "<option value='3'>Efectivo</option>";                                                                
+                                                            }else if($empresa["metododepago"]==3){
+                                                                echo "<option value='1'>Transferencia</option>";
+                                                                echo "<option value='2'>Deposito</option>";
+                                                                echo "<option value='3' selected='selected'>Efectivo</option>";                                                                
+                                                            }                                                            
+                                                        ?>
+                                                        </select>                                                                                                                         
+                                                        </div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">Banco del Cliente</div>
+                                                        <div style="width: 100%;"><input value="<?php echo $empresa["banco"]; ?>" type="text" id="banco" name="banco" placeholder="Banco del Cliente" style="width: 100%; font-size: 1.8ex; margin-bottom: 0px"  maxlength="30" /></div>                                                                                                                
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">Últimos 4 digitos de la cuenta</div>
+                                                        <div style="width: 100%;"><input value="<?php echo $empresa["ultimos"]; ?>"  type="text" id="ultimos" name="ultimos" placeholder="Últimos cuatro digitos de la cuenta principal del cliente" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
+                                                        
+                                                        
                                                         
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal</div>                                                        
                                                         <div style="width: 100%">
