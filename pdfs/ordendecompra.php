@@ -97,18 +97,7 @@
     
     $pdf->AddPage('P', 'A4');
     $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53,14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);    
-    $pdf->SetFont('courier', 'B', 10); 
-    
-    /*$pdf->SetXY(100,10);
-    $pdf->Cell(100, 4,"Orden de Compra: ".$orden["codigooc"], 0, 1,"R", 0, '', 0);
-    $pdf->SetFont('courier', '', 10);
-    $pdf->SetXY(100,14);
-    $pdf->Cell(100, 4,"Cliente: ".$empresa["nombreempresa"], 0, 1,"R", 0, '', 0);  
-    $pdf->SetXY(100,18);
-    $pdf->Cell(100, 4,"Fecha de Pedido: ".$orden["fechaderegistro"], 0, 1,"R", 0, '', 0);  
-    $pdf->SetXY(100,22);
-    $pdf->Cell(100, 4,"Fecha de Entrega: ".$orden["fechadeentrega"], 0, 1,"R", 0, '', 0);     
-    $pdf->Line(10, 29, 200, 29);*/
+    $pdf->SetFont('courier', 'B', 10);    
     
     $suma=10;
     $pdf->SetFont('courier', 'B', 8);
@@ -116,7 +105,7 @@
     $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
     $pdf->SetXY(175,$suma);
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+    $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
     $pdf->SetFont('courier', 'B', 8);
     $pdf->SetXY(140,$suma);
@@ -145,6 +134,10 @@
     $pdf->Line(10, 285, 200, 285);
     $pdf->SetXY(170,287);
     $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;    
+    
+    $pdf->SetFont('courier', 'B', 12);
+    $pdf->SetXY(140,30);
+    $pdf->Cell(60, 4,"ORDEN DE COMPRA", 0, 1,"C", 0, '', 0);    
     
     
     $suma=35;

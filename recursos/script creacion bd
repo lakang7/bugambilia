@@ -466,6 +466,7 @@ CREATE TABLE ordendeproduccion(
     total numeric(10,3) not null,
     prioridad integer not null,
     fechadeentrega date not null, 
+    tipoempaque integer not null,
     PRIMARY KEY (idordendeproduccion),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -514,6 +515,8 @@ CREATE TABLE usuario (
     contraseña varchar(20) not null,
     correo varchar(60) not null,
     registro TIMESTAMP not null,
+    puesto varchar(60) not null,
+    telefono varchar(20) not null,
     PRIMARY KEY (idusuario)    
 );
 

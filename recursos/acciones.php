@@ -848,23 +848,16 @@ if ($tarea == 16) {
            
     if(isset($_POST["sucursal"]) && $_POST["sucursal"]!=NULL && $_POST["sucursal"]!=""){
         if(isset($_POST["region"]) && $_POST["region"]!=NULL && $_POST["region"]!=""){
-            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
         }else {
-            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
         }
     }else{
-        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigooc,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo01"] . "','" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
     }
 
     //echo $sql_insertOrden."</br>";
     $result_insertOrden = mysql_query($sql_insertOrden, $con) or die(mysql_error());
-
-
-    $aux = substr($_POST["codigo01"], 1);
-    $nuevoCodigo = ($aux + 1);
-
-    $sqlupdateConfiguracion = "update configuracionsistema set secuenciaoc='" . $nuevoCodigo . "' where idconfiguracionsistema=1";
-    $resultupdateConfiguracion = mysql_query($sqlupdateConfiguracion, $con) or die(mysql_error());
 
     $aux = explode("-", $_POST["codigo02"]);
     $nuevoCodigo = ($aux[1] + 1);
@@ -872,16 +865,11 @@ if ($tarea == 16) {
     $sqlupdateConfiguracion = "update configuracionsistema set secuenciaop='" . $nuevoCodigo . "' where idconfiguracionsistema=1";
     $resultupdateConfiguracion = mysql_query($sqlupdateConfiguracion, $con) or die(mysql_error());
 
-
-
-
     $sql_ultimaOrden = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendecompra';";
     $result_ultimaOrden = mysql_query($sql_ultimaOrden, $con) or die(mysql_error());
     $fila = mysql_fetch_assoc($result_ultimaOrden);
     $indice = intval($fila["AUTO_INCREMENT"]);
     $indice--;
-
-
 
     $productos = $_POST["oculto01"];
     $listaIds = explode("_", $_POST["oculto02"]);
@@ -890,7 +878,6 @@ if ($tarea == 16) {
     $listaColores = explode("_", $_POST["oculto05"]);
     $listaPrecios = explode("_", $_POST["oculto06"]);
     $listaUnidades = explode("_", $_POST["oculto07"]);
-
 
     $subTotal = 0;
     $poriva = 0;

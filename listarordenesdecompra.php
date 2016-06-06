@@ -158,7 +158,7 @@
 					<div class="page-content">
                                             <div class="container-fluid">
 						<div class="page-header"><h1>Ordenes de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
-                                                <div class="row titulo_tabla" id="id-btn-dialog1">
+                                                <div class="row titulo_tabla">
                                                     Lista de Ordenes de Compra
                                                 </div>    
                                                 <div class="row filtros_tabla">
@@ -180,7 +180,7 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendecompra.codigooc">Codigo</option>
+                                                            <option value="ordendecompra.codigoexterno">Codigo</option>
                                                             <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="agenda.nombre">Contacto</option>
                                                             <option value="listadeprecios.nombre">Lista de Precios</option>
@@ -195,7 +195,7 @@
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">                                                                                                                                                           
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigooc')">Codigo</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Codigo</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
@@ -204,13 +204,24 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigooc as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaORDENES)) {
                                                             if($cuenta<10){
-                                                                echo "<div class='row linea_tabla'>";
+                                                                $band=0;
+                                                                $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
+                                                                $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($resultValida)==0){
+                                                                    $band=1;
+                                                                }                                                                
+                                                                if($band==1){
+                                                                    echo "<div class='row linea_tabla2'>";
+                                                                }else{
+                                                                    echo "<div class='row linea_tabla'>";
+                                                                }
+                                                                
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
@@ -228,9 +239,7 @@
                                                                 echo "<li><a href='#'>Editar</a></li>";
                                                                 echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
                                                                 
-                                                                $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
-                                                                $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($resultValida)==0){
+                                                                if($band==1){
                                                                     echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
                                                                     echo "<li class='divider'></li>";
                                                                     echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
@@ -313,7 +322,16 @@
                                                         mysql_close($con);                                                                
                                                         ?>
                                                 </select>                                                         
-                                            </div>                                                                                                                                    
+                                            </div>
+                                            <div style="width: 100%; margin-top: 10px">
+                                                Tipo de Empaque
+                                            </div>
+                                            <div style="width: 100%;">
+                                                <select class="chosen-select form-control" style="width: 100%" id="empaque" name="empaque" data-placeholder="Seleccione el Tipo de Empaque" required="required">
+                                                    <option value="1">Empaque Normal</option>
+                                                    <option value="2">Empaque Separado</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"><i class="ace-icon fa fa-times"></i>Cerrar</button>                                            
@@ -324,12 +342,14 @@
                                 <script type="text/javascript">
                                     function hola(){                                                                
                                         $("#persona_chosen").width("100%");
+                                        $("#empaque_chosen").width("100%");
                                     }
                                     function generar(){ 
                                         var idorden = document.getElementById("oculto").value;
                                         var idcontacto = document.getElementById("persona").value;
+                                        var tipoempaque = document.getElementById("empaque").value;
                                         //alert(idorden+" "+idcontacto);
-                                        var URL ="recursos/acciones2.php?tarea=17&idorden="+idorden+"&idcontacto="+idcontacto;
+                                        var URL ="recursos/acciones2.php?tarea=17&idorden="+idorden+"&idcontacto="+idcontacto+"&tipo="+tipoempaque;
                                         location.href=URL;
                                     }
                                 </script>
@@ -409,43 +429,6 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-                            
-                            
-				$( "#id-btn-dialog1" ).on('click', function(e) {
-					e.preventDefault();
-                                        alert("hola");
-					var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
-						modal: true,
-						title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> jQuery UI Dialog</h4></div>",
-						title_html: true,
-						buttons: [ 
-							{
-								text: "Cancel",
-								"class" : "btn btn-minier",
-								click: function() {
-									$( this ).dialog( "close" ); 
-								} 
-							},
-							{
-								text: "OK",
-								"class" : "btn btn-primary btn-minier",
-								click: function() {
-									$( this ).dialog( "close" ); 
-								} 
-							}
-						]
-					});
-
-				});                            
-                            
-                            
-                            
-
-
-			                            
-                            
-                            
-                            
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {

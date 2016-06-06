@@ -182,26 +182,11 @@
                                                             </div>                                                                                                                                                                                        
                                                         </div>
                                                         <div style="width: 100%; margin-top: 10px">                                                             
-                                                            <label>Codigo externo orden de compra</label>
+                                                            <label>(*) Codigo externo orden de compra</label>
                                                             <div style="width: 100%">
-                                                                <input type="text" id="codigoext" name="codigoext" placeholder="Codigo externo orden de compra"  maxlength="20" style="width: 100%" />
+                                                                <input type="text" id="codigoext" name="codigoext" placeholder="Codigo externo orden de compra"  maxlength="20" style="width: 100%" required="required" />
                                                             </div>                                                                                                                                                                                        
-                                                        </div> 
-                                                        
-                                                        <div style="width: 100%; margin-top: 10px"> 
-                                                            <?php
-                                                                $con=Conexion();
-                                                                $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema=1";
-                                                                $resultConfiguracion=mysql_query($sqlConfiguracion,$con) or die(mysql_error());
-                                                                $configuracion = mysql_fetch_assoc($resultConfiguracion);
-                                                                $codigo="M".$configuracion["secuenciaoc"];
-                                                            ?>
-                                                            <label>(*) Codigo interno orden de compra (Auto Generado)</label>
-                                                            <div style="width: 100%">
-                                                                <input type="text" readonly value="<?php echo $codigo ?>" id="codigo01" name="codigo01" placeholder="Codigo interno orden de compra"  maxlength="20" style="width: 100%" />
-                                                            </div>                                                                                                                                                                                        
-                                                        </div>                                                         
-                                                        
+                                                        </div>                                                                                                                                                                          
                                                         
                                                         <div style="width: 100%; margin-top: 10px"> 
                                                             <?php

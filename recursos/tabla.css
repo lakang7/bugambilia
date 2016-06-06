@@ -39,6 +39,16 @@
     border-left: 1px solid #CCC    
 }
 
+.linea_tabla2{
+    border-bottom: 1px solid #CCC;
+    padding-top: 3px;
+    padding-bottom: 3px; 
+    border-right: 1px solid #CCC; 
+    border-left: 1px solid #CCC;
+    background-color:#eaeaea;
+        
+}
+
 .columna_linea{
     font-size: 1.6ex;
 }
