@@ -189,7 +189,9 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";                                                                
+                    if(habilitaMenu($_SESSION["usuario"],1,2,3)==1){
+                        echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";                                                                
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -284,7 +286,9 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarmaterial.php?id=".$fila["idmaterial"]."'>Editar</a></li>";                                                                
+                    if(habilitaMenu($_SESSION["usuario"],2,4,3)==1){
+                        echo "<li><a href='editarmaterial.php?id=".$fila["idmaterial"]."'>Editar</a></li>";                                                                
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -397,8 +401,12 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarpatron.php?id=".$fila["idpatronproducto"]."'>Editar</a></li>"; 
-                    echo "<li><a href='pdfs/patronesproducto.php?id=".$fila["idpatronproducto"]."'  target='_blank'>Informe en PDF</a></li>";
+                    if(habilitaMenu($_SESSION["usuario"],2,5,3)==1){
+                        echo "<li><a href='editarpatron.php?id=".$fila["idpatronproducto"]."'>Editar</a></li>"; 
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],2,5,4)==1){
+                        echo "<li><a href='pdfs/patronesproducto.php?id=".$fila["idpatronproducto"]."'  target='_blank'>Informe en PDF</a></li>";
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";                    
                     echo "</div>";
@@ -609,8 +617,12 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";
-                    echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
+                    if(habilitaMenu($_SESSION["usuario"],2,6,3)==1){
+                        echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";                    
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
+                        echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -695,11 +707,21 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
-                    echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
-                    echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
-                    echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
-                    echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
+                    if(habilitaMenu($_SESSION["usuario"],3,7,3)==1){
+                        echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],3,7,4)==1){
+                        echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],3,7,5)==1){
+                        echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
+                        echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],3,7,7)==1){
+                        echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -873,13 +895,20 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='#'>Editar</a></li>";
-                    echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
-
+                    if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
+                        echo "<li><a href='#'>Editar</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
+                        echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
+                    }
                     if($band==1){
-                        echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
+                        if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
+                            echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
+                        }
                         echo "<li class='divider'></li>";
-                        echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
+                        if(habilitaMenu($_SESSION["usuario"],4,8,6)==1){
+                            echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
+                        }                                                                    
                     }                                                                
                     echo "</ul>";                                                                                                                                
                     echo "</div>";

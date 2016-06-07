@@ -152,7 +152,7 @@
 			</div>
                         
 			<div class="main-content">
-                            
+                            <input type="hidden" name="oculto" id="oculto" />
 				<div class="main-content-inner">
 					<div class="page-content"> 
                                                     <?php
@@ -261,12 +261,13 @@
                                                     </div>
                                                     </div>
                                                     <div class="col-md-2" style="border: 0px solid #CCC">
-                                                        <input type="text" id="precio" name="precio" placeholder="Precio Fijo" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
+                                                        <input type="number" id="precio" name="precio" placeholder="Precio Fijo" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
                                                     </div>
                                                     <div class="col-md-1" style="border: 0px solid #CCC">
                                                         <button class="btn btn-white btn-primary" type="submit" style="margin-top: 0px">Agregar</button>                                                
                                                     </div>
                                                 </div>
+                                                 </form>
                                                 <div class="row">
                                                     <div class="col-md-12" style="margin-top: 10px; font-size: 20px">Excepciones Agregadas a esta lista</div>
                                                 </div>                                                
@@ -280,7 +281,7 @@
                                                 </div>
                                                 <?php
                                                     $con=Conexion();
-                                                    $sql_listaExcepciones="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."'";                                                    
+                                                    $sql_listaExcepciones="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."' and estatus=0";                                                    
                                                     $result_listaExcepciones=mysql_query($sql_listaExcepciones,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaExcepciones)>0){
                                                         while ($excepcion = mysql_fetch_assoc($result_listaExcepciones)) {
@@ -311,15 +312,71 @@
                                                             $diferencia=round($excepcion["preciofinal"],2)-round($acumulado,2);
                                                             echo "<div class='col-md-1' style='text-align: center'>".round($excepcion["preciofinal"],2)."</div>";
                                                             echo "<div class='col-md-1' style='text-align: center'>".round($diferencia,2)."</div>";
+                                                            echo "<div class='col-md-2' >";
+                                                            
+                                                            echo "<div class='btn-group'>";
+                                                            echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                            echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                            echo "</button>";
+                                                            echo "<ul class='dropdown-menu dropdown-default'>";                                                                
+                                                            echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$excepcion["idexcepcionlista"].")>Cambiar Precio en la Excepción</a></li>";                                                                                                                            
+                                                            echo "<li><a href='recursos/acciones.php?tarea=18&id=".$excepcion["idexcepcionlista"]."'>Eliminar Excepción</a></li>";    
+                                                            
+                                                            echo "</ul>";                                                                                                                                
+                                                            echo "</div>";                                                             
+                                                            
+                                                            
+                                                            echo "</div>";
                                                             echo "</div>";
                                                         }
                                                     }
                                                     mysql_close($con);                                                                
-                                                ?>	                                                
+                                                ?>
+                                                
+                                                
+                            <script type="text/javascript">
+                                function prueba(id){                                    
+                                    document.getElementById("oculto").value=id;
+                                }
+                            </script>                    
+                            <div id="my-modal" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h3 class="smaller lighter blue no-margin" >Cambiar Precio de la Excepción</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="width: 100%;">
+                                                Nuevo Precio Para la Excepción
+                                            </div>
+                                            <div style="width: 100%;">
+                                                <input type="text" id="newprecio" name="newprecio" placeholder="Nuevo Precio para la Excepción" style="width: 100%; font-size: 1.8ex;" maxlength="10" required="required" />                                                         
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"><i class="ace-icon fa fa-times"></i>Cerrar</button>                                            
+                                            <button class="btn btn-sm btn-warning pull-right" style="margin-right: 10px" onclick="generar()"><i class="ace-icon fa fa-plus"></i>Cambiar Precio</button>                                            
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                                <script type="text/javascript">
+                                    function generar(){
+                                        var newprecio = document.getElementById("newprecio").value;
+                                        if(newprecio===""){
+                                            alert("Debe indicar el nuevo precio para la excepción.");
+                                        }else{
+                                            var idexcepcion = document.getElementById("oculto").value;                                           
+                                        }                                        
+                                        var URL ="recursos/acciones.php?tarea=19&idexcepcion="+idexcepcion+"&newprecio="+newprecio;
+                                        location.href=URL;
+                                    }
+                                </script>
+                            </div>                                                
 						
 					</div>
 				</div>
-                            </form>
+                           
 			</div>
 			
                         <div class="footer"  >

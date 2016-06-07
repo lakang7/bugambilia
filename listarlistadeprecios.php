@@ -228,19 +228,19 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,3)==1){
-                                                                echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
+                                                                    echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,4)==1){
-                                                                echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
+                                                                    echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,5)==1){
-                                                                echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
+                                                                    echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
-                                                                echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
+                                                                    echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,7)==1){
-                                                                echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
+                                                                    echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
                                                                 }
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                

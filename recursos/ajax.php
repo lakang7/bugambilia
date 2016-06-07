@@ -1,4 +1,4 @@
-<?php
+<?php session_start(); 
  
     require_once("funciones.php");
     $con=Conexion();
@@ -231,7 +231,9 @@
                 if($band==1){
                     echo "<div class='col-xs-12' title='Empresa'><i class='ace-icon glyphicon fa fa-building' style='margin-right: 1ex'></i>".$trabajo."</div>";
                 }
-                echo "<div class='col-xs-12'><a href='editarcontacto.php?id=".$fila["idagenda"]."' ><span class='label label-warning'>Editar</span></a></div>";
+                if(habilitaMenu($_SESSION["usuario"],1,3,3)==1){
+                    echo "<div class='col-xs-12'><a href='editarcontacto.php?id=".$fila["idagenda"]."' ><span class='label label-warning'>Editar</span></a></div>";
+                }
                 echo "</div>";
             }
             if(mysql_num_rows($result_listaAGENDA)==1){
@@ -284,7 +286,9 @@
                 if($band==1){
                     echo "<div class='col-xs-12' title='Empresa'><i class='ace-icon glyphicon fa fa-building' style='margin-right: 1ex'></i>".$trabajo."</div>";
                 }  
-                echo "<div class='col-xs-12'><a href='editarcontacto.php?id=".$fila["idagenda"]."' ><span class='label label-warning'>Editar</span></a></div>";
+                if(habilitaMenu($_SESSION["usuario"],1,3,3)==1){
+                    echo "<div class='col-xs-12'><a href='editarcontacto.php?id=".$fila["idagenda"]."' ><span class='label label-warning'>Editar</span></a></div>";
+                }
                 echo "</div>";
             }
             if(mysql_num_rows($result_listaAGENDA)==1){

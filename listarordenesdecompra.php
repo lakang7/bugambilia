@@ -267,8 +267,7 @@
                                                                     echo "<li class='divider'></li>";
                                                                     if(habilitaMenu($_SESSION["usuario"],4,8,6)==1){
                                                                         echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                                                                    }
-                                                                    
+                                                                    }                                                                    
                                                                 }                                                               
 
                                                                 echo "</ul>";                                                                                                                                

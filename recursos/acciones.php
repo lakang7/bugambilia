@@ -1058,6 +1058,55 @@ if ($tarea == 17) {
             alert("Orden de Compra Eliminada Satisfactoriamente.");
             document.location="../listarordenesdecompra.php";
         </script>
+    <?php
+}
+
+if ($tarea == 18) {
+    $sqlConsulta="select * from excepcionlista where idexcepcionlista='".$_GET["id"]."'";
+    $resultConsulta=mysql_query($sqlConsulta, $con) or die(mysql_error());
+    $excepcion = mysql_fetch_assoc($resultConsulta);
+    
+    $sqlupdateexcepcion = "update excepcionlista set estatus='1' where idexcepcionlista='".$_GET["id"]."'";
+    $resultupdateexcepcion = mysql_query($sqlupdateexcepcion, $con) or die(mysql_error());           
+    ?>
+        <script type="text/javascript">
+            alert("Excepción en la Lista de Precios Eliminada Satisfactoriamente.");
+            document.location="../excepcioneslistadeprecios.php?id=<?php echo $excepcion["idlistadeprecios"]; ?>";
+        </script>
+    <?php        
+}
+
+if ($tarea == 19) {
+    //echo $_GET["idexcepcion"]." ".$_GET["newprecio"];
+    $sql_excepcion = "select * from excepcionlista where idexcepcionlista='" . $_GET["idexcepcion"] . "'";
+    $result_excepcion = mysql_query($sql_excepcion, $con) or die(mysql_error());
+    
+    $sqlConsulta="select * from excepcionlista where idexcepcionlista='".$_GET["idexcepcion"]."'";
+    $resultConsulta=mysql_query($sqlConsulta, $con) or die(mysql_error());
+    $excepcion = mysql_fetch_assoc($resultConsulta);    
+    
+    if (mysql_num_rows($result_excepcion) > 0) {
+        $excepcion = mysql_fetch_assoc($result_excepcion);
+    }
+
+    if ($excepcion["preciofinal"] != $_GET["newprecio"]) {
+        $sql_buscaprefi = "select * from historicoexcepcionlista where idexcepcionlista='" . $_GET["idexcepcion"] . "' and hasta is null";
+        $result_buscaprefi = mysql_query($sql_buscaprefi, $con) or die(mysql_error());
+        if (mysql_num_rows($result_buscaprefi) > 0) {
+            $historico = mysql_fetch_assoc($result_buscaprefi);
+            $sql_cierraprefa = "update historicoexcepcionlista set hasta = now(), desde='" . $historico["desde"] . "' where idhistoricoexcepcionlista='" . $historico["idhistoricoexcepcionlista"] . "'";
+            $result_cierraprefa = mysql_query($sql_cierraprefa, $con) or die(mysql_error());
+            $sql_insertprefa = "insert into historicoexcepcionlista (idexcepcionlista,preciofinal,desde) values ('" . $_GET["idexcepcion"] . "','" . $_GET["newprecio"] . "',now())";
+            $result_insertprefa = mysql_query($sql_insertprefa, $con) or die(mysql_error());
+            $sql_updateExcepcion = "update excepcionlista set preciofinal='" . $_GET["newprecio"] . "' where idexcepcionlista='" . $_GET["idexcepcion"] . "'";
+            $result_updateExcepcion = mysql_query($sql_updateExcepcion, $con) or die(mysql_error());
+        }
+    }
+    ?>
+        <script type="text/javascript">
+            alert("Precio en la Excepción Cambiado Satisfactoriamente.");
+            document.location="../excepcioneslistadeprecios.php?id=<?php echo $excepcion["idlistadeprecios"]; ?>";
+        </script>
     <?php    
 }
 ?>

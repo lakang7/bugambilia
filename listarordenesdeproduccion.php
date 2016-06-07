@@ -153,9 +153,19 @@
                         
 			<div class="main-content">
                             <input type="hidden" name="oculto" id="oculto" />
-                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
+                            
 				<div class="main-content-inner">
 					<div class="page-content">
+                                            <?php                                                       
+                                                /*Listar Ordenes de Producción*/
+                                                if(habilitaMenu($_SESSION["usuario"],5,9,1)==1){
+                                                    echo "<a href='listarordenesdeproduccion.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                    echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                    echo "Listar Registros";
+                                                    echo "</button></a>";                                                            
+                                                }                                                        
+                                            ?>  
+                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
                                             <div class="container-fluid">
 						<div class="page-header"><h1>Ordenes de Producción<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
                                                 <div class="row titulo_tabla">
@@ -224,7 +234,6 @@
                                                                 echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                echo "<li><a href='editarpatron.php?id=".$fila["idorden"]."'>Editar</a></li>";
                                                                 echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                               
