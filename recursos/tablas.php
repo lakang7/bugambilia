@@ -1,4 +1,4 @@
-<?php
+<?php session_start(); 
  
     require_once("funciones.php");
     $con=Conexion();
@@ -72,8 +72,12 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='editarempresa.php?id=".$fila["idempresa"]."'>Editar</a></li>";
-                    echo "<li><a href='pdfs/empresas.php?id=".$fila["idempresa"]."' target='_blank'>Informe en PDF</a></li>";
+                    if(habilitaMenu($_SESSION["usuario"],1,1,3)==1){
+                        echo "<li><a href='editarempresa.php?id=".$fila["idempresa"]."'>Editar</a></li>";
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],1,1,4)==1){
+                        echo "<li><a href='pdfs/empresas.php?id=".$fila["idempresa"]."' target='_blank'>Informe en PDF</a></li>";
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";

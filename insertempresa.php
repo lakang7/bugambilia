@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Top Menu Style - Ace Admin</title>
+		<title>Bugambilia Buffets - Registro de Empresa</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -154,22 +154,26 @@
                             
 				<div class="main-content-inner">
 					<div class="page-content">                                            
-						<div class="page-header">                                                
-                                                    <a href="insertempresa.php"><button class="btn btn-white btn-info btn-bold">
-                                                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-                                                    Agregar Nuevo Registro
-                                                    </button></a>
-                                                
-                                                    <a href="listarempresas.php"><button class="btn btn-white btn-info btn-bold" style="margin-left: 8px; ">
-                                                    <i class="ace-icon fa fa-list-alt bigger-120 blue"></i>
-                                                    Listar Registros
-                                                    </button></a>
-                                                    
+						<div class="page-header">
+                                                    <?php
+                                                        /*Acción Registrar Empresa*/
+                                                        if(habilitaMenu($_SESSION["usuario"],1,1,1)==1){
+                                                            echo "<a href='insertempresa.php'><button class='btn btn-white btn-info btn-bold'>";
+                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
+                                                            echo "Agregar Nuevo Registro";
+                                                            echo "</button></a>";                                                            
+                                                        }
+                                                        
+                                                        /*Listar Empresas*/
+                                                        if(habilitaMenu($_SESSION["usuario"],1,1,2)==1){
+                                                            echo "<a href='listarempresas.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                            echo "Listar Registros";
+                                                            echo "</button></a>";                                                            
+                                                        }                                                        
+                                                    ?>                                                    
                                                     <h1 style="margin-top: 10px">Empresas<small><i class="ace-icon fa fa-angle-double-right"></i> Registrar</small></h1>
-                                                </div>
-						
-  
-                                                
+                                                </div>						                                                  
                                                 <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
                                                 <div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">

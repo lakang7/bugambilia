@@ -369,7 +369,7 @@
             $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
             $pdf->SetXY(175,$suma);
             $pdf->SetFont('courier', 'N', 8);
-            $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+            $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
             $pdf->SetFont('courier', 'B', 8);
             $pdf->SetXY(140,$suma);
@@ -476,7 +476,7 @@
         $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
         $pdf->SetXY(175,$suma);
         $pdf->SetFont('courier', 'N', 8);
-        $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+        $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
         $pdf->SetFont('courier', 'B', 8);
         $pdf->SetXY(140,$suma);
@@ -551,7 +551,7 @@
         $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
         $pdf->SetXY(175,$suma);
         $pdf->SetFont('courier', 'N', 8);
-        $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+        $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
         $pdf->SetFont('courier', 'B', 8);
         $pdf->SetXY(140,$suma);
@@ -622,7 +622,7 @@
         $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
         $pdf->SetXY(175,$suma);
         $pdf->SetFont('courier', 'N', 8);
-        $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+        $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
         $pdf->SetFont('courier', 'B', 8);
         $pdf->SetXY(140,$suma);
@@ -689,7 +689,7 @@
         $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
         $pdf->SetXY(175,$suma);
         $pdf->SetFont('courier', 'N', 8);
-        $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+        $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
         $pdf->SetFont('courier', 'B', 8);
         $pdf->SetXY(140,$suma);

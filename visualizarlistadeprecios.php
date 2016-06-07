@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta charset="utf-8" />
-        <title>Top Menu Style - Ace Admin</title>
+        <title>Bugambilia Buffets - Visualizar de Listas de Precios</title>
         <meta name="description" content="top menu &amp; navigation" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -155,9 +155,28 @@
 			</div>
 
             <div class="main-content">
-                <form method="post" id="form_crearListadePrecios" action="recursos/acciones.php?tarea=14&id=<?php echo $_GET["id"]; ?>">
+                
                     <div class="main-content-inner">
+                      
                         <div class="page-content"> 
+                                                    <?php
+                                                        /*Acción Registrar Empresa*/
+                                                        if(habilitaMenu($_SESSION["usuario"],3,7,1)==1){
+                                                            echo "<a href='insertlistadeprecios.php'><button class='btn btn-white btn-info btn-bold'>";
+                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
+                                                            echo "Agregar Nuevo Registro";
+                                                            echo "</button></a>";                                                            
+                                                        }
+                                                        
+                                                        /*Listar Empresas*/
+                                                        if(habilitaMenu($_SESSION["usuario"],3,7,2)==1){
+                                                            echo "<a href='listarlistadeprecios.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                            echo "Listar Registros";
+                                                            echo "</button></a>";                                                            
+                                                        }                                                        
+                                                    ?> 
+                            <form method="post" id="form_crearListadePrecios" action="recursos/acciones.php?tarea=14&id=<?php echo $_GET["id"]; ?>">
                             <?php
                             $con = Conexion();
                             $sql_LISTA = "select * from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";

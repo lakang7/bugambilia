@@ -328,9 +328,9 @@
                 $pdf->SetXY(162,$suma);
                 $pdf->Cell(10, 4,$proorden["numerodeunidades"], 1, 1,"C", 0, '', 0); 
                 $pdf->SetXY(172,$suma);
-                $pdf->Cell(14, 4,"$".$proorden["precioventa"], 1, 1,"C", 0, '', 0); 
+                $pdf->Cell(14, 4,"$".$proorden["preciofabrica"], 1, 1,"C", 0, '', 0); 
                 $pdf->SetXY(186,$suma);
-                $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
+                $pdf->Cell(17, 4,"$".($proorden["preciofabrica"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
                 $cuenta++;
             }
           
@@ -347,7 +347,7 @@
             $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
             $pdf->SetXY(175,$suma);
             $pdf->SetFont('courier', 'N', 8);
-            $pdf->Cell(25, 4,$orden["codigooc"],0, 1,"L", 0, '', 0); $suma+=4;
+            $pdf->Cell(25, 4,$ordenpro["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
     
             $pdf->SetFont('courier', 'B', 8);
             $pdf->SetXY(140,$suma);
@@ -413,9 +413,9 @@
                 $pdf->SetXY(162,$suma);
                 $pdf->Cell(10, 4,$proorden["numerodeunidades"], 1, 1,"C", 0, '', 0); 
                 $pdf->SetXY(172,$suma);
-                $pdf->Cell(14, 4,"$".$proorden["precioventa"], 1, 1,"C", 0, '', 0); 
+                $pdf->Cell(14, 4,"$".$proorden["preciofabrica"], 1, 1,"C", 0, '', 0); 
                 $pdf->SetXY(186,$suma);
-                $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
+                $pdf->Cell(17, 4,"$".($proorden["preciofabrica"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
                 $cuenta++;
             }             
         }            

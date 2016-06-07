@@ -151,9 +151,27 @@
 			</div>
                         
 			<div class="main-content">
-                            <form enctype="multipart/form-data" method="post" id="form_crearPatron" action="recursos/acciones.php?tarea=6">
+                            
 				<div class="main-content-inner">
-					<div class="page-content">                                            
+					<div class="page-content">
+                                                    <?php
+                                                        /*Acción Registrar Empresa*/
+                                                        if(habilitaMenu($_SESSION["usuario"],2,5,1)==1){
+                                                            echo "<a href='insertpatron.php'><button class='btn btn-white btn-info btn-bold'>";
+                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
+                                                            echo "Agregar Nuevo Registro";
+                                                            echo "</button></a>";                                                            
+                                                        }
+                                                        
+                                                        /*Listar Empresas*/
+                                                        if(habilitaMenu($_SESSION["usuario"],2,5,2)==1){
+                                                            echo "<a href='listarpatrones.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                            echo "Listar Registros";
+                                                            echo "</button></a>";                                                            
+                                                        }                                                        
+                                                    ?>                                             
+                                            <form enctype="multipart/form-data" method="post" id="form_crearPatron" action="recursos/acciones.php?tarea=6">
 						<div class="page-header"><h1>Patrones<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">                                                                                                                                                                        

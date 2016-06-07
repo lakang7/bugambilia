@@ -69,8 +69,14 @@ if ($tarea == 1) {
         $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,1,now()," . $descripcion . ")";
         $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
         /*         * ******fin insercion bitacora ******** */
-        echo "Registro Satisfactorio de empresa";
-    }
+        //echo "Registro Satisfactorio de empresa";
+    }    
+    ?>
+        <script type="text/javascript">
+            alert("Empresa Registrada Satisfactoriamente.");
+            document.location="../listarempresas.php";
+        </script>
+    <?php    
 }
 
 /* Insertar Sucursal */
@@ -120,8 +126,14 @@ if ($tarea == 2) {
         /*         * ******fin insercion bitacora ******** */
 
 
-        echo "Registro Satisfactorio de sucursal";
+        //echo "Registro Satisfactorio de sucursal";
     }
+    ?>
+        <script type="text/javascript">
+            alert("Sucursal Registrada Satisfactoriamente.");
+            document.location="../listarsucursales.php";
+        </script>
+    <?php    
 }
 
 /* Insertar Contacto */
@@ -175,6 +187,12 @@ if ($tarea == 3) {
 //        showRegistro($sql_insertBitacora);
         echo "Registro de Contacto Satisfactorio";
     }
+    ?>
+        <script type="text/javascript">
+            alert("Contacto Registrado Satisfactoriamente.");
+            document.location="../listarcontactos.php";
+        </script>
+    <?php    
 }
 
 /* Insertar Material */
@@ -222,8 +240,15 @@ if ($tarea == 4) {
         /*         * ******fin insercion bitacora ******** */
 
 
-        echo "Registro de Material Satisfactorio";
+        //echo "Registro de Material Satisfactorio";
     }
+    
+    ?>
+        <script type="text/javascript">
+            alert("Material Registrado Satisfactoriamente.");
+            document.location="../listarmateriales.php";
+        </script>
+    <?php     
 }
 
 /* Insertar Producto */
@@ -284,8 +309,14 @@ if ($tarea == 5) {
 
 //        showRegistro($sql_insertBitacora);
 
-        echo "Registro de Producto Satisfactorio";
+       // echo "Registro de Producto Satisfactorio";
     }
+    ?>
+        <script type="text/javascript">
+            alert("Producto Registrado Satisfactoriamente.");
+            document.location="../listarproductos.php";
+        </script>
+    <?php    
 }
 
 /* Insertar Patron */
@@ -347,8 +378,14 @@ if ($tarea == 6) {
         /*         * ******fin insercion bitacora ******** */
 
 //        showRegistro($sql_insertBitacora);
-        echo "Registro de Patron Satisfactorio";
+        //echo "Registro de Patron Satisfactorio";
     }
+    ?>
+        <script type="text/javascript">
+            alert("Patrón Registrado Satisfactoriamente.");
+            document.location="../listarpatrones.php";
+        </script>
+    <?php     
 }
 
 /* Editar Empresa */
@@ -391,8 +428,16 @@ if ($tarea == 7) {
 //        showRegistro($sql_insertBitacora);
         $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
         /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
-        echo "Actualización Satisfactoria de Empresa";
+        //echo "Actualización Satisfactoria de Empresa";
     }
+    
+    ?>
+        <script type="text/javascript">
+            alert("Empresa Editada Satisfactoriamente.");
+            document.location="../listarempresas.php";
+        </script>
+    <?php    
+    
 }
 
 /* Editar Sucursal */
@@ -457,13 +502,19 @@ if ($tarea == 8) {
         $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
         /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
 
-        echo "Actualización Satisfactoria de Sucursal";
+        //echo "Actualización Satisfactoria de Sucursal";
     }
+    ?>
+        <script type="text/javascript">
+            alert("Sucursal Editada Satisfactoriamente.");
+            document.location="../listarsucursales.php";
+        </script>
+    <?php    
 }
 
 /* Editar Contacto */
 if ($tarea == 9) {
-    echo "Editar Contacto";
+    //echo "Editar Contacto";
 
     /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
     $sql_beforeupdate = "select referencia, nombre, telefono1, telefono2, email from agenda where idagenda='" . $_GET["id"] . "' ";
@@ -514,7 +565,14 @@ if ($tarea == 9) {
         $sql_insertAsocia = "insert into asociacionagenda (tipo,idagenda,idempresa,idsucursal,idestado) values(3," . $_GET["id"] . "," . $_POST["empresa"] . "," . $_POST["sucursal"] . "," . $_POST["region"] . ")";
         $result_insertAsocia = mysql_query($sql_insertAsocia, $con) or die(mysql_error());
     }
-    echo "Actualización Satisfactoria de Contacto";
+    //echo "Actualización Satisfactoria de Contacto";
+    
+    ?>
+        <script type="text/javascript">
+            alert("Contacto Editado Satisfactoriamente.");
+            document.location="../listarcontactos.php";
+        </script>
+    <?php     
 }
 
 /* Editar Material */
@@ -586,7 +644,13 @@ if ($tarea == 10) {
 
 
 
-    echo "Actualización Satisfactoria de Material";
+    //echo "Actualización Satisfactoria de Material";
+    ?>
+        <script type="text/javascript">
+            alert("Material Editado Satisfactoriamente.");
+            document.location="../listarmateriales.php";
+        </script>
+    <?php    
 }
 
 /* Editar Patrón */
@@ -643,7 +707,13 @@ if ($tarea == 11) {
     $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
     /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
 
-    echo "Actualización Satisfactoria de Patrón";
+    //echo "Actualización Satisfactoria de Patrón";
+    ?>
+        <script type="text/javascript">
+            alert("Patrón Editado Satisfactoriamente.");
+            document.location="../listarpatrones.php";
+        </script>
+    <?php    
 }
 
 /* Editar producto */
@@ -714,7 +784,13 @@ if ($tarea == 12) {
     /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
 
 
-    echo "Producto Editado Satisfactoriamente";
+    //echo "Producto Editado Satisfactoriamente";
+    ?>
+        <script type="text/javascript">
+            alert("Producto Editado Satisfactoriamente.");
+            document.location="../listarproductos.php";
+        </script>
+    <?php    
 }
 
 /* insertar lista de precios */
@@ -746,7 +822,13 @@ if ($tarea == 13) {
                 $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
             }
         }
-        echo "Registro Satisfactorio de la lista de precios";
+        //echo "Registro Satisfactorio de la lista de precios";
+    ?>
+        <script type="text/javascript">
+            alert("Lista de Precios Registrada Satisfactoriamente.");
+            document.location="../listarlistadeprecios.php";
+        </script>
+    <?php          
     }
 }
 
@@ -827,6 +909,12 @@ if ($tarea == 14) {
         /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
     }
     mysql_close($con);
+    ?>
+        <script type="text/javascript">
+            alert("Lista de Precios Editada Satisfactoriamente.");
+            document.location="../listarlistadeprecios.php";
+        </script>
+    <?php     
 }
 
 /* insertar excepcion de la regla */
@@ -840,6 +928,12 @@ if ($tarea == 15) {
     $indice--;
     $sql_insertHistorico = "insert into historicoexcepcionlista (idexcepcionlista,preciofinal,desde,hasta) values(" . $indice . ",'" . $_POST["precio"] . "',now(),NULL);";
     $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
+    ?>
+        <script type="text/javascript">
+            alert("Excepción en la Lista de Precios Registrada Satisfactoriamente.");
+            document.location="../excepcioneslistadeprecios.php?id=<?php echo $_GET["id"]; ?>";
+        </script>
+    <?php     
 }
 
 /* insertar orden de compra dolor de cabeza */

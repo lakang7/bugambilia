@@ -44,5 +44,51 @@
         return $acumula;
     }
     
+    function habilitaMenu($usuario,$idmenu,$idsubmenu,$accion){
+        $con = Conexion();
+        $retorna=0;
+        $sql_menualto="select * from menualto where idusuario='".$usuario."' and idmenu=".$idmenu;
+        $result_menualto=mysql_query($sql_menualto,$con) or die(mysql_error());
+        if(mysql_num_rows($result_menualto)>0){
+            $menualto=mysql_fetch_assoc($result_menualto);
+            $sql_privilegio="select * from privilegio where idmenualto='".$menualto["idmenualto"]."' and idsubmenu=".$idsubmenu;
+            $result_privilegio=mysql_query($sql_privilegio,$con) or die(mysql_error());
+            if(mysql_num_rows($result_privilegio)>0){
+                $privilegio=mysql_fetch_assoc($result_privilegio);
+                if($accion==1){
+                    $retorna=$privilegio["accion01"];
+                }
+                if($accion==2){
+                    $retorna=$privilegio["accion02"];
+                }
+                if($accion==3){
+                    $retorna=$privilegio["accion03"];
+                }
+                if($accion==4){
+                    $retorna=$privilegio["accion04"];
+                }
+                if($accion==5){
+                    $retorna=$privilegio["accion05"];
+                }
+                if($accion==6){
+                    $retorna=$privilegio["accion06"];
+                }
+                if($accion==7){
+                    $retorna=$privilegio["accion07"];
+                }
+                if($accion==8){
+                    $retorna=$privilegio["accion08"];
+                }
+                if($accion==9){
+                    $retorna=$privilegio["accion09"];
+                }
+                if($accion==10){
+                    $retorna=$privilegio["accion10"];
+                }                
+            }
+        }
+        return $retorna;
+    }
+    
     
 ?>

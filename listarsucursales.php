@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Top Menu Style - Ace Admin</title>
+		<title>Bugambilia Buffets - Listado de Sucursales</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -154,11 +154,30 @@
                     
                         
 			<div class="main-content">
-                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
+                            
 				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
+                                                    <?php
+                                                        /*Acción Registrar Empresa*/
+                                                        if(habilitaMenu($_SESSION["usuario"],1,2,1)==1){
+                                                            echo "<a href='insertsucursal.php'><button class='btn btn-white btn-info btn-bold'>";
+                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
+                                                            echo "Agregar Nuevo Registro";
+                                                            echo "</button></a>";                                                            
+                                                        }
+                                                        
+                                                        /*Listar Empresas*/
+                                                        if(habilitaMenu($_SESSION["usuario"],1,2,2)==1){
+                                                            echo "<a href='listarsucursales.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                            echo "Listar Registros";
+                                                            echo "</button></a>";                                                            
+                                                        }                                                        
+                                                    ?>
+                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
 						<div class="page-header"><h1>Sucursales<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
+                                                
                                                 <div class="row titulo_tabla">
                                                     Lista de Sucursales
                                                 </div>    
@@ -217,7 +236,9 @@
                                                                 echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],1,2,3)==1){
+                                                                    echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";
+                                                                }                                                                                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                 
                                                                 
