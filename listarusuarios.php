@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Listado Ordenes de Compra</title>
+		<title>Bugambilia Buffets - Listado de Usuarios</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -30,7 +30,7 @@
                 ?>                 
 	</head>
 
-	<body class="no-skin">
+        <body class="no-skin">
 		<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar navbar-fixed-top">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -92,6 +92,7 @@
 		</div>
 
 		<div class="main-container" id="main-container">
+                    
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
@@ -151,33 +152,33 @@
 				</script>
 			</div>
                         
-			<div class="main-content">
-                            <input type="hidden" name="oculto" id="oculto" />
-                            
-				<div class="main-content-inner">                                                                                                                                            
+			<div class="main-content">                            
+				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
+						<div class="page-header">                                                
                                                     <?php
-                                                        /*Acción Registrar Empresa*/
-                                                        if(habilitaMenu($_SESSION["usuario"],4,8,1)==1){
-                                                            echo "<a href='insertordendecompra.php'><button class='btn btn-white btn-info btn-bold'>";
+                                                        /*Acción Registrar Contacto*/
+                                                        if(habilitaMenu($_SESSION["usuario"],6,10,1)==1){
+                                                            echo "<a href='insertusuario.php'><button class='btn btn-white btn-info btn-bold'>";
                                                             echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
                                                             echo "Agregar Nuevo Registro";
                                                             echo "</button></a>";                                                            
                                                         }
                                                         
-                                                        /*Listar Empresas*/
-                                                        if(habilitaMenu($_SESSION["usuario"],4,8,2)==1){
-                                                            echo "<a href='listarordenesdecompra.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                        /*Listar Contactos*/
+                                                        if(habilitaMenu($_SESSION["usuario"],6,10,2)==1){
+                                                            echo "<a href='listarusuarios.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
                                                             echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
                                                         }                                                        
-                                                    ?> 
-                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
-						<div class="page-header"><h1>Ordenes de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
-                                                <div class="row titulo_tabla">
-                                                    Lista de Ordenes de Compra
+                                                    ?>                                                    
+                                                    <h1 style="margin-top: 10px">Usuarios<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1>
+                                                </div>
+                                                
+                                                <div class="row titulo_tabla" style="margin-top: 10px">
+                                                    Lista de Usuarios
                                                 </div>    
                                                 <div class="row filtros_tabla">
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
@@ -198,55 +199,38 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendecompra.codigoexterno">Codigo</option>
-                                                            <option value="empresa.nombreempresa">Empresa</option>
-                                                            <option value="agenda.nombre">Contacto</option>
-                                                            <option value="listadeprecios.nombre">Lista de Precios</option>
-                                                            <option value="ordendecompra.fechaderegistro">Registro</option>
-                                                            <option value="ordendecompra.fechadeentrega">Entrega</option>
-                                                            <option value="ordendecompra.total">Total</option>                                                            
+                                                            <option value="usuario">Usuario</option>
+                                                            <option value="nombre">Nombre</option>
+                                                            <option value="correo">Correo Electronico</option>
+                                                            <option value="telefono">Teléfono</option>
+                                                            <option value="puesto">Puesto</option>
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendecompra.fechaderegistro" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
+                                                <input type="hidden" id="campoordena" name="campoordena" value="usuario" >
+                                                <input type="hidden" id="ordenordena" name="ordenordena" value="asc" >                                                
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
-                                                <div id="contenedortabla">                                                                                                                                                           
+                                                <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Codigo</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechadeentrega')">Entrega</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('usuario')">Usuario<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
+                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('nombre')">Nombre</div>
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('correo')">Correo Electronico</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('telefono')">Teléfono</div> 
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('puesto')">Puesto</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
-                                                    $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
-                                                    if(mysql_num_rows($result_listaORDENES)>0){
+                                                    $sql_listaEMPRESA="select idusuario, usuario, nombre, correo, telefono, puesto from usuario order by usuario asc";
+                                                    $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;
-                                                        while ($fila = mysql_fetch_assoc($result_listaORDENES)) {
+                                                        while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                                                             if($cuenta<10){
-                                                                $band=0;
-                                                                $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
-                                                                $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($resultValida)==0){
-                                                                    $band=1;
-                                                                }                                                                
-                                                                if($band==1){
-                                                                    echo "<div class='row linea_tabla2'>";
-                                                                }else{
-                                                                    echo "<div class='row linea_tabla'>";
-                                                                }
-                                                                
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
+                                                                echo "<div class='row linea_tabla'>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["usuario"]."</div>";
+                                                                echo "<div class='col-xs-3 columna_linea'>".$fila["nombre"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["correo"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["telefono"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["puesto"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
                                                                 
                                                                 echo "<div class='btn-group'>";
@@ -254,24 +238,12 @@
                                                                 echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                                                                    echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
+                                                                if(habilitaMenu($_SESSION["usuario"],6,10,3)==1){
+                                                                    echo "<li><a href='editarusuario.php?id=".$fila["idusuario"]."'>Editar</a></li>";
                                                                 }
-                                                                if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
-                                                                    echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
-                                                                }
-                                                                if($band==1){
-                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
-                                                                        echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
-                                                                    }
-                                                                    echo "<li class='divider'></li>";
-                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,6)==1){
-                                                                        echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                                                                    }                                                                    
-                                                                }                                                               
-                                                                echo "<li><a href='facturacion/facturar.php?id=".$fila["idorden"]."' target='_blank'>Facturar Orden de Compra</a></li>";
                                                                 echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                echo "</div>";                                                                
+                                                                
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }
@@ -282,7 +254,7 @@
                                                 ?>                                                                                                 
                                                 <div class="row pie_tabla" >
                                                     <?php
-                                                    $numeroelementos=mysql_num_rows($result_listaORDENES);   
+                                                    $numeroelementos=mysql_num_rows($result_listaEMPRESA);   
                                                     if(10>$numeroelementos){
                                                         echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
                                                     }else{
@@ -311,74 +283,6 @@
 					</div>
                                     </div>
 				</div>
-                            </form>
-                            
-                            
-                            
-                            
-                            
-                            <script type="text/javascript">
-                                function prueba(id){                                    
-                                    document.getElementById("oculto").value=id;
-                                }
-                            </script>
-                            <div id="my-modal" class="modal fade" tabindex="-1" onshow="hola()">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h3 class="smaller lighter blue no-margin" >Generar Orden de Producción</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div style="width: 100%;">
-                                                Persona Interna de Contacto para la orden de Producción
-                                            </div>
-                                            <div style="width: 100%;">
-                                                <select class="chosen-select form-control" style="width: 100%" id="persona" name="persona" data-placeholder="Seleccione el contacto" required="required">                                                    
-                                                        <?php
-                                                        $con=Conexion();
-                                                        $sql_listaUSUARIOS="select * from usuario order by nombre";
-                                                        $result_listaUSUARIOS=mysql_query($sql_listaUSUARIOS,$con) or die(mysql_error());
-                                                        if(mysql_num_rows($result_listaUSUARIOS)>0){
-                                                            while ($usuario = mysql_fetch_assoc($result_listaUSUARIOS)) {
-                                                                echo "<option value='".$usuario["idusuario"]."'>".$usuario["nombre"]."</option>";                                                                                                                                                            
-                                                            }
-                                                        }
-                                                        mysql_close($con);                                                                
-                                                        ?>
-                                                </select>                                                         
-                                            </div>
-                                            <div style="width: 100%; margin-top: 10px">
-                                                Tipo de Empaque
-                                            </div>
-                                            <div style="width: 100%;">
-                                                <select class="chosen-select form-control" style="width: 100%" id="empaque" name="empaque" data-placeholder="Seleccione el Tipo de Empaque" required="required">
-                                                    <option value="1">Empaque Normal</option>
-                                                    <option value="2">Empaque Separado</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"><i class="ace-icon fa fa-times"></i>Cerrar</button>                                            
-                                            <button class="btn btn-sm btn-warning pull-right" style="margin-right: 10px" onclick="generar()"><i class="ace-icon fa fa-plus"></i>Generar</button>                                            
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                                <script type="text/javascript">
-                                    function hola(){                                                                
-                                        $("#persona_chosen").width("100%");
-                                        $("#empaque_chosen").width("100%");
-                                    }
-                                    function generar(){ 
-                                        var idorden = document.getElementById("oculto").value;
-                                        var idcontacto = document.getElementById("persona").value;
-                                        var tipoempaque = document.getElementById("empaque").value;
-                                        //alert(idorden+" "+idcontacto);
-                                        var URL ="recursos/acciones2.php?tarea=17&idorden="+idorden+"&idcontacto="+idcontacto+"&tipo="+tipoempaque;
-                                        location.href=URL;
-                                    }
-                                </script>
-                            </div>                                                                                                                
                             
 			</div>
 			
@@ -447,10 +351,12 @@
 		<script src="assets/js/jquery.autosize.min.js"></script>
 		<script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script src="assets/js/jquery.maskedinput.min.js"></script>
-		<script src="assets/js/bootstrap-tag.min.js"></script>              
-                
-                
-                
+		<script src="assets/js/bootstrap-tag.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -825,7 +731,7 @@
                 <script type="text/javascript">
                     function ordena(columna){
                         var campoanterior = document.getElementById("campoordena").value;
-                        var ordenanterior = document.getElementById("ordenordena").value;                          
+                        var ordenanterior = document.getElementById("ordenordena").value;                        
                         if(campoanterior === columna){
                             if(ordenanterior === "desc"){
                                 document.getElementById("ordenordena").value="asc";
@@ -837,27 +743,29 @@
                             document.getElementById("ordenordena").value="desc";
                         }
                                                 
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"usuarios",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
                     }
                     
                     function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"usuarios",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
                     }
                     
                     function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"usuarios",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     }
                     
                     function pagina(pagina){
                         document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"usuarios",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     } 
                     
                     $('#filtro').keypress(function (e) {
                         if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdecompra",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"usuarios",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                         }                        
-                    });                    
+                    });  
+                    
+                    
                 </script>
 	</body>
 </html>

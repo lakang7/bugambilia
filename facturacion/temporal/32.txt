@@ -1,0 +1,8 @@
+|EMISOR|IMM010209S23|Regimen de pequeño contribuyente|
+|RECEPTOR|COCACOLA004|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|094532|
+|COMPROBANTE|3.2|Sin Serie|2016-06-11 11:19:25|PAGO EN UNA SOLA EXHIBICION|810.00|939.60|Tarjeta de débito|Ingreso|PESOS|1.00||16||100|Factura con descuento|FALSE|micorreo@pruebascorreo.com|||FACTURA|0123|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Monterrey|Nuevo León|MEXICO|03800|
+|CONCEPTO|12|Pieza|BR014|Bowl Redondo L|900.00|900.00|IVA|16|129.60|||
+|CONCEPTO|12|Pieza|BR013|Bowl Redondo M|900.00|900.00|IVA|16|129.60|||
+|CONCEPTO|12|Pieza|BR012|Bowl Redondo S|900.00|900.00|IVA|16|129.60|||
+|CONCEPTO|12|Pieza|BR011|Bowl Redondo XS|900.00|900.00|IVA|16|129.60|||

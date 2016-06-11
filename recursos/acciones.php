@@ -1109,4 +1109,222 @@ if ($tarea == 19) {
         </script>
     <?php    
 }
+
+if ($tarea == 20) {
+    $sqlUsuario = "insert into usuario (nombre,usuario,contraseña,correo,puesto,telefono,registro) values('".$_POST["nombre"]."','".$_POST["usuario"]."','".$_POST["contrasena"]."','".$_POST["correo"]."','".$_POST["puesto"]."','".$_POST["telefono"]."',now())";
+    $resultUsuario = mysql_query($sqlUsuario, $con) or die(mysql_error()); 
+        
+    $sql_ultimaEMPRESA = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'usuario';";
+    $result_ultimaEMPRESA = mysql_query($sql_ultimaEMPRESA, $con) or die(mysql_error());
+    $fila = mysql_fetch_assoc($result_ultimaEMPRESA);
+    $indice = intval($fila["AUTO_INCREMENT"]);
+    $indice--; 
+    
+    $sqlMENU="select * from menu order by idmenu";
+    $resultMENU=mysql_query($sqlMENU,$con) or die(mysql_error());
+    while ($menu = mysql_fetch_assoc($resultMENU)) {  
+        $sqlMenuAlto="insert into menualto (idmenu,idusuario) values('".$menu["idmenu"]."','".$indice."')";
+        $resultMenuAlto = mysql_query($sqlMenuAlto, $con) or die(mysql_error());
+        
+        $sql_ultimoMenuAlto = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'menualto';";
+        $result_ultimoMenuAlto = mysql_query( $sql_ultimoMenuAlto, $con) or die(mysql_error());
+        $fila = mysql_fetch_assoc($result_ultimoMenuAlto);
+        $indice2 = intval($fila["AUTO_INCREMENT"]);
+        $indice2--;        
+        
+        $sqlSubMenu="select * from submenu where idmenu='".$menu["idmenu"]."' order by idsubmenu";
+        $resultSUBMENU=mysql_query($sqlSubMenu,$con) or die(mysql_error());
+        while ($submenu = mysql_fetch_assoc($resultSUBMENU)) {
+            $sqlInsertPrivilegio="insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values('".$indice2."','".$submenu["idsubmenu"]."',0,0,0,0,0,0,0,0,0,0)";
+            $resultInsertPrivilegio = mysql_query($sqlInsertPrivilegio, $con) or die(mysql_error());            
+        }        
+        
+    }    
+    
+    /*Creación de Matriz Base*/   
+    $sqlMENU="select * from menu order by idmenu";
+    $resultMENU=mysql_query($sqlMENU,$con) or die(mysql_error());
+    while ($menu = mysql_fetch_assoc($resultMENU)) {                                                                    
+        $sqlSUBMENU="select * from submenu where idmenu='".$menu["idmenu"]."' order by idsubmenu";
+        $resultSUBMENU=mysql_query($sqlSUBMENU,$con) or die(mysql_error());
+        while ($submenu = mysql_fetch_assoc($resultSUBMENU)) {
+            $sqlOPCION="select * from opsubmenu where idsubmenu='".$submenu["idsubmenu"]."' order by idopsubmenu";
+            //echo $sqlOPCION."</br>";
+            $resultOPCION=mysql_query($sqlOPCION,$con) or die(mysql_error());
+            while ($opcion = mysql_fetch_assoc($resultOPCION)) {
+                if(isset($_POST["checkbox-".$menu["idmenu"]."-".$submenu["idsubmenu"]."-".$opcion["indice"].""])){
+                    $sqlMenuAlto="select * from menualto where idmenu='".$menu["idmenu"]."' and idusuario='".$indice."'";
+                    $resultMenuAlto=mysql_query($sqlMenuAlto,$con) or die(mysql_error());
+                    $menualto = mysql_fetch_assoc($resultMenuAlto);
+                    if($opcion["indice"]==1){
+                        $sqlUpdate="update privilegio set accion01=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==2){
+                        $sqlUpdate="update privilegio set accion02=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                      
+                    if($opcion["indice"]==3){
+                        $sqlUpdate="update privilegio set accion03=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==4){
+                        $sqlUpdate="update privilegio set accion04=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }  
+                    if($opcion["indice"]==5){
+                        $sqlUpdate="update privilegio set accion05=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==6){
+                        $sqlUpdate="update privilegio set accion06=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==7){
+                        $sqlUpdate="update privilegio set accion07=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==8){
+                        $sqlUpdate="update privilegio set accion08=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==9){
+                        $sqlUpdate="update privilegio set accion09=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==10){
+                        $sqlUpdate="update privilegio set accion10=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                     
+                }                 
+            }
+        }                                                                                                                                                                                                       
+    }    
+    ?>
+        <script type="text/javascript">
+            alert("Usuario Registrado Satisfactoriamente.");
+            document.location="../listarusuarios.php";
+        </script>
+    <?php         
+}
+
+
+if ($tarea == 21) {
+    $sqlUpdate = "update usuario set nombre='".$_POST["nombre"]."', usuario='".$_POST["usuario"]."', contraseña='".$_POST["contrasena"]."', correo='".$_POST["correo"]."', puesto='".$_POST["puesto"]."', telefono='".$_POST["telefono"]."' where idusuario='".$_GET["id"]."'";
+    $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error()); 
+    
+    /*Actualización de Matriz Base*/   
+    $sqlMENU="select * from menu order by idmenu";
+    $resultMENU=mysql_query($sqlMENU,$con) or die(mysql_error());
+    while ($menu = mysql_fetch_assoc($resultMENU)) {                                                                    
+        $sqlSUBMENU="select * from submenu where idmenu='".$menu["idmenu"]."' order by idsubmenu";
+        $resultSUBMENU=mysql_query($sqlSUBMENU,$con) or die(mysql_error());
+        while ($submenu = mysql_fetch_assoc($resultSUBMENU)) {
+            $sqlOPCION="select * from opsubmenu where idsubmenu='".$submenu["idsubmenu"]."' order by idopsubmenu";
+            //echo $sqlOPCION."</br>";
+            $resultOPCION=mysql_query($sqlOPCION,$con) or die(mysql_error());
+            while ($opcion = mysql_fetch_assoc($resultOPCION)) {
+                if(isset($_POST["checkbox-".$menu["idmenu"]."-".$submenu["idsubmenu"]."-".$opcion["indice"].""])){
+                    $sqlMenuAlto="select * from menualto where idmenu='".$menu["idmenu"]."' and idusuario='".$_GET["id"]."'";
+                    $resultMenuAlto=mysql_query($sqlMenuAlto,$con) or die(mysql_error());
+                    $menualto = mysql_fetch_assoc($resultMenuAlto);
+                    if($opcion["indice"]==1){
+                        $sqlUpdate="update privilegio set accion01=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                     
+                    if($opcion["indice"]==2){
+                        $sqlUpdate="update privilegio set accion02=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                      
+                    if($opcion["indice"]==3){
+                        $sqlUpdate="update privilegio set accion03=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==4){
+                        $sqlUpdate="update privilegio set accion04=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }  
+                    if($opcion["indice"]==5){
+                        $sqlUpdate="update privilegio set accion05=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==6){
+                        $sqlUpdate="update privilegio set accion06=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==7){
+                        $sqlUpdate="update privilegio set accion07=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==8){
+                        $sqlUpdate="update privilegio set accion08=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==9){
+                        $sqlUpdate="update privilegio set accion09=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==10){
+                        $sqlUpdate="update privilegio set accion10=1 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                     
+                }else{
+                    $sqlMenuAlto="select * from menualto where idmenu='".$menu["idmenu"]."' and idusuario='".$_GET["id"]."'";
+                    $resultMenuAlto=mysql_query($sqlMenuAlto,$con) or die(mysql_error());
+                    $menualto = mysql_fetch_assoc($resultMenuAlto);
+                    if($opcion["indice"]==1){
+                        $sqlUpdate="update privilegio set accion01=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                     
+                    if($opcion["indice"]==2){
+                        $sqlUpdate="update privilegio set accion02=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                      
+                    if($opcion["indice"]==3){
+                        $sqlUpdate="update privilegio set accion03=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==4){
+                        $sqlUpdate="update privilegio set accion04=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }  
+                    if($opcion["indice"]==5){
+                        $sqlUpdate="update privilegio set accion05=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==6){
+                        $sqlUpdate="update privilegio set accion06=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==7){
+                        $sqlUpdate="update privilegio set accion07=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==8){
+                        $sqlUpdate="update privilegio set accion08=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==9){
+                        $sqlUpdate="update privilegio set accion09=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    } 
+                    if($opcion["indice"]==10){
+                        $sqlUpdate="update privilegio set accion10=0 where idmenualto='".$menualto["idmenualto"]."' and idsubmenu='".$submenu["idsubmenu"]."'";
+                        $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());                        
+                    }                                                                                                                                                                                    
+                }                 
+            }
+        }                                                                                                                                                                                                       
+    }    
+    
+    
+    
+    
+    ?>
+        <script type="text/javascript">
+            alert("Usuario Editado Satisfactoriamente.");
+            document.location="../listarusuarios.php";
+        </script>
+    <?php     
+}
 ?>

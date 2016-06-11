@@ -535,7 +535,8 @@ insert into menu (nombre,icono) values("Clientes","menu-icon fa fa-globe");
 insert into menu (nombre,icono) values("Productos","menu-icon fa fa-flask");
 insert into menu (nombre,icono) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt");
 insert into menu (nombre,icono) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags");
-insert into menu (nombre,icono) values("Ordenes de Producción","menu-icon glyphicon glyphicon-barcode");
+insert into menu (nombre,icono) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user");
+insert into menu (nombre,icono) values("Usuarios","menu-icon glyphicon glyphicon-barcode");
 
 CREATE TABLE submenu(
     idsubmenu mediumint(8) unsigned auto_increment,
@@ -556,6 +557,68 @@ insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos
 insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
 insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listarordenesdecompra.php");
 insert into submenu (idmenu,nombre,pagina) values(5,"Ordenes de Producción","listarordenesdeproduccion.php");
+insert into submenu (idmenu,nombre,pagina) values(6,"Usuarios del Sistema","listarusuarios.php");
+
+CREATE TABLE opsubmenu(
+    idopsubmenu mediumint(8) unsigned auto_increment,
+    idsubmenu mediumint(8) unsigned not null,
+    indice integer not null,
+    nombre varchar(30) not null,
+    PRIMARY KEY (idopsubmenu),
+    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,4,"Informe en PDF");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,3,"Editar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,3,"Editar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,3,"Editar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,4,"Informe en PDF");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,4,"Informe en PDF");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,4,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,5,"Excepciones");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,6,"Exportar en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,7,"Exportar en Excel");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Eliminar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Informe en PDF");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,3,"Editar");
+
+
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
@@ -571,6 +634,7 @@ insert into menualto (idmenu,idusuario) values(2,1);
 insert into menualto (idmenu,idusuario) values(3,1);
 insert into menualto (idmenu,idusuario) values(4,1);
 insert into menualto (idmenu,idusuario) values(5,1);
+insert into menualto (idmenu,idusuario) values(6,1);
 
 CREATE TABLE privilegio(
     idprivilegio mediumint(8) unsigned auto_increment,

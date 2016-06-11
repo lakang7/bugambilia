@@ -896,7 +896,7 @@
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
                     if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                        echo "<li><a href='#'>Editar</a></li>";
+                        echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
                     }
                     if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
                         echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
@@ -1084,6 +1084,132 @@
                         echo "<li class='divider'></li>";
                         echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
                     }                                                                
+                    echo "</ul>";                                                                                                                                
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";  
+                }
+                $cuenta++;
+            }
+        }
+                        
+        echo "<div class='row pie_tabla' >";
+                                                    
+            $numeroelementos=mysql_num_rows($result_listaEMPRESA);   
+            if($_POST["elementos"]>$numeroelementos){
+                echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
+            }else{
+                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+            }
+                               
+                                                        
+            $numeropaginas=  ceil($numeroelementos/$_POST["elementos"]);
+            echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
+            echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
+            for($i=($_POST["pagina"]-3);$i<$numeropaginas && $i<($_POST["pagina"]+2);$i++){
+                if($i>-1){                    
+                    if($i==($_POST["pagina"]-1)){
+                        echo "<li onclick='pagina(".($i+1).")' class='active'><a>".($i+1)."</a></li>";
+                    }else{
+                        echo "<li onclick='pagina(".($i+1).")'><a>".($i+1)."</a></li>";
+                    }                    
+                }                                                            
+            }
+            echo "<li onclick='pagina(".($numeropaginas).")' class='next'><a><i class='ace-icon fa fa-angle-double-right'></i></a></li>";
+            echo "</ul>";
+                                                                                                    
+        echo "</div>";                
+    }    
+    
+    
+    if($_POST["tabla"]=="usuarios"){            
+        echo "<div class='row cabecera_tabla'>";       
+        if($_POST["campo"]=="usuario"){
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }
+            echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto</div>";
+        }else
+        if($_POST["campo"]=="nombre"){
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario</div>";
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            } 
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto</div>";
+        }else
+        if($_POST["campo"]=="correo"){
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario</div>";
+            echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre</div>";        
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto</div>";
+        }else
+        if($_POST["campo"]=="telefono"){
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario</div>";
+            echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico</div>";        
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto</div>";
+        }else
+        if($_POST["campo"]=="puesto"){
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('usuario')>Usuario</div>";
+            echo "<div class='col-xs-3 columna_cabecera' onclick=ordena('nombre')>Nombre</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('correo')>Correo Electronico</div>";        
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('telefono')>Teléfono</div>";
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('puesto')>Puesto<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }            
+        }                                                             
+        echo "</div>"; 
+        
+        $sql_listaEMPRESA="";
+        if($_POST["filtro"]==""){            
+            $sql_listaEMPRESA="select idusuario, usuario, nombre, correo, telefono, puesto from usuario order by ".$_POST["campo"]." ".$_POST["orden"];
+        }else{
+            $sql_listaEMPRESA="select idusuario, usuario, nombre, correo, telefono, puesto from where ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];
+        }               
+        
+        //echo $sql_listaEMPRESA;
+        
+        $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
+        if(mysql_num_rows($result_listaEMPRESA)>0){
+            $cuenta=0;
+            while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
+                if($cuenta<($_POST["elementos"]*$_POST["pagina"]) && ($cuenta >=(($_POST["pagina"]*$_POST["elementos"])-$_POST["elementos"]) && $cuenta<($_POST["pagina"]*$_POST["elementos"]))){
+                    echo "<div class='row linea_tabla'>";
+                    echo "<div class='col-xs-2 columna_linea'>".$fila["usuario"]."</div>";
+                    echo "<div class='col-xs-3 columna_linea'>".$fila["nombre"]."</div>";
+                    echo "<div class='col-xs-2 columna_linea'>".$fila["correo"]."</div>";
+                    echo "<div class='col-xs-1 columna_linea'>".$fila["telefono"]."</div>";
+                    echo "<div class='col-xs-2 columna_linea'>".$fila["puesto"]."</div>";
+                    echo "<div class='col-xs-2' >";
+                    echo "<div class='btn-group'>";
+                    echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                    echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                    echo "</button>";
+                    echo "<ul class='dropdown-menu dropdown-default'>";
+                    if(habilitaMenu($_SESSION["usuario"],6,10,3)==1){
+                        echo "<li><a href='editarusuario.php?id=".$fila["idusuario"]."'>Editar</a></li>";
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
