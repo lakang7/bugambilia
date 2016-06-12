@@ -181,8 +181,18 @@
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
                                                         }                                                        
-                                                    ?> 
-                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=16">
+                                                    ?>
+                                            
+                                                        <?php
+                                                            $con=Conexion();
+                                                            $sql_ORDEN="select * from ordendecompra where idordendecompra='".$_GET["id"]."'";
+                                                            $result_ORDEN=mysql_query($sql_ORDEN,$con) or die(mysql_error());
+                                                            if(mysql_num_rows($result_ORDEN)>0){
+                                                                $orden = mysql_fetch_assoc($result_ORDEN);                                                                                                                                           
+                                                            }
+                                                            mysql_close($con);
+                                                        ?>                                            
+                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=22&id=<?php echo $_GET["id"]; ?>">
 						<div class="page-header"><h1>Orden de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
@@ -191,7 +201,7 @@
                                                             <div class="row">
                                                                 <div class="col-xs-8 col-sm-11">
                                                                     <div class="input-group">
-                                                                        <input class="form-control date-picker" id="id-date-picker-1" name="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" value="<?php echo date("Y")."-".date("m")."-".date("d"); ?>" />
+                                                                        <input class="form-control date-picker" id="id-date-picker-1" name="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" value="<?php echo $orden["fechaderegistro"]; ?>" disabled="disabled" />
                                                                         <span class="input-group-addon">
                                                                             <i class="fa fa-calendar bigger-110"></i>
                                                                         </span>
@@ -202,21 +212,14 @@
                                                         <div style="width: 100%; margin-top: 10px">                                                             
                                                             <label>(*) Codigo externo orden de compra</label>
                                                             <div style="width: 100%">
-                                                                <input type="text" id="codigoext" name="codigoext" placeholder="Codigo externo orden de compra"  maxlength="20" style="width: 100%" required="required" />
+                                                                <input type="text" id="codigoext" name="codigoext" value="<?php echo $orden["codigoexterno"]; ?>" placeholder="Codigo externo orden de compra"  maxlength="20" style="width: 100%" required="required" />
                                                             </div>                                                                                                                                                                                        
                                                         </div>                                                                                                                                                                          
                                                         
                                                         <div style="width: 100%; margin-top: 10px"> 
-                                                            <?php
-                                                                $con=Conexion();
-                                                                $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema=1";
-                                                                $resultConfiguracion=mysql_query($sqlConfiguracion,$con) or die(mysql_error());
-                                                                $configuracion = mysql_fetch_assoc($resultConfiguracion);
-                                                                $codigo="POMX-".$configuracion["secuenciaop"];
-                                                            ?>
                                                             <label>(*) Codigo interno orden de Producción (Auto Generado)</label>
                                                             <div style="width: 100%">
-                                                                <input type="text" readonly value="<?php echo $codigo ?>" id="codigo02" name="codigo02" placeholder="Codigo interno orden de producción"  maxlength="20" style="width: 100%" />
+                                                                <input type="text" readonly value="<?php echo $orden["codigoop"]; ?>" id="codigo02" name="codigo02" placeholder="Codigo interno orden de producción"  maxlength="20" style="width: 100%" />
                                                             </div>                                                                                                                                                                                        
                                                         </div>                                                        
                                                         
@@ -235,17 +238,56 @@
                                                             <label>(*) Prioridad</label>
                                                             <div style="width: 100%;">
                                                             <select class="chosen-select form-control" id="prioridad" name="prioridad" data-placeholder="Seleccione la prioridad de la orden" required="required">                                                                
-                                                                <option value="1" selected="selected">Normal - de 28 a 42 días</option>
-                                                                <option value="2">Urgente - asignacion manual de la fecha</option>													
+                                                                <?php
+                                                                    if($orden["prioridad"]==1){
+                                                                        echo "<option value='1' selected='selected'>Normal - de 28 a 42 días</option>";
+                                                                        echo "<option value='2'>Urgente - asignacion manual de la fecha</option>";
+                                                                    }else if($orden["prioridad"]==2){
+                                                                        echo "<option value='1'>Normal - de 28 a 42 días</option>";
+                                                                        echo "<option value='2' selected='selected'>Urgente - asignacion manual de la fecha</option>";                                                                        
+                                                                    }
+                                                                ?>													
                                                             </select>                                                                                                                         
                                                             </div>                                                                                                                                                                                                                                                                                                                                                                          
                                                         </div>                                                        
-                                                        <div id="contenedorprioridad" >                                                                                                                                                                                                                                                
-                                                        </div>
-                                                        
+                                                        <div id="contenedorprioridad" > 
+                                                        <?php
+                                                            echo "<div style='width: 70%;margin-top: 10px'>";                                                            
+                                                            echo "<label>(*) Fecha de Entrega</label>";
+                                                            echo "<div class='row'>";
+                                                            echo "<div class='col-xs-8 col-sm-11'>";
+                                                            echo "<div class='input-group'>";
+                                                            echo "<input class='form-control date-picker' id='id-date-picker-2' name='id-date-picker-2' type='text' data-date-format='yyyy-mm-dd' value='".$orden["fechadeentrega"]."' />";
+                                                            echo "<span class='input-group-addon'>";
+                                                            echo "<i class='fa fa-calendar bigger-110'></i>";
+                                                            echo "</span>";
+                                                            echo "</div>";
+                                                            echo "</div>";
+                                                            echo "</div>";                                                                                                                                                                                      
+                                                            echo "</div>"; 
+                                                        ?>
+                                                        </div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">
-                                                            <label>(*) Empresa</label> <div id="capaiva"></div>
-                                                            <select class="chosen-select form-control" id="empresa" name="empresa" data-placeholder="Elija la empresa solicitante" required="required">
+                                                            <label>(*) Empresa</label>                                                             
+                                                            <div id="capaiva">
+                                                            <?php
+                                                                $con=Conexion();
+                                                                $sqlEmpresa="select * from empresa where idempresa='".$orden["idempresa"]."'";
+                                                                $resultEmpresa=mysql_query($sqlEmpresa,$con) or die(mysql_error());  
+                                                                $empresa = mysql_fetch_assoc($resultEmpresa);
+                                                                if($empresa["iva"]==0){
+                                                                    echo "<input type='hidden' name='appiva' id='appiva' value='N'/>";
+                                                                }else if($empresa["iva"]==1){
+                                                                    $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema='1'";
+                                                                    $resultConfiguracion=mysql_query($sqlConfiguracion,$con) or die(mysql_error());
+                                                                    $configuracion = mysql_fetch_assoc($resultConfiguracion);            
+                                                                    echo "<input type='hidden' name='appiva' id='appiva' value='S'/>";
+                                                                    echo "<input type='hidden' name='poriva' id='poriva' value='".$configuracion["poriva"]."'/>";
+                                                                }
+                                                                mysql_close($con); 
+                                                            ?>
+                                                            </div>
+                                                            <select class="chosen-select form-control" disabled="true" id="empresa" name="empresa" data-placeholder="Elija la empresa solicitante" required="required">
                                                             <option value="">  </option>
                                                             <?php
                                                                 $con=Conexion();
@@ -253,7 +295,12 @@
                                                                 $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                                 if(mysql_num_rows($result_listaEMPRESA)>0){
                                                                     while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                                                                    echo "<option value='".$fila["idempresa"]."'>".$fila["nombrecomercial"]."</option>";
+                                                                        if($orden["idempresa"]==$fila["idempresa"]){
+                                                                            echo "<option value='".$fila["idempresa"]."' selected='selected'>".$fila["nombrecomercial"]."</option>";
+                                                                        }  else {
+                                                                            echo "<option value='".$fila["idempresa"]."'>".$fila["nombrecomercial"]."</option>";
+                                                                        }
+                                                                    
                                                                     }
                                                                 }
                                                                 mysql_close($con);                                                                
@@ -262,22 +309,207 @@
                                                         </div>
                                                         <div style="width: 100%; margin-top: 10px">
                                                             <div id="contenedor01">
-                                                                
+                                                                <?php
+                                                                    $con=Conexion();
+                                                                    if($orden["idsucursal"]!=NULL){                                                                        
+                                                                        $sql_cuenta="select count(*) as total from sucursal where idempresa='".$orden["idempresa"]."' order by nombrecomercial";
+                                                                        $result_cuenta=mysql_query($sql_cuenta,$con) or die(mysql_error());
+                                                                        $total = mysql_fetch_assoc($result_cuenta);
+                                                                        if($total["total"]>0){
+                                                                            echo "<div style='width: 100%; float: left; margin-right: 10px'>";
+                                                                            echo "<label>Sucursal</label>";
+                                                                            echo "<select class='chosen-select form-control' disabled='true' id='sucursal' name='sucursal' data-placeholder='Elija la sucursal solicitante'>";
+                                                                            echo "<option value=''></option>";
+                                                                            $sql_listaSucursal="select * from sucursal where idempresa='".$orden["idempresa"]."' order by nombrecomercial";
+                                                                            $result_listaSucursal=mysql_query($sql_listaSucursal,$con) or die(mysql_error());
+                                                                            if(mysql_num_rows($result_listaSucursal)>0){
+                                                                                while ($sucursal = mysql_fetch_assoc($result_listaSucursal)) {
+                                                                                    if($orden["idsucursal"]==$sucursal["idsucursal"]){
+                                                                                        echo "<option value='".$sucursal["idsucursal"]."' selected='selected'>".$sucursal["nombrecomercial"]."</option>";
+                                                                                    }else{
+                                                                                        echo "<option value='".$sucursal["idsucursal"]."'>".$sucursal["nombrecomercial"]."</option>";
+                                                                                    }                                                                                    
+                                                                                }
+                                                                            }
+                                                                            echo "</select>";
+                                                                            echo "</div>";
+                                                                            echo "<div id='contenedor02' style='margin-top: 10px'>";
+                                                                            if($orden["idestado"]!=NULL){                                                                                                                                                                
+                                                                                $sql_cuenta="select count(*) as total from estadosensucursal where idsucursal='".$orden["idsucursal"]."'";
+                                                                                $result_cuenta=mysql_query($sql_cuenta,$con) or die(mysql_error());
+                                                                                $total = mysql_fetch_assoc($result_cuenta);         
+                                                                                echo "<div style='width: 100%; margin-top: 10px'>";
+                                                                                echo "<label style='margin-top: 10px'>Región</label>";
+                                                                                echo "<select class='chosen-select form-control' disabled='true' id='region' name='region' data-placeholder='Elija la región solicitante'>";
+                                                                                echo "<option value=''></option>";
+                                                                                $sql_listaESTSUCURSAL="select * from estadosensucursal where idsucursal='".$orden["idsucursal"]."'";
+                                                                                $result_listaESTSUCURSAL=mysql_query($sql_listaESTSUCURSAL,$con) or die(mysql_error());
+                                                                                if(mysql_num_rows($result_listaESTSUCURSAL)>0){
+                                                                                    while ($fila = mysql_fetch_assoc($result_listaESTSUCURSAL)) {
+                                                                                        $sql_estado="select * from estado where idestado='".$fila["idestado"]."'";
+                                                                                        $result_estado=mysql_query($sql_estado,$con) or die(mysql_error());
+                                                                                        $fila02 = mysql_fetch_assoc($result_estado);
+                                                                                        if($fila02["idestado"]==$orden["idestado"]){
+                                                                                           echo "<option value='".$fila["idestado"]."' selected='selected'>".$fila02["nombre"]."</option>"; 
+                                                                                        }else {
+                                                                                           echo "<option value='".$fila["idestado"]."'>".$fila02["nombre"]."</option>"; 
+                                                                                        }
+                                                                                                            
+                                                                                    }
+                                                                                }
+                                                                                echo "</select>"; 
+                                                                                echo "</div>";                                                                                                                                                                                                                                                                                                                                
+                                                                            }                                                                                                                                                        
+                                                                            echo "</div>";            
+                                                                        }                                                                                                                                                                                                                        
+                                                                    }
+                                                                    mysql_close($con);
+                                                                ?>
                                                             </div>
                                                         </div>
-                                                        <div id="contenedor03" ></div>
-                                                        <div id="contenedor04" ></div>
+                                                        <div id="contenedor03" >
+                                                        <?php    
+                                                        $con=Conexion();    
+                                                        echo "<div style='width: 100%; margin-top: 10px'>";
+                                                        echo "<label style='margin-top: 10px'>Contacto de Compra</label>";
+                                                        echo "<select class='chosen-select form-control' id='contacto01' name='contacto01' data-placeholder='Elija el contacto asociado' required='required'>";
+                                                        $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$orden["idempresa"]."'";
+                                                        $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_listaASOCIACION)>0){
+                                                            while ($fila = mysql_fetch_assoc($result_listaASOCIACION)) {
+                                                                $sql_agenda="select * from agenda where idagenda='".$fila["idagenda"]."'";
+                                                                $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+                                                                $fila02 = mysql_fetch_assoc($result_agenda);
+                                                                if($fila02["idagenda"]==$orden["idagenda01"]){
+                                                                    echo "<option value='".$fila02["idagenda"]."' selected='selected'>".$fila02["nombre"]."</option>";
+                                                                }else{
+                                                                    echo "<option value='".$fila02["idagenda"]."'>".$fila02["nombre"]."</option>";
+                                                                }                                                                                    
+                                                            }
+                                                        }
+                                                        echo "</select>";                               
+                                                        echo "</div>";
+        
+                                                        echo "<div style='width: 100%; margin-top: 10px'>";
+                                                        echo "<label>Contacto de Cuentas por Pagar</label>";
+                                                        echo "<select class='chosen-select form-control' id='contacto02' name='contacto02' data-placeholder='Elija el contacto asociado' required='required'>";
+                                                        $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$orden["idempresa"]."'";
+                                                        $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_listaASOCIACION)>0){
+                                                            while ($fila = mysql_fetch_assoc($result_listaASOCIACION)) {
+                                                                $sql_agenda="select * from agenda where idagenda='".$fila["idagenda"]."'";
+                                                                $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+                                                                $fila02 = mysql_fetch_assoc($result_agenda);
+                                                                if($fila02["idagenda"]==$orden["idagenda02"]){
+                                                                    echo "<option value='".$fila02["idagenda"]."' selected='selected'>".$fila02["nombre"]."</option>";                    
+                                                                }else{
+                                                                    echo "<option value='".$fila02["idagenda"]."'>".$fila02["nombre"]."</option>";                    
+                                                                }                                                                
+                                                            }
+                                                        }
+                                                        echo "</select>";                               
+                                                        echo "</div>";
+        
+                                                        echo "<div style='width: 100%; margin-top: 10px'>";
+                                                        echo "<label>Contacto de Entrega</label>";
+                                                        echo "<select class='chosen-select form-control' id='contacto03' name='contacto03' data-placeholder='Elija el contacto asociado' required='required'>";
+                                                        $sql_listaASOCIACION="select * from asociacionagenda where idempresa='".$orden["idempresa"]."'";
+                                                        $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_listaASOCIACION)>0){
+                                                            while ($fila = mysql_fetch_assoc($result_listaASOCIACION)) {
+                                                                $sql_agenda="select * from agenda where idagenda='".$fila["idagenda"]."'";
+                                                                $result_agenda=mysql_query($sql_agenda,$con) or die(mysql_error());
+                                                                $fila02 = mysql_fetch_assoc($result_agenda);
+                                                                if($fila02["idagenda"]==$orden["idagenda03"]){
+                                                                    echo "<option value='".$fila02["idagenda"]."' selected='selected'>".$fila02["nombre"]."</option>";
+                                                                }else{
+                                                                    echo "<option value='".$fila02["idagenda"]."'>".$fila02["nombre"]."</option>";
+                                                                }                                                                                    
+                                                            }
+                                                        }
+                                                        echo "</select>";                               
+                                                        echo "</div>";                                                            
+                                                        mysql_close($con);    
+                                                        ?>  
+                                                        </div>
+                                                        <div id="contenedor04" >
+                                                            <?php
+                                                                $con=Conexion();
+                                                                echo "<div style='width: 100%; margin-top: 10px'>";
+                                                                echo "<label>Lista de Precios</label>";        
+                                                                echo "<select class='chosen-select form-control' disabled='true' id='lista' name='lista' data-placeholder='Elija la lista de precios' required='required'>";
+                                                                $sql_listaLISTAPRECIOS="select * from listadeprecios where idempresa='".$orden["idempresa"]."'";
+                                                                $result_listaLISTAPRECIOS=mysql_query($sql_listaLISTAPRECIOS,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($result_listaLISTAPRECIOS)>0){
+                                                                    while ($fila = mysql_fetch_assoc($result_listaLISTAPRECIOS)) {
+                                                                        if($orden["idlistadeprecios"]==$fila["idlistadeprecios"]){
+                                                                            echo "<option value='".$fila["idlistadeprecios"]."' selected='selected'>".$fila["nombre"]."</option>";
+                                                                        }else{
+                                                                            echo "<option value='".$fila["idlistadeprecios"]."'>".$fila["nombre"]."</option>";
+                                                                        }
+                                                                                            
+                                                                    }
+                                                                }
+                                                                echo "</select>";
+                                                                echo "</div>";
+                                                                mysql_close($con); 
+                                                           ?> 
+                                                        </div>
                                                         
                                                         <div style="width: 100%; margin-top: 10px">                                                                                                                       
                                                             <label>(*) Condiciones de Pago</label>
                                                             <div style="width: 100%;">
                                                             <select class="chosen-select form-control" id="condiciones" name="condiciones" data-placeholder="Seleccione la prioridad de la orden" required="required">                                                                
-                                                                <option value="1">50% Anticipo 50% Contra Aviso de Entrega</option>
-                                                                <option value="2">100% Contra Aviso de Entrega</option>	
-                                                                <option value="3">50% Anticipo 15 dias de Credito</option>
-                                                                <option value="4">50% Anticipo 30 dias de Credito</option>
-                                                                <option value="5">Credito de 15 días</option>
-                                                                <option value="6">Credito de 30 días</option>
+                                                                <?php
+                                                                    if($orden["condiciones"]==1){
+                                                                        echo "<option value='1' selected='selected'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5'>Credito de 15 días</option>";
+                                                                        echo "<option value='6'>Credito de 30 días</option>";                                                                        
+                                                                    }
+                                                                    if($orden["condiciones"]==2){
+                                                                        echo "<option value='1'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2' selected='selected'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5'>Credito de 15 días</option>";
+                                                                        echo "<option value='6'>Credito de 30 días</option>";                                                                        
+                                                                    }
+                                                                    if($orden["condiciones"]==3){
+                                                                        echo "<option value='1'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3' selected='selected'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5'>Credito de 15 días</option>";
+                                                                        echo "<option value='6'>Credito de 30 días</option>";                                                                        
+                                                                    }
+                                                                    if($orden["condiciones"]==4){
+                                                                        echo "<option value='1'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4' selected='selected'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5'>Credito de 15 días</option>";
+                                                                        echo "<option value='6'>Credito de 30 días</option>";                                                                        
+                                                                    }
+                                                                    if($orden["condiciones"]==5){
+                                                                        echo "<option value='1'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5' selected='selected'>Credito de 15 días</option>";
+                                                                        echo "<option value='6'>Credito de 30 días</option>";                                                                        
+                                                                    }
+                                                                    if($orden["condiciones"]==6){
+                                                                        echo "<option value='1'>50% Anticipo 50% Contra Aviso de Entrega</option>";
+                                                                        echo "<option value='2'>100% Contra Aviso de Entrega</option>";	
+                                                                        echo "<option value='3'>50% Anticipo 15 dias de Credito</option>";
+                                                                        echo "<option value='4'>50% Anticipo 30 dias de Credito</option>";
+                                                                        echo "<option value='5'>Credito de 15 días</option>";
+                                                                        echo "<option value='6' selected='selected'>Credito de 30 días</option>";                                                                        
+                                                                    }                                                                                                                                                                                                    
+                                                                ?>                                                                
                                                             </select>                                                                                                                         
                                                             </div>                                                                                                                                                                                                                                                                                                                                                                          
                                                         </div> 
@@ -285,14 +517,14 @@
                                                         <div style="width: 100%; margin-top: 10px">                                                             
                                                             <label>Paqueteria</label>
                                                             <div style="width: 100%">
-                                                                <input type="text" id="paqueteria" name="paqueteria" placeholder="Paqueteria para el envio de la orden"  maxlength="30" style="width: 100%" />
+                                                                <input type="text" id="paqueteria" value="<?php echo $orden["paqueteria"]; ?>" name="paqueteria" placeholder="Paqueteria para el envio de la orden"  maxlength="30" style="width: 100%" />
                                                             </div>                                                                                                                                                                                        
                                                         </div>  
                                                         
                                                         <div style="width: 100%; margin-top: 10px">                                                             
                                                             <label>Observaciones</label>
                                                             <div style="width: 100%">
-                                                                <input type="text" id="observaciones" name="observaciones" placeholder="Observaciones para esta orden de compra"  maxlength="300" style="width: 100%" />
+                                                                <input type="text" id="observaciones" value="<?php echo $orden["observaciones"]; ?>" name="observaciones" placeholder="Observaciones para esta orden de compra"  maxlength="300" style="width: 100%" />
                                                             </div>                                                                                                                                                                                        
                                                         </div>                                                        
                                                         
@@ -300,24 +532,75 @@
                                                             <label>Productos en la Orden de Compra</label>
                                                         </div>
                                                         <div id="oculto00"></div>
-                                                        <input type="hidden" name="oculto01" id="oculto01" value="0"/><!-- numero de la unidad -->
-                                                        <input type="hidden" name="oculto02" id="oculto02" value=""/> <!-- id productos -->
-                                                        <input type="hidden" name="oculto03" id="oculto03" value=""/> <!-- codigo productos -->
-                                                        <input type="hidden" name="oculto04" id="oculto04" value=""/> <!-- descripcion productos -->
-                                                        <input type="hidden" name="oculto05" id="oculto05" value=""/> <!-- colores producto -->
-                                                        <input type="hidden" name="oculto06" id="oculto06" value=""/> <!-- precio productos -->
-                                                        <input type="hidden" name="oculto07" id="oculto07" value=""/> <!-- unidades por producto -->
+                                                            <?php
+                                                                $con=Conexion();
+                                                                $listaIDS="";
+                                                                $listaCODIGOS="";
+                                                                $listaDESCRIPCIONES="";
+                                                                $listaCOLORES="";
+                                                                $listaPRECIOS="";
+                                                                $listaUNIDADES="";
+                                                                $sql_listaPro="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
+                                                                $result_listaPro=mysql_query($sql_listaPro,$con) or die(mysql_error());
+                                                                $cuenta=1;
+                                                                if(mysql_num_rows($result_listaPro)>0){
+                                                                    while ($pr = mysql_fetch_assoc($result_listaPro)) {
+                                                                        $listaIDS=$listaIDS."_".$pr["idproducto"];
+                                                                        $sqlPro="select * from producto where idproducto='".$pr["idproducto"]."'";
+                                                                        $resultPro=mysql_query($sqlPro,$con) or die(mysql_error());
+                                                                        $p = mysql_fetch_assoc($resultPro);
+                                                                        $listaCODIGOS=$listaCODIGOS."_".$p["codigo"];
+                                                                        $listaDESCRIPCIONES=$listaDESCRIPCIONES."_".$p["descripcion"];
+                                                                        $listaPRECIOS=$listaPRECIOS."_".$pr["precioventa"];
+                                                                        $listaUNIDADES=$listaUNIDADES."_".$pr["numerodeunidades"];
+                                                                        $sqlCol="select * from color where idcolor='".$pr["idcolor"]."'";
+                                                                        $resultCol=mysql_query($sqlCol,$con) or die(mysql_error());
+                                                                        $color = mysql_fetch_assoc($resultCol);
+                                                                        $listaCOLORES=$listaCOLORES."_".$color["nombre"];                                                                        
+                                                                        $cuenta++;                                                                        
+                                                                    }                                                                            
+                                                                }
+                                                                $cuenta--;
+                                                                mysql_close($con); 
+                                                            ?>                                                         
+                                                        <input type="hidden" name="oculto01" id="oculto01" value="<?php echo $cuenta; ?>"/><!-- numero de la unidad -->
+                                                        <input type="hidden" name="oculto02" id="oculto02" value="<?php echo $listaIDS; ?>"/> <!-- id productos -->
+                                                        <input type="hidden" name="oculto03" id="oculto03" value="<?php echo $listaCODIGOS; ?>"/> <!-- codigo productos -->
+                                                        <input type="hidden" name="oculto04" id="oculto04" value="<?php echo $listaDESCRIPCIONES; ?>"/> <!-- descripcion productos -->
+                                                        <input type="hidden" name="oculto05" id="oculto05" value="<?php echo $listaCOLORES; ?>"/> <!-- colores producto -->
+                                                        <input type="hidden" name="oculto06" id="oculto06" value="<?php echo $listaPRECIOS; ?>"/> <!-- precio productos -->
+                                                        <input type="hidden" name="oculto07" id="oculto07" value="<?php echo $listaUNIDADES; ?>"/> <!-- unidades por producto -->
                                                         <div id="productosenorden">
+                                                            <?php
+                                                                $con=Conexion();
+                                                                $sql_listaPro="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
+                                                                $result_listaPro=mysql_query($sql_listaPro,$con) or die(mysql_error());
+                                                                $cuenta=1;
+                                                                if(mysql_num_rows($result_listaPro)>0){
+                                                                    while ($pr = mysql_fetch_assoc($result_listaPro)) {
+                                                                        $sqlPro="select * from producto where idproducto='".$pr["idproducto"]."'";
+                                                                        $resultPro=mysql_query($sqlPro,$con) or die(mysql_error());
+                                                                        $p = mysql_fetch_assoc($resultPro);
+                                                                        
+                                                                        $sqlCol="select * from color where idcolor='".$pr["idcolor"]."'";
+                                                                        $resultCol=mysql_query($sqlCol,$con) or die(mysql_error());
+                                                                        $color = mysql_fetch_assoc($resultCol);                                                                        
+                                                                        echo "<div style='width: 100%; margin-bottom: 5px; border-bottom: 1px solid #CCC; font-size: 12px'><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Item Numero:</label> ".$cuenta."</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Codigo:</label> ".$p["codigo"]." / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Color:</label> ".$color["nombre"]." / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Descripcion:</label> ".$p["descripcion"]."</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Numero de Unidades:</label> ".$pr["numerodeunidades"]." / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Unitario:</label> $".$pr["precioventa"]." / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Total:</label> $".round(($pr["precioventa"]*$pr["numerodeunidades"]),2)."</div><div style='width: 100%'><div class='btn btn-minier btn-danger' style='margin-bottom: 5px; margin-top: 1px' onclick='eliminar(".$cuenta.")'>Eliminar</div></div></div>";
+                                                                        $cuenta++;                                                                        
+                                                                    }                                                                            
+                                                                } 
+                                                                mysql_close($con); 
+                                                            ?>                                                                                                                                                                                   
                                                         </div>
                                                         <div id="totalizacion" style="background-color: #eaeaea; font-size: 16px; padding: 1ex; width: 100%; height: 125px">
-                                                            <div class="left" style="width: 50%; float: left">Productos: <label style="font-size: 22px; font-weight: bold">0</label></div>
-                                                            <div class="right" style="width: 50%; float: left; text-align: right">Subtotal:   <label style="font-size: 22px; font-weight: bold">$0</label></div>
-                                                            <div class="right" style="width: 100%; float: left; text-align: right">Iva:   <label style="font-size: 22px; font-weight: bold">$0</label></div>
-                                                            <div class="right" style="width: 100%; float: left; text-align: right">Total:   <label style="font-size: 22px; font-weight: bold">$0</label></div>
+                                                            <div class="left" style="width: 50%; float: left">Productos: <label style="font-size: 22px; font-weight: bold"><?php echo ($cuenta-1); ?></label></div>
+                                                            <div class="right" style="width: 50%; float: left; text-align: right">Subtotal:   <label style="font-size: 22px; font-weight: bold">$<?php echo round($orden["subtotal"],2); ?></label></div>
+                                                            <div class="right" style="width: 100%; float: left; text-align: right">Iva:   <label style="font-size: 22px; font-weight: bold">$<?php echo round($orden["iva"],2); ?></label></div>
+                                                            <div class="right" style="width: 100%; float: left; text-align: right">Total:   <label style="font-size: 22px; font-weight: bold">$<?php echo round($orden["total"],2); ?></label></div>
                                                         </div>
                                                         <div style="width: 100%; margin-top: 10px;">
                                                             <div id="agrega01" style="visibility: visible">Seleccione una empresa para poder agregar productos a la orden de compra</div>
-                                                            <a id="agrega02" href="#my-modal" role="button" class="btn btn-sm btn-primary" data-toggle="modal" style="visibility: hidden">Agregar Productos a la Orden de Compra</a>                                                            
+                                                            <a id="agrega02" href="#my-modal" role="button" class="btn btn-sm btn-primary" data-toggle="modal" style="visibility: visible">Agregar Productos a la Orden de Compra</a>                                                            
                                                         </div>
                                                         
                                                                                                                                                                         
@@ -450,10 +733,12 @@
                                                                 $("#color_chosen").width("100%");
                                                             }
                                                             
-                                                            function agregar(){                                                                
+                                                            function agregar(){ 
+                                                                
                                                                 if(document.getElementById("producto").value!=="" && document.getElementById("color").value!=="" && document.getElementById("unidades").value!==""){                                                                    
                                                                     $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value }, function(){
                                                                         var resultado=document.getElementById("devuelve").value;
+                                                                        
                                                                         var resp = resultado.split("_"); 
                                                                         var proid = resp[0];
                                                                         var procodigo = resp[1];
@@ -461,8 +746,8 @@
                                                                         var procolor = resp[3];
                                                                         var proprecio = parseFloat(resp[4]).toFixed(2);
                                                                         var prounidades = parseFloat(document.getElementById("unidades").value).toFixed(0);
-                                                                        var unidad = parseInt(document.getElementById("oculto01").value);
-                                                                        unidad++;
+                                                                        var unidad = parseInt(document.getElementById("oculto01").value);                                                                        
+                                                                        unidad++;                                                                        
                                                                         document.getElementById("oculto01").value=unidad;
                                                                         document.getElementById("oculto02").value=document.getElementById("oculto02").value+"_"+proid;
                                                                         document.getElementById("oculto03").value=document.getElementById("oculto03").value+"_"+procodigo;
@@ -470,6 +755,7 @@
                                                                         document.getElementById("oculto05").value=document.getElementById("oculto05").value+"_"+procolor;
                                                                         document.getElementById("oculto06").value=document.getElementById("oculto06").value+"_"+proprecio;
                                                                         document.getElementById("oculto07").value=document.getElementById("oculto07").value+"_"+prounidades;
+                                                                        
                                                                         var listaprecios = document.getElementById("oculto06").value.split("_");
                                                                         var listaunidades = document.getElementById("oculto07").value.split("_");
                                                                         var acumulado=parseFloat("0");
@@ -489,8 +775,9 @@
                                                                             iva = 0;
                                                                             total = acumulado + iva;                                                                            
                                                                         }
-
+                                                                        
                                                                         $("#productosenorden").append("<div style='width: 100%; margin-bottom: 5px; border-bottom: 1px solid #CCC; font-size: 12px'><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Item Numero:</label> "+unidad+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Codigo:</label> "+procodigo+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Color:</label> "+procolor+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Descripcion:</label> "+prodescripcion+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Numero de Unidades:</label> "+prounidades+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Unitario:</label> $"+proprecio+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Total:</label> $"+parseFloat(proprecio*prounidades).toFixed(2)+"</div><div style='width: 100%'><div class='btn btn-minier btn-danger' style='margin-bottom: 5px; margin-top: 1px' onclick='eliminar("+unidad+")'>Eliminar</div></div></div>");                                                                                                                                                
+                                                                        
                                                                         $("#totalizacion").html("<div class='left' style='width: 50%; float: left'>Productos: <label style='font-size: 22px; font-weight: bold'>"+unidad+"</label></div><div class='right' style='width: 50%; float: left; text-align: right'>Subtotal:   <label style='font-size: 22px; font-weight: bold'>$"+parseFloat(acumulado).toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Iva:   <label style='font-size: 22px; font-weight: bold'>$"+iva.toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Total:   <label style='font-size: 22px; font-weight: bold'>$"+total.toFixed(2)+"</label></div>");
                                                                     });                                                                                                                                        
                                                                 }else{
@@ -1153,8 +1440,7 @@
                                             document.getElementById("oculto07").value="";                                            
                                             
                                             $("#productosenorden").html("");
-                                            var acumulado=0;
-                                            //$("#totalizacion").html("<div class='left' style='width: 50%; float: left'>Productos: <label style='font-size: 22px; font-weight: bold'>"+document.getElementById("oculto01").value+"</label></div><div class='right' style='width: 50%; float: left; text-align: right'>Total:   <label style='font-size: 22px; font-weight: bold'>$"+parseFloat(acumulado).toFixed(2)+"</label></div>");
+                                            var acumulado=0;                                            
                                             $("#totalizacion").html("<div class='left' style='width: 50%; float: left'>Productos: <label style='font-size: 22px; font-weight: bold'>"+document.getElementById("oculto01").value+"</label></div><div class='right' style='width: 50%; float: left; text-align: right'>Subtotal:   <label style='font-size: 22px; font-weight: bold'>$"+parseFloat(acumulado).toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Iva:   <label style='font-size: 22px; font-weight: bold'>$"+0.00+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Total:   <label style='font-size: 22px; font-weight: bold'>$"+0.00+"</label></div>");
                                             
                                         });                                         
@@ -1218,3 +1504,4 @@
 		</script>
 	</body>
 </html>
+ 

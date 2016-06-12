@@ -1316,15 +1316,79 @@ if ($tarea == 21) {
             }
         }                                                                                                                                                                                                       
     }    
-    
-    
-    
-    
+                
     ?>
         <script type="text/javascript">
             alert("Usuario Editado Satisfactoriamente.");
             document.location="../listarusuarios.php";
         </script>
     <?php     
+}
+
+/* insertar orden de compra dolor de cabeza */
+if ($tarea == 22) {
+    $sqlUpdateBase="update ordendecompra set codigoexterno='".$_POST["codigoext"]."', idagenda01='".$_POST["contacto01"]."', idagenda02='".$_POST["contacto02"]."', idagenda03='".$_POST["contacto03"]."', condiciones='".$_POST["condiciones"]."', paqueteria='".$_POST["paqueteria"]."', observaciones='".$_POST["observaciones"]."' where idordendecompra='".$_GET["id"]."'";
+    $resultUpdateBase=mysql_query($sqlUpdateBase,$con) or die(mysql_error());  
+    
+    $sqlDelete="delete from productosordencompra where idordendecompra='".$_GET["id"]."'";
+    $resultDelete=mysql_query($sqlDelete,$con) or die(mysql_error());
+    
+    
+    $productos = $_POST["oculto01"];
+    $listaIds = explode("_", $_POST["oculto02"]);
+    $listaCodigos = explode("_", $_POST["oculto03"]);
+    $listaDescripciones = explode("_", $_POST["oculto04"]);
+    $listaColores = explode("_", $_POST["oculto05"]);
+    $listaPrecios = explode("_", $_POST["oculto06"]);
+    $listaUnidades = explode("_", $_POST["oculto07"]);
+
+    $subTotal = 0;
+    $poriva = 0;
+    $total = 0;
+    $iva = 0;
+
+    $materiales = array();
+
+    for ($i = 0; $i < count($listaIds); $i++) {
+        if ($listaIds[$i] != "") {
+            $sql_precio = "select preciofabrica,idmaterial from producto where idproducto='" . $listaIds[$i] . "'";
+            $result_precio = mysql_query($sql_precio, $con) or die(mysql_error());
+            if (mysql_num_rows($result_precio) > 0) {
+                $precio = mysql_fetch_assoc($result_precio);
+                $banderina = 0;
+                for ($j = 0; $j < count($materiales); $j++) {
+                    if ($materiales[$j] == $precio["idmaterial"]) {
+                        $banderina = 1;
+                    }
+                }
+                if ($banderina == 0) {
+                    $materiales[count($materiales)] = $precio["idmaterial"];
+                }
+                $sql_color = "select * from color where nombre='" . $listaColores[$i] . "'";
+                $result_color = mysql_query($sql_color, $con) or die(mysql_error());
+                $color = mysql_fetch_assoc($result_color);
+                $subTotal+=($listaUnidades[$i] * $listaPrecios[$i]);
+                $sql_insProducto = "insert into productosordencompra (idordendecompra,idproducto,idcolor,preciofabrica,precioventa,numerodeunidades) values('" . $_GET["id"] . "','" . $listaIds[$i] . "','" . $color["idcolor"] . "','" . $precio["preciofabrica"] . "','" . $listaPrecios[$i] . "','" . $listaUnidades[$i] . "')";
+                $result_insProducto = mysql_query($sql_insProducto, $con) or die(mysql_error());
+            }
+        }
+    }
+
+    if ($_POST["appiva"] == "S") {
+        $poriva = $_POST["poriva"];
+        $iva = $subTotal * ($poriva / 100);
+        $total = $subTotal + $iva;
+    } else if ($_POST["appiva"] == "N") {
+        $total = $subTotal;
+    }
+
+    $sql_updateOrdenCompra = "update ordendecompra set subtotal='" . $subTotal . "',poriva='" . $poriva . "',iva='" . $iva . "',total='" . $total . "' where idordendecompra='" .$_GET["id"]. "'";
+    $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());    
+    
+    
+    
+    
+    
+    
 }
 ?>
