@@ -1325,7 +1325,6 @@ if ($tarea == 21) {
     <?php     
 }
 
-/* insertar orden de compra dolor de cabeza */
 if ($tarea == 22) {
     $sqlUpdateBase="update ordendecompra set codigoexterno='".$_POST["codigoext"]."', idagenda01='".$_POST["contacto01"]."', idagenda02='".$_POST["contacto02"]."', idagenda03='".$_POST["contacto03"]."', condiciones='".$_POST["condiciones"]."', paqueteria='".$_POST["paqueteria"]."', observaciones='".$_POST["observaciones"]."' where idordendecompra='".$_GET["id"]."'";
     $resultUpdateBase=mysql_query($sqlUpdateBase,$con) or die(mysql_error());  
@@ -1383,12 +1382,26 @@ if ($tarea == 22) {
     }
 
     $sql_updateOrdenCompra = "update ordendecompra set subtotal='" . $subTotal . "',poriva='" . $poriva . "',iva='" . $iva . "',total='" . $total . "' where idordendecompra='" .$_GET["id"]. "'";
-    $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());    
+    $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error()); 
     
-    
-    
-    
-    
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Compra Editada Satisfactoriamente.");
+            document.location="../listarordenesdecompra.php";
+        </script>
+    <?php    
+}
+
+
+if ($tarea == 23) {
+    $sqlUpdate="update configuracionsistema set regalias='".$_POST["regalias"]."', poriva='".$_POST["iva"]."', secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."' where idconfiguracionsistema=1";
+    $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Compra Editada Satisfactoriamente.");
+            document.location="../configuracionsistema.php";
+        </script>
+    <?php  
     
 }
 ?>

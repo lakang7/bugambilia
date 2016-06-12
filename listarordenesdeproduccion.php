@@ -118,10 +118,24 @@
                                             $sql_uno="select * from menualto where idusuario='".$_SESSION["usuario"]."'";
                                             $result_uno=mysql_query($sql_uno,$con) or die(mysql_error());
                                             if(mysql_num_rows($result_uno)>0){
+                                                
                                                 while ($uno = mysql_fetch_assoc($result_uno)) {
+                                                    $banderaGeneral=0;
                                                     $sql_dos="select * from menu where idmenu='".$uno["idmenu"]."'";
                                                     $result_dos=mysql_query($sql_dos,$con) or die(mysql_error());
                                                     $dos = mysql_fetch_assoc($result_dos);
+                                                    
+                                                    $sql_auxtres="select * from privilegio where idmenualto='".$uno["idmenualto"]."'";
+                                                    $result_auxtres=mysql_query($sql_auxtres,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_auxtres)>0){
+                                                        while ($auxtres = mysql_fetch_assoc($result_auxtres)) {
+                                                            if($auxtres["accion01"]!=0 || $auxtres["accion02"]!=0 || $auxtres["accion03"]!=0 ||$auxtres["accion04"]!=0 ||$auxtres["accion05"]!=0 || $auxtres["accion06"]!=0 || $auxtres["accion07"]!=0 || $auxtres["accion08"]!=0 || $auxtres["accion09"]!=0 || $auxtres["accion10"]!=0){
+                                                                $banderaGeneral=1;
+                                                            }
+                                                        }            
+                                                    }                                                    
+                                                    
+                                                    if($banderaGeneral==1){
                                                      ?>
                                                         <li class="hover">
                                                             <a href="#" class="dropdown-toggle"><i class="<?php echo $dos["icono"]; ?>"></i><span class="menu-text"><?php echo $dos["nombre"]; ?></span></a>                                                            
@@ -134,16 +148,18 @@
                                                                     <ul class="submenu">
                                                                         <?php
                                                                             while ($tres = mysql_fetch_assoc($result_tres)) {
-                                                                                $sql_cuatro="select * from submenu where idsubmenu='".$tres["idsubmenu"]."'";
-                                                                                $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
-                                                                                $cuatro = mysql_fetch_assoc($result_cuatro);
-                                                                                echo "<li class='hover'>";
-                                                                                echo "<a href='".$cuatro["pagina"]."'>";
-                                                                                echo "<i class='menu-icon fa fa-caret-right'></i>";
-                                                                                echo $cuatro["nombre"];
-                                                                                echo "</a>";                                                          
-                                                                                echo "<b class='arrow'></b>";
-                                                                                echo "</li>";                                                              
+                                                                                if($tres["accion01"]!=0 || $tres["accion02"]!=0 ||$tres["accion03"]!=0 ||$tres["accion04"]!=0 ||$tres["accion05"]!=0 ||$tres["accion06"]!=0 ||$tres["accion07"]!=0 ||$tres["accion08"]!=0 ||$tres["accion09"]!=0 ||$tres["accion10"]!=0){
+                                                                                    $sql_cuatro="select * from submenu where idsubmenu='".$tres["idsubmenu"]."'";
+                                                                                    $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
+                                                                                    $cuatro = mysql_fetch_assoc($result_cuatro);
+                                                                                    echo "<li class='hover'>";
+                                                                                    echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                    echo "<i class='menu-icon fa fa-caret-right'></i>";
+                                                                                    echo $cuatro["nombre"];
+                                                                                    echo "</a>";                                                          
+                                                                                    echo "<b class='arrow'></b>";
+                                                                                    echo "</li>";                                                                                     
+                                                                                }                                                             
                                                                             }
                                                                         ?>
                                                                     </ul>                 
@@ -152,6 +168,7 @@
                                                             ?>
                                                         </li>                                    
                                                     <?php
+                                                    }
                                                 }   
                                             }
                                         ?>                                                        	                                                                                			

@@ -713,7 +713,7 @@
         $acumulado=($acumulado+($acumulado*($tipo["portipo"]/100)));
         $acumulado=($acumulado+($acumulado*($busca["porcentajeganancia"]/100)));         
         
-        $sqlExcepcion="select * from excepcionlista where idlistadeprecios='".$idlistadeprecios."' and idproducto='".$producto["idproducto"]."'";                                                                                
+        $sqlExcepcion="select * from excepcionlista where idlistadeprecios='".$idlistadeprecios."' and idproducto='".$producto["idproducto"]."' and estatus=0";                                                                                
         $resultExcepcion=mysql_query($sqlExcepcion,$con) or die(mysql_error());
         if(mysql_num_rows($resultExcepcion)>0){
             $excepcion=mysql_fetch_assoc($resultExcepcion);

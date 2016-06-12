@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Registro de Material</title>
+		<title>Bugambilia Buffets - Configuración Sistema</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -28,7 +28,7 @@
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/colorpicker.min.css" />                
+		<link rel="stylesheet" href="assets/css/colorpicker.min.css" />                 
                 
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
@@ -110,6 +110,7 @@
 				<script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 				</script>
+
 				<ul class="nav nav-list">
                                         <?php 
                                             $con=  Conexion();
@@ -180,57 +181,54 @@
 			<div class="main-content">
                             
 				<div class="main-content-inner">
-					<div class="page-content">
-                                                    <?php
-                                                        /*Acción Registrar Empresa*/
-                                                        if(habilitaMenu($_SESSION["usuario"],2,4,1)==1){
-                                                            echo "<a href='insertmaterial.php'><button class='btn btn-white btn-info btn-bold'>";
-                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
-                                                            echo "Agregar Nuevo Registro";
-                                                            echo "</button></a>";                                                            
-                                                        }
-                                                        
-                                                        /*Listar Empresas*/
-                                                        if(habilitaMenu($_SESSION["usuario"],2,4,2)==1){
-                                                            echo "<a href='listarmateriales.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
-                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
-                                                            echo "Listar Registros";
-                                                            echo "</button></a>";                                                            
-                                                        }                                                        
-                                                    ?>   
-                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=4">
-						<div class="page-header"><h1>Materiales<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
-						<div class="row">
+					<div class="page-content">                                            
+						<div class="page-header">                                                    
+                                                    <h1 style="margin-top: 10px">Configuración Sistema<small><i class="ace-icon fa fa-angle-double-right"></i> Editar</small></h1>
+                                                </div>						                                                  
+                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=23">
+                                                <div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
-                                                        <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos del Material</div>                                                        
-                                                        <div style="width: 100%;">(*) Código del Material</div>
-                                                        <div style="width: 100%;"><input type="text" id="codigomaterial" name="codigomaterial" placeholder="Ingrese el código para el material" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>
-                                                        <div style="width: 100%; margin-top: 10px">(*) Nombre del Material</div>
-                                                        <div style="width: 100%;"><input type="text" id="nombrematerial" name="nombrematerial" placeholder="Ingrese el nombre del material" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>                                                                                                             
-                                                        <div style="width: 100%; margin-top: 10px;">(*) Seleccione los colores disponibles para este material</div>
-                                                        <div id="contenedor" >
-                                                            <select multiple class="chosen-select form-control" id="colores" name="colores[]" data-placeholder="Elija las colores asociados a esta linea de producción" >
-                                                            <?php
-                                                                $con=Conexion();
-                                                                $sql_listaCOLOR="select * from color order by nombre";
-                                                                $result_listaCOLOR=mysql_query($sql_listaCOLOR,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($result_listaCOLOR)>0){
-                                                                    while ($fila = mysql_fetch_assoc($result_listaCOLOR)) {
-                                                                    echo "<option value='".$fila["idcolor"]."'>".$fila["nombre"]."</option>";
-                                                                    }
-                                                                }
-                                                                mysql_close($con);                                                                
-                                                            ?>								
-							</select> 
-                                                        </div>
-                                                        <div style="width: 100%; margin-top: 10px">(*) Número de diás para la fabricación de este tipo de material</div>
-                                                        <div style="width: 100%;"><input type="text" id="dias" name="dias" placeholder="Ingrese el numero de dias para la fabricación de este material" style="width: 100%; font-size: 1.8ex;" maxlength="3" required="required" /></div>                                                         
+                                                        <?php
+                                                            $con=Conexion();
+                                                            $sql_CONFIGURACION="select * from configuracionsistema where idconfiguracionsistema=1";
+                                                            $result_CONFIGURACION=mysql_query($sql_CONFIGURACION,$con) or die(mysql_error());
+                                                            if(mysql_num_rows($result_CONFIGURACION)>0){
+                                                                $configuracion = mysql_fetch_assoc($result_CONFIGURACION);                                                                                                                                           
+                                                            }                                                                                                                                                                                                                                               
+                                                        ?>                                                        
+                                                        
+                                                        <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Parametros de Configuración</div>                                                                                                              
+                                                        <div style="width: 100%; margin-top: 0px">Porcentaje de Regalias</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo round($configuracion["regalias"],2); ?>" id="regalias" name="regalias" placeholder="Porcentaje de Regalias" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Porcentaje de IVA</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo round($configuracion["poriva"],2); ?>" id="iva" name="iva" placeholder="Porcentaje de IVA" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Valor de Secuencia en Ordenes de Producción</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["secuenciaop"]; ?>" id="secuencia" name="secuencia" placeholder="Valor de Secuencia en Ordenes de Producción" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
+                                                        
+                                                        <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal de La Empresa</div>                                                        
+                                                        <div style="width: 100%">
+                                                            <input type="text" id="fiscalempresa" value="<?php echo $configuracion["facturacionempresa"]; ?>" name="fiscalempresa" placeholder="Nombre de la Empresa" style="width: 54%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />
+                                                            <input type="text" id="fiscalrfc" value="<?php echo $configuracion["facturacionrfc"]; ?>" name="fiscalrfc" placeholder="RFC de la Empresa" style="width: 44%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="30" />                                                            
+                                                        </div>  
+                                                        <div style="width: 100%">
+                                                            <input type="text" id="fiscalavenida" value="<?php echo $configuracion["facturacioncalle"]; ?>" name="fiscalavenida" placeholder="Calle o Avenida" style="width: 54%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />
+                                                            <input type="text" id="fiscalexterior" value="<?php echo $configuracion["facturacionext"]; ?>" name="fiscalexterior" placeholder="Número Exterior" style="width: 22%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="30" />
+                                                            <input type="text" id="fiscalinterior" value="<?php echo $configuracion["facturacionint"]; ?>" name="fiscalinterior" placeholder="Número Interior" style="width: 21%; font-size: 1.8ex; margin-bottom: 10px" maxlength="30" />
+                                                        </div>                                                                                                                
+                                                        <div style="width: 100%; margin-bottom: 10px">
+                                                            <input type="text" id="fiscalcolonia" value="<?php echo $configuracion["facturacioncolonia"]; ?>" name="fiscalcolonia" placeholder="Colonia" style="width: 25%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />
+                                                            <input type="text" id="fiscalestpais" value="<?php echo $configuracion["facturacionestpais"]; ?>" name="fiscalestpais" placeholder="Estado y País" style="width: 48%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="30" />                                                            
+                                                            <input type="text" id="fiscalpostal" value="<?php echo $configuracion["facturacionpostal"]; ?>" name="fiscalpostal" placeholder="Código Postal" style="width: 24%; font-size: 1.8ex; margin-bottom: 10px" maxlength="10" />
+                                                        </div>                                                       
                                                     </div>
 						</div>
-                                                <button class="btn btn-info" type="submit" style="margin-top: 15px"><i class="ace-icon fa fa-check "></i>Registrar</button>                                                
-					</div>
+						<button class="btn btn-info" type="submit"><i class="ace-icon fa fa-check "></i>Registrar</button>                                                
+					</form>
+                                        </div>
 				</div>
-                            </form>
+                            
 			</div>
 			
                         <div class="footer">
@@ -306,7 +304,20 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+                
+                $( document ).ready(function() {    
+                    $("#telefono").keydown(function (e) {        
+                        if($.inArray(e.keyCode, [48,49,50,51,52,53,54,55,56,57,37,39,8,189]) !== -1){            
+                            return;
+                        }else{
+                            e.preventDefault();
+                        }
+                    });
+                });
+                        
 			jQuery(function($) {
+                            
+                            
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {
@@ -672,16 +683,10 @@
 					$('textarea[class*=autosize]').trigger('autosize.destroy');
 					$('.limiterBox,.autosizejs').remove();
 					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
-				});                                                              
+				});    
+                                
+                                
 			
-                                $('#matriz').change(function(){
-                                    var $selectedOption = $(this).find('option:selected');
-                                    var selectedValue = $selectedOption.val();
-                                    $("#contenedor").load("recursos/ajax.php", {tarea:1, id: selectedValue}, function(){                                                                                
-					$('.chosen-select').chosen({allow_single_deselect:true}); 			                                                                                                                                                           
-                                    });
-                                });                         
-                        
 			});
 		</script>
 	</body>

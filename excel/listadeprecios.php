@@ -175,7 +175,7 @@ $estiloTituloColumnas = array(
                         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('R'.$fila,$acumulado);
                         $acumulado=$acumulado+$acumulado*($busca["porcentajeganancia"]/100);
                                                 
-                        $sqlExcepcion="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."' and idproducto='".$pro["idproducto"]."'";                                                                                
+                        $sqlExcepcion="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."' and idproducto='".$pro["idproducto"]."' and estatus=0";                                                                                
                         $resultExcepcion=mysql_query($sqlExcepcion,$con) or die(mysql_error());
                         if(mysql_num_rows($resultExcepcion)>0){
                         $excepcion=mysql_fetch_assoc($resultExcepcion);                            
