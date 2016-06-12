@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php session_start(); 
+    
+    if(!isset($_SESSION["usuario"])){
+        ?>
+        <script type="text/javascript" language="JavaScript" >
+            alert("Debe Iniciar Sesión para poder accesar a esta pantalla.");
+            location.href = "login.php";
+        </script>        
+        <?php
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
