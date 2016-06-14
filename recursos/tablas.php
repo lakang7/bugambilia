@@ -871,16 +871,20 @@
             while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                 if($cuenta<($_POST["elementos"]*$_POST["pagina"]) && ($cuenta >=(($_POST["pagina"]*$_POST["elementos"])-$_POST["elementos"]) && $cuenta<($_POST["pagina"]*$_POST["elementos"]))){
                     $band=0;
+                    $band1=0;
                     $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
                     $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
                     if(mysql_num_rows($resultValida)==0){
                         $band=1;
-                    }
-                    if($band==1){
-                        echo "<div class='row linea_tabla2'>";
-                    }else{
-                        echo "<div class='row linea_tabla'>";
-                    }                                        
+                    } 
+                                                                
+                    $sqlValida2="select * from factura where idordendecompra='".$fila["idorden"]."'";
+                    $resultValida2=mysql_query($sqlValida2,$con) or die(mysql_error());
+                    if(mysql_num_rows($resultValida2)==0){
+                        $band1=1;
+                    } 
+
+                    echo "<div class='row linea_tabla'>";                                                            
                     echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
@@ -895,21 +899,31 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                        echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
-                    }
-                    if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
-                        echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
-                    }
-                    if($band==1){
+                    if($band==1 && $band1==1){
+                        if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
+                            echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
+                        }
+                                                                
                         if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
                             echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
                         }
-                        echo "<li class='divider'></li>";
+                    }
+                                                                
+                    if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
+                        echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
+                    }
+                                                                
+                    if($band==1){
                         if(habilitaMenu($_SESSION["usuario"],4,8,6)==1){
                             echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                        }                                                                    
-                    }                                                                
+                        }
+                    }
+                                                                
+                    if($band1==1){
+                        if(habilitaMenu($_SESSION["usuario"],4,8,7)==1){                                                            
+                            echo "<li><a href='facturacion/facturar.php?id=".$fila["idorden"]."' target='_blank'>Facturar Orden de Compra</a></li>";
+                        }
+                    }                                                               
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
