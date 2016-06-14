@@ -1,0 +1,9 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-14 11:17:16|Pago en Una Sola Exhibicion|2675.970|3104.125|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|BR012|BR012 Bowl Redondo S|20.33|243.96|IVA|16|39.03|||
+|CONCEPTO|6|Pieza|H-BU405|H-BU405 Budinera Boston grande|20.14|120.84|IVA|16|19.33|||
+|CONCEPTO|2|Pieza|TU004|TU004 Charola Carlota L|80.64|161.28|IVA|16|25.8|||
+|CONCEPTO|12|Pieza|TU005|TU005 Charola Carlota XL|100|1199.99|IVA|16|192|||
+|CONCEPTO|9|Pieza|BSD15|BSD15 Curazao Cuadrado Hondo XL|47.73|429.57|IVA|16|68.73|||

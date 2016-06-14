@@ -202,10 +202,19 @@
                                                         <div style="width: 100%;"><input type="text" value="<?php echo round($configuracion["regalias"],2); ?>" id="regalias" name="regalias" placeholder="Porcentaje de Regalias" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>
                                                         
                                                         <div style="width: 100%; margin-top: 0px">Porcentaje de IVA</div>
-                                                        <div style="width: 100%;"><input type="text" value="<?php echo round($configuracion["poriva"],2); ?>" id="iva" name="iva" placeholder="Porcentaje de IVA" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo round($configuracion["poriva"],2); ?>" id="iva" name="iva" placeholder="Porcentaje de IVA" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="5" /></div>                                                        
                                                         
                                                         <div style="width: 100%; margin-top: 0px">Valor de Secuencia en Ordenes de Producción</div>
-                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["secuenciaop"]; ?>" id="secuencia" name="secuencia" placeholder="Valor de Secuencia en Ordenes de Producción" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["secuenciaop"]; ?>" id="secuencia" name="secuencia" placeholder="Valor de Secuencia en Ordenes de Producción" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Cambio del Dolar</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["cambio"]; ?>" id="cambio" name="cambio" placeholder="Cambio del Dolar a Pesos Mexicanos" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="5" /></div>                                                        
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Serie</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["serie"]; ?>" id="serie" name="serie" placeholder="Nombre de la Serie" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="20" /></div>                                                        
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Folio Actual</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["folio"]; ?>" id="folio" name="folio" placeholder="Folio Actual" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="10" /></div>                                                                                                                
                                                         
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal de La Empresa</div>                                                        
                                                         <div style="width: 100%">

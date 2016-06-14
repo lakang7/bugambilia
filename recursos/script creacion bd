@@ -493,7 +493,6 @@ CREATE TABLE productosordenproduccion(
     FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-
 CREATE TABLE productosordencompra(
     idproductosordencompra mediumint(8) unsigned auto_increment,
     idordendecompra mediumint(8) unsigned not null,
@@ -507,6 +506,28 @@ CREATE TABLE productosordencompra(
     FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+CREATE TABLE factura(
+    idfactura mediumint(8) unsigned auto_increment,
+    idagenda mediumint(8) unsigned null,
+    idempresa mediumint(8) unsigned null,    
+    idordendecompra mediumint(8) unsigned null,      
+    emision TIMESTAMP not null,     
+    serie varchar(20) not null,
+    folio mediumint(8) unsigned null,
+    subtotal numeric(10,3) not null,
+    poriva numeric(10,2) not null,
+    iva numeric(10,3) not null,
+    total numeric(10,3) not null,
+    pdf varchar(60) not null,
+    xml varchar(60) not null,
+    PRIMARY KEY (idfactura),
+    FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,    
+    FOREIGN KEY (idagenda) REFERENCES agenda(idagenda) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
 
 CREATE TABLE usuario (
     idusuario mediumint(8) unsigned auto_increment,
@@ -610,6 +631,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(8,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Eliminar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");

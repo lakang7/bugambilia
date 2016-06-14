@@ -1,0 +1,6 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-14 11:24:33|Pago en Una Sola Exhibicion|258.480|299.837|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|6|Pieza|BUD13|BUD13 Curazao Rectangular Hondo M|30.57|183.42|IVA|16|29.35|||
+|CONCEPTO|6|Pieza|BUD11|BUD11 Curazao Rectangular Hondo XS|12.51|75.06|IVA|16|12.01|||

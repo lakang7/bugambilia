@@ -1394,11 +1394,11 @@ if ($tarea == 22) {
 
 
 if ($tarea == 23) {
-    $sqlUpdate="update configuracionsistema set regalias='".$_POST["regalias"]."', poriva='".$_POST["iva"]."', secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."' where idconfiguracionsistema=1";
+    $sqlUpdate="update configuracionsistema set regalias='".$_POST["regalias"]."', poriva='".$_POST["iva"]."', secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', cambio='".$_POST["cambio"]."', serie='".$_POST["serie"]."', folio='".$_POST["folio"]."' where idconfiguracionsistema=1";
     $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
     ?>
         <script type="text/javascript">
-            alert("Orden de Compra Editada Satisfactoriamente.");
+            alert("Parametros de Configuración Editados Satisfactoriamente.");
             document.location="../configuracionsistema.php";
         </script>
     <?php  
