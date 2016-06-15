@@ -105,14 +105,17 @@
         }
     } 
     
-    if($band1==1 && $band2==1){
-        //echo "Acerto </br>";
-        //echo $aux1."</br>";
-        //echo $aux2."</br>";
-        
+    if($band1==1 && $band2==1){       
         $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$configuracion["serie"]."','".($configuracion["folio"]+1)."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$aux1."','".$aux2."')";
         $result_insertFactura=mysql_query($sql_insertFactura,$con) or die(mysql_error());
         
         $sql_update="update configuracionsistema set folio='".($configuracion["folio"]+1)."' where idconfiguracionsistema=1";
-        $result_update=mysql_query($sql_update,$con) or die(mysql_error());         
+        $result_update=mysql_query($sql_update,$con) or die(mysql_error()); 
+        ?>
+            <script language="javascript">
+                window.open('descargapdf.php?folio=<?php echo ($configuracion["folio"]+1) ?>', '_blank');
+                window.open('descargaxml.php?folio=<?php echo ($configuracion["folio"]+1) ?>', '_blank');
+                window.close();
+            </script>
+        <?php                                                                           
     }

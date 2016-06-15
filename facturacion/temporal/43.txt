@@ -1,0 +1,8 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-15 10:28:09|Pago en Una Sola Exhibicion|3622.200|4201.752|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|TU004|TU004 ST Charola Carlota L|80.64|967.68|IVA|16|154.83|||
+|CONCEPTO|12|Pieza|TU003|TU003 ST Charola Carlota M|47.31|567.72|IVA|16|90.84|||
+|CONCEPTO|12|Pieza|TU002|TU002 ST Charola Carlota S|30.54|366.48|IVA|16|58.64|||
+|CONCEPTO|12|Pieza|TU005|TU005 ST Charola Carlota XL|100|1199.99|IVA|16|192|||

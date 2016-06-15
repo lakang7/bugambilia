@@ -1,0 +1,10 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-15 16:09:36|Pago en Una Sola Exhibicion|8044.920|9332.107|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|BR014|BR014 YW Bowl Redondo L|50.13|601.56|IVA|16|96.25|||
+|CONCEPTO|12|Pieza|BR013|BR013 ST Bowl Redondo M|29.08|348.96|IVA|16|55.83|||
+|CONCEPTO|12|Pieza|BR012|BR012 SB Bowl Redondo S|20.33|243.96|IVA|16|39.03|||
+|CONCEPTO|12|Pieza|BR011|BR011 SB Bowl Redondo XS|11.87|142.44|IVA|16|22.79|||
+|CONCEPTO|50|Pieza|BSD15|BSD15 CH Curazao Cuadrado Hondo XL|47.73|2386.5|IVA|16|381.84|||
+|CONCEPTO|75|Pieza|BSD16|BSD16 MW Curazao Cuadrado Hondo XXL|57.62|4321.5|IVA|16|691.44|||

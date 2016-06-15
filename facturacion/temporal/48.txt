@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-15 15:47:29|Pago en Una Sola Exhibicion|10642.500|12345.300|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|50|Pieza|BR011|BR011 WW Bowl Redondo XS|11.87|593.5|IVA|16|94.96|||
+|CONCEPTO|50|Pieza|TU005|TU005 S Charola Carlota XL|100|4999.95|IVA|16|799.99|||
+|CONCEPTO|50|Pieza|BSD16|BSD16 CH Curazao Cuadrado Hondo XXL|57.62|2881|IVA|16|460.96|||

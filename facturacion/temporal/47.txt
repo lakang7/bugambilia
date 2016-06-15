@@ -1,0 +1,9 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-15 15:28:37|Pago en Una Sola Exhibicion|2371.860|2751.358|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|BR014|BR014 J Bowl Redondo L|50.13|601.56|IVA|16|96.25|||
+|CONCEPTO|12|Pieza|H-BU403|H-BU403 WW Budinera Boston chica|11.47|137.64|IVA|16|22.02|||
+|CONCEPTO|12|Pieza|TU004|TU004 CB Charola Carlota L|80.64|967.68|IVA|16|154.83|||
+|CONCEPTO|12|Pieza|DU201|DU201 S Placa Rectangular c/Ribete XS|16.15|193.8|IVA|16|31.01|||
+|CONCEPTO|6|Pieza|H-FRW13|H-FRW13 WW Wok Hondo M|78.53|471.18|IVA|16|75.39|||

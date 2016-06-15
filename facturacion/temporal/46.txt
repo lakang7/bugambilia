@@ -1,0 +1,12 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-15 13:57:29|Pago en Una Sola Exhibicion|2026.380|2350.601|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|6|Pieza|BR014|BR014 ST Bowl Redondo L|50.13|300.78|IVA|16|48.12|||
+|CONCEPTO|6|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|174.48|IVA|16|27.92|||
+|CONCEPTO|6|Pieza|BR012|BR012 CB Bowl Redondo S|20.33|121.98|IVA|16|19.52|||
+|CONCEPTO|6|Pieza|BR011|BR011 S Bowl Redondo XS|11.87|71.22|IVA|16|11.4|||
+|CONCEPTO|6|Pieza|DS204|DS204 SB Placa Cuadrada con Ribete L|68.61|411.66|IVA|16|65.87|||
+|CONCEPTO|6|Pieza|DS203|DS203 WW Placa Cuadrada con Ribete M|42.66|255.96|IVA|16|40.95|||
+|CONCEPTO|6|Pieza|DS202|DS202 MW Placa Cuadrada con Ribete S|40.36|242.16|IVA|16|38.75|||
+|CONCEPTO|6|Pieza|DR005|DR005 G Placa Redonda XL|74.69|448.14|IVA|16|71.7|||
