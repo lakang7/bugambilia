@@ -116,7 +116,7 @@
 				<ul class="nav nav-list">
                                         <?php 
                                             $con=  Conexion();
-                                            $sql_uno="select * from menualto where idusuario='".$_SESSION["usuario"]."'";
+                                            $sql_uno="select menualto.idmenualto, menualto.idmenu, menualto.idusuario, menu.posicion from menualto, menu where idusuario='".$_SESSION["usuario"]."' and menu.idmenu = menualto.idmenu order by menu.posicion";
                                             $result_uno=mysql_query($sql_uno,$con) or die(mysql_error());
                                             if(mysql_num_rows($result_uno)>0){
                                                 

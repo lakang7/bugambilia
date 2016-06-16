@@ -549,15 +549,17 @@ CREATE TABLE menu(
     nombre varchar(60) not null,
     descripcion varchar(120) null,
     icono varchar(60) not null,
+    posicion integer not null,
     PRIMARY KEY (idmenu)
 );
 
-insert into menu (nombre,icono) values("Clientes","menu-icon fa fa-globe");
-insert into menu (nombre,icono) values("Productos","menu-icon fa fa-flask");
-insert into menu (nombre,icono) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt");
-insert into menu (nombre,icono) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags");
-insert into menu (nombre,icono) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user");
-insert into menu (nombre,icono) values("Configuración","menu-icon glyphicon glyphicon glyphicon-cog");
+insert into menu (nombre,icono,posicion) values("Clientes","menu-icon fa fa-globe",1);
+insert into menu (nombre,icono,posicion) values("Productos","menu-icon fa fa-flask",2);
+insert into menu (nombre,icono,posicion) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt",3);
+insert into menu (nombre,icono,posicion) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags",4);
+insert into menu (nombre,icono,posicion) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user",5);
+insert into menu (nombre,icono,posicion) values("Configuración","menu-icon glyphicon glyphicon-cog",7);
+insert into menu (nombre,icono,posicion) values("Facturación","menu-icon glyphicon glyphicon-usd",6);
 
 CREATE TABLE submenu(
     idsubmenu mediumint(8) unsigned auto_increment,
@@ -580,6 +582,7 @@ insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listaro
 insert into submenu (idmenu,nombre,pagina) values(5,"Ordenes de Producción","listarordenesdeproduccion.php");
 insert into submenu (idmenu,nombre,pagina) values(6,"Usuarios del Sistema","listarusuarios.php");
 insert into submenu (idmenu,nombre,pagina) values(6,"Parametrizacion","configuracionsistema.php");
+insert into submenu (idmenu,nombre,pagina) values(7,"Facturas Emitidas","listarfacturas.php");
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -643,6 +646,10 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(10,3,"Editar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(11,1,"Editar");
 
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
+
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
     idmenu mediumint(8) unsigned not null,
@@ -658,6 +665,7 @@ insert into menualto (idmenu,idusuario) values(3,1);
 insert into menualto (idmenu,idusuario) values(4,1);
 insert into menualto (idmenu,idusuario) values(5,1);
 insert into menualto (idmenu,idusuario) values(6,1);
+insert into menualto (idmenu,idusuario) values(7,1);
 
 CREATE TABLE privilegio(
     idprivilegio mediumint(8) unsigned auto_increment,

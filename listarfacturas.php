@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Registro de Sucursal</title>
+		<title>Bugambilia Buffets - Listado de Facturas</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -28,19 +28,20 @@
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/colorpicker.min.css" />                
+		<link rel="stylesheet" href="assets/css/colorpicker.min.css" />                 
                 
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-		<script src="assets/js/ace-extra.min.js"></script>
+                <link rel="stylesheet" href="recursos/tabla.css" />
+                <script src="assets/js/ace-extra.min.js"></script>
                 <?php
                     header('Content-Type: text/html; charset=UTF-8');        
                     require_once("recursos/funciones.php");
-                    Conexion();
+                    $con=Conexion();
                 ?>                 
 	</head>
 
-	<body class="no-skin">
+        <body class="no-skin">
 		<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar navbar-fixed-top">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -51,7 +52,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Bugambilia
+							Bugambilia Buffet
 						</small>
 					</a>
 
@@ -102,6 +103,7 @@
 		</div>
 
 		<div class="main-container" id="main-container">
+                    
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
@@ -178,72 +180,143 @@
 				</script>
 			</div>
                         
-			<div class="main-content">
-                            
+			<div class="main-content">                            
 				<div class="main-content-inner">
 					<div class="page-content">
-                                                    <?php
-                                                        /*Acción Registrar Empresa*/
-                                                        if(habilitaMenu($_SESSION["usuario"],1,2,1)==1){
-                                                            echo "<a href='insertsucursal.php'><button class='btn btn-white btn-info btn-bold'>";
-                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
-                                                            echo "Agregar Nuevo Registro";
-                                                            echo "</button></a>";                                                            
-                                                        }
-                                                        
+                                            <div class="container-fluid">
+						<div class="page-header">                                                
+                                                    <?php                                                                                                              
                                                         /*Listar Empresas*/
-                                                        if(habilitaMenu($_SESSION["usuario"],1,2,2)==1){
-                                                            echo "<a href='listarsucursales.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                        if(habilitaMenu($_SESSION["usuario"],7,12,1)==1){
+                                                            echo "<a href='listarfacturas.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
                                                             echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
                                                         }                                                        
-                                                    ?>
-                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=2">
-						<div class="page-header"><h1>Sucursales<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
-						<div class="row">
-                                                    <div class="col-md-6" style="border: 0px solid #CCC">
-                                                        <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos de la Sucursal</div>                                                        
-                                                        <div style="width: 100%; ">Empresa Matriz</div>
-                                                        <select class="chosen-select form-control" id="matriz" name="matriz" data-placeholder="Elija la empresa matriz" required="required">
-                                                            <option value="">  </option>
-                                                            <?php
-                                                                $con=Conexion();
-                                                                $sql_listaEMPRESA="select * from empresa order by nombrecomercial";
-                                                                $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($result_listaEMPRESA)>0){
-                                                                    while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                                                                    echo "<option value='".$fila["idempresa"]."'>".$fila["nombrecomercial"]."</option>";
-                                                                    }
-                                                                }
-                                                                mysql_close($con);                                                                
-                                                            ?>
-                                                        </select>                                                        
-                                                        <div style="width: 100%; margin-top: 10px;">Nombre de la Sucursal</div>
-                                                        <div style="width: 100%;"><input type="text" id="nombresucursal" name="nombresucursal" placeholder="Ingrese un nombre para la sucursal" style="width: 100%; font-size: 1.8ex;" maxlength="60" required="required" /></div>
-
-                                                        <div style="width: 100%; margin-top: 10px;">Regiones</div>
-                                                        <div id="contenedor" >
-                                                            <select multiple class="chosen-select form-control" id="regiones" name="regiones[]" data-placeholder="Elija las regiones asociadas a esta sucursal" >
-                                                            <?php
-                                                                $con=Conexion();
-                                                                $sql_listaESTADO="select * from estado order by nombre";
-                                                                $result_listaESTADO=mysql_query($sql_listaESTADO,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($result_listaESTADO)>0){
-                                                                    while ($fila = mysql_fetch_assoc($result_listaESTADO)) {
-                                                                    echo "<option value='".$fila["idestado"]."'>".$fila["nombre"]."</option>";
-                                                                    }
-                                                                }
-                                                                mysql_close($con);                                                                
-                                                            ?>								
-							</select> 
-                                                        </div>
-                                                    </div>
+                                                    ?>                                                    
+                                                    <h1 style="margin-top: 10px">Facturas<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1>
+                                                </div>
+                                                
+                                                <div class="row titulo_tabla" style="margin-top: 10px">
+                                                    Lista de Facturas
+                                                </div>    
+                                                <div class="row filtros_tabla">
+                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
+                                                    <div style="width: 10%; float: left; margin-right: 1ex">
+                                                        <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                        </select>
+                                                    </div>                                                    
+                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
+                                                    <div style="width:auto; float: right; margin-right: 1.5ex">
+                                                        <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
+                                                    </div>                                                            
+                                                    <div style="width: 20%; float: right; margin-right: 1ex" >
+                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
+                                                    </div>                                                            
+                                                    <div style="width: 20%; float: right; margin-right: 1ex">
+                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
+                                                            <option value="codigoexterno">Código</option>
+                                                            <option value="nombreempresa">Empresa</option>
+                                                            <option value="emision">Fecha de Emisión</option>
+                                                            <option value="serie">Serie</option>
+                                                            <option value="folio">Folio</option>
+                                                            <option value="subtotal">Subtotal</option>
+                                                            <option value="iva">Iva</option>
+                                                            <option value="total">Total</option>                                                            
+                                                        </select>
+                                                    </div>                                                                                                        
+                                                </div>
+                                                <input type="hidden" id="campoordena" name="campoordena" value="emision" >
+                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
+                                                <input type="hidden" id="pagina" name="pagina" value="1" >
+                                                <div id="contenedortabla">
+                                                <div class="row cabecera_tabla">
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('codigoexterno')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('nombreempresa')">Empresa</div>                                                    
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('emision')">Fecha de Emisión</div> 
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('serie')">Serie</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('folio')">Folio</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('subtotal')">Subtotal</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('iva')">Iva</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('total')">Total</div>
 						</div>
-                                                <button class="btn btn-info" type="submit" style="margin-top: 15px"><i class="ace-icon fa fa-check "></i>Registrar</button>                                                
+                                                <?php 
+                                                    $sql_listaEMPRESA="select factura.idfactura, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
+                                                    $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_listaEMPRESA)>0){
+                                                        $cuenta=0;
+                                                        while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
+                                                            if($cuenta<10){
+                                                                echo "<div class='row linea_tabla'>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["nombreempresa"]."</div>";                                                                
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["emision"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["serie"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["folio"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["subtotal"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["iva"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
+                                                                echo "<div class='col-xs-2' >";
+                                                                
+                                                                echo "<div class='btn-group'>";
+                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                                echo "</button>";
+                                                                echo "<ul class='dropdown-menu dropdown-default'>";
+                                                                if(habilitaMenu($_SESSION["usuario"],7,12,2)==1){
+                                                                    echo "<li><a href='facturacion/descargar.php?idfactura=".$fila["idfactura"]."' target='_blank'>Descargar</a></li>";
+                                                                }
+                                                                if(habilitaMenu($_SESSION["usuario"],7,12,3)==1){
+                                                                    echo "<li><a href='pagarfactura.php?id=".$fila["idfactura"]."'>Pagar</a></li>";
+                                                                }                                                                
+
+                                                                echo "</ul>";                                                                                                                                
+                                                                echo "</div>";                                                                
+                                                                
+                                                                echo "</div>";
+                                                                echo "</div>"; 
+                                                            }
+                                                            $cuenta++;
+                                                        }
+                                                    }                                                    
+                                                    
+                                                ?>                                                                                                 
+                                                <div class="row pie_tabla" >
+                                                    <?php
+                                                    $numeroelementos=mysql_num_rows($result_listaEMPRESA);   
+                                                    if(10>$numeroelementos){
+                                                        echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
+                                                    }else{
+                                                        echo "Mostrando 10 de ".$numeroelementos." elementos";
+                                                    }
+                               
+                                                        
+                                                    $numeropaginas=  ceil($numeroelementos/10);
+                                                    $pagina=1;
+                                                    echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
+                                                    echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
+                                                    for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){
+                                                        if($i>-1){                    
+                                                            if($i==($pagina-1)){
+                                                                echo "<li onclick='pagina(".($i+1).")' class='active'><a>".($i+1)."</a></li>";
+                                                            }else{
+                                                                echo "<li onclick='pagina(".($i+1).")'><a>".($i+1)."</a></li>";
+                                                            }                    
+                                                        }                                                            
+                                                    }
+                                                    echo "<li onclick='pagina(".($numeropaginas).")' class='next'><a><i class='ace-icon fa fa-angle-double-right'></i></a></li>";
+                                                    echo "</ul>";
+                                                    ?>                                                    
+                                                </div>
+                                                </div>
 					</div>
+                                    </div>
 				</div>
-                            </form>
+                            
 			</div>
 			
                         <div class="footer">
@@ -685,17 +758,47 @@
 					$('textarea[class*=autosize]').trigger('autosize.destroy');
 					$('.limiterBox,.autosizejs').remove();
 					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
-				});                                                              
-			
-                                $('#matriz').change(function(){
-                                    var $selectedOption = $(this).find('option:selected');
-                                    var selectedValue = $selectedOption.val();
-                                    $("#contenedor").load("recursos/ajax.php", {tarea:1, id: selectedValue}, function(){                                                                                
-					$('.chosen-select').chosen({allow_single_deselect:true}); 			                                                                                                                                                           
-                                    });
-                                });                         
-                        
+				}); 
 			});
 		</script>
+                <script type="text/javascript">
+                    function ordena(columna){
+                        var campoanterior = document.getElementById("campoordena").value;
+                        var ordenanterior = document.getElementById("ordenordena").value;                        
+                        if(campoanterior === columna){
+                            if(ordenanterior === "desc"){
+                                document.getElementById("ordenordena").value="asc";
+                            }else{
+                                document.getElementById("ordenordena").value="desc";
+                            }
+                        }else{
+                            document.getElementById("campoordena").value=columna;
+                            document.getElementById("ordenordena").value="desc";
+                        }
+                                                
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
+                    }
+                    
+                    function limita(){
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
+                    }
+                    
+                    function filtrar(){
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                    }
+                    
+                    function pagina(pagina){
+                        document.getElementById("pagina").value=pagina;
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                    } 
+                    
+                    $('#filtro').keypress(function (e) {
+                        if(e.which ==13){
+                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        }                        
+                    });  
+                    
+                    
+                </script>
 	</body>
 </html>
