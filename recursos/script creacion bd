@@ -521,12 +521,26 @@ CREATE TABLE factura(
     total numeric(10,3) not null,
     pdf varchar(60) not null,
     xml varchar(60) not null,
+    resta numeric(10,3) not null,
     PRIMARY KEY (idfactura),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,    
     FOREIGN KEY (idagenda) REFERENCES agenda(idagenda) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE pago(
+    idpago mediumint(8) unsigned auto_increment,
+    idusuario mediumint(8) unsigned not null,
+    idfactura mediumint(8) unsigned not null,
+    fecharegistro TIMESTAMP not null, 
+    fechapago date not null,
+    monto numeric(10,3) not null, 
+    tipopago integer not null,
+    referencia varchar(20) not null,
+    PRIMARY KEY (idpago),  
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idfactura) REFERENCES factura(idfactura) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
 
 CREATE TABLE usuario (

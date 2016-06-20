@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Listado de Facturas</title>
+		<title>Bugambilia Buffets - Registro de Pago</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -32,16 +32,16 @@
                 
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-                <link rel="stylesheet" href="recursos/tabla.css" />
-                <script src="assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
+                <link rel="stylesheet" href="recursos/listadeprecios.css" />
                 <?php
                     header('Content-Type: text/html; charset=UTF-8');        
                     require_once("recursos/funciones.php");
-                    $con=Conexion();
+                    Conexion();
                 ?>                 
 	</head>
 
-        <body class="no-skin">
+	<body class="no-skin">
 		<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar navbar-fixed-top">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -103,7 +103,6 @@
 		</div>
 
 		<div class="main-container" id="main-container">
-                    
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
@@ -180,150 +179,167 @@
 				</script>
 			</div>
                         
-			<div class="main-content">                            
+			<div class="main-content">
+                            <input type="hidden" name="oculto" id="oculto" />
 				<div class="main-content-inner">
-					<div class="page-content">
-                                            <div class="container-fluid">
-						<div class="page-header">                                                
-                                                    <?php                                                                                                              
-                                                        /*Listar Empresas*/
-                                                        if(habilitaMenu($_SESSION["usuario"],7,12,1)==1){
-                                                            echo "<a href='listarfacturas.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
-                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
-                                                            echo "Listar Registros";
-                                                            echo "</button></a>";                                                            
-                                                        }                                                        
-                                                    ?>                                                    
-                                                    <h1 style="margin-top: 10px">Facturas<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1>
-                                                </div>
-                                                
-                                                <div class="row titulo_tabla" style="margin-top: 10px">
-                                                    Lista de Facturas
-                                                </div>    
-                                                <div class="row filtros_tabla">
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
-                                                    <div style="width: 10%; float: left; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </div>                                                    
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
-                                                    <div style="width:auto; float: right; margin-right: 1.5ex">
-                                                        <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex" >
-                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="codigoexterno">Código</option>
-                                                            <option value="nombreempresa">Empresa</option>
-                                                            <option value="emision">Fecha de Emisión</option>
-                                                            <option value="serie">Serie</option>
-                                                            <option value="folio">Folio</option>
-                                                            <option value="subtotal">Subtotal</option>
-                                                            <option value="iva">Iva</option>
-                                                            <option value="total">Total</option> 
-                                                            <option value="resta">Resta</option> 
-                                                        </select>
-                                                    </div>                                                                                                        
-                                                </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="emision" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
-                                                <input type="hidden" id="pagina" name="pagina" value="1" >
-                                                <div id="contenedortabla">
-                                                <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('codigoexterno')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('nombreempresa')">Empresa</div>                                                    
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('emision')">Fecha de Emisión</div> 
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('serie')">Serie</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('folio')">Folio</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('subtotal')">Subtotal</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('iva')">Iva</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('total')">Total</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('resta')">Resta</div>
-						</div>
-                                                <?php 
-                                                    $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
-                                                    $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
-                                                    if(mysql_num_rows($result_listaEMPRESA)>0){
-                                                        $cuenta=0;
-                                                        while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                                                            if($cuenta<10){
-                                                                echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["nombreempresa"]."</div>";                                                                
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["emision"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["serie"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["folio"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["subtotal"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["iva"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["resta"]."</div>";
-                                                                echo "<div class='col-xs-2' >";
-                                                                
-                                                                echo "<div class='btn-group'>";
-                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
-                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
-                                                                echo "</button>";
-                                                                echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                if(habilitaMenu($_SESSION["usuario"],7,12,2)==1){
-                                                                    echo "<li><a href='facturacion/descargar.php?idfactura=".$fila["idfactura"]."' target='_blank'>Descargar</a></li>";
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],7,12,3)==1){
-                                                                    echo "<li><a href='registrodepago.php?idfactura=".$fila["idfactura"]."'>Pagar</a></li>";
-                                                                }                                                                
-
-                                                                echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                
-                                                                
-                                                                echo "</div>";
-                                                                echo "</div>"; 
+					<div class="page-content"> 
+                                            <form method="post" id="form_crearListadePrecios" action="recursos/acciones.php?tarea=24&idfactura=<?php echo $_GET["idfactura"]; ?>">
+                                                <?php
+                                                    $con=Conexion();
+                                                    $sql_FACTURA="select * from factura where idfactura='".$_GET["idfactura"]."'";
+                                                    $result_FACTURA=mysql_query($sql_FACTURA,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_FACTURA)>0){
+                                                        $factura = mysql_fetch_assoc($result_FACTURA);
+                                                        $sql_Empresa="select * from empresa where idempresa='".$factura["idempresa"]."'";
+                                                        $result_Empresa=mysql_query($sql_Empresa,$con) or die(mysql_error());
+                                                        $empresa = mysql_fetch_assoc($result_Empresa);
+                                                        $acumulaPagado=0;
+                                                        $sqlPagos="select * from pago where idfactura='".$_GET["idfactura"]."'";
+                                                        $resultPagos=mysql_query($sqlPagos,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($resultPagos)>0){
+                                                            while ($pag = mysql_fetch_assoc($resultPagos)) {                                                                                                                    
+                                                                $acumulaPagado+=$pag["monto"];
                                                             }
-                                                            $cuenta++;
                                                         }
                                                     }                                                    
+                                                    mysql_close($con);
+                                                ?>                                              
+						<div class="page-header"><h1><?php echo $empresa["nombreempresa"]; ?><small><i class="ace-icon fa fa-angle-double-right"></i> <?php echo $factura["serie"]." - ".$factura["folio"]; ?></small></h1></div>
+                                                <div class="row" style="padding: 0px; border-bottom: 1px solid #CCC; padding-bottom: 5px; border-top: 1px solid  #CCC; padding-top: 5px; background-color: #efefef; margin-bottom: 10px">
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">SUBTOTAL</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $factura["subtotal"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">IVA</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $factura["iva"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">TOTAL</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $factura["total"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">PAGADO</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo round($acumulaPagado,3); ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">RESTA</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo ($factura["total"]-round($acumulaPagado,3)); ?></div>
+                                                    </div>                                                    
+                                                   
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-12" style="margin-bottom: 10px; font-size: 20px">Registrar Nuevo Pago</div>
+                                                </div>
+                                                <div class="row" style="border-bottom: 1px solid #CCC; padding-bottom: 15px">
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">
+                                                        <select class="chosen-select form-control" id="tipodepago" name="tipodepago" data-placeholder="Seleccione el tipo de pago" required="required">                                                            
+                                                            <option value="1">Transferencia Electronica</option>
+                                                            <option value="2">Deposito Bancario</option>
+                                                            <option value="3">Efectivo</option>
+                                                        </select>                                                                                                                         
+                                                        </div>                                                        
+                                                    </div>
+
+                                                    <div class="col-md-2" style="border: 0px solid #CCC">
+                                                        <div class="input-group">
+                                                            <input class="form-control date-picker" id="id-date-picker-1" name="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" value="<?php echo date("Y")."-".date("m")."-".date("d"); ?>" />
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar bigger-110"></i>
+                                                            </span>
+                                                        </div>                                                                                                                
+                                                    </div>                                                    
                                                     
-                                                ?>                                                                                                 
-                                                <div class="row pie_tabla" >
-                                                    <?php
-                                                    $numeroelementos=mysql_num_rows($result_listaEMPRESA);   
-                                                    if(10>$numeroelementos){
-                                                        echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
-                                                    }else{
-                                                        echo "Mostrando 10 de ".$numeroelementos." elementos";
-                                                    }
-                               
-                                                        
-                                                    $numeropaginas=  ceil($numeroelementos/10);
-                                                    $pagina=1;
-                                                    echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
-                                                    echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
-                                                    for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){
-                                                        if($i>-1){                    
-                                                            if($i==($pagina-1)){
-                                                                echo "<li onclick='pagina(".($i+1).")' class='active'><a>".($i+1)."</a></li>";
-                                                            }else{
-                                                                echo "<li onclick='pagina(".($i+1).")'><a>".($i+1)."</a></li>";
-                                                            }                    
-                                                        }                                                            
-                                                    }
-                                                    echo "<li onclick='pagina(".($numeropaginas).")' class='next'><a><i class='ace-icon fa fa-angle-double-right'></i></a></li>";
-                                                    echo "</ul>";
-                                                    ?>                                                    
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">                                                        
+                                                            <input type="text" id="referencia" name="referencia" placeholder="Número de Referencia" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
+                                                        </div>                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">                                                        
+                                                            <input type="text" id="cantidad" name="cantidad" placeholder="Monto del Pago" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />                                                        
+                                                        </div>                                                        
+                                                    </div>
+                                                    
+                                                    
+
+                                                    <div class="col-md-1" style="border: 0px solid #CCC">
+                                                        <button class="btn btn-white btn-primary" type="submit" style="margin-top: 0px">Agregar</button>                                                
+                                                    </div>
                                                 </div>
+                                                 </form>
+                                                <div class="row">
+                                                    <div class="col-md-12" style="margin-top: 10px; font-size: 20px">Pagos Realizados a esta Factura</div>
+                                                </div>                                                
+                                                <div class="row" style="border-bottom: 1px solid #CCC; padding-bottom: 6px; padding-top: 6px; font-weight: bold; font-size: 2ex">
+                                                    <div class="col-md-1">Fecha</div>
+                                                    <div class="col-md-2">Tipo de Pago</div>
+                                                    <div class="col-md-2">Número de Referencia</div>
+                                                    <div class="col-md-1">Monto</div>
+                                                    <div class="col-md-2">Registrado Por</div>
                                                 </div>
+                                                <?php
+                                                    $con=Conexion();
+                                                    $sql_listaPagos="select * from pago where idfactura='".$_GET["idfactura"]."'";                                                    
+                                                    $result_listaPagos=mysql_query($sql_listaPagos,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_listaPagos)>0){
+                                                        while ($pago = mysql_fetch_assoc($result_listaPagos)) {
+                                                            $tipodepago="";
+                                                            if($pago["tipopago"]==1){
+                                                                $tipodepago="Transferencia Electronica";
+                                                            }
+                                                            if($pago["tipopago"]==2){
+                                                                $tipodepago="Deposito Bancario";
+                                                            }
+                                                            if($pago["tipopago"]==3){
+                                                                $tipodepago="Efectivo";
+                                                            }      
+                                                            $sqlUsuario="select * from usuario where idusuario='".$pago["idusuario"]."'";
+                                                            $resultUsuario=mysql_query($sqlUsuario,$con) or die(mysql_error());
+                                                            $usuario = mysql_fetch_assoc($resultUsuario);
+                                                            echo "<div class='row' style='padding-bottom: 5px; padding-top: 5px;border-bottom: 1px solid #CCC'>";
+                                                            echo "<div class='col-md-1'>".$pago["fechapago"]."</div>";
+                                                            echo "<div class='col-md-2'>".$tipodepago."</div>";
+                                                            echo "<div class='col-md-2'>".$pago["referencia"]."</div>";
+                                                            echo "<div class='col-md-1'>".$pago["monto"]."</div>";
+                                                            echo "<div class='col-md-2'>".$usuario["nombre"]."</div>";
+                                                            echo "<div class='col-md-2' >";
+                                                            
+                                                            echo "<div class='btn-group'>";
+                                                            echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                            echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                            echo "</button>";
+                                                            echo "<ul class='dropdown-menu dropdown-default'>";                                                                                                                                                                                                                                                       
+                                                            echo "<li><a href='recursos/acciones.php?tarea=26&id=".$pago["idpago"]."'>Eliminar Pago</a></li>";                                                                
+                                                            echo "</ul>";                                                                                                                                
+                                                            echo "</div>";                                                             
+                                                            
+                                                            
+                                                            echo "</div>";
+                                                            echo "</div>";
+                                                        }
+                                                    }
+                                                    mysql_close($con);                                                                
+                                                ?>
+                                                
+                                                
+                            <script type="text/javascript">
+                                function prueba(id){                                    
+                                    document.getElementById("oculto").value=id;
+                                }
+                            </script>                    
+                                                
+						
 					</div>
-                                    </div>
 				</div>
-                            
+                           
 			</div>
 			
-                        <div class="footer">
-				<div class="footer-inner">
+                        <div class="footer"  >
+                            <div class="footer-inner" >
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Bugambilia Buffet</span>
@@ -761,47 +777,23 @@
 					$('textarea[class*=autosize]').trigger('autosize.destroy');
 					$('.limiterBox,.autosizejs').remove();
 					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
-				}); 
+				});    
+                                
+                                
+                                $('#forma').change(function(){
+                                    var $selectedOption = $(this).find('option:selected');
+                                    var selectedValue = $selectedOption.val();
+                                    $("#contenedor01").load("recursos/ajax.php", {tarea:10, id: selectedValue}, function(){                                                                                
+					$('.chosen-select').chosen({allow_single_deselect:true});
+                                            $('#patron').change(function(){
+                                                $("#contenedor02").load("recursos/ajax.php", {tarea:11, id:document.getElementById("patron").value}, function(){
+                                                    $('.chosen-select').chosen({allow_single_deselect:true});
+                                                });
+                                            });
+                                    });
+                                });                                
+			
 			});
 		</script>
-                <script type="text/javascript">
-                    function ordena(columna){
-                        var campoanterior = document.getElementById("campoordena").value;
-                        var ordenanterior = document.getElementById("ordenordena").value;                        
-                        if(campoanterior === columna){
-                            if(ordenanterior === "desc"){
-                                document.getElementById("ordenordena").value="asc";
-                            }else{
-                                document.getElementById("ordenordena").value="desc";
-                            }
-                        }else{
-                            document.getElementById("campoordena").value=columna;
-                            document.getElementById("ordenordena").value="desc";
-                        }
-                                                
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
-                    }
-                    
-                    function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
-                    }
-                    
-                    function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    }
-                    
-                    function pagina(pagina){
-                        document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    } 
-                    
-                    $('#filtro').keypress(function (e) {
-                        if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"facturas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                        }                        
-                    });  
-                    
-                    
-                </script>
 	</body>
 </html>

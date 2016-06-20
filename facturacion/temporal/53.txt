@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-16 14:57:23|Pago en Una Sola Exhibicion|1204.320|1397.011|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|6|Pieza|BR013|BR013 SB Bowl Redondo M|29.08|174.48|IVA|16|27.92|||
+|CONCEPTO|6|Pieza|H-BUS504|H-BUS504 MW Budinera Chicago sin tapa|13.49|80.94|IVA|16|12.95|||
+|CONCEPTO|30|Pieza|BSD14|BSD14 G Curazao Cuadrado Hondo L|31.63|948.9|IVA|16|151.82|||

@@ -1404,4 +1404,53 @@ if ($tarea == 23) {
     <?php  
     
 }
+
+if ($tarea == 24) {
+    $sqlInsertPago="insert into pago (idusuario,idfactura,fecharegistro,fechapago,monto,tipopago,referencia) values('".$_SESSION["usuario"]."','".$_GET["idfactura"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["cantidad"]."','".$_POST["tipodepago"]."','".$_POST["referencia"]."')";
+    $resultInsertPago = mysql_query($sqlInsertPago, $con) or die(mysql_error());
+    
+    $acumulaPagos=0;
+    $sqlPagos="select * from pago where idfactura='".$_GET["idfactura"]."'";
+    $resultPagos = mysql_query($sqlPagos, $con) or die(mysql_error());
+    if (mysql_num_rows($resultPagos) > 0) {
+        while ($pagos = mysql_fetch_assoc($resultPagos)) {
+            $acumulaPagos+=$pagos["monto"];
+        }
+    }
+    
+    $sqlFactura="select * from factura where idfactura='".$_GET["idfactura"]."'";
+    $resultFactura=mysql_query($sqlFactura, $con) or die(mysql_error());
+    $factura = mysql_fetch_assoc($resultFactura);
+    
+    $sqlUpdate="update factura set resta='".($factura["total"]-round($acumulaPagos,3))."' where idfactura='".$_GET["idfactura"]."'";
+    $resultUpdate=mysql_query($sqlUpdate, $con) or die(mysql_error());
+    ?>
+        <script type="text/javascript">
+            alert("Pago Registrado Satisfactoriamente.");
+            document.location="../registrodepago.php?idfactura=<?php echo $_GET["idfactura"]; ?>";
+        </script>
+    <?php     
+    
+}
+
+if ($tarea == 25) {
+    
+}
+
+if ($tarea == 26) {
+    $sqlpago="select * from pago where idpago='".$_GET["id"]."'";
+    $resultpago=mysql_query($sqlpago,$con) or die(mysql_error());
+    $pago = mysql_fetch_assoc($resultpago);
+    
+    $sqlDelete="delete from pago where idpago='".$_GET["id"]."'";
+    $resultDelete=mysql_query($sqlDelete,$con) or die(mysql_error());
+    
+    ?>
+        <script type="text/javascript">
+            alert("Pago Eliminado Satisfactoriamente.");
+            document.location="../registrodepago.php?idfactura=<?php echo $pago["idfactura"]; ?>";
+        </script>
+    <?php    
+    
+}
 ?>

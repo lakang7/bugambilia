@@ -106,7 +106,7 @@
     } 
     
     if($band1==1 && $band2==1){       
-        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$configuracion["serie"]."','".($configuracion["folio"]+1)."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$aux1."','".$aux2."')";
+        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml,resta) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$configuracion["serie"]."','".($configuracion["folio"]+1)."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$aux1."','".$aux2."','".$orden["total"]."')";
         $result_insertFactura=mysql_query($sql_insertFactura,$con) or die(mysql_error());
         
         $sql_update="update configuracionsistema set folio='".($configuracion["folio"]+1)."' where idconfiguracionsistema=1";
