@@ -1,2 +1,0 @@
-[17-06-2016 10:38:11] Se ha producido un error al intentar enviar el archivo.
-There was no endpoint listening at https://conector.stagefacturador.com/servicioconector.svc that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.

@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-22 10:53:07|Pago en Una Sola Exhibicion|1591.310|1845.920|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|10|Pieza|DR002|DR002 S Placa Redonda S|27.55|275.5|IVA|16|44.08|||
+|CONCEPTO|5|Pieza|DR005|DR005 WW Placa Redonda XL|74.69|373.45|IVA|16|59.75|||
+|CONCEPTO|12|Pieza|H-FRW13|H-FRW13 CH Wok Hondo M|78.53|942.36|IVA|16|150.78|||

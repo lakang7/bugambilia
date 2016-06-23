@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-22 12:09:26|Pago en Una Sola Exhibicion|1118.120|1297.019|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|BSD14|BSD14 WW Curazao Cuadrado Hondo L|31.63|379.56|IVA|16|60.73|||
+|CONCEPTO|10|Pieza|BSD16|BSD16 CB Curazao Cuadrado Hondo XXL|57.62|576.2|IVA|16|92.19|||
+|CONCEPTO|12|Pieza|FRD21|FRD21 YW Miami Redondo Hondo XS|13.53|162.36|IVA|16|25.98|||

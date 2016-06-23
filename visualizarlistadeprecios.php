@@ -141,7 +141,11 @@
                                                                                 $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
                                                                                 $cuatro = mysql_fetch_assoc($result_cuatro);
                                                                                 echo "<li class='hover'>";
-                                                                                echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                if($cuatro["abre"]==0){
+                                                                                    echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                }else if($cuatro["abre"]==1){
+                                                                                    echo "<a href='".$cuatro["pagina"]."' target='_blank'>";
+                                                                                }
                                                                                 echo "<i class='menu-icon fa fa-caret-right'></i>";
                                                                                 echo $cuatro["nombre"];
                                                                                 echo "</a>";                                                          

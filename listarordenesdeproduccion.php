@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Top Menu Style - Ace Admin</title>
+		<title>Bugambilia Buffets - Listado Ordenes de Producción</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -153,7 +153,11 @@
                                                                                     $result_cuatro=mysql_query($sql_cuatro,$con) or die(mysql_error());
                                                                                     $cuatro = mysql_fetch_assoc($result_cuatro);
                                                                                     echo "<li class='hover'>";
-                                                                                    echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                    if($cuatro["abre"]==0){
+                                                                                        echo "<a href='".$cuatro["pagina"]."'>";
+                                                                                    }else if($cuatro["abre"]==1){
+                                                                                        echo "<a href='".$cuatro["pagina"]."' target='_blank'>";
+                                                                                    }
                                                                                     echo "<i class='menu-icon fa fa-caret-right'></i>";
                                                                                     echo $cuatro["nombre"];
                                                                                     echo "</a>";                                                          

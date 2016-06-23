@@ -572,8 +572,9 @@ insert into menu (nombre,icono,posicion) values("Productos","menu-icon fa fa-fla
 insert into menu (nombre,icono,posicion) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt",3);
 insert into menu (nombre,icono,posicion) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags",4);
 insert into menu (nombre,icono,posicion) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user",5);
-insert into menu (nombre,icono,posicion) values("Configuración","menu-icon glyphicon glyphicon-cog",7);
+insert into menu (nombre,icono,posicion) values("Configuración","menu-icon glyphicon glyphicon-cog",8);
 insert into menu (nombre,icono,posicion) values("Facturación","menu-icon glyphicon glyphicon-usd",6);
+insert into menu (nombre,icono,posicion) values("Reportes","menu-icon glyphicon glyphicon-paperclip",7);
 
 CREATE TABLE submenu(
     idsubmenu mediumint(8) unsigned auto_increment,
@@ -581,22 +582,24 @@ CREATE TABLE submenu(
     nombre varchar(60) not null,
     descripcion varchar(120) null,
     pagina varchar(200) not null,
+    abre integer not null,
     PRIMARY KEY (idsubmenu),
     FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-insert into submenu (idmenu,nombre,pagina) values(1,"Empresas","listarempresas.php");
-insert into submenu (idmenu,nombre,pagina) values(1,"Sucursales","listarsucursales.php");
-insert into submenu (idmenu,nombre,pagina) values(1,"Contactos","listarcontactos.php");
-insert into submenu (idmenu,nombre,pagina) values(2,"Materiales","listarmateriales.php");
-insert into submenu (idmenu,nombre,pagina) values(2,"Patrones","listarpatrones.php");
-insert into submenu (idmenu,nombre,pagina) values(2,"Productos","listarproductos.php");
-insert into submenu (idmenu,nombre,pagina) values(3,"Lista de Precios","listarlistadeprecios.php");
-insert into submenu (idmenu,nombre,pagina) values(4,"Ordenes de Compra","listarordenesdecompra.php");
-insert into submenu (idmenu,nombre,pagina) values(5,"Ordenes de Producción","listarordenesdeproduccion.php");
-insert into submenu (idmenu,nombre,pagina) values(6,"Usuarios del Sistema","listarusuarios.php");
-insert into submenu (idmenu,nombre,pagina) values(6,"Parametrizacion","configuracionsistema.php");
-insert into submenu (idmenu,nombre,pagina) values(7,"Facturas Emitidas","listarfacturas.php");
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Empresas","listarempresas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Sucursales","listarsucursales.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Contactos","listarcontactos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Materiales","listarmateriales.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Patrones","listarpatrones.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Productos","listarproductos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(3,"Lista de Precios","listarlistadeprecios.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(4,"Ordenes de Compra","listarordenesdecompra.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(5,"Ordenes de Producción","listarordenesdeproduccion.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(6,"Usuarios del Sistema","listarusuarios.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(6,"Parametrizacion","configuracionsistema.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Emitidas","listarfacturas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Cobrar","pdfs/cuentasporcobrar.php",1);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -663,6 +666,8 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(11,1,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(13,1,"Visualizar");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
