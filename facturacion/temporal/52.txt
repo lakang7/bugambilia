@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-06-15 16:53:01|Pago en Una Sola Exhibicion|1178.340|1366.874|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|6|Pieza|DR204|DR204 CB Placa Redonda con Ribete L|52.98|317.88|IVA|16|50.86|||
-|CONCEPTO|12|Pieza|DR202|DR202 WW Placa Redonda con Ribete S|31.09|373.08|IVA|16|59.69|||
-|CONCEPTO|6|Pieza|FRW13|FRW13 SB Wok Hondo M|81.23|487.38|IVA|16|77.98|||

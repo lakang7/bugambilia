@@ -32,12 +32,33 @@
         $iva=round($configuracion["poriva"],2);
     }
     
+    $archivosPDF = array();
+    $directorio = opendir("salidapdf/GOYA780416GM0/"); //ruta actual
+    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+    {   
+        if($archivo!="." && $archivo!=".."){
+             $archivosPDF[count($archivosPDF)]=$archivo;          
+        }        
+    } 
+    
+    $archivosXML = array();    
+    $directorio = opendir("salidaxml/GOYA780416GM0/"); //ruta actual
+    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+    {   
+        if($archivo!="." && $archivo!=".."){
+            $principal = explode(".",$archivo);
+            if($principal[1]=="xml"){
+                $archivosXML[count($archivosXML)]=$archivo;             
+            }
+        }                
+    }    
+    
     $RFCfacturacion="GOYA780416GM0";
     
     $file = fopen("temporal/".$_GET["id"].".txt", "w");
     fwrite($file, "|EMISOR|".$RFCfacturacion."|Regimen General de Ley Personas Morales|" . PHP_EOL);
     fwrite($file, "|RECEPTOR|".$empresa["identificador"]."|".$empresa["nombreempresa"]."|".$empresa["fiscalcalle"]."|".$empresa["fiscalexterior"]."|".$empresa["fiscalinterior"]."|".$empresa["fiscalcolonia"]."|||".$empresa["fiscalciudad"]."|".$empresa["fiscalestado"]."|".$pais["nombre"]."|".$empresa["fiscalpostal"]."|" . PHP_EOL);
-    fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|El cambio de Dolares Americanos a Pesos Mexicanos es ".$configuracion["cambio"]."|FALSE|micorreo@pruebascorreo.com|||FACTURA|".$empresa["ultimos"]."|" . PHP_EOL);
+    fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|El cambio de Dolares Americanos a Pesos Mexicanos es ".$configuracion["cambio"].", Orden de Compra: ".$orden["codigoexterno"].", Orden de Producción: ".$orden["codigoop"]."|FALSE|micorreo@pruebascorreo.com|||FACTURA|".$empresa["ultimos"]."|" . PHP_EOL);
     fwrite($file, "|EXPEDIDOEN|01|Desconocida|".$configuracion["facturacioncalle"]."|".$configuracion["facturacionext"]."|".$configuracion["facturacionint"]."|".$configuracion["facturacioncolonia"]."|||".$configuracion["facturacionestpais"]."||MEXICO|".$configuracion["facturacionpostal"]."|" . PHP_EOL);
     
     $sqlProductos="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
@@ -60,62 +81,102 @@
     
     copy("temporal/".$_GET["id"].".txt","paraprocesar/".$_GET["id"].".txt");
 
-    $aux1="";
+    
+    
     $band1=0;
-    for($i=0;$i<20;$i++){
+    for($i=0;$i<40;$i++){
         if($band1==0){
             sleep(6);
-            $directorio = opendir("salidapdf/GOYA780416GM0/"); //ruta actual
-            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
-            {   
-                if($band1==0){
-                    if($archivo!="." && $archivo!=".."){
-                        $divide =  explode("-",$archivo);
-                        if($divide[2]==($configuracion["folio"]+1)){
-                            $aux1=$archivo;
-                            $band1=1;                            
-                        }                        
-                    }
-                }
-            }
-        }
-    }
     
-    $aux2="";
-    $band2=0;
-    for($i=0;$i<20;$i++){
-        if($band2==0){
-            sleep(6);
-            $directorio = opendir("salidaxml/GOYA780416GM0/"); //ruta actual
-            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
-            {   
-                if($band2==0){
-                    if($archivo!="." && $archivo!=".."){
-                        $principal = explode(".",$archivo);
-                        if($principal[1]=="xml"){
-                            $divide = explode("-",$archivo);
-                            if($divide[2]==($configuracion["folio"]+1)){
-                                $aux2=$archivo;
-                                $band2=1;                           
-                            } 
-                        }
-                    }
-                }
-            }
-        }
+    $archivosPDF2 = array();
+    $directorio = opendir("salidapdf/GOYA780416GM0/"); //ruta actual
+    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+    {   
+        if($archivo!="." && $archivo!=".."){
+             $archivosPDF2[count($archivosPDF2)]=$archivo;          
+        }        
     } 
     
-    if($band1==1 && $band2==1){       
-        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml,resta) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$configuracion["serie"]."','".($configuracion["folio"]+1)."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$aux1."','".$aux2."','".$orden["total"]."')";
+    $archivosXML2 = array();    
+    $directorio = opendir("salidaxml/GOYA780416GM0/"); //ruta actual
+    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+    {   
+        if($archivo!="." && $archivo!=".."){
+            $principal = explode(".",$archivo);
+            if($principal[1]=="xml"){
+                $archivosXML2[count($archivosXML2)]=$archivo;             
+            }
+        }                
+    }
+    
+    $aux01="";
+    $aux02="";
+    $posicion01=-1;
+    $posicion02=-1;
+    if(count($archivosPDF2)>count($archivosPDF)){
+        for($i=0;$i<count($archivosPDF2);$i++){
+            if($posicion01==-1){
+                $encuentra=0;
+                for($j=0;$j<count($archivosPDF);$j++){
+                    if($archivosPDF2[$i]==$archivosPDF[$j]){
+                        $encuentra=1;
+                    }
+                }            
+                if($encuentra==0){
+                    $posicion01=$i;
+                }
+            }
+        }        
+    }
+    
+    if(count($archivosXML2)>count($archivosXML)){
+        for($i=0;$i<count($archivosXML2);$i++){
+            if($posicion02==-1){
+                $encuentra=0;
+                for($j=0;$j<count($archivosXML);$j++){
+                    if($archivosXML2[$i]==$archivosXML[$j]){
+                        $encuentra=1;
+                    }
+                }            
+                if($encuentra==0){
+                    $posicion02=$i;
+                }
+            }
+        }        
+    }    
+    
+    echo "El valor de la posicion01 es: ".$posicion01." y el de la posicion02 es: ".$posicion02."</br>";
+            if($posicion01!=-1 && $posicion02!=-1){
+                $band1=1;
+            }            
+        }
+    }
+
+    
+    if($band1==1){
+    
+        $listaBusca=explode("-",$archivosPDF2[$posicion01]);
+        $serieEncontrada=$listaBusca[1];
+        $folioEncontrado=$listaBusca[2];
+    
+        echo "Archivo 01: ".$archivosPDF2[$posicion01]."</br>";
+        echo "Archivo 02: ".$archivosXML2[$posicion02]."</br>";
+        echo "Serie: ".$serieEncontrada."</br>";
+        echo "Folio: ".$folioEncontrado."</br>";
+    
+        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml,resta) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$serieEncontrada."','".$folioEncontrado."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$archivosPDF2[$posicion01]."','".$archivosXML2[$posicion02]."','".$orden["total"]."')";
         $result_insertFactura=mysql_query($sql_insertFactura,$con) or die(mysql_error());
         
-        $sql_update="update configuracionsistema set folio='".($configuracion["folio"]+1)."' where idconfiguracionsistema=1";
+        $sql_update="update configuracionsistema set folio='".$folioEncontrado."' where idconfiguracionsistema=1";
         $result_update=mysql_query($sql_update,$con) or die(mysql_error()); 
         ?>
             <script language="javascript">
-                window.open('descargapdf.php?folio=<?php echo ($configuracion["folio"]+1) ?>', '_blank');
-                window.open('descargaxml.php?folio=<?php echo ($configuracion["folio"]+1) ?>', '_blank');
+                window.open('descargapdf.php?folio=<?php echo ($folioEncontrado) ?>', '_blank');
+                window.open('descargaxml.php?folio=<?php echo ($folioEncontrado) ?>', '_blank');
                 window.close();
             </script>
-        <?php                                                                           
+        <?php         
+    
+    
     }
+    

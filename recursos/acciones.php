@@ -1326,6 +1326,10 @@ if ($tarea == 21) {
 }
 
 if ($tarea == 22) {
+    $sqlOrden="select * from ordendecompra where idordendecompra='".$_GET["id"]."'";
+    $resultOrden=mysql_query($sqlOrden,$con) or die(mysql_error()); 
+    $ord = mysql_fetch_assoc($resultOrden);
+    
     $sqlUpdateBase="update ordendecompra set codigoexterno='".$_POST["codigoext"]."', idagenda01='".$_POST["contacto01"]."', idagenda02='".$_POST["contacto02"]."', idagenda03='".$_POST["contacto03"]."', condiciones='".$_POST["condiciones"]."', paqueteria='".$_POST["paqueteria"]."', observaciones='".$_POST["observaciones"]."' where idordendecompra='".$_GET["id"]."'";
     $resultUpdateBase=mysql_query($sqlUpdateBase,$con) or die(mysql_error());  
     
@@ -1383,6 +1387,31 @@ if ($tarea == 22) {
 
     $sql_updateOrdenCompra = "update ordendecompra set subtotal='" . $subTotal . "',poriva='" . $poriva . "',iva='" . $iva . "',total='" . $total . "' where idordendecompra='" .$_GET["id"]. "'";
     $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error()); 
+    
+    
+    /* Se suman de 28 a 42 días dependiendo de los tipos de productos */
+    if ($_POST["prioridad"] == 1) {
+        $mayor = -999999;
+        for ($j = 0; $j < count($materiales); $j++) {
+            $sqlSelMaterial = "select * from material where idmaterial='" . $materiales[$j] . "'";
+            $resultSelMaterial = mysql_query($sqlSelMaterial, $con) or die(mysql_error());
+            $material = mysql_fetch_assoc($resultSelMaterial);
+            if ($material["dias"] > $mayor) {
+                $mayor = $material["dias"];
+            }
+        }
+        $nuevafecha = new DateTime($ord["fechaderegistro"]);
+        $nuevafecha->modify('+' . $mayor . ' day');
+
+        $sql_updateOrdenCompra = "update ordendecompra set fechadeentrega='" . $nuevafecha->format('Y-m-d') . "' where idordendecompra='" . $_GET["id"] . "'";
+        $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
+    } else if ($_POST["prioridad"] == 2) { /* Se establece una fecha fija de entrega */
+        $sql_updateOrdenCompra = "update ordendecompra set fechadeentrega='" . $_POST["id-date-picker-2"] . "' where idordendecompra='" . $_GET["id"] . "'";
+        $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
+    }    
+    
+    
+    
     
     ?>
         <script type="text/javascript">

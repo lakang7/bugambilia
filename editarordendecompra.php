@@ -284,19 +284,21 @@
                                                         </div>                                                        
                                                         <div id="contenedorprioridad" > 
                                                         <?php
-                                                            echo "<div style='width: 70%;margin-top: 10px'>";                                                            
-                                                            echo "<label>(*) Fecha de Entrega</label>";
-                                                            echo "<div class='row'>";
-                                                            echo "<div class='col-xs-8 col-sm-11'>";
-                                                            echo "<div class='input-group'>";
-                                                            echo "<input class='form-control date-picker' id='id-date-picker-2' name='id-date-picker-2' type='text' data-date-format='yyyy-mm-dd' value='".$orden["fechadeentrega"]."' />";
-                                                            echo "<span class='input-group-addon'>";
-                                                            echo "<i class='fa fa-calendar bigger-110'></i>";
-                                                            echo "</span>";
-                                                            echo "</div>";
-                                                            echo "</div>";
-                                                            echo "</div>";                                                                                                                                                                                      
-                                                            echo "</div>"; 
+                                                            if($orden["prioridad"]==2){
+                                                                echo "<div style='width: 70%;margin-top: 10px'>";                                                            
+                                                                echo "<label>(*) Fecha de Entrega</label>";
+                                                                echo "<div class='row'>";
+                                                                echo "<div class='col-xs-8 col-sm-11'>";
+                                                                echo "<div class='input-group'>";
+                                                                echo "<input class='form-control date-picker' id='id-date-picker-2' name='id-date-picker-2' type='text' data-date-format='yyyy-mm-dd' value='".$orden["fechadeentrega"]."' />";
+                                                                echo "<span class='input-group-addon'>";
+                                                                echo "<i class='fa fa-calendar bigger-110'></i>";
+                                                                echo "</span>";
+                                                                echo "</div>";
+                                                                echo "</div>";
+                                                                echo "</div>";                                                                                                                                                                                      
+                                                                echo "</div>"; 
+                                                            }
                                                         ?>
                                                         </div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">

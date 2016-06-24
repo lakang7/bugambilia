@@ -1,0 +1,12 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-23 18:17:30|Pago en Una Sola Exhibicion|1827.400|2119.784|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: JUEVES010, Orden de Producción: POMX-4078|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|10|Pieza|BR014|BR014 ST Bowl Redondo L|50.13|501.3|IVA|16|80.21|||
+|CONCEPTO|10|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|290.8|IVA|16|46.53|||
+|CONCEPTO|10|Pieza|BR012|BR012 CB Bowl Redondo S|20.33|203.3|IVA|16|32.53|||
+|CONCEPTO|10|Pieza|BR011|BR011 S Bowl Redondo XS|11.87|118.7|IVA|16|18.99|||
+|CONCEPTO|10|Pieza|H-BU403|H-BU403 SB Budinera Boston chica|11.47|114.7|IVA|16|18.35|||
+|CONCEPTO|10|Pieza|H-BU405|H-BU405 WW Budinera Boston grande|20.14|201.4|IVA|16|32.22|||
+|CONCEPTO|10|Pieza|H-BU404|H-BU404 CH Budinera Boston mediana|16.91|169.1|IVA|16|27.06|||
+|CONCEPTO|10|Pieza|H-BU504|H-BU504 G Budinera Chicago con tapa|22.81|228.1|IVA|16|36.5|||

@@ -1,0 +1,12 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-23 18:21:16|Pago en Una Sola Exhibicion|3052.120|3540.459|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: JUEVES011, Orden de Producción: POMX-4079|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|FRA44|FRA44 CB Esfera Redondo Corta Alta L|25.72|308.64|IVA|16|49.38|||
+|CONCEPTO|12|Pieza|FRA43|FRA43 YW Esfera Redondo Corta Alta M|21.34|256.08|IVA|16|40.97|||
+|CONCEPTO|12|Pieza|FRA42|FRA42 WW Esfera Redondo Corta Alta S|8.98|107.76|IVA|16|17.24|||
+|CONCEPTO|12|Pieza|FRA41|FRA41 CH Esfera Redondo Corta Alta XS (a)|12.62|151.44|IVA|16|24.23|||
+|CONCEPTO|20|Pieza|BR014|BR014 YW Bowl Redondo L|50.13|1002.6|IVA|16|160.42|||
+|CONCEPTO|20|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|581.6|IVA|16|93.06|||
+|CONCEPTO|20|Pieza|BR012|BR012 YW Bowl Redondo S|20.33|406.6|IVA|16|65.06|||
+|CONCEPTO|20|Pieza|BR011|BR011 YW Bowl Redondo XS|11.87|237.4|IVA|16|37.98|||

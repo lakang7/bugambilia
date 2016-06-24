@@ -1,0 +1,12 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-06-23 18:25:14|Pago en Una Sola Exhibicion|2925.200|3393.232|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: JUEVES012, Orden de Producción: POMX-4080|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|6|Pieza|TU004|TU004 YW Charola Carlota L|80.64|483.84|IVA|16|77.41|||
+|CONCEPTO|6|Pieza|TU003|TU003 WW Charola Carlota M|47.31|283.86|IVA|16|45.42|||
+|CONCEPTO|6|Pieza|TU002|TU002 SB Charola Carlota S|30.54|183.24|IVA|16|29.32|||
+|CONCEPTO|6|Pieza|TU005|TU005 G Charola Carlota XL|100|599.99|IVA|16|96|||
+|CONCEPTO|10|Pieza|BR011|BR011 MW Bowl Redondo XS|11.87|118.7|IVA|16|18.99|||
+|CONCEPTO|10|Pieza|BR012|BR012 CB Bowl Redondo S|20.33|203.3|IVA|16|32.53|||
+|CONCEPTO|10|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|290.8|IVA|16|46.53|||
+|CONCEPTO|10|Pieza|BR014|BR014 S Bowl Redondo L|50.13|501.3|IVA|16|80.21|||

@@ -8,7 +8,7 @@
         </script>        
         <?php
     }
-
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@
                 ?>                 
 	</head>
 
-	<body class="no-skin">
+        <body class="no-skin" >
 		<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar navbar-fixed-top">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -214,7 +214,7 @@
                                                             echo "</button></a>";                                                            
                                                         }                                                        
                                                     ?> 
-                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=16">
+                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=16"  >
 						<div class="page-header"><h1>Orden de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
@@ -475,6 +475,8 @@
 								</div><!-- /.modal-content -->
                                                             </div><!-- /.modal-dialog -->
                                                             <script type="text/javascript">
+   
+                                                            
                                                             function hola(){                                                                
                                                                 $("#forma_chosen").width("100%");
                                                                 $("#patron_chosen").width("100%");
@@ -765,6 +767,8 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+                     
+                    
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
