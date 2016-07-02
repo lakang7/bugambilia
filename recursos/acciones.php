@@ -942,12 +942,12 @@ if ($tarea == 16) {
            
     if(isset($_POST["sucursal"]) && $_POST["sucursal"]!=NULL && $_POST["sucursal"]!=""){
         if(isset($_POST["region"]) && $_POST["region"]!=NULL && $_POST["region"]!=""){
-            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones,estatus) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["region"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."','1')";
         }else {
-            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+            $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones,estatus) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["sucursal"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."','1')";
         }
     }else{
-        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."')";
+        $sql_insertOrden = "insert into ordendecompra (codigoexterno,tipo,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuario,codigoop,subtotal,poriva,iva,total,prioridad,fechadeentrega,condiciones,paqueteria,observaciones,estatus) values('" . $_POST["codigoext"] . "','" . $_POST["tipoorden"] . "',now(),'" . $_POST["id-date-picker-1"] . "','" . $_POST["empresa"] . "','" . $_POST["contacto01"] . "','" . $_POST["contacto02"] . "','" . $_POST["contacto03"] . "','" . $_POST["lista"] . "',1,'" . $_POST["codigo02"] . "',0,0,0,0,'" . $_POST["prioridad"] . "',now(),'".$_POST["condiciones"]."','".$_POST["paqueteria"]."','".$_POST["observaciones"]."','1')";
     }
 
     //echo $sql_insertOrden."</br>";
@@ -1047,15 +1047,21 @@ if ($tarea == 16) {
     <?php     
 }
 
-
+/*Cancelar orden de compra lo que implica cancelar la orden de producción en caso de existir*/
 if ($tarea == 17) {
-    $sqldeleteproductos = "delete from productosordencompra where idordendecompra='".$_GET["id"]."'";
-    $resuldeleteproductos = mysql_query($sqldeleteproductos, $con) or die(mysql_error());
-    $sqldeleteorden = "delete from ordendecompra where idordendecompra='".$_GET["id"]."'";
-    $resuldeleteorden = mysql_query($sqldeleteorden, $con) or die(mysql_error());    
+    
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$_GET["id"]."'";
+    $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());  
+    
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$_GET["id"]."'";
+    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
+            
+    $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$_GET["id"]."'";
+    $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());    
+    
     ?>
         <script type="text/javascript">
-            alert("Orden de Compra Eliminada Satisfactoriamente.");
+            alert("Orden de Compra Cancelada Satisfactoriamente.");
             document.location="../listarordenesdecompra.php";
         </script>
     <?php
@@ -1410,15 +1416,61 @@ if ($tarea == 22) {
         $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
     }    
     
-    
-    
+    /*Actualiza la Orden de Producción*/
+    $sqlOrden="select * from ordendeproduccion where idordendecompra='".$_GET["id"]."'";
+    $resultOrden = mysql_query($sqlOrden, $con) or die(mysql_error());
+    if (mysql_num_rows($resultOrden) > 0) {
+        
+        $ordenP = mysql_fetch_assoc($resultOrden);
+        //echo "Encontro una orden de producción para editarse";
+        
+        $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
+        $result_Configuracion = mysql_query($sqlConfiguracion, $con) or die(mysql_error());
+        if (mysql_num_rows($result_Configuracion) > 0) {
+             $configuracion = mysql_fetch_assoc($result_Configuracion);
+        }         
+        
+        $sqlORDENCOMPRA = "select * from ordendecompra where idordendecompra='".$_GET["id"]."'";
+        $resultORDENCOMPRA = mysql_query($sqlORDENCOMPRA, $con) or die(mysql_error());
+        $ORDEN = mysql_fetch_assoc($resultORDENCOMPRA);
+        
+        $subTotal=0;
+        $sql_listaPRODUCTOS="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
+        $result_listaPRODUCTOS=mysql_query($sql_listaPRODUCTOS,$con) or die(mysql_error());
+        if(mysql_num_rows($result_listaPRODUCTOS)>0){
+            while ($producto = mysql_fetch_assoc($result_listaPRODUCTOS)) {
+                $subTotal+=$producto["preciofabrica"]*$producto["numerodeunidades"];
+                
+            }
+        }
+        $poriva=$configuracion["poriva"];
+        $iva=$subTotal*($poriva/100);
+        $total=$subTotal+$iva;
+                        
+        $sql_insertProduccion = "";                        
+        $sqlUpdateOrdenDeProduccion="update ordendeproduccion set idagenda01='".$_POST["contacto01"]."', idagenda02='".$_POST["contacto02"]."', idagenda03='".$_POST["contacto03"]."', subtotal='".$subTotal."', poriva='".$poriva."', iva='".$iva."', total='".$total."', prioridad='".$ORDEN["prioridad"]."', fechadeentrega='".$ORDEN["fechadeentrega"]."' where idordendeproduccion='".$ordenP["idordendeproduccion"]."'";
+        $resultUpdateOrdenDeProduccion = mysql_query($sqlUpdateOrdenDeProduccion,$con) or die(mysql_error()); 
+        
+        $sqlDelete="delete from productosordenproduccion where idordendeproduccion='".$ordenP["idordendeproduccion"]."'";
+        $resultDelete = mysql_query($sqlDelete,$con) or die(mysql_error());
+        
+        $sql_listaPRODUCTOS="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
+        $result_listaPRODUCTOS=mysql_query($sql_listaPRODUCTOS,$con) or die(mysql_error());
+        if(mysql_num_rows($result_listaPRODUCTOS)>0){
+            while ($producto = mysql_fetch_assoc($result_listaPRODUCTOS)) {
+                $sql_insertProducto = "insert into productosordenproduccion (idordendeproduccion,idproducto,idcolor,preciofabrica,numerodeunidades) values('".$ordenP["idordendeproduccion"]."','".$producto["idproducto"]."','".$producto["idcolor"]."','".$producto["preciofabrica"]."','".$producto["numerodeunidades"]."')";
+                $result_Producto = mysql_query($sql_insertProducto,$con) or die(mysql_error());
+            }
+        }        
+        
+    }
     
     ?>
         <script type="text/javascript">
             alert("Orden de Compra Editada Satisfactoriamente.");
             document.location="../listarordenesdecompra.php";
         </script>
-    <?php    
+    <?php   
 }
 
 
@@ -1479,7 +1531,29 @@ if ($tarea == 26) {
             alert("Pago Eliminado Satisfactoriamente.");
             document.location="../registrodepago.php?idfactura=<?php echo $pago["idfactura"]; ?>";
         </script>
-    <?php    
+    <?php        
+}
+
+/*Cancelar orden de Producción lo que implica cancelar la orden de compra*/
+if ($tarea == 27) {
+    $sqlORDENPRODUCCION = "select * from ordendeproduccion where idordendeproduccion='".$_GET["id"]."'";
+    $resultORDENPRODUCCION = mysql_query($sqlORDENPRODUCCION, $con) or die(mysql_error());
+    $ORDENP = mysql_fetch_assoc($resultORDENPRODUCCION);        
     
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."'";
+    $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());
+    
+    $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."'";
+    $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());    
+    
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendeproduccion='".$_GET["id"]."'";
+    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
+            
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Producción Cancelada Satisfactoriamente.");
+            document.location="../listarordenesdeproduccion.php";
+        </script>
+    <?php
 }
 ?>

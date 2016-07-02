@@ -45,12 +45,12 @@ $pdf->Cell(80, 6, "Página 0".$pagina, 0, 1, "R", 0, '', 0);
 $con = Conexion();
 
 $acumulaTotal=0;
-$sqlFacturas2="select * from factura where resta>0 order by emision";
+$sqlFacturas2="select * from factura where resta>0 and estatus=1 order by emision";
 $resultFacturas2 = mysql_query($sqlFacturas2, $con) or die(mysql_error());
 while ($factura2 = mysql_fetch_assoc($resultFacturas2)) {
     $acumulaTotal+=$factura2["resta"];
 }
-$sqlFacturas="select * from factura where resta>0 order by emision";
+$sqlFacturas="select * from factura where resta>0 and estatus=1 order by emision";
 $resultFacturas = mysql_query($sqlFacturas, $con) or die(mysql_error());
 $numeroElementos=  mysql_num_rows($resultFacturas);
 

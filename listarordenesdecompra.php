@@ -230,7 +230,7 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendecompra.codigoexterno">Codigo</option>
+                                                            <option value="ordendecompra.codigoexterno">Código</option>
                                                             <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="agenda.nombre">Contacto</option>
                                                             <option value="listadeprecios.nombre">Lista de Precios</option>
@@ -245,7 +245,7 @@
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">                                                                                                                                                           
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Codigo</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Código</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
@@ -254,7 +254,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
@@ -290,15 +290,13 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 
-                                                                if($band==1 && $band1==1){
-                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                                                                        echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
-                                                                    }
+                                                                if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
+                                                                    echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
+                                                                }   
                                                                 
-                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
-                                                                        echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
-                                                                    }
-                                                                }
+                                                                if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Cancelar</a></li>";
+                                                                }                                                                                                                                
                                                                 
                                                                 if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
                                                                     echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";

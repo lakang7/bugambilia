@@ -434,6 +434,7 @@ CREATE TABLE ordendecompra(
     condiciones integer not null,
     paqueteria varchar(30) not null,
     observaciones varchar(300) not null,
+    estatus integer not null,
     PRIMARY KEY (idordendecompra),
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -467,6 +468,7 @@ CREATE TABLE ordendeproduccion(
     prioridad integer not null,
     fechadeentrega date not null, 
     tipoempaque integer not null,
+    estatus integer not null,
     PRIMARY KEY (idordendeproduccion),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -522,6 +524,7 @@ CREATE TABLE factura(
     pdf varchar(60) not null,
     xml varchar(60) not null,
     resta numeric(10,3) not null,
+    estatus integer not null,
     PRIMARY KEY (idfactura),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,    
@@ -651,13 +654,14 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(8,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Eliminar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Cancelar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,3,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,4,"Cancelar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");

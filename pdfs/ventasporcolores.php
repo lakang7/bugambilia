@@ -444,14 +444,56 @@ if($_POST["tipo"]==1){
                     }   
                 }
             }
-        } 
-        
-        $altura+=5;
-        
-        
-
+        }         
+        $altura+=5;                
     }      
     
+}else if($_POST["tipo"]==3){ /*Agrupación Anual*/
+        
+        $pdf->SetXY(10,$altura);
+        $pdf->SetFont('courier', 'B', 10); 
+        $pdf->Cell(80, 4,"Año ".$_POST["anno"], 0, 1, "L", 0, '', 0); $altura+=7; 
+        $pdf->SetFont('courier', '', 10);        
+        $colores=array();
+        $unidades=array();
+        for($i=0;$i<count($listaColores);$i++){
+            $colores[$i]=$listaColores[$i];
+            $unidades[$i]=0;
+            for($j=0;$j<12;$j++){
+                $unidades[$i]+=$listaPorMeses[$listaColores[$i]][$j];
+            }
+        }
+                                                                                   
+        $ordenado =  bubbleSort($unidades, $colores, count($unidades));
+        $ordenado01 = $ordenado[0];
+        $ordenado02 = $ordenado[1];
+        
+        $acumulaAUX=0;
+        for($i=0;$i<count($ordenado01) && $i< $_POST["elementos"];$i++){
+            $acumulaAUX+=$ordenado01[$i];                        
+        }
+                
+        for($i=0;$i<count($ordenado01) && $i< $_POST["elementos"];$i++){
+            if($acumulaAUX>0 && $ordenado01[$i]>0){
+                $sqlcolor="select * from color where idcolor='".$ordenado02[$i]."'";
+                $resultColor = mysql_query($sqlcolor, $con) or die(mysql_error());
+                if (mysql_num_rows($resultColor) > 0) {
+                    while ($color = mysql_fetch_assoc($resultColor)) {
+                        $pdf->SetXY(10,$altura); 
+                        $pdf->Cell(18, 4,$color["codigo"], 0, 1, "L", 0, '', 0); 
+                        $pdf->SetXY(28,$altura); 
+                        $pdf->Cell(60, 4,$color["nombre"], 0, 1, "L", 0, '', 0);   
+                        $pdf->SetXY(88,$altura); 
+                        $pdf->Cell(20, 4,$ordenado01[$i], 0, 1, "R", 0, '', 0); 
+                        $pdf->SetXY(108,$altura);
+                        $x = (($ordenado01[$i]*90)/$ordenado01[0]);
+                        $pdf->Cell($x, 4,"", 1, 1, "R", 0, '', 0);                     
+                        $altura+=4.8;                                                
+                    }   
+                }
+            }
+        }         
+                
 }
 
 

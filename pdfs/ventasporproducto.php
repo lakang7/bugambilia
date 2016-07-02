@@ -139,6 +139,10 @@ if($_POST["tipo"]==1){
 if($_POST["tipo"]==2){
     $pdf->Cell(80, 4, "Agrupación por Trimestres", 0, 1, "R", 0, '', 0); $altura+=4.50;
 }
+
+if($_POST["tipo"]==3){
+    $pdf->Cell(80, 4, "Agrupación Anualizada", 0, 1, "R", 0, '', 0); $altura+=4.50;
+}
 $pdf->SetXY(120,$altura); 
 $pdf->Cell(80, 4, "Año: ".$_POST["anno"], 0, 1, "R", 0, '', 0); $altura+=4.50;
 
@@ -455,6 +459,52 @@ if($_POST["tipo"]==1){ /*Agrupacion por meses*/
 
     }      
     
+}else if($_POST["tipo"]==3){ /*Agrupación Anual*/
+        
+        $pdf->SetXY(10,$altura);
+        $pdf->SetFont('courier', 'B', 10); 
+        $pdf->Cell(80, 4,"Año ".$_POST["anno"], 0, 1, "L", 0, '', 0); $altura+=7; 
+        $pdf->SetFont('courier', '', 10);        
+        $productos=array();
+        $unidades=array();
+        for($i=0;$i<count($listaProductos);$i++){
+            $productos[$i]=$listaProductos[$i];
+            $unidades[$i]=0;
+            for($j=0;$j<12;$j++){
+                $unidades[$i]+=$listaPorMeses[$listaProductos[$i]][$j];
+            }
+        }
+        
+        $ordenado =  bubbleSort($unidades, $productos, count($unidades));
+        $ordenado01 = $ordenado[0];
+        $ordenado02 = $ordenado[1];
+        
+        $acumulaAUX=0;
+        for($i=0;$i<count($ordenado01) && $i< $_POST["elementos"];$i++){
+            $acumulaAUX+=$ordenado01[$i];                        
+        }
+                
+        for($i=0;$i<count($ordenado01) && $i< $_POST["elementos"];$i++){
+            if($acumulaAUX>0 && $ordenado01[$i]>0){
+                $sqlproducto="select * from producto where idproducto='".$ordenado02[$i]."'";
+                $resultProducto = mysql_query($sqlproducto, $con) or die(mysql_error());
+                if (mysql_num_rows($resultProducto) > 0) {
+                    while ($producto = mysql_fetch_assoc($resultProducto)) {
+                        $pdf->SetXY(10,$altura); 
+                        $pdf->Cell(18, 4,$producto["codigo"], 0, 1, "L", 0, '', 0); 
+                        $pdf->SetXY(28,$altura); 
+                        $pdf->Cell(60, 4,$producto["descripcion"], 0, 1, "L", 0, '', 0);   
+                        $pdf->SetXY(88,$altura); 
+                        $pdf->Cell(20, 4,$ordenado01[$i], 0, 1, "R", 0, '', 0); 
+                        $pdf->SetXY(108,$altura); 
+                        $x = (($ordenado01[$i]*90)/$ordenado01[0]);
+                        $pdf->Cell($x, 4,"", 1, 1, "R", 0, '', 0);                     
+                        $altura+=4.8;                                                
+                    }   
+                }
+            }
+        }         
+                
 }
 
 

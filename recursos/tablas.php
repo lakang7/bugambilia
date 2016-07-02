@@ -858,9 +858,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){                        
-            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];
+            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];
         }else{                        
-            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];
+            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];
         }               
         
         //echo $sql_listaEMPRESA;
@@ -899,15 +899,14 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    if($band==1 && $band1==1){
-                        if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                            echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
-                        }
-                                                                
-                        if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
-                            echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Eliminar</a></li>";
-                        }
+                    
+                    if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
+                        echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
                     }
+                                                                
+                    if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Cancelar</a></li>";
+                    }                    
                                                                 
                     if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
                         echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
@@ -1063,9 +1062,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){                                    
-            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];            
+            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];            
         }else{                                    
-            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
+            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
         }               
         
         //echo $sql_listaEMPRESA;
@@ -1405,9 +1404,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){            
-            $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by ".$_POST["campo"]." ".$_POST["orden"];
+            $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.estatus=1 and factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by ".$_POST["campo"]." ".$_POST["orden"];
         }else{            
-            $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
+            $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.estatus=1 and factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
         }               
         
         //echo $sql_listaEMPRESA;

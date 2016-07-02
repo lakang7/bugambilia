@@ -207,6 +207,7 @@
                                                             <select class="chosen-select form-control" id="tipo" name="tipo" data-placeholder="Seleccione el tipo de agrupación" required="required">
                                                             <option value="1">Més</option>
                                                             <option value="2">Trimestre</option>
+                                                            <option value="3">Año</option>
                                                         </select>                                                                                                                         
                                                         </div> 
                                                                                                                 

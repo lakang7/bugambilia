@@ -164,7 +164,7 @@
         echo "Serie: ".$serieEncontrada."</br>";
         echo "Folio: ".$folioEncontrado."</br>";
     
-        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml,resta) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$serieEncontrada."','".$folioEncontrado."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$archivosPDF2[$posicion01]."','".$archivosXML2[$posicion02]."','".$orden["total"]."')";
+        $sql_insertFactura="insert into factura (idagenda,idempresa,idordendecompra,emision,serie,folio,subtotal,poriva,iva,total,pdf,xml,resta,estatus) values('".$orden["idagenda01"]."','".$orden["idempresa"]."','".$orden["idordendecompra"]."',now(),'".$serieEncontrada."','".$folioEncontrado."','".$orden["subtotal"]."','".$orden["poriva"]."','".$orden["iva"]."','".$orden["total"]."','".$archivosPDF2[$posicion01]."','".$archivosXML2[$posicion02]."','".$orden["total"]."','1')";
         $result_insertFactura=mysql_query($sql_insertFactura,$con) or die(mysql_error());
         
         $sql_update="update configuracionsistema set folio='".$folioEncontrado."' where idconfiguracionsistema=1";

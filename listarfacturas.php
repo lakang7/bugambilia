@@ -251,7 +251,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('resta')">Resta</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
+                                                    $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.estatus=1 and factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;

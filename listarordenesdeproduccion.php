@@ -246,7 +246,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendeproduccion.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendeproduccion.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
@@ -266,7 +266,8 @@
                                                                 echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                                                                                
+                                                                echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
+                                                                echo "<li><a href='recursos/acciones.php?tarea=27&id=".$fila["idorden"]."'>Cancelar</a></li>";
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                               
                                                                 echo "</div>";
