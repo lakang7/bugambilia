@@ -186,7 +186,7 @@
                             
 				<div class="main-content-inner">
 					<div class="page-content">                                            
-                                            <form enctype="multipart/form-data" method="post" id="form_crearPatron" action="pdfs/ventasporcolores.php">
+                                            <form enctype="multipart/form-data"  target="_blank"  method="post" id="form_crearPatron" action="pdfs/ventasporcolores.php">
 						<div class="page-header"><h1>Reporte Ventas Por Colores<small><i class="ace-icon fa fa-angle-double-right"></i> Generación</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">                                                                                                                                                                                                                                

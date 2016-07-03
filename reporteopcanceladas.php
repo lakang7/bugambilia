@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Reporte Ventas Por Producto</title>
+		<title>Bugambilia Buffets - Reporte Ordenes de Producción Canceladas</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -186,48 +186,38 @@
                             
 				<div class="main-content-inner">
 					<div class="page-content">                                            
-                                            <form enctype="multipart/form-data"  target="_blank"  method="post" id="form_crearPatron" action="pdfs/ventasporproducto.php">
-						<div class="page-header"><h1>Reporte Ventas Por Producto<small><i class="ace-icon fa fa-angle-double-right"></i> Generación</small></h1></div>
+                                            <form enctype="multipart/form-data" method="post" target="_blank" id="form_crearPatron" action="pdfs/ordenesproduccioncanceladas.php">
+						<div class="page-header"><h1>Reporte Ordenes de Producción Canceladas<small><i class="ace-icon fa fa-angle-double-right"></i> Generación</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">                                                                                                                                                                                                                                
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos Para La Generación del Reporte</div>                                                        
-
-                                                        <div style="width: 100%;">Año para la generación del reporte </div>
-                                                        <div style="width: 100%;">
-                                                            <select class="chosen-select form-control" id="anno" name="anno" data-placeholder="Seleccione el tipo de agrupación" required="required">
-                                                            <option value="2016">2016</option>
-                                                            <option value="2017">2017</option>
-                                                            <option value="2018">2018</option>
-                                                            <option value="2019">2019</option>                                                            
-                                                        </select>                                                                                                                         
+                                                        <div style="width: 100%;">Fecha a partir de la cual se quiere emitir el reporte </div>
+                                                        <div style="width: 100%;">                                                                
+                                                            <div class="input-group">
+                                                                <input class="form-control date-picker" id="id-date-picker-1" name="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" value="<?php echo date("Y")."-".date("m")."-".date("d"); ?>" />
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                                </span>
+                                                            </div>                                                                                                                                                                                       
                                                         </div> 
-
-                                                        <div style="width: 100%; margin-top: 10px">Tipo de Agrupación </div>
+                                                        <div style="width: 100%; margin-top: 10px">Empresa o Empresas incluidas en el reporte</div>
                                                         <div style="width: 100%;">
-                                                            <select class="chosen-select form-control" id="tipo" name="tipo" data-placeholder="Seleccione el tipo de agrupación" required="required">
-                                                            <option value="1">Més</option>
-                                                            <option value="2">Trimestre</option>
-                                                            <option value="3">Año</option>
-                                                        </select>                                                                                                                         
+                                                        <select class="chosen-select form-control" id="empresa" name="empresa" data-placeholder="Elija la empresa matriz" required="required">
+                                                            <option value="0">Todas las Empresas</option>
+                                                            <?php
+                                                                $con=Conexion();
+                                                                $sql_listaEMPRESA="select * from empresa order by nombrecomercial";
+                                                                $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
+                                                                if(mysql_num_rows($result_listaEMPRESA)>0){
+                                                                    while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
+                                                                    echo "<option value='".$fila["idempresa"]."'>".$fila["nombrecomercial"]."</option>";
+                                                                    }
+                                                                }
+                                                                mysql_close($con);                                                                
+                                                            ?>
+                                                        </select>                                                                                                                        
                                                         </div> 
-                                                                                                                
-                                                        <div style="width: 100%; margin-top: 10px">Mostrar Resultado en Función de</div>
-                                                        <div style="width: 100%;">
-                                                            <select class="chosen-select form-control" id="unidades" name="unidades" data-placeholder="Mostrar el resultado en función de" required="required">
-                                                            <option value="1">Unidades</option>
-                                                            <option value="2">Dinero</option>
-                                                        </select>                                                                                                                         
-                                                        </div> 
-                                                        
-                                                        <div style="width: 100%; margin-top: 10px">Número de Elementos en el reporte</div>
-                                                        <div style="width: 100%;">
-                                                            <select class="chosen-select form-control" id="elementos" name="elementos" data-placeholder="Mostrar el resultado en función de" required="required">
-                                                            <option value="3">3</option>
-                                                            <option value="5">5</option>
-                                                            <option value="10">10</option>
-                                                            <option value="20">20</option>
-                                                        </select>                                                                                                                         
-                                                        </div>                                                        
+                                                                                                                                                                       
                                                     </div>
                                                     
                                                     
