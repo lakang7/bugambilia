@@ -185,6 +185,7 @@
                         
 			<div class="main-content">
                             <input type="hidden" name="oculto" id="oculto" />
+                            <input type="hidden" name="oculto2" id="oculto2" />
                             
 				<div class="main-content-inner">                                                                                                                                            
 					<div class="page-content">
@@ -294,8 +295,8 @@
                                                                     echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
                                                                 }   
                                                                 
-                                                                if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
-                                                                    echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Cancelar</a></li>";
+                                                                if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){                                                                    
+                                                                    echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>"; 
                                                                 }                                                                                                                                
                                                                 
                                                                 if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
@@ -354,15 +355,13 @@
 					</div>
                                     </div>
 				</div>
-                            </form>
-                            
-                            
-                            
-                            
-                            
+                            </form>                                                                                                                                            
                             <script type="text/javascript">
                                 function prueba(id){                                    
                                     document.getElementById("oculto").value=id;
+                                }
+                                function prueba2(id){
+                                    document.getElementById("oculto2").value=id;
                                 }
                             </script>
                             <div id="my-modal" class="modal fade" tabindex="-1" onshow="hola()">
@@ -420,9 +419,31 @@
                                         var URL ="recursos/acciones2.php?tarea=17&idorden="+idorden+"&idcontacto="+idcontacto+"&tipo="+tipoempaque;
                                         location.href=URL;
                                     }
+                                    function cancelar(){
+                                        var idorden = document.getElementById("oculto2").value;
+                                        var URL ="recursos/acciones.php?tarea=17&id="+idorden;
+                                        location.href=URL;                                       
+                                    }
                                 </script>
                             </div>                                                                                                                
-                            
+                            <div id="my-modal2" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h3 class="smaller lighter blue no-margin" >Cancelar Orden de Compra</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="width: 100%; font-size: 2ex; text-align: justify">
+                                                ¿Esta seguro de que desea cancelar esta orden de Compra? Tome en consideración que si para esta orden de compra ya fue generada una orden producción, la misma sera cancelada automaticamente.
+                                            </div>                                            
+                                        </div>
+                                        <div class="modal-footer">                                                                                       
+                                            <button class="btn btn-sm btn-danger pull-right" style="margin-right: 10px" onclick="cancelar()"><i class="ace-icon fa fa-times"></i>Cancelar Orden de Compra</button>                                            
+                                        </div>                                        
+                                    </div>
+                                </div>    
+                            </div>
 			</div>
 			
                         <div class="footer">

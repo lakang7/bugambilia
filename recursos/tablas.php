@@ -904,9 +904,9 @@
                         echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
                     }
                                                                 
-                    if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){
-                        echo "<li><a href='recursos/acciones.php?tarea=17&id=".$fila["idorden"]."'>Cancelar</a></li>";
-                    }                    
+                    if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){                                                                    
+                        echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>"; 
+                    }                   
                                                                 
                     if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
                         echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
