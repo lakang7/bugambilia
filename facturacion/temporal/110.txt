@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-07 17:36:40|Pago en Una Sola Exhibicion|399.600|463.536|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: JUEVES005, Orden de Producción: POMX-4110|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|10|Pieza|H-BU201|H-BU201 SB Budinera Denver chica|10.8|108|IVA|16|17.28|||
+|CONCEPTO|10|Pieza|H-BU203|H-BU203 G Budinera Denver Mediana|13.04|130.4|IVA|16|20.86|||
+|CONCEPTO|10|Pieza|H-BU001|H-BU001 J Budinera Nueva York con tapa|16.12|161.2|IVA|16|25.79|||

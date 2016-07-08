@@ -435,6 +435,7 @@ CREATE TABLE ordendecompra(
     paqueteria varchar(30) not null,
     observaciones varchar(300) not null,
     estatus integer not null,
+    conpago integer not null,
     PRIMARY KEY (idordendecompra),
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -607,6 +608,7 @@ insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Productos",
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Colores","reporteventasporcolores.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Compra Canceladas","reporteoccanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción Canceladas","reporteopcanceladas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -680,6 +682,9 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(14,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(15,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(16,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(17,1,"Visualizar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(18,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(18,2,"Nota de Credito");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,

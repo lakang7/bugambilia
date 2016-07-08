@@ -326,6 +326,16 @@
                                                             <div style="width: 100%">
                                                                 <input type="text" id="observaciones" name="observaciones" placeholder="Observaciones para esta orden de compra"  maxlength="300" style="width: 100%" />
                                                             </div>                                                                                                                                                                                        
+                                                        </div>  
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">                                                                                                                       
+                                                            <label>(*) Tipo de Orden de Compra</label>
+                                                            <div style="width: 100%;">
+                                                            <select class="chosen-select form-control" id="tipoordenc" name="tipoordenc" data-placeholder="Seleccione el tipo de orden" required="required">                                                                
+                                                                <option value="1">Orden de compra paga</option>
+                                                                <option value="2">Orden de compra de muestra</option>	
+                                                            </select>                                                                                                                         
+                                                            </div>                                                                                                                                                                                                                                                                                                                                                                          
                                                         </div>                                                        
                                                         
                                                         <div style="width: 100%; margin-top: 10px; margin-bottom: 5px">
@@ -486,7 +496,7 @@
                                                             
                                                             function agregar(){                                                                
                                                                 if(document.getElementById("producto").value!=="" && document.getElementById("color").value!=="" && document.getElementById("unidades").value!==""){                                                                    
-                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value }, function(){
+                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value, tipoorden:document.getElementById("tipoordenc").value  }, function(){
                                                                         var resultado=document.getElementById("devuelve").value;
                                                                         var resp = resultado.split("_"); 
                                                                         var proid = resp[0];

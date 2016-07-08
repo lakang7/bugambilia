@@ -255,7 +255,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendecompra.idordendecompra as idorden, ordendecompra.conpago as conpago, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendecompra.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
@@ -310,8 +310,10 @@
                                                                 }
                                                                 
                                                                 if($band1==1){
-                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,7)==1){                                                            
-                                                                        echo "<li><a href='facturacion/facturar.php?id=".$fila["idorden"]."' target='_blank'>Facturar Orden de Compra</a></li>";
+                                                                    if(habilitaMenu($_SESSION["usuario"],4,8,7)==1){
+                                                                        if($fila["conpago"]==1){
+                                                                            echo "<li><a href='facturacion/facturar.php?id=".$fila["idorden"]."' target='_blank'>Facturar Orden de Compra</a></li>";
+                                                                        }                                                                        
                                                                     }
                                                                 }
                                                                 echo "</ul>";                                                                                                                                

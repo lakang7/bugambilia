@@ -734,7 +734,12 @@
                 if(mysql_num_rows($resultcolor)>0){
                     $color = mysql_fetch_assoc($resultcolor);
                 }
-                $precio=calcularprecio($producto["idproducto"], $_POST["idlista"]);
+                if($_POST["tipoorden"]==1){
+                    $precio=calcularprecio($producto["idproducto"], $_POST["idlista"]);
+                }else if($_POST["tipoorden"]==2){
+                    $precio=0;
+                }
+                
                 $concatena=$producto["idproducto"]."_".$producto["codigo"]."_".$producto["descripcion"]."_".$color["nombre"]."_".$precio;
                 echo "<input type='hidden' id='devuelve' value='".$concatena."' />";
             }   

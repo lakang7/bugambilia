@@ -1,0 +1,26 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-07 15:40:52|Pago en Una Sola Exhibicion|6524.800|7568.768|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: VIERNES007, Orden de Producción: POMX-4094|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|4|Pieza|BR014|BR014 ST Bowl Redondo L|50.13|200.52|IVA|16|32.08|||
+|CONCEPTO|4|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|116.32|IVA|16|18.61|||
+|CONCEPTO|4|Pieza|BR012|BR012 CB Bowl Redondo S|20.33|81.32|IVA|16|13.01|||
+|CONCEPTO|4|Pieza|BR011|BR011 S Bowl Redondo XS|11.87|47.48|IVA|16|7.6|||
+|CONCEPTO|4|Pieza|H-BU403|H-BU403 SB Budinera Boston chica|11.47|45.88|IVA|16|7.34|||
+|CONCEPTO|4|Pieza|H-BU405|H-BU405 WW Budinera Boston grande|20.14|80.56|IVA|16|12.89|||
+|CONCEPTO|6|Pieza|H-BU404|H-BU404 MW Budinera Boston mediana|16.91|101.46|IVA|16|16.23|||
+|CONCEPTO|7|Pieza|H-BU201|H-BU201 CH Budinera Denver chica|10.8|75.6|IVA|16|12.1|||
+|CONCEPTO|7|Pieza|H-BU203|H-BU203 G Budinera Denver Mediana|13.04|91.28|IVA|16|14.6|||
+|CONCEPTO|12|Pieza|H-BU001|H-BU001 J Budinera Nueva York con tapa|16.12|193.44|IVA|16|30.95|||
+|CONCEPTO|10|Pieza|TU004|TU004 BR Charola Carlota L|80.64|806.4|IVA|16|129.02|||
+|CONCEPTO|6|Pieza|TU003|TU003 LT Charola Carlota M|47.31|283.86|IVA|16|45.42|||
+|CONCEPTO|8|Pieza|TU002|TU002 LM Charola Carlota S|30.54|244.32|IVA|16|39.09|||
+|CONCEPTO|12|Pieza|TU005|TU005 TG Charola Carlota XL|100|1199.99|IVA|16|192|||
+|CONCEPTO|7|Pieza|FRA44|FRA44 MC Esfera Redondo Corta Alta L|25.72|180.04|IVA|16|28.81|||
+|CONCEPTO|4|Pieza|FRA43|FRA43 BB Esfera Redondo Corta Alta M|21.34|85.36|IVA|16|13.66|||
+|CONCEPTO|6|Pieza|FRA41|FRA41 GB Esfera Redondo Corta Alta XS (a)|12.62|75.72|IVA|16|12.12|||
+|CONCEPTO|11|Pieza|FRA40|FRA40 PC Esfera Redondo Corta Alta XS (b)|4.36|47.96|IVA|16|7.67|||
+|CONCEPTO|6|Pieza|FRD24|FRD24 FR Miami Redondo Hondo L|30.4|182.4|IVA|16|29.18|||
+|CONCEPTO|12|Pieza|FRD23|FRD23 T Miami Redondo Hondo M|23.95|287.4|IVA|16|45.98|||
+|CONCEPTO|10|Pieza|FRD22|FRD22 FT Miami Redondo Hondo S|17.82|178.2|IVA|16|28.51|||
+|CONCEPTO|18|Pieza|FRD36|FRD36 WG Miami Redondo Hondo XL|77.72|1398.96|IVA|16|223.83|||

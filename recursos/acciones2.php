@@ -28,6 +28,9 @@
                 
             }
         }
+        if($ORDEN["conpago"]==2){
+            $subTotal=0;
+        }
         $poriva=$configuracion["poriva"];
         $iva=$subTotal*($poriva/100);
         $total=$subTotal+$iva;
@@ -58,7 +61,12 @@
         $result_listaPRODUCTOS=mysql_query($sql_listaPRODUCTOS,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaPRODUCTOS)>0){
             while ($producto = mysql_fetch_assoc($result_listaPRODUCTOS)) {
-                $sql_insertProducto = "insert into productosordenproduccion (idordendeproduccion,idproducto,idcolor,preciofabrica,numerodeunidades) values('".$indice."','".$producto["idproducto"]."','".$producto["idcolor"]."','".$producto["preciofabrica"]."','".$producto["numerodeunidades"]."')";
+                $sql_insertProducto = "";
+                if($ORDEN["conpago"]==1){
+                    $sql_insertProducto = "insert into productosordenproduccion (idordendeproduccion,idproducto,idcolor,preciofabrica,numerodeunidades) values('".$indice."','".$producto["idproducto"]."','".$producto["idcolor"]."','".$producto["preciofabrica"]."','".$producto["numerodeunidades"]."')";
+                }else if($ORDEN["conpago"]==2){
+                    $sql_insertProducto = "insert into productosordenproduccion (idordendeproduccion,idproducto,idcolor,preciofabrica,numerodeunidades) values('".$indice."','".$producto["idproducto"]."','".$producto["idcolor"]."','0','".$producto["numerodeunidades"]."')";        
+                }                
                 $result_Producto = mysql_query($sql_insertProducto,$con) or die(mysql_error());
             }
         }  

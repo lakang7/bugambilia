@@ -560,7 +560,25 @@
                                                             <div style="width: 100%">
                                                                 <input type="text" id="observaciones" value="<?php echo $orden["observaciones"]; ?>" name="observaciones" placeholder="Observaciones para esta orden de compra"  maxlength="300" style="width: 100%" />
                                                             </div>                                                                                                                                                                                        
-                                                        </div>                                                        
+                                                        </div>  
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">                                                                                                                       
+                                                            <label>(*) Tipo de Orden de Compra</label>
+                                                            <div style="width: 100%;">
+                                                            <select disabled="" class="chosen-select form-control" id="tipoordenc" name="tipoordenc" data-placeholder="Seleccione el tipo de orden" required="required">                                                                
+                                                                <?php
+                                                                    if($orden["conpago"]==1){
+                                                                        echo "<option value='1' selected='selected'>Orden de compra paga</option>";
+                                                                        echo "<option value='2'>Orden de compra de muestra</option>";
+                                                                    }else if($orden["conpago"]==2){
+                                                                        echo "<option value='1' >Orden de compra paga</option>";
+                                                                        echo "<option value='2' selected='selected'>Orden de compra de muestra</option>";                                                                        
+                                                                    }
+                                                                ?>
+	
+                                                            </select>                                                                                                                         
+                                                            </div>                                                                                                                                                                                                                                                                                                                                                                          
+                                                        </div>                                                         
                                                         
                                                         <div style="width: 100%; margin-top: 10px; margin-bottom: 5px">
                                                             <label>Productos en la Orden de Compra</label>
