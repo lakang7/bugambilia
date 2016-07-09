@@ -75,24 +75,33 @@
 
 				<div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
 					<ul class="nav ace-nav">
-
+                                                <?php
+                                                    $con=  Conexion();
+                                                    $sqlUsuario="select * from usuario where idusuario='".$_SESSION["usuario"]."'";
+                                                    $resultUsuario=mysql_query($sqlUsuario,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($resultUsuario)>0){
+                                                        $usuario = mysql_fetch_assoc($resultUsuario);
+                                                    }
+                                                ?>
 						<li class="light-blue user-min">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="assets/avatars/<?php echo $usuario["avatar"] ?>" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>Bienvenid@,</small>
+									<?php echo $usuario["usuario"]; ?>
 								</span>
-								<i class="ace-icon fa fa-caret-down"></i>
+                                                                <i class="ace-icon fa fa-caret-down"></i>
 							</a>
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li><a href="#"><i class="ace-icon fa fa-cog"></i>Settings</a></li>
-								<li><a href="profile.html"><i class="ace-icon fa fa-user"></i>Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
+                                                            <li onclick="salir()"><a href="#"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
 							</ul>
 						</li>
 					</ul>
+                                    <script type="text/javascript">
+                                        function salir(){
+                                            location.href = "recursos/acciones.php?tarea=-1";
+                                        }
+                                    </script>
 				</div>
 
 				<nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">

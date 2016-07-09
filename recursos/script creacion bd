@@ -606,6 +606,7 @@ CREATE TABLE usuario (
     registro TIMESTAMP not null,
     puesto varchar(60) not null,
     telefono varchar(20) not null,
+    avatar varchar(60),
     PRIMARY KEY (idusuario)    
 );
 

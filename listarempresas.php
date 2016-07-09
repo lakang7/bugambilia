@@ -85,11 +85,12 @@
                                                 ?>
 						<li class="light-blue user-min">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="assets/avatars/<?php echo $usuario["avatar"] ?>" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenid@,</small>
 									<?php echo $usuario["usuario"]; ?>
 								</span>
+                                                                <i class="ace-icon fa fa-caret-down"></i>
 							</a>
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                                             <li onclick="salir()"><a href="#"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
