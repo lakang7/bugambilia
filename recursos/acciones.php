@@ -1488,7 +1488,39 @@ if ($tarea == 22) {
 
 
 if ($tarea == 23) {
-    $sqlUpdate="update configuracionsistema set regalias='".$_POST["regalias"]."', poriva='".$_POST["iva"]."', secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', cambio='".$_POST["cambio"]."', serie='".$_POST["serie"]."', folio='".$_POST["folio"]."' where idconfiguracionsistema=1";
+    $Sqlconfiguracion="select * from configuracionsistema where idconfiguracionsistema=1";
+    $resultconfiguracion = mysql_query($Sqlconfiguracion, $con) or die(mysql_error());
+    $configuracion = mysql_fetch_assoc($resultconfiguracion);
+    
+    if($configuracion["regalias"]!=$_POST["regalias"]){
+        $sqlCierra="update historicoregalias set hasta = now() where hasta is null";
+        $resultCierra = mysql_query($sqlCierra, $con) or die(mysql_error());
+        $sqlInsert="insert into historicoregalias (porcentajeregalias,desde,hasta) values('".$_POST["regalias"]."',now(),NULL)";
+        $resultInsert = mysql_query($sqlInsert, $con) or die(mysql_error());
+        $sqlUpdate="update configuracionsistema set regalias='".$_POST["regalias"]."' where idconfiguracionsistema=1";
+        $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
+    }
+    
+    if($configuracion["poriva"]!=$_POST["iva"]){
+        $sqlCierra="update historicoporiva set hasta = now() where hasta is null";
+        $resultCierra = mysql_query($sqlCierra, $con) or die(mysql_error());
+        $sqlInsert="insert into historicoporiva (porcentajeiva,desde,hasta) values('".$_POST["iva"]."',now(),NULL)";
+        $resultInsert = mysql_query($sqlInsert, $con) or die(mysql_error());
+        $sqlUpdate="update configuracionsistema set poriva='".$_POST["iva"]."' where idconfiguracionsistema=1";
+        $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());        
+    } 
+    
+    if($configuracion["cambio"]!=$_POST["cambio"]){
+        $sqlCierra="update historicocambiodolar set hasta = now() where hasta is null";
+        $resultCierra = mysql_query($sqlCierra, $con) or die(mysql_error());
+        $sqlInsert="insert into historicocambiodolar (cambio,desde,hasta) values('".$_POST["cambio"]."',now(),NULL)";
+        $resultInsert = mysql_query($sqlInsert, $con) or die(mysql_error());
+        $sqlUpdate="update configuracionsistema set cambio='".$_POST["cambio"]."' where idconfiguracionsistema=1";
+        $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());        
+    }    
+    
+        
+    $sqlUpdate="update configuracionsistema set secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', serie='".$_POST["serie"]."', folio='".$_POST["folio"]."' where idconfiguracionsistema=1";
     $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
     ?>
         <script type="text/javascript">

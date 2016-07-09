@@ -13,7 +13,7 @@ $listaPorMeses=array();
 $listaMeses=array(1,2,3,4,5,6,7,8,9,10,11,12);
 
 for($m=0;$m<count($listaMeses);$m++){
-    $sqlOrdenes="select * FROM ordendecompra where extract(month from fechaderegistro)=".$listaMeses[$m]." and extract(year from fechaderegistro)=".$_POST["anno"];
+    $sqlOrdenes="select * FROM ordendecompra where extract(month from fechaderegistro)=".$listaMeses[$m]." and estatus=1 and extract(year from fechaderegistro)=".$_POST["anno"];
     $resultOrdenes = mysql_query($sqlOrdenes, $con) or die(mysql_error());
     if (mysql_num_rows($resultOrdenes) > 0) {
         while ($orden = mysql_fetch_assoc($resultOrdenes)) {

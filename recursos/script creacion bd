@@ -381,10 +381,43 @@ CREATE TABLE configuracionsistema (
     facturacionpostal varchar(60),
     facturacionestpais varchar(60),
     facturacionrfc varchar(25),
+    cambio numeric(5,3) not null,
+    serie varchar(20) not null, 
+    folio integer not null,
     PRIMARY KEY (idconfiguracionsistema)
 );
 
 insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23');
+
+CREATE TABLE historicoregalias (
+    idhistoricoregalias mediumint(8) unsigned auto_increment,
+    porcentajeregalias numeric(5,3) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT NULL,
+    PRIMARY KEY (idhistoricoregalias)
+);
+
+insert into historicoregalias (porcentajeregalias,desde,hasta) values(10,now(),null);
+
+CREATE TABLE historicoporiva (
+    idhistoricoporiva mediumint(8) unsigned auto_increment,
+    porcentajeiva numeric(5,3) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT NULL,
+    PRIMARY KEY (idhistoricoporiva)
+);
+
+insert into historicoporiva (porcentajeiva,desde,hasta) values(16,now(),null);
+
+CREATE TABLE historicocambiodolar (
+    idhistoricocambiodolar mediumint(8) unsigned auto_increment,
+    cambio numeric(5,3) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT NULL,
+    PRIMARY KEY (idhistoricocambiodolar)
+);
+
+insert into historicocambiodolar (cambio,desde,hasta) values(19.100,now(),null);
 
 CREATE TABLE excepcionlista (
     idexcepcionlista mediumint(8) unsigned auto_increment,
