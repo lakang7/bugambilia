@@ -4,7 +4,7 @@
         ?>
         <script type="text/javascript" language="JavaScript" >
             alert("Debe Iniciar Sesión para poder accesar a esta pantalla.");
-            location.href = "login.php";
+            location.href = "index.php";
         </script>        
         <?php
     }

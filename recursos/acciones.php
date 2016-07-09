@@ -5,6 +5,16 @@ require_once("funciones.php");
 $con = Conexion();
 $tarea = $_GET["tarea"];
 
+if ($tarea == -1) {
+    session_destroy();
+    ?>
+    <script type="text/javascript" language="JavaScript" >
+        location.href = "../index.php";
+    </script>
+    <?php    
+}
+
+
 /* Validar Login */
 if ($tarea == 0) {
     $sql_validaUsuario = "select * from usuario where usuario='" . $_POST["usuario"] . "' and contraseña='" . $_POST["password"] . "'";
