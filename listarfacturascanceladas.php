@@ -275,7 +275,7 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],7,18,2)==1){
-                                                                    echo "<li><a href='facturacion/descargar.php?idfactura=".$fila["idfactura"]."' target='_blank'>Nota de Credito</a></li>";
+                                                                    echo "<li><a href='facturacion/descargar1.php?idfactura=".$fila["idfactura"]."' target='_blank'>Descargar Nota de Credito</a></li>";
                                                                 }                                                               
 
                                                                 echo "</ul>";                                                                                                                                

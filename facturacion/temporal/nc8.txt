@@ -1,0 +1,14 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-08 16:47:28|Pago en Una Sola Exhibicion|584.260|677.742|Transferencia Electrónica|Ingreso|USD|19.100||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 723|FALSE|micorreo@pruebascorreo.com|||CREDITO|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|2|Pieza|BSD14|BSD14 ST Curazao Cuadrado Hondo L|31.63|63.26|IVA|16|10.12|||
+|CONCEPTO|2|Pieza|BSD13|BSD13 ST Curazao Cuadrado Hondo M|17.35|34.7|IVA|16|5.55|||
+|CONCEPTO|2|Pieza|BSD12|BSD12 ST Curazao Cuadrado Hondo S|16.18|32.36|IVA|16|5.18|||
+|CONCEPTO|2|Pieza|BSD15|BSD15 ST Curazao Cuadrado Hondo XL|47.73|95.46|IVA|16|15.27|||
+|CONCEPTO|2|Pieza|BSD11|BSD11 ST Curazao Cuadrado Hondo XS|14.38|28.76|IVA|16|4.6|||
+|CONCEPTO|2|Pieza|BSD16|BSD16 ST Curazao Cuadrado Hondo XXL|57.62|115.24|IVA|16|18.44|||
+|CONCEPTO|2|Pieza|BUD14|BUD14 ST Curazao Rectangular Hondo L|46.89|93.78|IVA|16|15|||
+|CONCEPTO|2|Pieza|BUD13|BUD13 ST Curazao Rectangular Hondo M|30.57|61.14|IVA|16|9.78|||
+|CONCEPTO|2|Pieza|BUD12|BUD12 ST Curazao Rectangular Hondo S|17.27|34.54|IVA|16|5.53|||
+|CONCEPTO|2|Pieza|BUD11|BUD11 ST Curazao Rectangular Hondo XS|12.51|25.02|IVA|16|4|||

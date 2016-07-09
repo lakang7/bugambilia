@@ -1,0 +1,9 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-08 16:51:52|Pago en Una Sola Exhibicion|980.520|1137.403|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: TARDE04, Orden de Producción: POMX-4129|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|6|Pieza|FRD24|FRD24 CB Miami Redondo Hondo L|30.4|182.4|IVA|16|29.18|||
+|CONCEPTO|6|Pieza|FRD23|FRD23 MW Miami Redondo Hondo M|23.95|143.7|IVA|16|22.99|||
+|CONCEPTO|6|Pieza|FRD22|FRD22 SB Miami Redondo Hondo S|17.82|106.92|IVA|16|17.11|||
+|CONCEPTO|6|Pieza|FRD36|FRD36 G Miami Redondo Hondo XL|77.72|466.32|IVA|16|74.61|||
+|CONCEPTO|6|Pieza|FRD21|FRD21 BB Miami Redondo Hondo XS|13.53|81.18|IVA|16|12.99|||

@@ -424,7 +424,8 @@
                                     function cancelar(){
                                         var idorden = document.getElementById("oculto2").value;
                                         var URL ="recursos/acciones.php?tarea=17&id="+idorden;
-                                        location.href=URL;                                       
+                                        window.open(URL);
+                                        location.href="listarordenesdecompra.php";
                                     }
                                 </script>
                             </div>                                                                                                                

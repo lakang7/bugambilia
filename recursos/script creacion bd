@@ -547,6 +547,23 @@ CREATE TABLE pago(
 );
 
 
+CREATE TABLE notadecredito(
+    idnotadecredito mediumint(8) unsigned auto_increment,
+    idfactura mediumint(8) unsigned not null,
+    emision TIMESTAMP not null,     
+    serie varchar(20) not null,
+    folio mediumint(8) unsigned null,
+    subtotal numeric(10,3) not null,
+    poriva numeric(10,2) not null,
+    iva numeric(10,3) not null,
+    total numeric(10,3) not null,
+    pdf varchar(60) not null,
+    xml varchar(60) not null,
+    PRIMARY KEY (idnotadecredito),
+    FOREIGN KEY (idfactura) REFERENCES factura(idfactura) ON UPDATE CASCADE ON DELETE RESTRICT    
+)
+
+
 CREATE TABLE usuario (
     idusuario mediumint(8) unsigned auto_increment,
     nombre varchar(60) not null,

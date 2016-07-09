@@ -1056,15 +1056,28 @@ if ($tarea == 17) {
     $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$_GET["id"]."'";
     $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
             
-    $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$_GET["id"]."'";
-    $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());    
-    
-    ?>
-        <script type="text/javascript">
-            alert("Orden de Compra Cancelada Satisfactoriamente.");
-            document.location="../listarordenesdecompra.php";
-        </script>
-    <?php
+    $sqlFactura="select * from factura where idordendecompra='".$_GET["id"]."' and estatus=1";
+    $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
+    if (mysql_num_rows($resultFactura) > 0) {
+        $factura = mysql_fetch_assoc($resultFactura);
+        $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$_GET["id"]."' and estatus=1";
+        $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error()); 
+        /*Emision Automatica de Nota de Credito*/
+        ?>
+            <script type="text/javascript">
+                location.target='_blank';                
+                document.location="../facturacion/notadecredito.php?idfactura=<?php echo $factura["idfactura"]; ?>";
+            </script>
+        <?php        
+        
+    }else{
+        ?>
+            <script type="text/javascript">
+                alert("Orden de Compra Cancelada Satisfactoriamente.");
+                document.location="../listarordenesdecompra.php";
+            </script>
+        <?php          
+    }           
 }
 
 if ($tarea == 18) {
@@ -1543,17 +1556,56 @@ if ($tarea == 27) {
     $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."'";
     $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());
     
-    $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."'";
-    $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());    
-    
     $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendeproduccion='".$_GET["id"]."'";
     $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
-            
+    
+    $sqlFactura="select * from factura where idordendecompra='".$ORDENP["idordendecompra"]."' and estatus=1";
+    $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
+    if (mysql_num_rows($resultFactura) > 0) {
+        $factura = mysql_fetch_assoc($resultFactura);
+        $sqlCancelarFA="update factura set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."' and estatus=1";
+        $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());
+        /*Emision Automatica de Nota de Credito*/
+        ?>
+            <script type="text/javascript">
+                location.target='_blank';                
+                document.location="../facturacion/notadecredito.php?idfactura=<?php echo $factura["idfactura"]; ?>";
+            </script>
+        <?php          
+    }else{
+        ?>
+            <script type="text/javascript">
+                alert("Orden de Producción Cancelada Satisfactoriamente.");
+                document.location="../listarordenesdeproduccion.php";
+            </script>
+        <?php        
+    }                           
+}
+
+
+
+/*Cancelar orden de Producción lo que implica cancelar la orden de compra*/
+if ($tarea == 28) {
+    $sqlFactura = "select * from factura where idfactura='".$_GET["id"]."'";
+    $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
+    $FACT = mysql_fetch_assoc($resultFactura);    
+    
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."'";
+    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());   
+    
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."'";
+    $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());
+    
+    $sqlCancelarFA="update factura set estatus='2' where idfactura='".$_GET["id"]."' and estatus=1";
+    $resultCancelarFA = mysql_query($sqlCancelarFA, $con) or die(mysql_error());
+        
+        
     ?>
         <script type="text/javascript">
-            alert("Orden de Producción Cancelada Satisfactoriamente.");
-            document.location="../listarordenesdeproduccion.php";
+            location.target='_blank';                
+            document.location="../facturacion/notadecredito.php?idfactura=<?php echo $_GET["id"]; ?>";
         </script>
-    <?php
+    <?php          
+                          
 }
 ?>

@@ -184,7 +184,8 @@
 				</script>
 			</div>
                         
-			<div class="main-content">                            
+			<div class="main-content">
+                                <input type="hidden" name="oculto2" id="oculto2" />
 				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
@@ -279,7 +280,10 @@
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],7,12,3)==1){
                                                                     echo "<li><a href='registrodepago.php?idfactura=".$fila["idfactura"]."'>Pagar</a></li>";
-                                                                }                                                                
+                                                                }  
+                                                                //if(habilitaMenu($_SESSION["usuario"],7,12,4)==1){
+                                                                    echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idfactura"].")>Cancelar</a></li>";
+                                                                //}                                                                
 
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                
@@ -323,6 +327,38 @@
 					</div>
                                     </div>
 				</div>
+                            
+                            <script type="text/javascript">
+                                function prueba2(id){                                    
+                                    document.getElementById("oculto2").value=id;
+                                }
+                                
+                                function cancelar(){
+                                    var idfactura = document.getElementById("oculto2").value;
+                                    var URL ="recursos/acciones.php?tarea=28&id="+idfactura;
+                                    window.open(URL);
+                                    location.href="listarfacturas.php";                                     
+                                }                                
+                            </script> 
+                            
+                            <div id="my-modal2" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h3 class="smaller lighter blue no-margin" >Cancelar Factura</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="width: 100%; font-size: 2ex; text-align: justify">
+                                                ¿Esta seguro de que desea cancelar esta Factura? Tome en consideración que cancelar esta factura, cancelara de forma automatica la orden de compra y de producción asociadas
+                                            </div>                                            
+                                        </div>
+                                        <div class="modal-footer">                                                                                       
+                                            <button class="btn btn-sm btn-danger pull-right" style="margin-right: 10px" onclick="cancelar()"><i class="ace-icon fa fa-times"></i>Cancelar Factura</button>                                            
+                                        </div>                                        
+                                    </div>
+                                </div>    
+                            </div>                            
                             
 			</div>
 			

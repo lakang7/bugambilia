@@ -327,7 +327,8 @@
                                 function cancelar(){
                                     var idorden = document.getElementById("oculto2").value;
                                     var URL ="recursos/acciones.php?tarea=27&id="+idorden;
-                                    location.href=URL;                                      
+                                    window.open(URL);
+                                    location.href="listarordenesdeproduccion.php";                                     
                                 }                                
                             </script>
                             
