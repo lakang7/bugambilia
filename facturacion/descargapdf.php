@@ -2,6 +2,12 @@
     require_once("../recursos/funciones.php");
     $con=Conexion();
     
+    $sql_configuracion="select * from configuracionsistema where idconfiguracionsistema=1";
+    $result_configuracion=mysql_query($sql_configuracion,$con) or die(mysql_error()); 
+    if(mysql_num_rows($result_configuracion)>0){
+       $configuracion = mysql_fetch_assoc($result_configuracion);                                
+    }    
+    
     $sql_factura="select * from factura where folio='".$_GET["folio"]."'";
     $result_factura=mysql_query($sql_factura,$con) or die(mysql_error());
     if(mysql_num_rows($result_factura)>0){
@@ -10,7 +16,7 @@
         ignore_user_abort(true);
         set_time_limit(0); // disable the time limit for this script        
                 
-        $fullPath="salidapdf/GOYA780416GM0/".$factura["pdf"];
+        $fullPath="salidapdf/".$configuracion["carpetabusqueda"]."/".$factura["pdf"];
         if ($fd = fopen ($fullPath, "r")) {
             $fsize = filesize($fullPath);
             $path_parts = pathinfo($fullPath);

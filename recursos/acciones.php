@@ -1530,7 +1530,7 @@ if ($tarea == 23) {
     }    
     
         
-    $sqlUpdate="update configuracionsistema set secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', serie='".$_POST["serie"]."', folio='".$_POST["folio"]."' where idconfiguracionsistema=1";
+    $sqlUpdate="update configuracionsistema set secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', carpetabusqueda='".$_POST["carpetabusqueda"]."' where idconfiguracionsistema=1";
     $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
     ?>
         <script type="text/javascript">

@@ -40,7 +40,7 @@
     }   
     
     $archivosPDF = array();
-    $directorio = opendir("salidapdf/GOYA780416GM0/"); //ruta actual
+    $directorio = opendir("salidapdf/".$configuracion["carpetabusqueda"]."/"); //ruta actual
     while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
     {   
         if($archivo!="." && $archivo!=".."){
@@ -49,7 +49,7 @@
     } 
     
     $archivosXML = array();    
-    $directorio = opendir("salidaxml/GOYA780416GM0/"); //ruta actual
+    $directorio = opendir("salidaxml/".$configuracion["carpetabusqueda"]."/"); //ruta actual
     while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
     {   
         if($archivo!="." && $archivo!=".."){
@@ -93,7 +93,7 @@
             sleep(6);
     
     $archivosPDF2 = array();
-    $directorio = opendir("salidapdf/GOYA780416GM0/"); //ruta actual
+    $directorio = opendir("salidapdf/".$configuracion["carpetabusqueda"]."/"); //ruta actual
     while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
     {   
         if($archivo!="." && $archivo!=".."){
@@ -102,7 +102,7 @@
     } 
     
     $archivosXML2 = array();    
-    $directorio = opendir("salidaxml/GOYA780416GM0/"); //ruta actual
+    $directorio = opendir("salidaxml/".$configuracion["carpetabusqueda"]."/"); //ruta actual
     while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
     {   
         if($archivo!="." && $archivo!=".."){

@@ -223,12 +223,9 @@
                                                         <div style="width: 100%; margin-top: 0px">Cambio del Dolar</div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["cambio"]; ?>" id="cambio" name="cambio" placeholder="Cambio del Dolar a Pesos Mexicanos" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="5" /></div>                                                        
                                                         
-                                                        <div style="width: 100%; margin-top: 0px">Serie</div>
-                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["serie"]; ?>" id="serie" name="serie" placeholder="Nombre de la Serie" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="20" /></div>                                                        
-                                                        
-                                                        <div style="width: 100%; margin-top: 0px">Folio Actual</div>
-                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["folio"]; ?>" id="folio" name="folio" placeholder="Folio Actual" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="10" /></div>                                                                                                                
-                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Carpeta de busqueda de Facturas y Notas de Credito</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["carpetabusqueda"]; ?>" id="carpetabusqueda" name="carpetabusqueda" placeholder="Carpeta para buscar en el sistema operativo" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="5" /></div>                                                        
+                                                                                                               
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal de La Empresa</div>                                                        
                                                         <div style="width: 100%">
                                                             <input type="text" id="fiscalempresa" value="<?php echo $configuracion["facturacionempresa"]; ?>" name="fiscalempresa" placeholder="Nombre de la Empresa" style="width: 54%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />

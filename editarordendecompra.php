@@ -797,7 +797,7 @@
                                                             function agregar(){ 
                                                                 
                                                                 if(document.getElementById("producto").value!=="" && document.getElementById("color").value!=="" && document.getElementById("unidades").value!==""){                                                                    
-                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value }, function(){
+                                                                    $("#oculto00").load("recursos/ajax.php", {tarea:19, idproducto: document.getElementById("producto").value, idcolor:document.getElementById("color").value, idlista:document.getElementById("lista").value, tipoorden:document.getElementById("tipoordenc").value  }, function(){
                                                                         var resultado=document.getElementById("devuelve").value;
                                                                         
                                                                         var resp = resultado.split("_"); 
