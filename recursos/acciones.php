@@ -1650,4 +1650,32 @@ if ($tarea == 28) {
     <?php          
                           
 }
+
+/*Cancelar orden de Producción lo que implica cancelar la orden de compra*/
+if ($tarea == 29) {
+    if($_POST["tiporeporte"]==1){
+        ?>
+        <script type="text/javascript">
+            location.target='_blank';                
+            document.location="../pdfs/historicoregalias.php";
+        </script>
+        <?php        
+    }
+    if($_POST["tiporeporte"]==2){
+        ?>
+        <script type="text/javascript">
+            location.target='_blank';                
+            document.location="../pdfs/historicoiva.php";
+        </script>
+        <?php        
+    }
+    if($_POST["tiporeporte"]==3){
+        ?>
+        <script type="text/javascript">
+            location.target='_blank';                
+            document.location="../pdfs/historicodolar.php";
+        </script>
+        <?php        
+    }    
+}
 ?>

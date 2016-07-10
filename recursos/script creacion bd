@@ -662,6 +662,7 @@ insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Colores","r
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Compra Canceladas","reporteoccanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción Canceladas","reporteopcanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Historicos","reportehistoricos.php",0);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -738,6 +739,8 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(17,1,"Visualizar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(18,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(18,2,"Nota de Credito");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(19,1,"Visualizar");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
