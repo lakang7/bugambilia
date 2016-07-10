@@ -1,8 +1,0 @@
-[09-07-2016 20:00:18] Se ha producido un error al intentar procesar el archivo.
-Código: P03
-Módulo:PARSER
-Mensaje: Error al parsear el archivo. - El formato del RFC es incorrecto para: BRA344657
-
-Verificar la información de su archivo que está intentando procesar.
-Para mayor información dirigirse a:
-https://facturador.zendesk.com

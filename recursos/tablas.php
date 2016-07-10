@@ -1091,14 +1091,12 @@
                     echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
-                    echo "<li><a href='#'>Editar</a></li>";
-                    echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
-                    $sqlValida="select * from ordendeproduccion where idordendecompra='".$fila["idorden"]."'";
-                    $resultValida=mysql_query($sqlValida,$con) or die(mysql_error());
-                    if(mysql_num_rows($resultValida)==0){
-                        echo "<li class='divider'></li>";
-                        echo "<li><a href='#my-modal' role='button' data-toggle='modal' onclick=prueba(".$fila["idorden"].")>Generar Orden de Producción</a></li>";                                                                    
-                    }                                                                
+                    if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
+                        echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                
+                    }
+                    if(habilitaMenu($_SESSION["usuario"],5,9,4)==1){
+                        echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>";
+                    }
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
