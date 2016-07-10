@@ -137,7 +137,12 @@
     
     $pdf->SetFont('courier', 'B', 12);
     $pdf->SetXY(140,30);
-    $pdf->Cell(60, 4,"ORDEN DE COMPRA", 0, 1,"C", 0, '', 0);    
+    $pdf->Cell(60, 4,"ORDEN DE COMPRA", 0, 1,"C", 0, '', 0); 
+    if($orden["conpago"]==2){
+        $pdf->SetXY(140,35);
+        $pdf->Cell(60, 4,"PEDIDO DE MUESTRA", 0, 1,"C", 0, '', 0);        
+    }
+
     
     
     $suma=35;

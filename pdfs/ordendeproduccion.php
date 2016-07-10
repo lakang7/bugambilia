@@ -61,7 +61,7 @@
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);         
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Bugambilia');
-    $pdf->SetTitle('Orden de Compra'); 
+    $pdf->SetTitle('Orden de Producción'); 
     
     // disable header and footer
     $pdf->setPrintHeader(false);
@@ -123,6 +123,10 @@
     $pdf->SetFont('courier', 'B', 12);
     $pdf->SetXY(140,30);
     $pdf->Cell(60, 4,"ORDEN DE PRODUCCIÓN", 0, 1,"C", 0, '', 0);
+    if($ordenpro["conpago"]==2){
+        $pdf->SetXY(140,35);
+        $pdf->Cell(60, 4,"PEDIDO DE MUESTRA", 0, 1,"C", 0, '', 0);        
+    }    
     
     $suma=35;
     $pdf->SetFont('courier', 'B', 8);
