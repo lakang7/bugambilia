@@ -1,0 +1,8 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|BRA344657|Brasil Buffets|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-07-09 20:00:11|Pago en Una Sola Exhibicion|2520.880|2924.221|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: SABADO04, Orden de Producción: POMX-4141|FALSE|micorreo@pruebascorreo.com|||FACTURA|1865|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|12|Pieza|BR014|BR014 YW Bowl Redondo L|59.08|708.96|IVA|16|113.43|||
+|CONCEPTO|4|Pieza|BR013|BR013 WW Bowl Redondo M|34.27|137.08|IVA|16|21.93|||
+|CONCEPTO|4|Pieza|FRD22|FRD22 G Miami Redondo Hondo S|21|84|IVA|16|13.44|||
+|CONCEPTO|18|Pieza|H-FRW13|H-FRW13 T Wok Hondo M|88.38|1590.84|IVA|16|254.53|||

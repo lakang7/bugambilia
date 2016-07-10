@@ -61,10 +61,16 @@
     }
     
     $RFCfacturacion="GOYA780416GM0";
+    $RFCReceptor="";
+    if($empresa["idpais"]==1){
+        $RFCReceptor=$empresa["identificador"];
+    }else{
+        $RFCReceptor=$configuracion["rfcextranjero"];
+    }    
     
     $file = fopen("temporal/nc".$_GET["idfactura"].".txt", "w");
     fwrite($file, "|EMISOR|".$RFCfacturacion."|Regimen General de Ley Personas Morales|" . PHP_EOL);
-    fwrite($file, "|RECEPTOR|".$empresa["identificador"]."|".$empresa["nombreempresa"]."|".$empresa["fiscalcalle"]."|".$empresa["fiscalexterior"]."|".$empresa["fiscalinterior"]."|".$empresa["fiscalcolonia"]."|||".$empresa["fiscalciudad"]."|".$empresa["fiscalestado"]."|".$pais["nombre"]."|".$empresa["fiscalpostal"]."|" . PHP_EOL);
+    fwrite($file, "|RECEPTOR|".$RFCReceptor."|".$empresa["nombreempresa"]."|".$empresa["fiscalcalle"]."|".$empresa["fiscalexterior"]."|".$empresa["fiscalinterior"]."|".$empresa["fiscalcolonia"]."|||".$empresa["fiscalciudad"]."|".$empresa["fiscalestado"]."|".$pais["nombre"]."|".$empresa["fiscalpostal"]."|" . PHP_EOL);
     fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|Esta Nota de Credito Cancela la Factura Serie: ".$factura["serie"]." Folio: ".$factura["folio"]."|FALSE|micorreo@pruebascorreo.com|||CREDITO|".$empresa["ultimos"]."|" . PHP_EOL);
     fwrite($file, "|EXPEDIDOEN|01|Desconocida|".$configuracion["facturacioncalle"]."|".$configuracion["facturacionext"]."|".$configuracion["facturacionint"]."|".$configuracion["facturacioncolonia"]."|||".$configuracion["facturacionestpais"]."||MEXICO|".$configuracion["facturacionpostal"]."|" . PHP_EOL);    
     

@@ -1,0 +1,6 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Texas Buffet|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|Estados Unidos|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-07-09 20:22:07|Pago en Una Sola Exhibicion|3237.200|3755.152|Transferencia Electrónica|Ingreso|USD|18.750||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 743|FALSE|micorreo@pruebascorreo.com|||CREDITO|0083|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|60|Pieza|BR014|BR014 YW Bowl Redondo L|50.13|3007.8|IVA|16|481.25|||
+|CONCEPTO|20|Pieza|H-BU403|H-BU403 CB Budinera Boston chica|11.47|229.4|IVA|16|36.7|||

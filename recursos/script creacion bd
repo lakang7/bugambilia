@@ -384,10 +384,12 @@ CREATE TABLE configuracionsistema (
     cambio numeric(5,3) not null,
     serie varchar(20) not null, 
     folio integer not null,
+    carpetabusqueda varchar(60) not null,
+    rfcextranjero varchar(25) not null,
     PRIMARY KEY (idconfiguracionsistema)
 );
 
-insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23');
+insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc,cambio,serie,folio,carpetabusqueda,rfcextranjero) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23','19.10','B','15','GOYA780416GM0','XEXX010101000');
 
 CREATE TABLE historicoregalias (
     idhistoricoregalias mediumint(8) unsigned auto_increment,
