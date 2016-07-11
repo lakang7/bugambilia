@@ -8,6 +8,15 @@ CREATE TABLE pais (
 INSERT INTO pais(nombre,identificador) VALUES ("México","MX");
 INSERT INTO pais(nombre,identificador) VALUES ("Estados Unidos","US");
 INSERT INTO pais(nombre,identificador) VALUES ("Panama","PA");
+INSERT INTO pais(nombre,identificador) VALUES ("Costa Rica","CR");
+INSERT INTO pais(nombre,identificador) VALUES ("Republica Dominicana","RD");
+INSERT INTO pais(nombre,identificador) VALUES ("Colombia","CO");
+INSERT INTO pais(nombre,identificador) VALUES ("Guatemala","GU");
+INSERT INTO pais(nombre,identificador) VALUES ("El Salvador","EL");
+INSERT INTO pais(nombre,identificador) VALUES ("Chile","CH");
+INSERT INTO pais(nombre,identificador) VALUES ("Jamaica","JA");
+INSERT INTO pais(nombre,identificador) VALUES ("Brasil","BR");
+INSERT INTO pais(nombre,identificador) VALUES ("Aruba","AR");
 
 CREATE TABLE estado (
     idestado mediumint(8) unsigned auto_increment,
@@ -102,15 +111,198 @@ INSERT INTO estado(idpais,nombre) VALUES (2,"West Virginia");
 INSERT INTO estado(idpais,nombre) VALUES (2,"Wisconsin");
 INSERT INTO estado(idpais,nombre) VALUES (2,"Wyoming");
 
-INSERT INTO estado(idpais,nombre) VALUES (3,"Panamá");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Bocas del Toro");
-INSERT INTO estado(idpais,nombre) VALUES (3,"Chiriquí");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Coclé");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Colón");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Chiriqui");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Darién");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Herrera");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Los Santos");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Panamá");
 INSERT INTO estado(idpais,nombre) VALUES (3,"Veraguas");
+INSERT INTO estado(idpais,nombre) VALUES (3,"Panamá Oeste");
+
+INSERT INTO estado(idpais,nombre) VALUES (4,"San José");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Alajuela");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Cartago");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Heredia");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Liberia");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Puntarenas");
+INSERT INTO estado(idpais,nombre) VALUES (4,"Limón");
+
+INSERT INTO estado(idpais,nombre) VALUES (5,"Azua");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Bahoruco");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Harahona");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Dajabón");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Distrito Nacional");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Duarte");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Elías Piña");
+INSERT INTO estado(idpais,nombre) VALUES (5,"El Seibo");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Espaillat");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Hato Mayor");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Hermanas Mirabal");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Independencia");
+INSERT INTO estado(idpais,nombre) VALUES (5,"La Altagracia");
+INSERT INTO estado(idpais,nombre) VALUES (5,"La Romana");
+INSERT INTO estado(idpais,nombre) VALUES (5,"La Vega");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Mará Trinidad Sánchez");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Monseñor Nouel");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Monte Cristi");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Monte Plata");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Pedernales");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Peravia");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Puerto Plata");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Samaná");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Sánchez Ramírez");
+INSERT INTO estado(idpais,nombre) VALUES (5,"San Cistóbal");
+INSERT INTO estado(idpais,nombre) VALUES (5,"San José de Ocoa");
+INSERT INTO estado(idpais,nombre) VALUES (5,"San Juan");
+INSERT INTO estado(idpais,nombre) VALUES (5,"San Pedro de Macorís");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Santiago");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Santiago Rodríguez");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Santodomingo");
+INSERT INTO estado(idpais,nombre) VALUES (5,"Valverde");
+
+INSERT INTO estado(idpais,nombre) VALUES (6,"Antioquia");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Caldas");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Bogotá");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Bolivar");
+INSERT INTO estado(idpais,nombre) VALUES (6,"San Andrés y Providencia");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Córdoba");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Sucre");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Atlántico");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Boyacá");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Arauca");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Casanare");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Cauca");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Valle del Cauca");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Chocó");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Nariño");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Quindío");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Risaralda");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Caquetá");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Amazonas");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Guainía");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Guaviare");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Vaupés");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Putumayo");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Cundinamarca");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Meta");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Vichada");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Magdalena");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Cesar");
+INSERT INTO estado(idpais,nombre) VALUES (6,"La Guajira");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Santander");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Norte de Santander");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Tolima");
+INSERT INTO estado(idpais,nombre) VALUES (6,"Huila");
+
+INSERT INTO estado(idpais,nombre) VALUES (7,"Alta Verapaz");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Baja Verapaz");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Chimaltenango");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Chiquimula");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Péten");
+INSERT INTO estado(idpais,nombre) VALUES (7,"El Progreso");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Quiché");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Escuintla");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Guatemala");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Huehuetenango");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Izabal");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Jalapa");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Jutiapa");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Quetzaltenango");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Retalhuleu");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Sacatepéquez");
+INSERT INTO estado(idpais,nombre) VALUES (7,"San Marcos");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Santa Rosa");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Sololá");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Suchitepéquez");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Totonicapán");
+INSERT INTO estado(idpais,nombre) VALUES (7,"Zacapa");
+
+INSERT INTO estado(idpais,nombre) VALUES (8,"Ahuachapán");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Santa Ana");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Sonsonate");
+INSERT INTO estado(idpais,nombre) VALUES (8,"La Libertad");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Chalatenango");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Cuscatlán");
+INSERT INTO estado(idpais,nombre) VALUES (8,"San Salvador");
+INSERT INTO estado(idpais,nombre) VALUES (8,"La Paz");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Cabañas");
+INSERT INTO estado(idpais,nombre) VALUES (8,"San Vicente");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Usulután");
+INSERT INTO estado(idpais,nombre) VALUES (8,"San Miguel");
+INSERT INTO estado(idpais,nombre) VALUES (8,"Morazán");
+INSERT INTO estado(idpais,nombre) VALUES (8,"La Unión");
+
+INSERT INTO estado(idpais,nombre) VALUES (9,"Arica y Parinacota");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Tarapacá");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Antofagasta");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Atacama");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Coquimbo");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Valparaiso");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Libertador General");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Maule");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Biobío");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Araucanía");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Los Ríos");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Los Lagos");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Aysén del General");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Magallanes y de la Antártica Chilena");
+INSERT INTO estado(idpais,nombre) VALUES (9,"Metropolitana de Santiago");
+
+INSERT INTO estado(idpais,nombre) VALUES (10,"Hanover");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Elizabeth");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint James");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Trelawny");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Westmoreland");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Clarendon");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Manchester");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Ann");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Catherine");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Mary");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Kingston");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Portland");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Andrew");
+INSERT INTO estado(idpais,nombre) VALUES (10,"Saint Thomas");
+
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Acre");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Alagoas");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Amapá");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Amazonas");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Bahía");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Ceará");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Espírito Santo");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Goiás");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Esatdo de Maranhao");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Mato Grosso");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Mato Grosso del Sur");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Minas Gerais");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Pará");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Paraíba");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Paraná");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Pernambuco");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Piauí");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Río de Janeiro");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Río Grande del Norte");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Río Grande del Sur");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Rondonia");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Roraima");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Santa Catarina");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado e Sao Paulo");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Sergipe");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Estado de Tocantins");
+INSERT INTO estado(idpais,nombre) VALUES (11,"Distrito Federal");
+INSERT INTO estado(idpais,nombre) VALUES (11,"República Federal de Brasil");
+
+INSERT INTO estado(idpais,nombre) VALUES (12,"Tanki Leendert");
+INSERT INTO estado(idpais,nombre) VALUES (12,"Oranjestad Oeste");
+INSERT INTO estado(idpais,nombre) VALUES (12,"Oranjestad Este");
+INSERT INTO estado(idpais,nombre) VALUES (12,"Paradera");
+INSERT INTO estado(idpais,nombre) VALUES (12,"San Nicolas Norte");
+INSERT INTO estado(idpais,nombre) VALUES (12,"San Nicolas Sur");
+INSERT INTO estado(idpais,nombre) VALUES (12,"Santa Cruz");
+INSERT INTO estado(idpais,nombre) VALUES (12,"Savaneta");
 
 CREATE TABLE empresa (
     idempresa mediumint(8) unsigned auto_increment,
@@ -663,6 +855,7 @@ insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Compra Canc
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción Canceladas","reporteopcanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Historicos","reportehistoricos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas","reporteventasdesdehasta.php",0);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -741,6 +934,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(18,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(18,2,"Nota de Credito");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(19,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(20,1,"Visualizar");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
