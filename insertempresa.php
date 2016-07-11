@@ -226,7 +226,7 @@
                                                             <option value="">  </option>
                                                             <?php
                                                                 $con=Conexion();
-                                                                $sql_listaPAIS="select * from pais order by idpais";
+                                                                $sql_listaPAIS="select * from pais order by nombre";
                                                                 $result_listaPAIS=mysql_query($sql_listaPAIS,$con) or die(mysql_error());
                                                                 if(mysql_num_rows($result_listaPAIS)>0){
                                                                     while ($fila = mysql_fetch_assoc($result_listaPAIS)) {
