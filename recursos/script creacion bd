@@ -807,6 +807,21 @@ CREATE TABLE usuario (
 insert into usuario (nombre,usuario,contraseña,correo,registro) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now());
 insert into usuario (nombre,usuario,contraseña,correo,registro) values("Daniel Angarita","daniel","123456789","lakang5@hotmail.com",now());
 
+CREATE TABLE pagoop(
+    idpagoop mediumint(8) unsigned auto_increment,
+    idusuario mediumint(8) unsigned not null,
+    idordendeproduccion mediumint(8) unsigned not null,
+    fecharegistro TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP, 
+    fechapago date not null,
+    monto numeric(10,3) not null, 
+    tipopago integer not null,
+    referencia varchar(20) not null,
+    PRIMARY KEY (idpagoop),  
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idordendeproduccion) REFERENCES ordendeproduccion(idordendeproduccion) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
 CREATE TABLE menu(
     idmenu mediumint(8) unsigned auto_increment,
     nombre varchar(60) not null,
@@ -909,10 +924,12 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Cancelar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
 
+
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,3,"Informe en PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,4,"Cancelar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,5,"Pagar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");
@@ -923,6 +940,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(11,1,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,4,"Cancelar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(13,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(14,1,"Visualizar");

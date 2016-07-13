@@ -1676,6 +1676,34 @@ if ($tarea == 29) {
             document.location="../pdfs/historicodolar.php";
         </script>
         <?php        
-    }    
+    }                   
+}
+
+if ($tarea == 30) {
+    $sqlInsertPago="insert into pagoop (idusuario,idordendeproduccion,fecharegistro,fechapago,monto,tipopago,referencia) values('".$_SESSION["usuario"]."','".$_GET["idorden"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["cantidad"]."','".$_POST["tipodepago"]."','".$_POST["referencia"]."')";
+    $resultInsertPago = mysql_query($sqlInsertPago, $con) or die(mysql_error());
+    
+    ?>
+        <script type="text/javascript">
+            alert("Pago Registrado Satisfactoriamente.");
+            document.location="../registrodepagofabrica.php?idorden=<?php echo $_GET["idorden"]; ?>";
+        </script>
+    <?php         
+}
+
+if ($tarea == 31) {
+    $sqlpago="select * from pagoop where idpagoop='".$_GET["id"]."'";
+    $resultpago=mysql_query($sqlpago,$con) or die(mysql_error());
+    $pago = mysql_fetch_assoc($resultpago);
+    
+    $sqlDelete="delete from pagoop where idpagoop='".$_GET["id"]."'";
+    $resultDelete=mysql_query($sqlDelete,$con) or die(mysql_error());
+    
+    ?>
+        <script type="text/javascript">
+            alert("Pago Eliminado Satisfactoriamente.");
+            document.location="../registrodepagofabrica.php?idorden=<?php echo $pago["idordendeproduccion"]; ?>";
+        </script>
+    <?php        
 }
 ?>

@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Listado Ordenes de Producción</title>
+		<title>Bugambilia Buffets - Registro de Pago a Fabrica</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -32,12 +32,12 @@
                 
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-                <link rel="stylesheet" href="recursos/tabla.css" />
-                <script src="assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
+                <link rel="stylesheet" href="recursos/listadeprecios.css" />
                 <?php
                     header('Content-Type: text/html; charset=UTF-8');        
                     require_once("recursos/funciones.php");
-                    $con=Conexion();
+                    Conexion();
                 ?>                 
 	</head>
 
@@ -72,7 +72,6 @@
 						<span class="icon-bar"></span>
 					</button>
 				</div>
-
 				<div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
 					<ul class="nav ace-nav">
                                                 <?php
@@ -193,180 +192,166 @@
 			</div>
                         
 			<div class="main-content">
-                            <input type="hidden" name="oculto2" id="oculto2" />
-                            
+                            <input type="hidden" name="oculto" id="oculto" />
 				<div class="main-content-inner">
-					<div class="page-content">
-                                            <?php                                                       
-                                                /*Listar Ordenes de Producción*/
-                                                if(habilitaMenu($_SESSION["usuario"],5,9,1)==1){
-                                                    echo "<a href='listarordenesdeproduccion.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
-                                                    echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
-                                                    echo "Listar Registros";
-                                                    echo "</button></a>";                                                            
-                                                }                                                        
-                                            ?>  
-                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
-                                            <div class="container-fluid">
-						<div class="page-header"><h1>Ordenes de Producción<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
-                                                <div class="row titulo_tabla">
-                                                    Lista de Ordenes de Producción
-                                                </div>    
-                                                <div class="row filtros_tabla">
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
-                                                    <div style="width: 10%; float: left; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </div>                                                    
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
-                                                    <div style="width:auto; float: right; margin-right: 1.5ex">
-                                                        <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex" >
-                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendeproduccion.codigoop">Codigo</option>
-                                                            <option value="empresa.nombreempresa">Empresa</option>
-                                                            <option value="agenda.nombre">Contacto</option>
-                                                            <option value="listadeprecios.nombre">Lista de Precios</option>
-                                                            <option value="ordendeproduccion.fechaderegistro">Registro</option>
-                                                            <option value="ordendeproduccion.fechadeentrega">Entrega</option>
-                                                            <option value="ordendeproduccion.total">Total</option>                                                            
-                                                        </select>
-                                                    </div>                                                                                                        
-                                                </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendeproduccion.fechaderegistro" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
-                                                <input type="hidden" id="pagina" name="pagina" value="1" >
-                                                <div id="contenedortabla">                                                                                                                                                                                                                                                                                                                    
-                                                <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechadeentrega')">Entrega</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.total')">Total</div>
-						</div>
-                                                <?php 
-                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendeproduccion.fechaderegistro DESC";
-                                                    $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
-                                                    if(mysql_num_rows($result_listaORDENES)>0){
-                                                        $cuenta=0;
-                                                        while ($fila = mysql_fetch_assoc($result_listaORDENES)) {
-                                                            if($cuenta<10){
-                                                                echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
-                                                                echo "<div class='col-xs-2' >";                                                                                                                                                                                                
-                                                                echo "<div class='btn-group'>";
-                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
-                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
-                                                                echo "</button>";
-                                                                echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
-                                                                    echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],5,9,5)==1){
-                                                                    echo "<li><a href='registrodepagofabrica.php?idorden=".$fila["idorden"]."'>Pagar</a></li>";
-                                                                }                                                                 
-                                                                if(habilitaMenu($_SESSION["usuario"],5,9,4)==1){
-                                                                    echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>";
-                                                                }
-                                                                echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                                                                                                                                                                                                                                                                               
-                                                                echo "</div>";
-                                                                echo "</div>"; 
+					<div class="page-content"> 
+                                            <form method="post" id="form_crearListadePrecios" action="recursos/acciones.php?tarea=30&idorden=<?php echo $_GET["idorden"]; ?>">
+                                                <?php
+                                                    $con=Conexion();
+                                                    $sql_ORDEN="select * from ordendeproduccion where idordendeproduccion='".$_GET["idorden"]."'";
+                                                    $result_ORDEN=mysql_query($sql_ORDEN,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_ORDEN)>0){
+                                                        $orden = mysql_fetch_assoc($result_ORDEN);
+                                                        $acumulaPagado=0;
+                                                        $sql_Empresa="select * from empresa where idempresa='".$orden["idempresa"]."'";
+                                                        $result_Empresa=mysql_query($sql_Empresa,$con) or die(mysql_error());
+                                                        $empresa = mysql_fetch_assoc($result_Empresa);                                                        
+                                                        $sqlPagos="select * from pagoop where idordendeproduccion='".$_GET["idorden"]."'";
+                                                        $resultPagos=mysql_query($sqlPagos,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($resultPagos)>0){
+                                                            while ($pag = mysql_fetch_assoc($resultPagos)) {                                                                                                                    
+                                                                $acumulaPagado+=$pag["monto"];
                                                             }
-                                                            $cuenta++;
                                                         }
                                                     }                                                    
+                                                    mysql_close($con);
+                                                ?>                                              
+						<div class="page-header"><h1><?php echo $orden["codigoop"]; ?><small><i class="ace-icon fa fa-angle-double-right"></i> <?php echo $empresa["nombreempresa"]; ?></small></h1></div>
+                                                <div class="row" style="padding: 0px; border-bottom: 1px solid #CCC; padding-bottom: 5px; border-top: 1px solid  #CCC; padding-top: 5px; background-color: #efefef; margin-bottom: 10px">
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">SUBTOTAL</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $orden["subtotal"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">IVA</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $orden["iva"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">TOTAL</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo $orden["total"]; ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">PAGADO</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo round($acumulaPagado,3); ?></div>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 0px">
+                                                        <div class="col-md-12" style="font-weight: bold; font-size: 1.6ex">RESTA</div>
+                                                        <div class="col-md-12" style="font-size: 2.8ex"><?php echo ($orden["total"]-round($acumulaPagado,3)); ?></div>
+                                                    </div>                                                    
+                                                   
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-12" style="margin-bottom: 10px; font-size: 20px">Registrar Nuevo Pago</div>
+                                                </div>
+                                                <div class="row" style="border-bottom: 1px solid #CCC; padding-bottom: 15px">
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">
+                                                        <select class="chosen-select form-control" id="tipodepago" name="tipodepago" data-placeholder="Seleccione el tipo de pago" required="required">                                                            
+                                                            <option value="1">Transferencia Electronica</option>
+                                                            <option value="2">Deposito Bancario</option>
+                                                            <option value="3">Efectivo</option>
+                                                        </select>                                                                                                                         
+                                                        </div>                                                        
+                                                    </div>
+
+                                                    <div class="col-md-2" style="border: 0px solid #CCC">
+                                                        <div class="input-group">
+                                                            <input class="form-control date-picker" id="id-date-picker-1" name="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" value="<?php echo date("Y")."-".date("m")."-".date("d"); ?>" />
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar bigger-110"></i>
+                                                            </span>
+                                                        </div>                                                                                                                
+                                                    </div>                                                    
                                                     
-                                                ?>                                                                                                 
-                                                <div class="row pie_tabla" >
-                                                    <?php
-                                                    $numeroelementos=mysql_num_rows($result_listaORDENES);   
-                                                    if(10>$numeroelementos){
-                                                        echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
-                                                    }else{
-                                                        echo "Mostrando 10 de ".$numeroelementos." elementos";
-                                                    }
-                               
-                                                        
-                                                    $numeropaginas=  ceil($numeroelementos/10);
-                                                    $pagina=1;
-                                                    echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
-                                                    echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
-                                                    for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){
-                                                        if($i>-1){                    
-                                                            if($i==($pagina-1)){
-                                                                echo "<li onclick='pagina(".($i+1).")' class='active'><a>".($i+1)."</a></li>";
-                                                            }else{
-                                                                echo "<li onclick='pagina(".($i+1).")'><a>".($i+1)."</a></li>";
-                                                            }                    
-                                                        }                                                            
-                                                    }
-                                                    echo "<li onclick='pagina(".($numeropaginas).")' class='next'><a><i class='ace-icon fa fa-angle-double-right'></i></a></li>";
-                                                    echo "</ul>";
-                                                    ?>                                                    
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">                                                        
+                                                            <input type="text" id="referencia" name="referencia" placeholder="Número de Referencia" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
+                                                        </div>                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-md-3" style="border: 0px solid #CCC">
+                                                        <div style="width: 100%;">                                                        
+                                                            <input type="text" id="cantidad" name="cantidad" placeholder="Monto del Pago" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />                                                        
+                                                        </div>                                                        
+                                                    </div>
+                                                    
+                                                    
+
+                                                    <div class="col-md-1" style="border: 0px solid #CCC">
+                                                        <button class="btn btn-white btn-primary" type="submit" style="margin-top: 0px">Agregar</button>                                                
+                                                    </div>
                                                 </div>
+                                                 </form>
+                                                <div class="row">
+                                                    <div class="col-md-12" style="margin-top: 10px; font-size: 20px">Pagos Realizados a esta Factura</div>
+                                                </div>                                                
+                                                <div class="row" style="border-bottom: 1px solid #CCC; padding-bottom: 6px; padding-top: 6px; font-weight: bold; font-size: 2ex">
+                                                    <div class="col-md-1">Fecha</div>
+                                                    <div class="col-md-2">Tipo de Pago</div>
+                                                    <div class="col-md-2">Número de Referencia</div>
+                                                    <div class="col-md-1">Monto</div>
+                                                    <div class="col-md-2">Registrado Por</div>
                                                 </div>
-					</div>
-                                    </div>
-				</div>
-                            </form>
-                            
-                            
-                            
-                            
-                            
+                                                <?php
+                                                    $con=Conexion();
+                                                    $sql_listaPagos="select * from pagoop where idordendeproduccion='".$_GET["idorden"]."'";                                                    
+                                                    $result_listaPagos=mysql_query($sql_listaPagos,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_listaPagos)>0){
+                                                        while ($pago = mysql_fetch_assoc($result_listaPagos)) {
+                                                            $tipodepago="";
+                                                            if($pago["tipopago"]==1){
+                                                                $tipodepago="Transferencia Electronica";
+                                                            }
+                                                            if($pago["tipopago"]==2){
+                                                                $tipodepago="Deposito Bancario";
+                                                            }
+                                                            if($pago["tipopago"]==3){
+                                                                $tipodepago="Efectivo";
+                                                            }      
+                                                            $sqlUsuario="select * from usuario where idusuario='".$pago["idusuario"]."'";
+                                                            $resultUsuario=mysql_query($sqlUsuario,$con) or die(mysql_error());
+                                                            $usuario = mysql_fetch_assoc($resultUsuario);
+                                                            echo "<div class='row' style='padding-bottom: 5px; padding-top: 5px;border-bottom: 1px solid #CCC'>";
+                                                            echo "<div class='col-md-1'>".$pago["fechapago"]."</div>";
+                                                            echo "<div class='col-md-2'>".$tipodepago."</div>";
+                                                            echo "<div class='col-md-2'>".$pago["referencia"]."</div>";
+                                                            echo "<div class='col-md-1'>".$pago["monto"]."</div>";
+                                                            echo "<div class='col-md-2'>".$usuario["nombre"]."</div>";
+                                                            echo "<div class='col-md-2' >";
+                                                            
+                                                            echo "<div class='btn-group'>";
+                                                            echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
+                                                            echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
+                                                            echo "</button>";
+                                                            echo "<ul class='dropdown-menu dropdown-default'>";                                                                                                                                                                                                                                                       
+                                                            echo "<li><a href='recursos/acciones.php?tarea=31&id=".$pago["idpagoop"]."'>Eliminar Pago</a></li>";                                                                
+                                                            echo "</ul>";                                                                                                                                
+                                                            echo "</div>";                                                             
+                                                            
+                                                            
+                                                            echo "</div>";
+                                                            echo "</div>";
+                                                        }
+                                                    }
+                                                    mysql_close($con);                                                                
+                                                ?>
+                                                
+                                                
                             <script type="text/javascript">
-                                function prueba2(id){                                    
-                                    document.getElementById("oculto2").value=id;
+                                function prueba(id){                                    
+                                    document.getElementById("oculto").value=id;
                                 }
-                                
-                                function cancelar(){
-                                    var idorden = document.getElementById("oculto2").value;
-                                    var URL ="recursos/acciones.php?tarea=27&id="+idorden;
-                                    window.open(URL);
-                                    location.href="listarordenesdeproduccion.php";                                     
-                                }                                
-                            </script>
-                            
-                            <div id="my-modal2" class="modal fade" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h3 class="smaller lighter blue no-margin" >Cancelar Orden de Producción</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div style="width: 100%; font-size: 2ex; text-align: justify">
-                                                ¿Esta seguro de que desea cancelar esta orden de Producción? Tome en consideración que cancelar esta orden de producción automaticamente cancelara la orden de compra y factura (En caso de ya haberse generado).
-                                            </div>                                            
-                                        </div>
-                                        <div class="modal-footer">                                                                                       
-                                            <button class="btn btn-sm btn-danger pull-right" style="margin-right: 10px" onclick="cancelar()"><i class="ace-icon fa fa-times"></i>Cancelar Orden de Producción</button>                                            
-                                        </div>                                        
-                                    </div>
-                                </div>    
-                            </div>                            
-                            
+                            </script>                    
+                                                
+						
+					</div>
+				</div>
+                           
 			</div>
 			
-                        <div class="footer">
-				<div class="footer-inner">
+                        <div class="footer"  >
+                            <div class="footer-inner" >
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Bugambilia Buffet</span>
@@ -804,45 +789,23 @@
 					$('textarea[class*=autosize]').trigger('autosize.destroy');
 					$('.limiterBox,.autosizejs').remove();
 					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
-				}); 
+				});    
+                                
+                                
+                                $('#forma').change(function(){
+                                    var $selectedOption = $(this).find('option:selected');
+                                    var selectedValue = $selectedOption.val();
+                                    $("#contenedor01").load("recursos/ajax.php", {tarea:10, id: selectedValue}, function(){                                                                                
+					$('.chosen-select').chosen({allow_single_deselect:true});
+                                            $('#patron').change(function(){
+                                                $("#contenedor02").load("recursos/ajax.php", {tarea:11, id:document.getElementById("patron").value}, function(){
+                                                    $('.chosen-select').chosen({allow_single_deselect:true});
+                                                });
+                                            });
+                                    });
+                                });                                
+			
 			});
 		</script>
-                <script type="text/javascript">
-                    function ordena(columna){
-                        var campoanterior = document.getElementById("campoordena").value;
-                        var ordenanterior = document.getElementById("ordenordena").value;                          
-                        if(campoanterior === columna){
-                            if(ordenanterior === "desc"){
-                                document.getElementById("ordenordena").value="asc";
-                            }else{
-                                document.getElementById("ordenordena").value="desc";
-                            }
-                        }else{
-                            document.getElementById("campoordena").value=columna;
-                            document.getElementById("ordenordena").value="desc";
-                        }
-                                                
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
-                    }
-                    
-                    function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
-                    }
-                    
-                    function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    }
-                    
-                    function pagina(pagina){
-                        document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    } 
-                    
-                    $('#filtro').keypress(function (e) {
-                        if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"ordenesdeproduccion",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                        }                        
-                    });                    
-                </script>
 	</body>
 </html>

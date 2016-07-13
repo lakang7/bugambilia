@@ -290,9 +290,9 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],7,12,3)==1){
                                                                     echo "<li><a href='registrodepago.php?idfactura=".$fila["idfactura"]."'>Pagar</a></li>";
                                                                 }  
-                                                                //if(habilitaMenu($_SESSION["usuario"],7,12,4)==1){
+                                                                if(habilitaMenu($_SESSION["usuario"],7,12,4)==1){
                                                                     echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idfactura"].")>Cancelar</a></li>";
-                                                                //}                                                                
+                                                                }                                                                
 
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                
