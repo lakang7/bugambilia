@@ -878,7 +878,7 @@
                         $band=1;
                     } 
                                                                 
-                    $sqlValida2="select * from factura where idordendecompra='".$fila["idorden"]."'";
+                    $sqlValida2="select * from factura where idordendecompra='".$fila["idorden"]."' and estatus=1";
                     $resultValida2=mysql_query($sqlValida2,$con) or die(mysql_error());
                     if(mysql_num_rows($resultValida2)==0){
                         $band1=1;
@@ -1094,6 +1094,9 @@
                     if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
                         echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                
                     }
+                    if(habilitaMenu($_SESSION["usuario"],5,9,5)==1){
+                        echo "<li><a href='registrodepagofabrica.php?idorden=".$fila["idorden"]."'>Pagar</a></li>";
+                    }                                                                 
                     if(habilitaMenu($_SESSION["usuario"],5,9,4)==1){
                         echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>";
                     }

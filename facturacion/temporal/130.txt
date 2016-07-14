@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-08 16:57:33|Pago en Una Sola Exhibicion|499.310|579.200|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: TARDE05, Orden de Producción: POMX-4130|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|7|Pieza|DU004|DU004 YW Placa Rectangular L|41.03|287.21|IVA|16|45.95|||
-|CONCEPTO|7|Pieza|DU002|DU002 S Placa Rectangular S|17.6|123.2|IVA|16|19.71|||
-|CONCEPTO|7|Pieza|DU001|DU001 BB Placa Rectangular XS|12.7|88.9|IVA|16|14.22|||

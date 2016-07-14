@@ -1,8 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-08 16:36:08|Pago en Una Sola Exhibicion|334.230|387.707|Transferencia Electrónica|Ingreso|USD|19.100||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 721|FALSE|micorreo@pruebascorreo.com|||CREDITO|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|3|Pieza|BR014|BR014 ST Bowl Redondo L|50.13|150.39|IVA|16|24.06|||
-|CONCEPTO|3|Pieza|BR013|BR013 YW Bowl Redondo M|29.08|87.24|IVA|16|13.96|||
-|CONCEPTO|3|Pieza|BR012|BR012 CB Bowl Redondo S|20.33|60.99|IVA|16|9.76|||
-|CONCEPTO|3|Pieza|BR011|BR011 S Bowl Redondo XS|11.87|35.61|IVA|16|5.7|||

@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-13 19:30:07|Pago en Una Sola Exhibicion|420.450|487.722|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: PRUEBA01, Orden de Producción: POMX-4152|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|5|Pieza|DU204|DU204 CB Placa Rectangular c/Ribete L|46|230|IVA|16|36.8|||
+|CONCEPTO|5|Pieza|DU202|DU202 SB Placa Rectangular c/Ribete S|21.94|109.7|IVA|16|17.55|||
+|CONCEPTO|5|Pieza|DU201|DU201 BB Placa Rectangular c/Ribete XS|16.15|80.75|IVA|16|12.92|||

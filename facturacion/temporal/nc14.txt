@@ -1,6 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-08 18:05:19|Pago en Una Sola Exhibicion|101.880|118.181|Transferencia Electrónica|Ingreso|USD|19.100||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 733|FALSE|micorreo@pruebascorreo.com|||CREDITO|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|6|Pieza|FRA41|FRA41 YW Esfera Redondo Corta Alta XS (a)|12.62|75.72|IVA|16|12.12|||
-|CONCEPTO|6|Pieza|FRA40|FRA40 SB Esfera Redondo Corta Alta XS (b)|4.36|26.16|IVA|16|4.19|||

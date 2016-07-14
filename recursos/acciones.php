@@ -1084,7 +1084,7 @@ if ($tarea == 17) {
         ?>
             <script type="text/javascript">
                 alert("Orden de Compra Cancelada Satisfactoriamente.");
-                document.location="../listarordenesdecompra.php";
+                window.close();
             </script>
         <?php          
     }           
@@ -1570,6 +1570,23 @@ if ($tarea == 24) {
 }
 
 if ($tarea == 25) {
+    
+    $sqlConsultaFactura="select * from factura where idfactura=".$_GET["idfactura"]." and estatus=2";
+    $resultFactura=mysql_query($sqlConsultaFactura, $con) or die(mysql_error());
+    $factura = mysql_fetch_assoc($resultFactura);   
+    
+    $sqlactordencompra="update ordendecompra set estatus=1 where estatus=2 and idordendecompra='".$factura["idordendecompra"]."'";
+    $resultactordencompra=mysql_query($sqlactordencompra, $con) or die(mysql_error());
+    
+    $sqlactordendeproduccion="update ordendeproduccion set estatus=1 where estatus=2 and idordendecompra='".$factura["idordendecompra"]."'";
+    $resultactordendeproduccion=mysql_query($sqlactordendeproduccion, $con) or die(mysql_error());
+    
+    ?>
+        <script type="text/javascript">
+            alert("La orden de compra y orden de producción asociadas a esta factura, fueron activades de nuevo y podra generar en cualquier momento una nueva factura desde la lista de ordenes de compra");
+            document.location="../listarordenesdecompra.php";
+        </script>
+    <?php     
     
 }
 

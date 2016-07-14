@@ -278,7 +278,7 @@
                                                                     $band=1;
                                                                 } 
                                                                 
-                                                                $sqlValida2="select * from factura where idordendecompra='".$fila["idorden"]."'";
+                                                                $sqlValida2="select * from factura where idordendecompra='".$fila["idorden"]."' and estatus=1";
                                                                 $resultValida2=mysql_query($sqlValida2,$con) or die(mysql_error());
                                                                 if(mysql_num_rows($resultValida2)==0){
                                                                     $band1=1;

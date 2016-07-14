@@ -1,9 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|SONY|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
-|COMPROBANTE|3.2|Sin Serie|2016-07-09 20:37:32|Pago en Una Sola Exhibicion|751.830|751.830|Transferencia Electrónica|Ingreso|USD|18.750||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: SABADO07, Orden de Producción: POMX-4143|FALSE|micorreo@pruebascorreo.com|||FACTURA|1556|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|5|Pieza|TU004|TU004 YW Charola Carlota L|80.64|403.2|IVA|0|0|||
-|CONCEPTO|5|Pieza|TU003|TU003 SB Charola Carlota M|47.31|236.55|IVA|0|0|||
-|CONCEPTO|2|Pieza|FRA44|FRA44 CH Esfera Redondo Corta Alta L|25.72|51.44|IVA|0|0|||
-|CONCEPTO|2|Pieza|FRA43|FRA43 PC Esfera Redondo Corta Alta M|21.34|42.68|IVA|0|0|||
-|CONCEPTO|2|Pieza|FRA42|FRA42 T Esfera Redondo Corta Alta S|8.98|17.96|IVA|0|0|||
