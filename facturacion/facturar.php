@@ -90,73 +90,75 @@
     
     
     $band1=0;
-    for($i=0;$i<40;$i++){
+    for($h=0;$h<40;$h++){
         if($band1==0){
             sleep(6);
     
-    $archivosPDF2 = array();
-    $directorio = opendir("salidapdf/".$configuracion["carpetabusqueda"]."/"); //ruta actual
-    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
-    {   
-        if($archivo!="." && $archivo!=".."){
-             $archivosPDF2[count($archivosPDF2)]=$archivo;          
-        }        
-    } 
+            $archivosPDF2 = array();
+            $directorio = opendir("salidapdf/".$configuracion["carpetabusqueda"]."/"); //ruta actual
+            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+            {   
+                if($archivo!="." && $archivo!=".."){
+                     $archivosPDF2[count($archivosPDF2)]=$archivo;          
+                }        
+            } 
     
-    $archivosXML2 = array();    
-    $directorio = opendir("salidaxml/".$configuracion["carpetabusqueda"]."/"); //ruta actual
-    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
-    {   
-        if($archivo!="." && $archivo!=".."){
-            $principal = explode(".",$archivo);
-            if($principal[1]=="xml"){
-                $archivosXML2[count($archivosXML2)]=$archivo;             
-            }
-        }                
-    }
-    
-    $aux01="";
-    $aux02="";
-    $posicion01=-1;
-    $posicion02=-1;
-    if(count($archivosPDF2)>count($archivosPDF)){
-        for($i=0;$i<count($archivosPDF2);$i++){
-            if($posicion01==-1){
-                $encuentra=0;
-                for($j=0;$j<count($archivosPDF);$j++){
-                    if($archivosPDF2[$i]==$archivosPDF[$j]){
-                        $encuentra=1;
+            $archivosXML2 = array();    
+            $directorio = opendir("salidaxml/".$configuracion["carpetabusqueda"]."/"); //ruta actual
+            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+            {       
+                if($archivo!="." && $archivo!=".."){
+                    $principal = explode(".",$archivo);
+                    if($principal[1]=="xml"){
+                        $archivosXML2[count($archivosXML2)]=$archivo;             
                     }
-                }            
-                if($encuentra==0){
-                    $posicion01=$i;
-                }
+                }                
             }
-        }        
-    }
-    
-    if(count($archivosXML2)>count($archivosXML)){
-        for($i=0;$i<count($archivosXML2);$i++){
-            if($posicion02==-1){
-                $encuentra=0;
-                for($j=0;$j<count($archivosXML);$j++){
-                    if($archivosXML2[$i]==$archivosXML[$j]){
-                        $encuentra=1;
+        
+            $aux01="";
+            $aux02="";
+            $posicion01=-1;
+            $posicion02=-1;
+            if(count($archivosPDF2)>count($archivosPDF)){
+                for($i=0;$i<count($archivosPDF2);$i++){
+                    if($posicion01==-1){
+                        $encuentra=0;
+                        for($j=0;$j<count($archivosPDF);$j++){
+                            if($archivosPDF2[$i]==$archivosPDF[$j]){
+                                $encuentra=1;
+                            }
+                        }            
+                        if($encuentra==0){
+                            $posicion01=$i;
+                        }
                     }
-                }            
-                if($encuentra==0){
-                    $posicion02=$i;
-                }
+                }        
             }
-        }        
-    }    
     
-    echo "El valor de la posicion01 es: ".$posicion01." y el de la posicion02 es: ".$posicion02."</br>";
-            if($posicion01!=-1 && $posicion02!=-1){
+            if(count($archivosXML2)>count($archivosXML)){
+                for($i=0;$i<count($archivosXML2);$i++){
+                    if($posicion02==-1){
+                        $encuentra=0;
+                        for($j=0;$j<count($archivosXML);$j++){
+                            if($archivosXML2[$i]==$archivosXML[$j]){
+                                $encuentra=1;
+                            }
+                        }            
+                        if($encuentra==0){
+                            $posicion02=$i;
+                        }
+                    }
+                }        
+            }    
+            
+            echo "El valor de la posicion01 es: ".$posicion01." y el de la posicion02 es: ".$posicion02."</br>";
+            if($posicion01>0 && $posicion02>0){
                 $band1=1;
             }            
         }
     }
+    
+    echo "</br>El valor de la band1 es: ".$band1;
 
     
     if($band1==1){
