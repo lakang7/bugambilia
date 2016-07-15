@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-14 16:57:21|Pago en Una Sola Exhibicion|802.300|930.668|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: JUEVES01, Orden de Producción: POMX-4154|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|20|Pieza|BR013|BR013 S Bowl Redondo M|29.08|581.6|IVA|16|93.06|||
-|CONCEPTO|10|Pieza|FRA40|FRA40 SB Esfera Redondo Corta Alta XS (b)|4.36|43.6|IVA|16|6.98|||
-|CONCEPTO|5|Pieza|FRW12|FRW12 CB Wok Hondo S|35.42|177.1|IVA|16|28.34|||

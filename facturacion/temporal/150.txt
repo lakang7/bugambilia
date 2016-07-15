@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-13 17:29:02|Pago en Una Sola Exhibicion|763.640|885.822|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: NOCHE01, Orden de Producción: POMX-4150|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|4|Pieza|FRD24|FRD24 CB Miami Redondo Hondo L|30.4|121.6|IVA|16|19.46|||
-|CONCEPTO|4|Pieza|DR206|DR206 FT Placa Redonda con Ribete XXL|85.82|343.28|IVA|16|54.92|||
-|CONCEPTO|4|Pieza|DR005|DR005 WG Placa Redonda XL|74.69|298.76|IVA|16|47.8|||

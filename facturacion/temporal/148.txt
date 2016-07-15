@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
-|COMPROBANTE|3.2|Sin Serie|2016-07-13 15:14:12|Pago en Una Sola Exhibicion|2496.700|2896.172|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: MIERCOLES04, Orden de Producción: POMX-4148|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
-|CONCEPTO|20|Pieza|DS204|DS204 YW Placa Cuadrada con Ribete L|68.61|1372.2|IVA|16|219.55|||
-|CONCEPTO|10|Pieza|FRW13|FRW13 J Wok Hondo M|81.23|812.3|IVA|16|129.97|||
-|CONCEPTO|10|Pieza|H-FRW12|H-FRW12 CB Wok Hondo S|31.22|312.2|IVA|16|49.95|||
