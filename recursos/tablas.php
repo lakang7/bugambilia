@@ -765,61 +765,80 @@
         echo "<div class='row cabecera_tabla'>";
         if($_POST["campo"]=="ordendecompra.codigoexterno"){
             if($_POST["orden"]=="desc"){
-                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
-                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else
+        if($_POST["campo"]=="ordendecompra.codigoop"){
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }            
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";        
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
+        }else            
         if($_POST["campo"]=="empresa.nombreempresa"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else 
         if($_POST["campo"]=="agenda.nombre"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";            
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else             
         if($_POST["campo"]=="listadeprecios.nombre"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
             if($_POST["orden"]=="desc"){
-                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
-                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             } 
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendecompra.fechaderegistro"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";        
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";        
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
@@ -829,10 +848,11 @@
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendecompra.fechadeentrega"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";        
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
@@ -842,10 +862,11 @@
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendecompra.total"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoop')>Código OP</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechaderegistro')>Registro</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.fechadeentrega')>Entrega</div>";
             if($_POST["orden"]=="desc"){
@@ -858,9 +879,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){                        
-            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.conpago as conpago, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];
+            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.conpago as conpago, ordendecompra.codigoexterno as codigo, ordendecompra.codigoop as codigoop, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];
         }else{                        
-            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.conpago as conpago, ordendecompra.codigoexterno as codigo, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];
+            $sql_listaEMPRESA="select ordendecompra.idordendecompra as idorden, ordendecompra.conpago as conpago, ordendecompra.codigoexterno as codigo, ordendecompra.codigoop as codigoop, ordendecompra.fechadeentrega as fecha, ordendecompra.fechaderegistro as registro, ordendecompra.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, empresa, agenda, listadeprecios where ordendecompra.estatus = 1 and ordendecompra.idempresa = empresa.idempresa and ordendecompra.idagenda01 = agenda.idagenda and ordendecompra.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];
         }               
         
         //echo $sql_listaEMPRESA;
@@ -886,9 +907,10 @@
 
                     echo "<div class='row linea_tabla'>";                                                            
                     echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
+                    echo "<div class='col-xs-1 columna_linea'>".$fila["codigoop"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                    echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
+                    echo "<div class='col-xs-1 columna_linea'>".$fila["lista"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
@@ -971,61 +993,80 @@
         echo "<div class='row cabecera_tabla'>";
         if($_POST["campo"]=="ordendeproduccion.codigoop"){
             if($_POST["orden"]=="desc"){
-                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
-                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else
+        if($_POST["campo"]=="ordendecompra.codigoexterno"){
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            if($_POST["orden"]=="desc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+            }else if($_POST["orden"]=="asc"){
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+            }            
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
+            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";        
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
+        }else           
         if($_POST["campo"]=="empresa.nombreempresa"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else 
         if($_POST["campo"]=="agenda.nombre"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";            
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
                 echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             }
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else             
         if($_POST["campo"]=="listadeprecios.nombre"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
             if($_POST["orden"]=="desc"){
-                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
-                echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
             } 
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendeproduccion.fechaderegistro"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";        
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";        
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
             }else if($_POST["orden"]=="asc"){
@@ -1035,10 +1076,11 @@
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendeproduccion.fechadeentrega"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";        
             if($_POST["orden"]=="desc"){
                 echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega<i class='ace-icon glyphicon glyphicon-upload' style='float: right'></i></div>";
@@ -1048,10 +1090,11 @@
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.total')>Total</div>";
         }else
         if($_POST["campo"]=="ordendeproduccion.total"){
-            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.codigoop')>Código OP</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendecompra.codigoexterno')>Código OC</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('empresa.nombreempresa')>Empresa</div>";
             echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('agenda.nombre')>Contacto</div>";
-            echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
+            echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('listadeprecios.nombre')>Lista de Precios</div>";
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechaderegistro')>Registro</div>";        
             echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('ordendeproduccion.fechadeentrega')>Entrega</div>";
             if($_POST["orden"]=="desc"){
@@ -1064,9 +1107,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){                                    
-            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ".$_POST["campo"]." ".$_POST["orden"];            
+            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendecompra.codigoexterno as codigoexterno, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ordendeproduccion.idordendecompra = ordendecompra.idordendecompra order by ".$_POST["campo"]." ".$_POST["orden"];            
         }else{                                    
-            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
+            $sql_listaEMPRESA="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendecompra.codigoexterno as codigoexterno, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ordendeproduccion.idordendecompra = ordendecompra.idordendecompra and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"];            
         }               
         
         //echo $sql_listaEMPRESA;
@@ -1078,9 +1121,10 @@
                 if($cuenta<($_POST["elementos"]*$_POST["pagina"]) && ($cuenta >=(($_POST["pagina"]*$_POST["elementos"])-$_POST["elementos"]) && $cuenta<($_POST["pagina"]*$_POST["elementos"]))){
                     echo "<div class='row linea_tabla'>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
+                    echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                    echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
+                    echo "<div class='col-xs-1 columna_linea'>".$fila["lista"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
                     echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";

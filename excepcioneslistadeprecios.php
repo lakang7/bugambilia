@@ -302,7 +302,7 @@
                                                     </div>
                                                     </div>
                                                     <div class="col-md-2" style="border: 0px solid #CCC">
-                                                        <input type="number" id="precio" name="precio" placeholder="Precio Fijo" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
+                                                        <input type="text" id="precio" name="precio" placeholder="Precio Fijo" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" />
                                                     </div>
                                                     <div class="col-md-1" style="border: 0px solid #CCC">
                                                         <button class="btn btn-white btn-primary" type="submit" style="margin-top: 0px">Agregar</button>                                                

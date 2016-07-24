@@ -318,7 +318,7 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
                     
-                $( document ).ready(function() {    
+/*                $( document ).ready(function() {    
                     $("#telefonouno").keydown(function (e) {        
                         if($.inArray(e.keyCode, [48,49,50,51,52,53,54,55,56,57,37,39,8,189]) !== -1){            
                             return;
@@ -333,7 +333,7 @@
                             e.preventDefault();
                         }
                     });                    
-                });                    
+                });*/                    
                     
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {

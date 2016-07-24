@@ -246,16 +246,17 @@
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">                                                                                                                                                                                                                                                                                                                    
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo OP</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo OC</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.fechadeentrega')">Entrega</div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendeproduccion, empresa, agenda, listadeprecios where estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios order by ordendeproduccion.fechaderegistro DESC";
+                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendecompra.codigoexterno as codigoexterno, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ordendeproduccion.idordendecompra = ordendecompra.idordendecompra order by ordendeproduccion.fechaderegistro DESC";
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
@@ -263,9 +264,10 @@
                                                             if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["lista"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";

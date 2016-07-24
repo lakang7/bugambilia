@@ -263,70 +263,70 @@ if ($tarea == 4) {
 
 /* Insertar Producto */
 if ($tarea == 5) {
-
-    $capacidad = "NULL";
-    $peso = "NULL";
-
-    if ($_POST["capacidad"] == "") {
+    
+    $sql_producto="select * from producto where codigo='".$_POST["codigoproducto"]."' or codigo='".strtoupper($_POST["codigoproducto"])."'";
+    $result_producto = mysql_query($sql_producto, $con) or die(mysql_error());
+    
+    if(mysql_num_rows($result_producto)==0){
+        
         $capacidad = "NULL";
-    } else {
-        $capacidad = $_POST["capacidad"];
-    }
-
-    if ($_POST["peso"] == "") {
         $peso = "NULL";
-    } else {
-        $peso = $_POST["peso"];
+
+        if ($_POST["capacidad"] == "") {
+            $capacidad = "NULL";
+        } else {
+            $capacidad = $_POST["capacidad"];
+        }
+
+        if ($_POST["peso"] == "") {
+            $peso = "NULL";
+        } else {
+            $peso = $_POST["peso"];
+        }
+        $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ")";
+        $result_insertProducto = mysql_query($sql_insertProducto, $con) or die(mysql_error());
+
+        if ($result_insertProducto == 1) {
+
+            $sql_ultimoPRODUCTO = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'producto';";
+            $result_ultimoPRODUCTO = mysql_query($sql_ultimoPRODUCTO, $con) or die(mysql_error());
+            $fila = mysql_fetch_assoc($result_ultimoPRODUCTO);
+            $indice = intval($fila["AUTO_INCREMENT"]);
+            $indice--;
+            
+            $sql_insertHistorico = "insert into historicopreciofabrica (idproducto,preciofabrica,desde,hasta) values(" . $indice . ",'" . $_POST["precio"] . "',now(),NULL);";
+            $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
+
+            $sql_tipoProducto = "select tp.codig TPCOD,tp.nombre TPNOM,tp.portipo TPPORC from tipoproducto tp where tp.idtipoproducto='" . $_POST["temporada"] . "'";
+            $result_tipoprod = mysql_query($sql_tipoProducto, $con) or die(mysql_error());
+            $producto = mysql_fetch_assoc($result_tipoprod);
+
+            $sql_patronProd = "select pp.nombreespanol PPNOM,pp.materiales PPMAT from patronproducto pp where pp.idpatronproducto='" . $_POST["patron"] . "'";
+            $result_patronProd = mysql_query($sql_patronProd, $con) or die(mysql_error());
+            $patron = mysql_fetch_assoc($result_patronProd);
+
+            $sql_MATERIAL = "select mat.codigo MATCOD,mat.nombre MATNOM,mat.colores MATCOL from material mat where mat.idmaterial='" . $_POST["material"] . "'";
+            $result_material = mysql_query($sql_MATERIAL, $con) or die(mysql_error());
+            $material = mysql_fetch_assoc($result_material);
+
+            $descripcion = "'Se creo el producto:  " . $_POST["descripcion"] . ", con el codigo:  " . $_POST["codigoproducto"] . ", con las caracteristicas siguientes; ( Largo: " . $_POST["largo"] . ", Ancho: " . $_POST["ancho"] . ", Alto: " . $_POST["alto"] . ", Peso: " . $peso . ", Capacidad: " . $capacidad . ", Precio: " . $_POST["precio"] . "), asociado al tipo de producto:  " . $producto["TPNOM"] . ", de codigo de tipo: " . $producto["TPCOD"] . " y con  un porcentaje de tipo de producto:  " . $producto["TPPORC"] . ", asociado al patron de producto: " . $patron["PPNOM"] . ", con  el material de patron: " . $patron["PPMAT"] . ", asociado al material: " . $material["MATNOM"] . ", con el codigo de material: " . $material["MATCOD"] . ", con los colores: " . $material["MATCOL"] . "'";
+            $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,6,now()," . $descripcion . ")";
+            $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
+        }
+        ?>
+            <script type="text/javascript">
+                alert("Producto Registrado Satisfactoriamente.");
+                document.location="../listarproductos.php";
+            </script>
+        <?php 
+    }else{
+        ?>
+            <script type="text/javascript">
+                alert("Ya existe un producto registrado con el codigo <?php echo $_POST["codigoproducto"]; ?> por favor verifiquelo.");
+                document.location="../listarproductos.php";
+            </script>
+        <?php         
     }
-    $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ")";
-    $result_insertProducto = mysql_query($sql_insertProducto, $con) or die(mysql_error());
-
-    if ($result_insertProducto == 1) {
-
-        $sql_ultimoPRODUCTO = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'producto';";
-        $result_ultimoPRODUCTO = mysql_query($sql_ultimoPRODUCTO, $con) or die(mysql_error());
-        $fila = mysql_fetch_assoc($result_ultimoPRODUCTO);
-        $indice = intval($fila["AUTO_INCREMENT"]);
-        $indice--;
-
-        $sql_insertHistorico = "insert into historicopreciofabrica (idproducto,preciofabrica,desde,hasta) values(" . $indice . ",'" . $_POST["precio"] . "',now(),NULL);";
-        $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
-
-        /*         * *******insercion a bitacora****** */
-        /**
-         * idtabla =6 -> producto
-         * idaccion =3 -> creacion
-         */
-        $sql_tipoProducto = "select tp.codig TPCOD,tp.nombre TPNOM,tp.portipo TPPORC from tipoproducto tp where tp.idtipoproducto='" . $_POST["temporada"] . "'";
-        $result_tipoprod = mysql_query($sql_tipoProducto, $con) or die(mysql_error());
-        $producto = mysql_fetch_assoc($result_tipoprod);
-
-        $sql_patronProd = "select pp.nombreespanol PPNOM,pp.materiales PPMAT from patronproducto pp where pp.idpatronproducto='" . $_POST["patron"] . "'";
-        $result_patronProd = mysql_query($sql_patronProd, $con) or die(mysql_error());
-        $patron = mysql_fetch_assoc($result_patronProd);
-
-        $sql_MATERIAL = "select mat.codigo MATCOD,mat.nombre MATNOM,mat.colores MATCOL from material mat where mat.idmaterial='" . $_POST["material"] . "'";
-        $result_material = mysql_query($sql_MATERIAL, $con) or die(mysql_error());
-        $material = mysql_fetch_assoc($result_material);
-
-
-        $descripcion = "'Se creo el producto:  " . $_POST["descripcion"] . ", con el codigo:  " . $_POST["codigoproducto"] . ", con las caracteristicas siguientes; ( Largo: " . $_POST["largo"] . ", Ancho: " . $_POST["ancho"] . ", Alto: " . $_POST["alto"] . ", Peso: " . $peso . ", Capacidad: " . $capacidad . ", Precio: " . $_POST["precio"] . "), asociado al tipo de producto:  " . $producto["TPNOM"] . ", de codigo de tipo: " . $producto["TPCOD"] . " y con  un porcentaje de tipo de producto:  " . $producto["TPPORC"] . ", asociado al patron de producto: " . $patron["PPNOM"] . ", con  el material de patron: " . $patron["PPMAT"] . ", asociado al material: " . $material["MATNOM"] . ", con el codigo de material: " . $material["MATCOD"] . ", con los colores: " . $material["MATCOL"] . "'";
-        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',3,6,now()," . $descripcion . ")";
-
-//        showRegistro($sql_insertBitacora);
-        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
-        /*         * ******fin insercion bitacora ******** */
-
-//        showRegistro($sql_insertBitacora);
-
-       // echo "Registro de Producto Satisfactorio";
-    }
-    ?>
-        <script type="text/javascript">
-            alert("Producto Registrado Satisfactoriamente.");
-            document.location="../listarproductos.php";
-        </script>
-    <?php    
 }
 
 /* Insertar Patron */
