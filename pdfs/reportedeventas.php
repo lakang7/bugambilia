@@ -86,12 +86,14 @@ $pdf->Cell(25, 4,"Fecha", 1, 1, "C", 0, '', 0);
 $pdf->SetXY(35,$altura);
 $pdf->Cell(25, 4,"O.Compra", 1, 1, "C", 0, '', 0);
 $pdf->SetXY(60,$altura);
+$pdf->Cell(28, 4,"O.Produccion", 1, 1, "C", 0, '', 0);
+$pdf->SetXY(88,$altura);
 $pdf->Cell(30, 4,"Factura", 1, 1, "C", 0, '', 0);
-$pdf->SetXY(90,$altura);
-$pdf->Cell(80, 4,"Empresa", 1, 1, "C", 0, '', 0);
-$pdf->SetXY(170,$altura);
-$pdf->Cell(30, 4,"Monto", 1, 1, "C", 0, '', 0);
-$pdf->SetFont('courier', '', 10);
+$pdf->SetXY(118,$altura);
+$pdf->Cell(60, 4,"Empresa", 1, 1, "C", 0, '', 0);
+$pdf->SetXY(178,$altura);
+$pdf->Cell(22, 4,"Monto", 1, 1, "C", 0, '', 0);
+$pdf->SetFont('courier', '', 9);
 $sqlVentas="select * from ordendecompra where estatus=1 and conpago=1 and fechaderegistro>='".$_POST["id-date-picker-1"]."' and fechaderegistro<='".$_POST["id-date-picker-2"]."' order by fechaderegistro ";
 $resultVentas = mysql_query($sqlVentas, $con) or die(mysql_error());
 $numeroElementos=  mysql_num_rows($resultVentas);
@@ -108,16 +110,19 @@ while ($venta = mysql_fetch_assoc($resultVentas)) {
     $pdf->SetXY(35,$altura);
     $pdf->Cell(25, 4,$venta["codigoexterno"], 1, 1, "C", 0, '', 0);
     $pdf->SetXY(60,$altura);
+    $pdf->Cell(28, 4,$venta["codigoop"], 1, 1, "C", 0, '', 0);
+    $pdf->SetXY(88,$altura);    
+    
     if(mysql_num_rows($resultFactura)>0){
         $factura = mysql_fetch_assoc($resultFactura);
         $pdf->Cell(30, 4,$factura["serie"]."-".$factura["folio"], 1, 1, "C", 0, '', 0);
     }else{
         $pdf->Cell(30, 4,"Sin Emitir", 1, 1, "C", 0, '', 0);
     }            
-    $pdf->SetXY(90,$altura);
-    $pdf->Cell(80, 4,$empresa["nombreempresa"], 1, 1, "L", 0, '', 0);
-    $pdf->SetXY(170,$altura);
-    $pdf->Cell(30, 4,"$".$venta["total"], 1, 1, "R", 0, '', 0);    
+    $pdf->SetXY(118,$altura);
+    $pdf->Cell(60, 4,$empresa["nombreempresa"], 1, 1, "L", 0, '', 0);
+    $pdf->SetXY(178,$altura);
+    $pdf->Cell(22, 4,"$".$venta["total"], 1, 1, "R", 0, '', 0);   
 }
 
 

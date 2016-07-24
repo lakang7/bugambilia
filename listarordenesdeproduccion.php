@@ -231,7 +231,8 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendeproduccion.codigoop">Codigo</option>
+                                                            <option value="ordendeproduccion.codigoop">Código orden de Producción</option>
+                                                            <option value="ordendecompra.codigoexterno">Código orden de Compra</option>
                                                             <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="agenda.nombre">Contacto</option>
                                                             <option value="listadeprecios.nombre">Lista de Precios</option>
