@@ -87,7 +87,7 @@ $altura+=4.5;
 $pdf->writeHTMLCell(193,4,10,$altura,"<b>Total &nbsp;de Cuentas por Pagar: </b>$".$acumulaTotal, 1, 0, false, true, "L");
 $altura+=4.5;
 $pdf->writeHTMLCell(193,4,10,$altura,"<b>Fecha de Emisión del Reporte: </b>".$dia." de ".$meses[($mes-1)]." de ".$ano, 1, 0, false, true, "L");
-$altura+=14;
+$altura+=10;
 
 while ($orden = mysql_fetch_assoc($resultOrdenes)) {
     $fecha01 = explode(" ", $orden["fechaderegistro"]);
@@ -141,7 +141,7 @@ while ($orden = mysql_fetch_assoc($resultOrdenes)) {
     $altura+=10; 
     
     
-        if($altura>250){
+        if($altura>270){
             $pdf->AddPage('P', 'A4');
             $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
             $pagina++;
