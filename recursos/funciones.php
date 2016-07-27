@@ -90,5 +90,58 @@
         return $retorna;
     }
     
+    function calcularprecio($idproducto,$idlistadeprecios){
+        $lista="";
+        $producto="";
+        $tipo="";
+        $configuracion="";
+        $busca="";
+        $acumulado=0;
+        $con=Conexion();
+        $sql_LISTA="select * from listadeprecios where idlistadeprecios='".$idlistadeprecios."'";
+        $result_LISTA=mysql_query($sql_LISTA,$con) or die(mysql_error());
+        if(mysql_num_rows($result_LISTA)>0){
+            $lista = mysql_fetch_assoc($result_LISTA);
+        }
+        
+        $sqlProducto="select * from producto where idproducto='".$idproducto."'";
+        $resultProducto=mysql_query($sqlProducto,$con) or die(mysql_error());
+        if(mysql_num_rows($resultProducto)>0){
+            $producto = mysql_fetch_assoc($resultProducto);                            
+        }
+        
+        $sql_tipo="select * from tipoproducto where idtipoproducto='".$producto["idtipoproducto"]."'";
+        $result_tipo=mysql_query($sql_tipo,$con) or die(mysql_error());
+        if(mysql_num_rows($result_tipo)>0){
+            $tipo=mysql_fetch_assoc($result_tipo);
+        }
+                        
+        $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema=1";
+        $result_Configuracion=mysql_query($sqlConfiguracion,$con) or die(mysql_error());
+        if(mysql_num_rows($result_Configuracion)>0){
+            $configuracion = mysql_fetch_assoc($result_Configuracion);
+        }  
+        
+        $sqlBUSCA="select * from listatipos where idlistadeprecios='".$idlistadeprecios."' and idtipoproducto='".$producto["idtipoproducto"]."'";
+        $resultBUSCA=mysql_query($sqlBUSCA,$con) or die(mysql_error());
+        if(mysql_num_rows($resultBUSCA)>0){
+            $busca=mysql_fetch_assoc($resultBUSCA);                                                                                    
+        }        
+        
+        
+        $acumulado=($producto["preciofabrica"]);
+        $acumulado=($acumulado+($acumulado*($configuracion["regalias"]/100)));
+        $acumulado=($acumulado+($acumulado*($tipo["portipo"]/100)));
+        $acumulado=($acumulado+($acumulado*($busca["porcentajeganancia"]/100)));         
+        
+        $sqlExcepcion="select * from excepcionlista where idlistadeprecios='".$idlistadeprecios."' and idproducto='".$producto["idproducto"]."' and estatus=0";                                                                                
+        $resultExcepcion=mysql_query($sqlExcepcion,$con) or die(mysql_error());
+        if(mysql_num_rows($resultExcepcion)>0){
+            $excepcion=mysql_fetch_assoc($resultExcepcion);
+            $acumulado=$excepcion["preciofinal"];
+        }        
+               
+        return $acumulado;
+    }     
     
 ?>

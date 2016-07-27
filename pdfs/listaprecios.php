@@ -35,6 +35,36 @@ $pdf->SetFont('courier', 'B', 10);
 $pdf->Line(10, 29, 200, 29);
 /* * *************FIN CABECERA PDF*********************** */
 
+$meses=array();
+    
+$meses[0]="Enero";
+$meses[1]="Febrero";
+$meses[2]="Marzo";
+$meses[3]="Abril";
+$meses[4]="Mayo";
+$meses[5]="Junio";
+$meses[6]="Julio";
+$meses[7]="Agosto";
+$meses[8]="Septiembre";
+$meses[9]="Octubre";
+$meses[10]="Noviembre";
+$meses[11]="Diciembre";
+$dia=date("d");
+$mes=date("m");
+$ano=date("Y");
+
+
+$altura=18;
+$pdf->SetXY(120,$altura); $altura+=5;
+$pdf->SetFont('courier', 'I', 10);
+$pdf->Cell(80, 6, "Lista de Precios", 0, 1, "R", 0, '', 0);
+
+$pdf->SetXY(120,$altura); 
+$pdf->SetFont('courier', 'I', 10);
+$pdf->Cell(80, 6, "Emitida el ".$dia." de ".$meses[($mes-1)]." de ".$ano, 0, 1, "R", 0, '', 0);
+
+
+
 
 $colum = 10;
 $suma = 35;

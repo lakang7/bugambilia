@@ -278,11 +278,18 @@
                                                                     echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
-                                                                    echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
+                                                                    echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en PDF</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,7)==1){
-                                                                    echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
-                                                                }
+                                                                    echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en Excel</a></li>";
+                                                                }                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],3,7,8)==1){
+                                                                    echo "<li><a href='pdfs/listapreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en PDF</a></li>";
+                                                                }                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],3,7,9)==1){
+                                                                    echo "<li><a href='excel/listadepreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en Excel</a></li>";
+                                                                }                                                                
+                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                
                                                                                                                                 
