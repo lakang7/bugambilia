@@ -238,16 +238,16 @@ if (mysql_num_rows($result_cattipo) > 0) {
 
                             $pdf->SetFont('courier', '', 7);
                             $pdf->SetXY($colum+=8, $suma);
-                            $pdf->Cell(24, 4, $pro["preciofabrica"], 1, 1, "C", 0, '', 0);
+                            $pdf->Cell(24, 4, number_format(round($pro["preciofabrica"],2),2,".",","), 1, 1, "C", 0, '', 0);
 
                             $acumulado = $pro["preciofabrica"];
                             $acumulado = $acumulado + $acumulado * ($configuracion["regalias"] / 100);
                             $pdf->SetXY($colum+=24, $suma);
-                            $pdf->Cell(14, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+                            $pdf->Cell(14, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
 
                             $acumulado = $acumulado + $acumulado * ($tipo["portipo"] / 100);
                             $pdf->SetXY($colum+=14, $suma);
-                            $pdf->Cell(22, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+                            $pdf->Cell(22, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
 
                             $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
                             $pdf->SetXY($colum+=22, $suma);
@@ -257,9 +257,9 @@ if (mysql_num_rows($result_cattipo) > 0) {
                                 $excepcion = mysql_fetch_assoc($resultExcepcion);
 //                        echo "<div class='col-xs-1' style='background-color: #ff0'>" . round($excepcion["preciofinal"], 2) . "</div>";
                                 $pdf->SetFillColor(255,255,0);
-                                $pdf->Cell(12, 4, number_format($excepcion["preciofinal"], 3, ".", ","), 1, 1, "C", 1, '', 0);
+                                $pdf->Cell(12, 4, number_format(round($excepcion["preciofinal"],2), 2, ".", ","), 1, 1, "C", 1, '', 0);
                             } else {
-                                $pdf->Cell(12, 4, number_format($acumulado, 3, ".", ","), 1, 1, "C", 0, '', 0);
+                                $pdf->Cell(12, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
                             }
 
                             $colum = 10;
