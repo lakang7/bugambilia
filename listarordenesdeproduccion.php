@@ -287,7 +287,10 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],5,9,4)==1){
                                                                     echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>";
                                                                 }
-                                                                echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],5,9,6)==1){
+                                                                    echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                                                                }
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                               
                                                                 echo "</div>";

@@ -328,8 +328,9 @@
                                                                         }                                                                        
                                                                     }
                                                                 }
-                                                                                                                                
-                                                                echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                                                                if(habilitaMenu($_SESSION["usuario"],4,8,8)==1){                                                                
+                                                                    echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                                                                }
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                                                                 echo "</div>";

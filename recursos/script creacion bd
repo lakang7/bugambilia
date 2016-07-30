@@ -930,6 +930,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Cancelar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,8,"Enviar por Email");
 
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
@@ -937,6 +938,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,3,"Informe en PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,4,"Cancelar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(9,5,"Pagar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,6,"Enviar por Email");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");
@@ -948,6 +950,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(12,4,"Cancelar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,5,"Enviar por Email");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(13,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(14,1,"Visualizar");
