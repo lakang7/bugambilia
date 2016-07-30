@@ -255,7 +255,10 @@
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["correo"]; ?>" id="correo" name="correo" placeholder="Correo Electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>
                                                         
                                                         <div style="width: 100%; margin-top: 0px">Contraseña</div>
-                                                        <div style="width: 100%;"><input type="password" value="<?php echo $configuracion["password"]; ?>" id="seguridad" name="seguridad" placeholder="Contraseña para el correo electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>                                                        
+                                                        <div style="width: 100%;"><input type="password" value="<?php echo $configuracion["seguridad"]; ?>" id="seguridad" name="seguridad" placeholder="Contraseña para el correo electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>    
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Correo de contacto para fabrica</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["correofabrica"]; ?>" id="contactofabrica" name="contactofabrica" placeholder="Correo electronico para enviar ordenes de produccion a fabrica" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>                                                        
                                                         
                                                     </div>
 						</div>

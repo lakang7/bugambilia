@@ -465,8 +465,63 @@
     
     
     
-    $pdf->Output('Orden de Compra.pdf', 'I');    
+       
     
-    
+    if($_GET["aux"]==0){
+        $pdf->Output('Orden de Produccion '.$orden["codigoop"].'.pdf', 'I');                 
+    }else if($_GET["aux"]==1){
+        $pdf->Output('C:\xampp\htdocs\bugambilia\pdfs\temporal\Orden de Produccion '.$orden["codigoop"].'.pdf', 'F');        
+        
+        $sqlORDENPRODUCCION="select * from ordendeproduccion where idordendeproduccion='".$_GET["id"]."'";
+        $resultORDENPRODUCCION=mysql_query($sqlORDENPRODUCCION,$con) or die(mysql_error());
+        $ordendeproduccion = mysql_fetch_assoc($resultORDENPRODUCCION);
+        
+        $sql_CONFIGURACION="select * from configuracionsistema where idconfiguracionsistema=1";
+        $result_CONFIGURACION=mysql_query($sql_CONFIGURACION,$con) or die(mysql_error());
+        if(mysql_num_rows($result_CONFIGURACION)>0){
+            $configuracion = mysql_fetch_assoc($result_CONFIGURACION);                                                                                                                                           
+        }
+        
+        require_once "Mail.php";
+        include 'Mail/mime.php' ;
+
+        $from = '<'.$configuracion["correo"].'>';        
+        $to = $configuracion["correofabrica"];
+        $subject = 'Orden de Produccion '.$ordendeproduccion["codigoop"];
+
+        $headers = array(
+            'From' => $from,
+            'To' => $to,
+            'Subject' => $subject
+        ); 
+        
+        $mime = new Mail_mime();
+        $mime -> setHTMLBody("Estimado Proveedor, adjunto le enviamos la orden de produccion ".$ordendeproduccion["codigoop"].".\n");        
+        $mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\pdfs\\temporal\\Orden de Produccion ".$ordendeproduccion["codigoop"].".pdf",'pdf');
+        $body = $mime->get();
+        $headers = $mime -> headers($headers);        
+        
+        $smtp = Mail::factory('smtp', array(
+            'host' => $configuracion["servidor"],
+            'port' => $configuracion["puerto"],
+            'auth' => true,
+            'username' => $configuracion["correo"],
+            'password' => $configuracion["seguridad"]
+        ));
+
+        $mail = $smtp->send($to, $headers, $body);
+
+        if (PEAR::isError($mail)) {
+            echo('<p>' . $mail->getMessage() . '</p>');
+        } else {
+            ?>
+                <script type="text/javascript">
+                    alert("Correo Electronico Enviado satisfactoriamente.");
+                    parent.window.close();
+                </script>
+            <?php
+        }        
+                                                                        
+    }    
     
 ?>

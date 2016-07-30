@@ -1530,7 +1530,7 @@ if ($tarea == 23) {
     }    
     
         
-    $sqlUpdate="update configuracionsistema set secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', carpetabusqueda='".$_POST["carpetabusqueda"]."', rfcextranjero='".$_POST["rfcextranjero"]."', servidor='".$_POST["servidor"]."', puerto='".$_POST["puerto"]."', correo='".$_POST["correo"]."', seguridad='".$_POST["seguridad"]."' where idconfiguracionsistema=1";
+    $sqlUpdate="update configuracionsistema set secuenciaop='".$_POST["secuencia"]."', facturacionempresa='".$_POST["fiscalempresa"]."', facturacioncalle='".$_POST["fiscalavenida"]."', facturacionext='".$_POST["fiscalexterior"]."', facturacionint='".$_POST["fiscalinterior"]."', facturacioncolonia='".$_POST["fiscalcolonia"]."', facturacionpostal='".$_POST["fiscalpostal"]."', facturacionestpais='".$_POST["fiscalestpais"]."', facturacionrfc='".$_POST["fiscalrfc"]."', carpetabusqueda='".$_POST["carpetabusqueda"]."', rfcextranjero='".$_POST["rfcextranjero"]."', servidor='".$_POST["servidor"]."', puerto='".$_POST["puerto"]."', correo='".$_POST["correo"]."', seguridad='".$_POST["seguridad"]."', correofabrica='".$_POST["contactofabrica"]."' where idconfiguracionsistema=1";
     $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
     ?>
         <script type="text/javascript">
