@@ -243,7 +243,20 @@
                                                             <input type="text" id="fiscalcolonia" value="<?php echo $configuracion["facturacioncolonia"]; ?>" name="fiscalcolonia" placeholder="Colonia" style="width: 25%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="60" />
                                                             <input type="text" id="fiscalestpais" value="<?php echo $configuracion["facturacionestpais"]; ?>" name="fiscalestpais" placeholder="Estado y País" style="width: 48%; font-size: 1.8ex; margin-bottom: 10px;margin-right: 0.5ex" maxlength="30" />                                                            
                                                             <input type="text" id="fiscalpostal" value="<?php echo $configuracion["facturacionpostal"]; ?>" name="fiscalpostal" placeholder="Código Postal" style="width: 24%; font-size: 1.8ex; margin-bottom: 10px" maxlength="10" />
-                                                        </div>                                                       
+                                                        </div> 
+                                                        <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Datos de Configuración para el envio de Emails</div>  
+                                                        <div style="width: 100%; margin-top: 0px">Servidor de Correo Electronico</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["servidor"]; ?>" id="servidor" name="servidor" placeholder="Servidor de Correo Electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>                                                        
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Puerto de Conexión</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["puerto"]; ?>" id="puerto" name="puerto" placeholder="Puerto de Conexión" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Correo Electronico</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $configuracion["correo"]; ?>" id="correo" name="correo" placeholder="Correo Electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>
+                                                        
+                                                        <div style="width: 100%; margin-top: 0px">Contraseña</div>
+                                                        <div style="width: 100%;"><input type="password" value="<?php echo $configuracion["password"]; ?>" id="seguridad" name="seguridad" placeholder="Contraseña para el correo electronico" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>                                                        
+                                                        
                                                     </div>
 						</div>
 						<button class="btn btn-info" type="submit"><i class="ace-icon fa fa-check "></i>Registrar</button>                                                

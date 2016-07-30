@@ -578,6 +578,10 @@ CREATE TABLE configuracionsistema (
     folio integer not null,
     carpetabusqueda varchar(60) not null,
     rfcextranjero varchar(25) not null,
+    servidor varchar(60) not null,
+    puerto varchar(6) not null,
+    correo varchar(60) not null,
+    password varchar(30) not null,
     PRIMARY KEY (idconfiguracionsistema)
 );
 
@@ -871,7 +875,7 @@ insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción
 insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Historicos","reportehistoricos.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas","reporteventasdesdehasta.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Pagar","pdfs/cuentasporpagar.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Pagar","pdfs/cuentasporpagar.php",1);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,

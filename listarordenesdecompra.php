@@ -312,7 +312,7 @@
                                                                 }                                                                                                                                
                                                                 
                                                                 if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
-                                                                    echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
+                                                                    echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar PDF</a></li>";
                                                                 }
                                                                 
                                                                 if($band==1){
@@ -328,6 +328,8 @@
                                                                         }                                                                        
                                                                     }
                                                                 }
+                                                                                                                                
+                                                                echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                                                                 echo "</div>";

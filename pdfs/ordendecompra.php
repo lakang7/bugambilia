@@ -759,9 +759,65 @@
     $pdf->SetFont('courier', 'N', 8);
     $pdf->MultiCell(193, 4,$orden["observaciones"], 1, "L", 0, 0, 10, $suma, true);        
     
-    $pdf->Output('Orden de Compra.pdf', 'I');
-    /*Agregado desde origen externo*/
-    
-    
-    
+    if($_GET["aux"]==0){
+        $pdf->Output('Orden de Compra '.$orden["codigoexterno"].'.pdf', 'I');
+    }else if($_GET["aux"]==1){
+        $pdf->Output('C:\xampp\htdocs\bugambilia\pdfs\temporal\Orden de Compra '.$orden["codigoexterno"].'.pdf', 'F');
+        
+        $sqlORDENCOMPRA="select * from ordendecompra where idordendecompra='".$_GET["id"]."'";
+        $resultORDENCOMPRA=mysql_query($sqlORDENCOMPRA,$con) or die(mysql_error());
+        $ordendecompra = mysql_fetch_assoc($resultORDENCOMPRA);
+        
+        $sql_CONFIGURACION="select * from configuracionsistema where idconfiguracionsistema=1";
+        $result_CONFIGURACION=mysql_query($sql_CONFIGURACION,$con) or die(mysql_error());
+        if(mysql_num_rows($result_CONFIGURACION)>0){
+            $configuracion = mysql_fetch_assoc($result_CONFIGURACION);                                                                                                                                           
+        } 
+        
+        $sqlAGENDA="select * from agenda where idagenda='".$ordendecompra["idagenda01"]."'";
+        $resultAGENDA=mysql_query($sqlAGENDA,$con) or die(mysql_error());
+        $contacto = mysql_fetch_assoc($resultAGENDA);        
+        
+        
+        require_once "Mail.php";
+        include 'Mail/mime.php' ;
+
+        $from = '<'.$configuracion["correo"].'>';        
+        $to = $contacto["email"];
+        $subject = 'Orden de Compra '.$ordendecompra["codigoexterno"];
+
+        $headers = array(
+            'From' => $from,
+            'To' => $to,
+            'Subject' => $subject
+        ); 
+        
+        $mime = new Mail_mime();
+        $mime -> setHTMLBody("Estimado cliente, adjunto le estamos enviando la Orden de Compra ".$ordendecompra["codigoexterno"].", para que la pueda revisar y nos confirme si todos los datos son correctos para proceder a mandar a produccion.\n");        
+        $mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\pdfs\\temporal\\Orden de Compra ".$orden["codigoexterno"].".pdf",'pdf');
+        $body = $mime->get();
+        $headers = $mime -> headers($headers);        
+        
+        $smtp = Mail::factory('smtp', array(
+            'host' => $configuracion["servidor"],
+            'port' => $configuracion["puerto"],
+            'auth' => true,
+            'username' => $configuracion["correo"],
+            'password' => $configuracion["seguridad"]
+        ));
+
+        $mail = $smtp->send($to, $headers, $body);
+
+        if (PEAR::isError($mail)) {
+            echo('<p>' . $mail->getMessage() . '</p>');
+        } else {
+            ?>
+                <script type="text/javascript">
+                    alert("Correo Electronico Enviado satisfactoriamente.");
+                    parent.window.close();
+                </script>
+            <?php
+        }        
+        
+    }                
 ?>
