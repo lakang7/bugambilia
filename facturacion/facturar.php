@@ -152,7 +152,7 @@
             }    
             
             echo "El valor de la posicion01 es: ".$posicion01." y el de la posicion02 es: ".$posicion02."</br>";
-            if($posicion01>0 && $posicion02>0){
+            if($posicion01>=0 && $posicion02>=0){
                 $band1=1;
             }            
         }

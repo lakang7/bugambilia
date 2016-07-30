@@ -1,0 +1,6 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Productos FEMSA CA|Av. do Estados|5533|306|Liberdage|||Sao Paulo|Sao Paulo|Estados Unidos|03030|
+|COMPROBANTE|3.2|Sin Serie|2016-07-29 22:05:11|Pago en Una Sola Exhibicion|4512.600|5234.616|Transferencia Electrónica|Ingreso|USD|18.750||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 18.750, Orden de Compra: POST02, Orden de Producción: POMX-4160|FALSE|micorreo@pruebascorreo.com|||FACTURA|4567|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||Distrito Federal||MEXICO|03800|
+|CONCEPTO|45|Pieza|BSD16|BSD16 T Curazao Cuadrado Hondo XXL|57.62|2592.9|IVA|16|414.86|||
+|CONCEPTO|45|Pieza|DS203|DS203 PC Placa Cuadrada con Ribete M|42.66|1919.7|IVA|16|307.15|||

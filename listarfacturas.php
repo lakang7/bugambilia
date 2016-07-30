@@ -293,7 +293,7 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],7,12,4)==1){
                                                                     echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idfactura"].")>Cancelar</a></li>";
                                                                 }                                                                
-
+                                                                echo "<li><a href='pdfs/factura.php?id=".$fila["idfactura"]."' target='_blank'>Enviar por Email</a></li>";
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                
                                                                 
