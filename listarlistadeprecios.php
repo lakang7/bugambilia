@@ -288,6 +288,9 @@
                                                                 }                                                                
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,9)==1){
                                                                     echo "<li><a href='excel/listadepreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en Excel</a></li>";
+                                                                } 
+                                                                if(habilitaMenu($_SESSION["usuario"],3,7,10)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=38&id=".$fila["idlistadeprecios"]."'>Eliminar Lista de Precios</a></li>";
                                                                 }                                                                
                                                                 
                                                                 echo "</ul>";                                                                                                                                

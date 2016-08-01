@@ -282,6 +282,9 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],1,1,4)==1){
                                                                     echo "<li><a href='pdfs/empresas.php?id=".$fila["idempresa"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
                                                                 }
+                                                                if(habilitaMenu($_SESSION["usuario"],1,1,5)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=32&id=".$fila["idempresa"]."'>Eliminar Empresa</a></li>";
+                                                                }
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                
                                                                 

@@ -294,6 +294,9 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
                                                                     echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
                                                                 }
+                                                                if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
+                                                                }                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                                                                                
                                                                 echo "</div>";

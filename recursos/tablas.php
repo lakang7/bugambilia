@@ -78,6 +78,9 @@
                     if(habilitaMenu($_SESSION["usuario"],1,1,4)==1){
                         echo "<li><a href='pdfs/empresas.php?id=".$fila["idempresa"]."' target='_blank'>Informe en PDF</a></li>";
                     }
+                    if(habilitaMenu($_SESSION["usuario"],1,1,5)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=32&id=".$fila["idempresa"]."'>Eliminar Empresa</a></li>";
+                    }                    
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -192,6 +195,9 @@
                     if(habilitaMenu($_SESSION["usuario"],1,2,3)==1){
                         echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";                                                                
                     }
+                    if(habilitaMenu($_SESSION["usuario"],1,2,4)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=33&id=".$fila["idsucursal"]."'>Eliminar Sucursal</a></li>";
+                    }                    
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -289,6 +295,9 @@
                     if(habilitaMenu($_SESSION["usuario"],2,4,3)==1){
                         echo "<li><a href='editarmaterial.php?id=".$fila["idmaterial"]."'>Editar</a></li>";                                                                
                     }
+                    if(habilitaMenu($_SESSION["usuario"],2,4,4)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=35&id=".$fila["idmaterial"]."'>Eliminar Material</a></li>";
+                    }                      
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -407,6 +416,9 @@
                     if(habilitaMenu($_SESSION["usuario"],2,5,4)==1){
                         echo "<li><a href='pdfs/patronesproducto.php?id=".$fila["idpatronproducto"]."'  target='_blank'>Informe en PDF</a></li>";
                     }
+                    if(habilitaMenu($_SESSION["usuario"],2,5,5)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=36&id=".$fila["idpatronproducto"]."'>Eliminar Patron de Producto</a></li>";
+                    }                    
                     echo "</ul>";                                                                                                                                
                     echo "</div>";                    
                     echo "</div>";
@@ -623,6 +635,9 @@
                     if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
                         echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
                     }
+                    if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
+                    }                     
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -717,11 +732,20 @@
                         echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
                     }
                     if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
-                        echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en PDF</a></li>";
+                        echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en PDF</a></li>";
                     }
                     if(habilitaMenu($_SESSION["usuario"],3,7,7)==1){
-                        echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar en Excel</a></li>";
-                    }
+                        echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en Excel</a></li>";
+                    }                                                                
+                    if(habilitaMenu($_SESSION["usuario"],3,7,8)==1){
+                        echo "<li><a href='pdfs/listapreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en PDF</a></li>";
+                    }                                                                
+                    if(habilitaMenu($_SESSION["usuario"],3,7,9)==1){
+                        echo "<li><a href='excel/listadepreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en Excel</a></li>";
+                    } 
+                    if(habilitaMenu($_SESSION["usuario"],3,7,10)==1){
+                        echo "<li><a href='recursos/acciones.php?tarea=38&id=".$fila["idlistadeprecios"]."'>Eliminar Lista de Precios</a></li>";
+                    } 
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";

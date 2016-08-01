@@ -890,28 +890,34 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(1,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(1,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(1,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(1,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,5,"Eliminar Empresa");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(2,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(2,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(2,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,4,"Eliminar Sucursal");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(3,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(3,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(3,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,4,"Eliminar Contacto");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(4,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(4,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(4,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,4,"Eliminar Material");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(5,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(5,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(5,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(5,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,5,"Eliminar Patron de Producto");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,5,"Eliminar ,Producto");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,2,"Listar");
@@ -922,6 +928,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(7,6,"Exportar en PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,7,"Exportar en Excel");
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,8,"Exportar Para Clientes PDF");
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,9,"Exportar Para Clientes Excel");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,10,"Eliminar Lista de Precios");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(8,2,"Listar");

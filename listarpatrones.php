@@ -279,7 +279,9 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],2,5,4)==1){
                                                                     echo "<li><a href='pdfs/patronesproducto.php?id=".$fila["idpatronproducto"]."'  target='_blank'>Informe en PDF</a></li>";
                                                                 }
-                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],2,5,5)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=36&id=".$fila["idpatronproducto"]."'>Eliminar Patron de Producto</a></li>";
+                                                                }                                                                 
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";
                                                                 echo "</div>";

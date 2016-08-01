@@ -297,6 +297,9 @@
                                                             if(habilitaMenu($_SESSION["usuario"],1,3,3)==1){
                                                                 echo "<div class='col-xs-12'><a href='editarcontacto.php?id=".$fila["idagenda"]."' ><span class='label label-warning'>Editar</span></a></div>";                                                            
                                                             }
+                                                            if(habilitaMenu($_SESSION["usuario"],1,3,4)==1){
+                                                                echo "<div class='col-xs-12'><a href='recursos/acciones.php?tarea=34&id=".$fila["idagenda"]."' ><span class='label label-warning'>Eliminar Contacto</span></a></div>";                                                            
+                                                            }                                                            
                                                             echo "</div>";
                                                         }
                                                         echo "<div class='row contacto'>".mysql_num_rows($result_listaAGENDA)." Contactos Encontrados</div>";

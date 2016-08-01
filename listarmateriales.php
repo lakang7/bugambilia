@@ -274,7 +274,10 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],2,4,3)==1){
                                                                     echo "<li><a href='editarmaterial.php?id=".$fila["idmaterial"]."'>Editar</a></li>";
                                                                 }
-                                                                                                                                
+                                                                
+                                                                if(habilitaMenu($_SESSION["usuario"],2,4,4)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=35&id=".$fila["idmaterial"]."'>Eliminar Material</a></li>";
+                                                                }                                                                                                                                                                                                 
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";
                                                                 echo "</div>";

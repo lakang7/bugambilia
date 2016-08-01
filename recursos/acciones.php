@@ -1723,4 +1723,396 @@ if ($tarea == 31) {
         </script>
     <?php        
 }
+
+/*Eliminar Empresa*/
+if($tarea==32){
+    $sqlSucursales="select * from sucursal where idempresa='".$_GET["id"]."'";
+    $resultSucursales=mysql_query($sqlSucursales,$con) or die(mysql_error());
+    $sucursales=mysql_num_rows($resultSucursales);
+    
+    if($sucursales==0){
+        $sqlContactos="select * from asociacionagenda where idempresa='".$_GET["id"]."'";
+        $resultContactos=mysql_query($sqlContactos,$con) or die(mysql_error());
+        $contactos=mysql_num_rows($resultContactos);    
+        
+        if($contactos==0){
+            $sqlOrdenesdecompra="select * from ordendecompra where idempresa='".$_GET["id"]."'";
+            $resultOrdenesdecompra=mysql_query($sqlOrdenesdecompra,$con) or die(mysql_error());
+            $ordenesdecompra=mysql_num_rows($resultOrdenesdecompra);   
+            
+            if($ordenesdecompra==0){
+                $sqlOrdenesdeproduccion="select * from ordendeproduccion where idempresa='".$_GET["id"]."'";
+                $resultOrdenesdeproduccion=mysql_query($sqlOrdenesdeproduccion,$con) or die(mysql_error());
+                $ordenesdeproduccion=mysql_num_rows($resultOrdenesdeproduccion); 
+                
+                if($ordenesdeproduccion==0){
+                    $sqlFacturas="select * from factura where idempresa='".$_GET["id"]."'";
+                    $resultFacturas=mysql_query($sqlFacturas,$con) or die(mysql_error());
+                    $facturas=mysql_num_rows($resultFacturas); 
+                }
+            }
+        }
+    }
+    
+    if($sucursales>0){
+        ?>
+        <script type="text/javascript">
+            alert("La empresa no se puede eliminar ya que tiene sucursales asociadas.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php
+    }
+    
+    if($contactos>0){
+        ?>
+        <script type="text/javascript">
+            alert("La empresa no se puede eliminar ya que tiene contactos asociados.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdecompra>0){
+        ?>
+        <script type="text/javascript">
+            alert("La empresa no se puede eliminar ya que tiene ordenes de compra asociada.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdeproduccion>0){
+        ?>
+        <script type="text/javascript">
+            alert("La empresa no se puede eliminar ya que tiene ordenes de produccion asociadas.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php
+    }
+    
+    if($facturas>0){
+        ?>
+        <script type="text/javascript">
+            alert("La empresa no se puede eliminar ya que tiene facturas asociadas.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php
+    }
+    
+    if($sucursales==0 && $contactos==0 && $ordenesdecompra==0 && $ordenesdeproduccion==0 && $facturas==0){
+        $sql_eliminaEmpresa = "delete from empresa where idempresa='" . $_GET["id"] . "'";
+        $result_eliminaEmpresa = mysql_query($sql_eliminaEmpresa, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Empresa Eliminada Satisfactoriamente.");
+            document.location="../listarempresas.php";
+        </script>
+        <?php                        
+    }        
+}
+
+
+/*Eliminar Sucursal*/
+if($tarea==33){
+    $sqlContactos="select * from asociacionagenda where idsucursal='".$_GET["id"]."'";
+    $resultContactos=mysql_query($sqlContactos,$con) or die(mysql_error());
+    $contactos=mysql_num_rows($resultContactos);    
+        
+    if($contactos==0){
+        $sqlOrdenesdecompra="select * from ordendecompra where idsucursal='".$_GET["id"]."'";
+        $resultOrdenesdecompra=mysql_query($sqlOrdenesdecompra,$con) or die(mysql_error());
+        $ordenesdecompra=mysql_num_rows($resultOrdenesdecompra);   
+            
+        if($ordenesdecompra==0){
+            $sqlOrdenesdeproduccion="select * from ordendeproduccion where idsucursal='".$_GET["id"]."'";
+            $resultOrdenesdeproduccion=mysql_query($sqlOrdenesdeproduccion,$con) or die(mysql_error());
+            $ordenesdeproduccion=mysql_num_rows($resultOrdenesdeproduccion);                
+        }
+    }
+    
+    if($contactos>0){
+        ?>
+        <script type="text/javascript">
+            alert("La sucursal no se puede eliminar ya que tiene contactos asociados.");
+            document.location="../listarsucursales.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdecompra>0){
+        ?>
+        <script type="text/javascript">
+            alert("La sucursal no se puede eliminar ya que tiene ordenes de compra asociada.");
+            document.location="../listarsucursales.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdeproduccion>0){
+        ?>
+        <script type="text/javascript">
+            alert("La sucursal no se puede eliminar ya que tiene ordenes de produccion asociadas.");
+            document.location="../listarsucursales.php";
+        </script>
+        <?php
+    }    
+    
+    if($contactos==0 && $ordenesdecompra==0 && $ordenesdeproduccion==0){
+        $sql_eliminaestados=" delete from estadosensucursal where idsucursal='".$_GET["id"]."'"; 
+        $result_eliminaestados = mysql_query($sql_eliminaestados, $con) or die(mysql_error()); 
+        
+        $sql_eliminaSucursal = "delete from sucursal where idsucursal='" . $_GET["id"] . "'";
+        $result_eliminaSucursal = mysql_query($sql_eliminaSucursal, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Sucursal Eliminada Satisfactoriamente.");
+            document.location="../listarsucursales.php";
+        </script>
+        <?php                        
+    }         
+}
+
+/*Eliminar Contacto*/
+if($tarea==34){
+    $sqlOrdenesdecompra="select * from ordendecompra where idagenda01='".$_GET["id"]."' or idagenda02='".$_GET["id"]."' or idagenda03='".$_GET["id"]."'";
+    $resultOrdenesdecompra=mysql_query($sqlOrdenesdecompra,$con) or die(mysql_error());
+    $ordenesdecompra=mysql_num_rows($resultOrdenesdecompra); 
+    if($ordenesdecompra==0){
+        $sqlOrdenesdeproduccion="select * from ordendeproduccion where idagenda01='".$_GET["id"]."' or idagenda02='".$_GET["id"]."' or idagenda03='".$_GET["id"]."'";
+        $resultOrdenesdeproduccion=mysql_query($sqlOrdenesdeproduccion,$con) or die(mysql_error());
+        $ordenesdeproduccion=mysql_num_rows($resultOrdenesdeproduccion);
+        if($ordenesdeproduccion==0){
+            $sqlFacturas="select * from factura where idagenda='".$_GET["id"]."'";
+            $resultFacturas=mysql_query($sqlFacturas,$con) or die(mysql_error());
+            $facturas=mysql_num_rows($resultFacturas);            
+        }
+    }
+    
+    if($ordenesdecompra>0){
+        ?>
+        <script type="text/javascript">
+            alert("El contacto no se puede eliminar ya que tiene ordenes de compras asociados.");
+            document.location="../listarcontactos.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdeproduccion>0){
+        ?>
+        <script type="text/javascript">
+            alert("El contacto no se puede eliminar ya que tiene ordenes de produccion asociada.");
+            document.location="../listarcontactos.php";
+        </script>
+        <?php
+    }
+    
+    if($facturas>0){
+        ?>
+        <script type="text/javascript">
+            alert("El contacto no se puede eliminar ya que tiene facturas asociadas.");
+            document.location="../listarcontactos.php";
+        </script>
+        <?php
+    } 
+    
+    if($ordenesdecompra==0 && $ordenesdeproduccion==0 && $facturas==0){
+        $sql_eliminaAsociado=" delete from asociacionagenda where idagenda='".$_GET["id"]."'"; 
+        $result_eliminaAsociado = mysql_query($sql_eliminaAsociado, $con) or die(mysql_error()); 
+        
+        $sql_eliminaAgenda = "delete from agenda where idagenda='" . $_GET["id"] . "'";
+        $result_eliminaAgenda = mysql_query($sql_eliminaAgenda, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Informacion de Contacto Eliminada Satisfactoriamente.");
+            document.location="../listarcontactos.php";
+        </script>
+        <?php                        
+    }     
+}
+
+/*Eliminar Material*/
+if($tarea==35){
+    $sqlmatpatron="select * from materialespatron where idmaterial='".$_GET["id"]."'";
+    $resultMatPatron=mysql_query($sqlmatpatron,$con) or die(mysql_error());
+    $matpatron=mysql_num_rows($resultMatPatron);  
+    
+    $sqlProductos="select * from producto where idmaterial='".$_GET["id"]."'";
+    $resultProductos=mysql_query($sqlProductos,$con) or die(mysql_error());
+    $productos=mysql_num_rows($resultProductos);      
+    
+    if($matpatron>0){
+        ?>
+        <script type="text/javascript">
+            alert("El Material no se puede eliminar ya que esta asociado a patrones de productos.");
+            document.location="../listarmateriales.php";
+        </script>
+        <?php
+    }
+    
+    if($productos>0){
+        ?>
+        <script type="text/javascript">
+            alert("El Material no se puede eliminar ya que esta asociado a productos.");
+            document.location="../listarmateriales.php";
+        </script>
+        <?php
+    }
+    
+    if($matpatron==0 && $productos==0){
+        $sql_eliminaColorMateriales = "delete from colorenmaterial where idmaterial='" . $_GET["id"] . "'";
+        $result_eliminaColorMateriales = mysql_query($sql_eliminaColorMateriales, $con) or die(mysql_error());         
+        
+        $sql_eliminaMaterial = "delete from material where idmaterial='" . $_GET["id"] . "'";
+        $result_eliminaMaterial = mysql_query($sql_eliminaMaterial, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Material Eliminado Satisfactoriamente.");
+            document.location="../listarmateriales.php";
+        </script>
+        <?php         
+    }    
+}
+
+/*Eliminar Patron*/
+if($tarea==36){
+    $sqlProductos="select * from producto where idpatronproducto='".$_GET["id"]."'";
+    $resultProductos=mysql_query($sqlProductos,$con) or die(mysql_error());
+    $productos=mysql_num_rows($resultProductos);  
+    
+    if($productos>0){
+        ?>
+        <script type="text/javascript">
+            alert("El Patron no se puede eliminar ya que tiene productos asociados.");
+            document.location="../listarpatrones.php";
+        </script>
+        <?php
+    }
+            
+    if($productos==0){
+        
+        $sql_eliminamaterialespatron = "delete from materialespatron where idpatronproducto='" . $_GET["id"] . "'";
+        $result_eliminamaterialpatron = mysql_query($sql_eliminamaterialespatron, $con) or die(mysql_error());
+        
+        $sql_eliminapatronProducto = "delete from patronproducto where idpatronproducto='" . $_GET["id"] . "'";
+        $result_eliminapatronProducto = mysql_query($sql_eliminapatronProducto, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Patron de Producto Eliminado Satisfactoriamente.");
+            document.location="../listarpatrones.php";
+        </script>
+        <?php         
+    }
+    
+}
+
+/*Eliminar Producto*/
+if($tarea==37){
+    $sqlOrdenesdecompra="select * from productosordencompra where idproducto='".$_GET["id"]."'";
+    $resultOrdenesdecompra=mysql_query($sqlOrdenesdecompra,$con) or die(mysql_error());
+    $ordenesdecompra=mysql_num_rows($resultOrdenesdecompra);   
+    
+    $sqlOrdenesdeproduccion="select * from productosordenproduccion where idproducto='".$_GET["id"]."'";
+    $resultOrdenesdeproduccion=mysql_query($sqlOrdenesdeproduccion,$con) or die(mysql_error());
+    $ordenesdeproduccion=mysql_num_rows($resultOrdenesdeproduccion);    
+    
+    
+    if($ordenesdecompra>0){
+        ?>
+        <script type="text/javascript">
+            alert("El Producto no se puede eliminar ya que esta asociado a ordenes de compra.");
+            document.location="../listarproductos.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdeproduccion>0){
+        ?>
+        <script type="text/javascript">
+            alert("El Producto no se puede eliminar ya que esta asociado a ordenes de produccion.");
+            document.location="../listarproductos.php";
+        </script>
+        <?php
+    }  
+    
+    if($ordenesdecompra==0 && $ordenesdeproduccion==0){
+        
+        $sql_eliminamaHistorico = "delete from historicopreciofabrica where idproducto='" . $_GET["id"] . "'";
+        $result_eliminaHistorico = mysql_query($sql_eliminamaHistorico, $con) or die(mysql_error());
+        
+        $sql_eliminaProducto = "delete from producto where idproducto='" . $_GET["id"] . "'";
+        $result_eliminaProducto = mysql_query($sql_eliminaProducto, $con) or die(mysql_error()); 
+        ?>
+        <script type="text/javascript">
+            alert("Producto Eliminado Satisfactoriamente.");
+            document.location="../listarproductos.php";
+        </script>
+        <?php         
+    }    
+}
+
+/*Eliminar Lista de Precios*/
+if($tarea==38){
+    $sqlOrdenesdecompra="select * from ordendecompra where idlistadeprecios='".$_GET["id"]."'";
+    $resultOrdenesdecompra=mysql_query($sqlOrdenesdecompra,$con) or die(mysql_error());
+    $ordenesdecompra=mysql_num_rows($resultOrdenesdecompra);
+    
+    $sqlOrdenesdeproduccion="select * from ordendeproduccion where idlistadeprecios='".$_GET["id"]."'";
+    $resultOrdenesdeproduccion=mysql_query($sqlOrdenesdeproduccion,$con) or die(mysql_error());
+    $ordenesdeproduccion=mysql_num_rows($resultOrdenesdeproduccion); 
+    
+    if($ordenesdecompra>0){
+        ?>
+        <script type="text/javascript">
+            alert("La Lista de Precios no se puede eliminar ya que esta asociada a ordenes de compra.");
+            document.location="../listarlistadeprecios.php";
+        </script>
+        <?php
+    }
+    
+    if($ordenesdeproduccion>0){
+        ?>
+        <script type="text/javascript">
+            alert("La Lista de Precios no se puede eliminar ya que esta asociada a ordenes de produccion.");
+            document.location="../listarlistadeprecios.php";
+        </script>
+        <?php
+    }  
+    
+    if($ordenesdecompra==0 && $ordenesdeproduccion==0){
+        
+        $sql_exc="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."'";
+        $result_exc = mysql_query($sql_exc, $con) or die(mysql_error());        
+        if (mysql_num_rows($result_exc) > 0) {
+            while ($excepcion = mysql_fetch_assoc($resultFactura)) {                
+                $sql_eliminamaExcepciones = "delete from historicoexcepcionlista where idexcepcionlista='" . $excepcion["idexcepcionlista"] . "'";
+                $result_eliminaExcepciones = mysql_query($sql_eliminamaExcepciones, $con) or die(mysql_error());            
+            }
+        }
+                        
+        $sql_eliminamaExcepciones = "delete from excepcionlista where idlistadeprecios='" . $_GET["id"] . "'";
+        $result_eliminaExcepciones = mysql_query($sql_eliminamaExcepciones, $con) or die(mysql_error());
+         
+        $sql_exc2="select * from listatipos where idlistadeprecios='".$_GET["id"]."'";
+        $result_ltipos = mysql_query($sql_exc2, $con) or die(mysql_error());        
+        if (mysql_num_rows($result_ltipos) > 0) {
+            while ($tipo = mysql_fetch_assoc($result_ltipos)) {
+                $sql_eliminaHisxGan = "delete from historicoporcentajeganancia where idlistatipos='" . $tipo["idlistatipos"] . "'";
+                $result_eliminaHisxGan = mysql_query($sql_eliminaHisxGan, $con) or die(mysql_error()); 
+            }
+        }        
+        
+        $sql_eliminaListaTipos = "delete from listatipos where idlistadeprecios='" . $_GET["id"] . "'";
+        $result_eliminaListaTipos = mysql_query($sql_eliminaListaTipos, $con) or die(mysql_error());         
+        
+        $sql_eliminaLista = "delete from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
+        $result_eliminaLista = mysql_query($sql_eliminaLista, $con) or die(mysql_error());         
+        ?>
+        <script type="text/javascript">
+            alert("Lista de Precios Eliminada Satisfactoriamente.");
+            document.location="../listarlistadeprecios.php";
+        </script>
+        <?php         
+    }     
+}
+
 ?>

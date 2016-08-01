@@ -279,7 +279,10 @@
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],1,2,3)==1){
                                                                     echo "<li><a href='editarsucursal.php?id=".$fila["idsucursal"]."'>Editar</a></li>";
-                                                                }                                                                                                                                
+                                                                }
+                                                                if(habilitaMenu($_SESSION["usuario"],1,2,4)==1){
+                                                                    echo "<li><a href='recursos/acciones.php?tarea=33&id=".$fila["idsucursal"]."'>Eliminar Sucursal</a></li>";
+                                                                }                                                                
                                                                 echo "</ul>";                                                                                                                                
                                                                 echo "</div>";                                                                 
                                                                 
