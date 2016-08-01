@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Listado de Productos</title>
+		<title>Bugambilia Buffets - Ficha Tecnica de Producto</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -32,12 +32,11 @@
                 
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-                <link rel="stylesheet" href="recursos/tabla.css" />
-                <script src="assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
                 <?php
                     header('Content-Type: text/html; charset=UTF-8');        
                     require_once("recursos/funciones.php");
-                    $con=Conexion();
+                    Conexion();
                 ?>                 
 	</head>
 
@@ -195,155 +194,88 @@
 			<div class="main-content">
                             
 				<div class="main-content-inner">
-					<div class="page-content">
-                                            <div class="container-fluid">
-                                                    <?php
-                                                        /*Acción Registrar Empresa*/
-                                                        if(habilitaMenu($_SESSION["usuario"],2,6,1)==1){
-                                                            echo "<a href='insertproducto.php'><button class='btn btn-white btn-info btn-bold'>";
-                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
-                                                            echo "Agregar Nuevo Registro";
-                                                            echo "</button></a>";                                                            
+					<div class="page-content">  
+                                                <?php
+                                                    $con=Conexion();
+                                                    $sql_PRODUCTO="select * from producto where idproducto='".$_GET["id"]."'";
+                                                    $result_PRODUCTO=mysql_query($sql_PRODUCTO,$con) or die(mysql_error());
+                                                    if(mysql_num_rows($result_PRODUCTO)>0){
+                                                        $producto = mysql_fetch_assoc($result_PRODUCTO);
+                                                        $sql_PATRON="select * from patronproducto where idpatronproducto='".$producto["idpatronproducto"]."'";
+                                                        $result_PATRON=mysql_query($sql_PATRON,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_PATRON)>0){
+                                                            $patron = mysql_fetch_assoc($result_PATRON);                                                                                                                                           
+                                                        } 
+                                                        
+                                                        $sql_MATERIAL="select * from material where idmaterial='".$producto["idmaterial"]."'";
+                                                        $result_MATERIAL=mysql_query($sql_MATERIAL,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_MATERIAL)>0){
+                                                            $material = mysql_fetch_assoc($result_MATERIAL);                                                                                                                                           
                                                         }
                                                         
-                                                        /*Listar Empresas*/
-                                                        if(habilitaMenu($_SESSION["usuario"],2,6,2)==1){
-                                                            echo "<a href='listarproductos.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
-                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
-                                                            echo "Listar Registros";
-                                                            echo "</button></a>";                                                            
+                                                        $sql_TIPO="select * from tipoproducto where idtipoproducto='".$producto["idtipoproducto"]."'";
+                                                        $result_TIPO=mysql_query($sql_TIPO,$con) or die(mysql_error());
+                                                        if(mysql_num_rows($result_TIPO)>0){
+                                                            $tipo = mysql_fetch_assoc($result_TIPO);                                                                                                                                           
                                                         }                                                        
-                                                    ?>
-                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
-						<div class="page-header"><h1>Productos<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
-                                                <div class="row titulo_tabla">
-                                                    Lista de Productos
-                                                </div>    
-                                                <div class="row filtros_tabla">
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
-                                                    <div style="width: 10%; float: left; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </div>                                                    
-                                                    <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
-                                                    <div style="width:auto; float: right; margin-right: 1.5ex">
-                                                        <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex" >
-                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
-                                                    </div>                                                            
-                                                    <div style="width: 20%; float: right; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="producto.codigo">Código</option>
-                                                            <option value="material.nombre">Material</option>
-                                                            <option value="tipoproducto.codig">Tipo</option>
-                                                            <option value="producto.descripcion">Producto</option>
-                                                            <option value="categoriaproducto.nombreespanol">Tipo de Producto</option>
-                                                            <option value="producto.dimensionlargo">Largo (cm)</option>
-                                                            <option value="producto.dimensionancho">Ancho (cm)</option>
-                                                            <option value="producto.dimensionalto">Alto (cm)</option>
-                                                            <option value="producto.preciofabrica">Precio de Fabrica</option>
-                                                        </select>
-                                                    </div>                                                                                                        
-                                                </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="producto.codigo" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="asc" >                                                
-                                                <input type="hidden" id="pagina" name="pagina" value="1" >
-                                                <div id="contenedortabla">
-                                                <div class="centrar"></div>
-                                                <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.codigo')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('material.nombre')">Material</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('tipoproducto.codig')">Tipo</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('producto.descripcion')">Producto</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('categoriaproducto.nombreespanol')">Forma del Producto</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionlargo')">Largo (cm)</div>  
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionancho')">Ancho (cm)</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionalto')">Alto (cm)</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.preciofabrica')">Precio de Fabrica</div>                                                     
-						</div>
-                                                <?php 
-                                                    $sql_listaEMPRESA="select producto.codigo, producto.descripcion, categoriaproducto.nombreespanol, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.preciofabrica, producto.idproducto, material.nombre, tipoproducto.codig from producto, patronproducto, categoriaproducto, material, tipoproducto where producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto = categoriaproducto.idcategoriaproducto and producto.idmaterial = material.idmaterial and producto.idtipoproducto = tipoproducto.idtipoproducto order by producto.codigo";
-                                                    $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
-                                                    if(mysql_num_rows($result_listaEMPRESA)>0){
-                                                        $cuenta=0;
-                                                        while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                                                            if($cuenta<10){
-                                                                echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["nombre"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codig"]."</div>";
-                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["descripcion"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["nombreespanol"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["dimensionlargo"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["dimensionancho"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["dimensionalto"]."</div>";                                                                
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["preciofabrica"]."</div>";
-                                                                echo "<div class='col-xs-2' >";                                                                
-                                                                echo "<div class='btn-group'>";
-                                                                echo "<button data-toggle='dropdown' class='btn btn-primary btn-sm btn-white dropdown-toggle'>";
-                                                                echo "Acciones <span class='ace-icon fa fa-caret-down icon-on-right'></span>";
-                                                                echo "</button>";
-                                                                echo "<ul class='dropdown-menu dropdown-default'>";
-                                                                if(habilitaMenu($_SESSION["usuario"],2,6,3)==1){
-                                                                    echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
-                                                                    echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],2,6,6)==1){
-                                                                    echo "<li><a href='fichatecnicaproducto.php?id=".$fila["idproducto"]."'>Ficha Tecnica del Producto</a></li>";
-                                                                }                                                                
-                                                                if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
-                                                                    echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
-                                                                }
-
-                                                                echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                                                                                
-                                                                echo "</div>";
-                                                                echo "</div>"; 
-                                                            }
-                                                            $cuenta++;
-                                                        }
-                                                    }                                                    
-                                                    
-                                                ?>                                                                                                 
-                                                <div class="row pie_tabla" >
-                                                    <?php
-                                                    $numeroelementos=mysql_num_rows($result_listaEMPRESA);   
-                                                    if(10>$numeroelementos){
-                                                        echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
-                                                    }else{
-                                                        echo "Mostrando 10 de ".$numeroelementos." elementos";
-                                                    }
-                               
-                                                        
-                                                    $numeropaginas=  ceil($numeroelementos/10);
-                                                    $pagina=1;
-                                                    echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
-                                                    echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
-                                                    for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){
-                                                        if($i>-1){                    
-                                                            if($i==($pagina-1)){
-                                                                echo "<li onclick='pagina(".($i+1).")' class='active'><a>".($i+1)."</a></li>";
+                                                    }                                                                                                                                                                                                                                               
+                                                ?>                                            
+						<div class="page-header">                                                    
+                                                    <h1 style="margin-top: 10px"><?php echo $producto["codigo"]." ".$producto["descripcion"] ; ?></h1>
+                                                </div>		                                                
+                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=23">
+                                                <div class="row">
+                                                    <div class="col-md-6" style="border: 0px solid #CCC">   
+                                                        <?php
+                                                            if($patron["foto"]!=NULL){
+                                                                echo "<img src='imagenes/productos/".$patron["foto"]."' class='img-responsive' alt='".$producto["descripcion"]."'>";
                                                             }else{
-                                                                echo "<li onclick='pagina(".($i+1).")'><a>".($i+1)."</a></li>";
-                                                            }                    
-                                                        }                                                            
-                                                    }
-                                                    echo "<li onclick='pagina(".($numeropaginas).")' class='next'><a><i class='ace-icon fa fa-angle-double-right'></i></a></li>";
-                                                    echo "</ul>";
-                                                    ?>                                                    
-                                                </div>
-                                                </div>
-					</div>
-                                    </div>
+                                                                echo "<div style='width: 100%; font-size: 2ex;'>No se encontro una imagen en la base de datos para este producto</div>";
+                                                            }
+                                                        ?>
+                                                                                                                
+                                                        <div style="width: 100%; font-size: 2ex; border-top: 1px solid #CCC; padding-top: 1.5ex"><b>Forma del Producto:</b> Redondo</div>                                                                                                                                               
+                                                        <div style="width: 100%; font-size: 2ex;"><b>Material:</b> <?php echo $material["nombre"] ?></div>
+                                                        <div style="width: 100%; font-size: 2ex;"><b>Clasificación:</b> <?php echo $tipo["nombre"] ?></div>
+                                                        <div style="width: 100%; font-size: 2ex;"><b>Basado en el Patrón:</b> <?php echo $patron["nombreespanol"] ?></div>
+                                                        <div style="width: 100%; font-size: 2ex;"><b>Precio de Fabrica:</b> $<?php echo $producto["preciofabrica"] ?> </div>
+                                                        <?php
+                                                            if($producto["dimensionlargo"]==NULL){
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Largo: </b> Valor no registrado</div>";
+                                                            }else{
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Largo: </b>".$producto["dimensionlargo"]." cm</div>";
+                                                            }
+                                                            
+                                                            if($producto["dimensionancho"]==NULL){
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Ancho: </b> Valor no registrado</div>";
+                                                            }else{
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Ancho: </b>".$producto["dimensionancho"]." cm</div>";
+                                                            } 
+                                                            
+                                                            if($producto["dimensionalto"]==NULL){
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Alto: </b> Valor no registrado</div>";
+                                                            }else{
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Alto: </b>".$producto["dimensionalto"]." cm</div>";
+                                                            }
+                                                            
+                                                            if($producto["peso"]==NULL){
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Peso: </b> Valor no registrado</div>";
+                                                            }else{
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Peso: </b>".$producto["peso"]." kg</div>";
+                                                            }   
+                                                            
+                                                            if($producto["capacidad"]==NULL){
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Capacidad: </b> Valor no registrado</div>";
+                                                            }else{
+                                                                echo "<div style='width: 100%; font-size: 2ex;'><b>Capacidad: </b>".$producto["capacidad"]." Litros</div>";
+                                                            }                                                                                                                                                                                    
+                                                        ?>                                                                                                                                                                                                                                                                                        
+                                                    </div>
+						</div>						                                               
+					</form>
+                                        </div>
 				</div>
-                            </form>
+                            
 			</div>
 			
                         <div class="footer">
@@ -419,7 +351,20 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+                
+                $( document ).ready(function() {    
+                    $("#telefono").keydown(function (e) {        
+                        if($.inArray(e.keyCode, [48,49,50,51,52,53,54,55,56,57,37,39,8,189]) !== -1){            
+                            return;
+                        }else{
+                            e.preventDefault();
+                        }
+                    });
+                });
+                        
 			jQuery(function($) {
+                            
+                            
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {
@@ -785,45 +730,11 @@
 					$('textarea[class*=autosize]').trigger('autosize.destroy');
 					$('.limiterBox,.autosizejs').remove();
 					$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
-				}); 
+				});    
+                                
+                                
+			
 			});
 		</script>
-                <script type="text/javascript">
-                    function ordena(columna){
-                        var campoanterior = document.getElementById("campoordena").value;
-                        var ordenanterior = document.getElementById("ordenordena").value;                        
-                        if(campoanterior === columna){
-                            if(ordenanterior === "desc"){
-                                document.getElementById("ordenordena").value="asc";
-                            }else{
-                                document.getElementById("ordenordena").value="desc";
-                            }
-                        }else{
-                            document.getElementById("campoordena").value=columna;
-                            document.getElementById("ordenordena").value="desc";
-                        }
-                                                
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
-                    }
-                    
-                    function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
-                    }
-                    
-                    function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    }
-                    
-                    function pagina(pagina){
-                        document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                    } 
-                    
-                    $('#filtro').keypress(function (e) {
-                        if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
-                        }                        
-                    });                    
-                </script>
 	</body>
 </html>

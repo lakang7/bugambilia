@@ -666,11 +666,6 @@ if ($tarea == 10) {
 /* Editar Patrón */
 if ($tarea == 11) {
 
-    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
-    $sql_beforeupdate = "select idcategoriaproducto,nombreespanol, nombreingles,  materiales from patronproducto where idpatronproducto='" . $_GET["id"] . "'";
-    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
-    /*     * ************************************************** */
-
     $sql_updatePatron = "update patronproducto set idcategoriaproducto='" . $_POST["tipo"] . "',nombreespanol='" . $_POST["espanol"] . "',nombreingles='" . $_POST["ingles"] . "' where idpatronproducto='" . $_GET["id"] . "'";
     $result_updatePatron = mysql_query($sql_updatePatron, $con) or die(mysql_error());
 
@@ -694,28 +689,15 @@ if ($tarea == 11) {
 
     $sql_update = "update patronproducto set materiales='" . $materiales . "' where idpatronproducto='" . $_GET["id"] . "'";
     $result_update = mysql_query($sql_update, $con) or die(mysql_error());
-
-
-    /*     * *********EXTRACCION DESPUES DE MODIFICAR************** */
-    $sql_afterupdate = "select idcategoriaproducto,nombreespanol, nombreingles,  materiales from patronproducto where idpatronproducto='" . $_GET["id"] . "'";
-    $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
-    /*     * ************************************************** */
-    $oldregistro = mysql_fetch_row($result_beforeupdate);
-    $news = mysql_fetch_row($result_afterupdate);
-
-    $campos = array("idcategoriaproducto", " nombreespanol", " nombreingles", " materiales");
-    $descripcion = "'Registro de Material con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
-    $linea = "";
-    for ($index = 0; $index < count($oldregistro); $index++) {
-        if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
-            $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
+    
+    if ($_FILES['imagenpatron']['name']) {
+        $target_path = "C:\\xampp\\htdocs\\bugambilia\\imagenes\\productos\\";
+        $target_path = $target_path . basename($_FILES['imagenpatron']['name']);
+        if (move_uploaded_file($_FILES['imagenpatron']['tmp_name'], $target_path)) {
+            $sql_updatePRODUCTO = "update patronproducto set foto='" . $_FILES['imagenpatron']['name'] . "' where idpatronproducto='" . $_GET["id"] . "'";
+            $result_updatePRODUCTO = mysql_query($sql_updatePRODUCTO, $con) or die(mysql_error());
         }
-    }
-    $descripcion = $descripcion . " " . $linea . "'";
-    $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,5,now()," . $descripcion . ")";
-//        showRegistro($sql_insertBitacora);
-    $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
-    /*     * *****************FIN SQL UPDATE REGISTRO ******************* */
+    }    
 
     //echo "Actualización Satisfactoria de Patrón";
     ?>

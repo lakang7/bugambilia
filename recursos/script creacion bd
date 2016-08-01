@@ -917,7 +917,8 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(6,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,2,"Listar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Editar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(6,4,"Informe en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,5,"Eliminar ,Producto");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,5,"Eliminar Producto");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,6,"Visualizar Ficha Tecnica");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,1,"Agregar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(7,2,"Listar");

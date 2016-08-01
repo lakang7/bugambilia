@@ -635,6 +635,9 @@
                     if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
                         echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
                     }
+                    if(habilitaMenu($_SESSION["usuario"],2,6,6)==1){
+                        echo "<li><a href='fichatecnicaproducto.php?id=".$fila["idproducto"]."'>Ficha Tecnica del Producto</a></li>";
+                    }                    
                     if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
                         echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
                     }                     
