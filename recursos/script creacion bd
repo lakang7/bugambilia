@@ -1,3 +1,281 @@
+CREATE TABLE usuario (
+    idusuario mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    usuario varchar(20) not null,
+    contraseña varchar(20) not null,
+    correo varchar(60) not null,
+    registro TIMESTAMP not null,
+    puesto varchar(60) not null,
+    telefono varchar(20) not null,
+    avatar varchar(60),
+    PRIMARY KEY (idusuario)    
+);
+
+insert into usuario (nombre,usuario,contraseña,correo,registro,avatar) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now(),"avatarlakhsmi.png");
+
+CREATE TABLE menu(
+    idmenu mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    descripcion varchar(120) null,
+    icono varchar(60) not null,
+    posicion integer not null,
+    PRIMARY KEY (idmenu)
+);
+
+insert into menu (nombre,icono,posicion) values("Clientes","menu-icon fa fa-globe",1);
+insert into menu (nombre,icono,posicion) values("Productos","menu-icon fa fa-flask",2);
+insert into menu (nombre,icono,posicion) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt",3);
+insert into menu (nombre,icono,posicion) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags",4);
+insert into menu (nombre,icono,posicion) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user",5);
+insert into menu (nombre,icono,posicion) values("Configuración","menu-icon glyphicon glyphicon-cog",8);
+insert into menu (nombre,icono,posicion) values("Facturación","menu-icon glyphicon glyphicon-usd",6);
+insert into menu (nombre,icono,posicion) values("Reportes","menu-icon glyphicon glyphicon-paperclip",7);
+
+CREATE TABLE submenu(
+    idsubmenu mediumint(8) unsigned auto_increment,
+    idmenu mediumint(8) unsigned not null,
+    nombre varchar(60) not null,
+    descripcion varchar(120) null,
+    pagina varchar(200) not null,
+    abre integer not null,
+    PRIMARY KEY (idsubmenu),
+    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Empresas","listarempresas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Sucursales","listarsucursales.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(1,"Contactos","listarcontactos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Materiales","listarmateriales.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Patrones","listarpatrones.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(2,"Productos","listarproductos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(3,"Lista de Precios","listarlistadeprecios.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(4,"Ordenes de Compra","listarordenesdecompra.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(5,"Ordenes de Producción","listarordenesdeproduccion.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(6,"Usuarios del Sistema","listarusuarios.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(6,"Parametrizacion","configuracionsistema.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Emitidas","listarfacturas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Cobrar","pdfs/cuentasporcobrar.php",1);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Productos","reporteventasporproducto.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Colores","reporteventasporcolores.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Compra Canceladas","reporteoccanceladas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción Canceladas","reporteopcanceladas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Historicos","reportehistoricos.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas","reporteventasdesdehasta.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Pagar","pdfs/cuentasporpagar.php",1);
+
+CREATE TABLE opsubmenu(
+    idopsubmenu mediumint(8) unsigned auto_increment,
+    idsubmenu mediumint(8) unsigned not null,
+    indice integer not null,
+    nombre varchar(30) not null,
+    PRIMARY KEY (idopsubmenu),
+    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(1,5,"Eliminar Empresa");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(2,4,"Eliminar Sucursal");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(3,4,"Eliminar Contacto");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(4,4,"Eliminar Material");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(5,5,"Eliminar Patron de Producto");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,4,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,5,"Eliminar Producto");
+insert into opsubmenu (idsubmenu,indice,nombre) values(6,6,"Visualizar Ficha Tecnica");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,4,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,5,"Excepciones");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,6,"Exportar en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,7,"Exportar en Excel");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,8,"Exportar Para Clientes PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,9,"Exportar Para Clientes Excel");
+insert into opsubmenu (idsubmenu,indice,nombre) values(7,10,"Eliminar Lista de Precios");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,3,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Cancelar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
+insert into opsubmenu (idsubmenu,indice,nombre) values(8,8,"Enviar por Email");
+
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,3,"Informe en PDF");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,4,"Cancelar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,5,"Pagar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(9,6,"Enviar por Email");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(10,3,"Editar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(11,1,"Editar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,4,"Cancelar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(12,5,"Enviar por Email");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(13,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(14,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(15,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(16,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(17,1,"Visualizar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(18,1,"Listar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(18,2,"Nota de Credito");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(19,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(20,1,"Visualizar");
+
+insert into opsubmenu (idsubmenu,indice,nombre) values(21,1,"Visualizar");
+
+CREATE TABLE menualto(
+    idmenualto mediumint(8) unsigned auto_increment,
+    idmenu mediumint(8) unsigned not null,
+    idusuario mediumint(8) unsigned not null,
+    PRIMARY KEY (idmenualto),
+    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into menualto (idmenu,idusuario) values(1,1);
+insert into menualto (idmenu,idusuario) values(2,1);
+insert into menualto (idmenu,idusuario) values(3,1);
+insert into menualto (idmenu,idusuario) values(4,1);
+insert into menualto (idmenu,idusuario) values(5,1);
+insert into menualto (idmenu,idusuario) values(6,1);
+insert into menualto (idmenu,idusuario) values(7,1);
+insert into menualto (idmenu,idusuario) values(8,1);
+
+CREATE TABLE privilegio(
+    idprivilegio mediumint(8) unsigned auto_increment,
+    idmenualto mediumint(8) unsigned not null, 
+    idsubmenu mediumint(8) unsigned not null,
+    accion01 integer not null,
+    accion02 integer not null,
+    accion03 integer not null,
+    accion04 integer not null,
+    accion05 integer not null,
+    accion06 integer not null,
+    accion07 integer not null,
+    accion08 integer not null,
+    accion09 integer not null,
+    accion10 integer not null,
+    PRIMARY KEY (idprivilegio),
+    FOREIGN KEY (idmenualto) REFERENCES menualto(idmenualto) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(1,1,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(1,2,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(1,3,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(2,4,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(2,5,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(2,6,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(3,7,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(4,8,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(5,9,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(6,10,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(6,11,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(7,12,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(7,18,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,13,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,14,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,15,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,16,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,17,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,19,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,20,1,1,1,1,1,1,1,1,1,1);
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,21,1,1,1,1,1,1,1,1,1,1);
+
+
+
+CREATE TABLE tabla (
+    idtabla mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    descripcion varchar(200) null,
+    PRIMARY KEY (idtabla)  
+);
+
+insert into tabla (nombre) values("Empresas");
+insert into tabla (nombre) values("Sucursales");
+insert into tabla (nombre) values("Contactos");
+insert into tabla (nombre) values("Materiales");
+insert into tabla (nombre) values("Patrones");
+insert into tabla (nombre) values("Productos");
+
+CREATE TABLE accion (
+    idaccion mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    descripcion varchar(200) null,
+    PRIMARY KEY (idaccion)  
+);
+
+insert into accion (nombre, descripcion) values("Inicio de Sessión","Un usuario del sistema inicia sesión en el mismo.");
+insert into accion (nombre, descripcion) values("Cierre de Sessión","Un usuario del sistema finaliza su sesión en el mismo.");
+insert into accion (nombre, descripcion) values("Creación de Registro","Se inserta un nuevo registro en la base de datos.");
+insert into accion (nombre, descripcion) values("Edición de Registro","Se edita un registro ya existente en la base de datos.");
+insert into accion (nombre, descripcion) values("Eliminación de Registro","Se elimina un registro de la base de datos.");
+insert into accion (nombre, descripcion) values("Exportar en PDF","Se genera y exporta un reporte del sistema en fomato PDF.");
+insert into accion (nombre, descripcion) values("Exportar en Excel","Se genera y exporta un reporte del sistema en fomato excel.");
+
+CREATE TABLE bitacora (
+    idbitacora mediumint(8) unsigned auto_increment,
+    idusuario mediumint(8) unsigned not null,
+    idaccion mediumint(8) unsigned not null,
+    idtabla mediumint(8) unsigned null,
+    momento TIMESTAMP not null,
+    descripcion varchar(1200) not null,
+    PRIMARY KEY (idbitacora),
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idaccion) REFERENCES accion(idaccion) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idtabla) REFERENCES tabla(idtabla) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE pais (
     idpais mediumint(8) unsigned auto_increment,
     nombre varchar(60) not null,
@@ -421,7 +699,9 @@ CREATE TABLE material (
     PRIMARY KEY (idmaterial)
 );
 
-
+insert into material (codigo,nombre,colores,registro,dias) values('CLASICO','Clasico','Blanco, Negro, Acero, Rojo Fuego, Pacífico, Ladrillo, Moka, Latte, Verde Bosque, Verde Musgo, Arandano, Lima, Mandarina, Amarillo, Blanco Mármol, Negro Granito, Gris, Azul Cielo, Jade, Arena, Terracota',now(),28);
+insert into material (codigo,nombre,colores,registro,dias) values('HOT','Anodizado','Gris',now(),42);
+ 
 CREATE TABLE colorenmaterial (
     idcolorenmaterial mediumint(8) unsigned auto_increment,
     idmaterial mediumint(8) unsigned not null,
@@ -431,6 +711,30 @@ CREATE TABLE colorenmaterial (
     FOREIGN KEY (idmaterial) REFERENCES material(idmaterial) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idcolor) REFERENCES color(idcolor) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,1,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,2,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,3,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,4,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,5,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,6,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,7,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,8,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,9,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,10,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,11,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,12,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,13,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,14,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,15,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,16,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,17,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,18,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,19,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,20,now());
+insert into colorenmaterial (idmaterial,idcolor,registro) values(1,21,now());
+
+insert into colorenmaterial (idmaterial,idcolor,registro) values(2,17,now());
 
 CREATE TABLE categoriaproducto (
     idcategoriaproducto mediumint(8) unsigned auto_increment,
@@ -506,12 +810,15 @@ CREATE TABLE producto (
     idmaterial mediumint(8) unsigned not null,
     codigo varchar(30) not null,     
     descripcion varchar(200) not null, 
-    dimensionlargo numeric(5,2) not null,
-    dimensionancho numeric(5,2) not null,
-    dimensionalto numeric(5,2) not null,
-    peso numeric(5,2),
-    capacidad numeric(5,2),
-    preciofabrica numeric(5,2) not null,        
+    descripcioning varchar(200) not null,
+    dimensionlargo numeric(4,2) not null,
+    dimensionancho numeric(4,2) not null,
+    dimensionalto numeric(4,2) not null,
+    peso numeric(4,2),
+    capacidad numeric(4,2),
+    preciofabrica numeric(4,2) not null,
+    regalias numeric(4,2) not null,
+    estandarizado numeric(4,2) not null,        
     registro TIMESTAMP not null,
     PRIMARY KEY (idproducto),
     FOREIGN KEY (idtipoproducto) REFERENCES tipoproducto(idtipoproducto) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -522,9 +829,9 @@ CREATE TABLE producto (
 CREATE TABLE historicopreciofabrica (
     idhistoricopreciofabrica mediumint(8) unsigned auto_increment,
     idproducto mediumint(8) unsigned not null,
-    preciofabrica numeric(5,3) not null,
-    desde TIMESTAMP not null,
-    hasta TIMESTAMP null,
+    preciofabrica numeric(4,2) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricopreciofabrica),
     FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -552,8 +859,8 @@ CREATE TABLE historicoporcentajeganancia (
     idhistoricoporcentajeganancia mediumint(8) unsigned auto_increment,
     idlistatipos mediumint(8) unsigned not null,
     porcentajeganancia numeric(5,3) not null,
-    desde TIMESTAMP not null,
-    hasta TIMESTAMP null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricoporcentajeganancia),
     FOREIGN KEY (idlistatipos) REFERENCES listatipos(idlistatipos) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -582,16 +889,17 @@ CREATE TABLE configuracionsistema (
     puerto varchar(6) not null,
     correo varchar(60) not null,
     password varchar(30) not null,
+    correofabrica varchar(60) not null,
     PRIMARY KEY (idconfiguracionsistema)
 );
 
-insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc,cambio,serie,folio,carpetabusqueda,rfcextranjero) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23','19.10','B','15','GOYA780416GM0','XEXX010101000');
+insert into configuracionsistema (idconfiguracionsistema,regalias,codigoclasica,poriva,secuenciaoc, secuenciaop,facturacionempresa,facturacioncalle,facturacionext,facturacionint,facturacioncolonia,facturacionpostal,facturacionestpais,facturacionrfc,cambio,serie,folio,carpetabusqueda,rfcextranjero,servidor,puerto,correo,password,correofabrica) values(1,10,'CLASICA',16,2300,4000,'IMMANTI, S.A. DE C.V.','Av. Uno','54','206','San Pedro de los Pinos','03800','México, D.F.','IMM010209S23','19.10','B','15','GOYA780416GM0','XEXX010101000','mail.elabcnaturista.com','26','contacto@elabcnaturista.com','Wl23428mt','lakang7@gmail.com');
 
 CREATE TABLE historicoregalias (
     idhistoricoregalias mediumint(8) unsigned auto_increment,
     porcentajeregalias numeric(5,3) not null,
     desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
-    hasta TIMESTAMP null DEFAULT NULL,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricoregalias)
 );
 
@@ -601,7 +909,7 @@ CREATE TABLE historicoporiva (
     idhistoricoporiva mediumint(8) unsigned auto_increment,
     porcentajeiva numeric(5,3) not null,
     desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
-    hasta TIMESTAMP null DEFAULT NULL,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricoporiva)
 );
 
@@ -611,7 +919,7 @@ CREATE TABLE historicocambiodolar (
     idhistoricocambiodolar mediumint(8) unsigned auto_increment,
     cambio numeric(5,3) not null,
     desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
-    hasta TIMESTAMP null DEFAULT NULL,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricocambiodolar)
 );
 
@@ -633,8 +941,8 @@ CREATE TABLE historicoexcepcionlista(
     idhistoricoexcepcionlista mediumint(8) unsigned auto_increment,
     idexcepcionlista mediumint(8) unsigned not null,
     preciofinal numeric(5,3) not null,
-    desde TIMESTAMP not null,
-    hasta TIMESTAMP null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idhistoricoexcepcionlista),
     FOREIGN KEY (idexcepcionlista) REFERENCES excepcionlista(idexcepcionlista) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -792,24 +1100,7 @@ CREATE TABLE notadecredito(
     xml varchar(60) not null,
     PRIMARY KEY (idnotadecredito),
     FOREIGN KEY (idfactura) REFERENCES factura(idfactura) ON UPDATE CASCADE ON DELETE RESTRICT    
-)
-
-
-CREATE TABLE usuario (
-    idusuario mediumint(8) unsigned auto_increment,
-    nombre varchar(60) not null,
-    usuario varchar(20) not null,
-    contraseña varchar(20) not null,
-    correo varchar(60) not null,
-    registro TIMESTAMP not null,
-    puesto varchar(60) not null,
-    telefono varchar(20) not null,
-    avatar varchar(60),
-    PRIMARY KEY (idusuario)    
 );
-
-insert into usuario (nombre,usuario,contraseña,correo,registro) values("Lakhsmi Angarita","lakang","123456","lakang7@gmail.com",now());
-insert into usuario (nombre,usuario,contraseña,correo,registro) values("Daniel Angarita","daniel","123456789","lakang5@hotmail.com",now());
 
 CREATE TABLE pagoop(
     idpagoop mediumint(8) unsigned auto_increment,
@@ -825,240 +1116,3 @@ CREATE TABLE pagoop(
     FOREIGN KEY (idordendeproduccion) REFERENCES ordendeproduccion(idordendeproduccion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-
-CREATE TABLE menu(
-    idmenu mediumint(8) unsigned auto_increment,
-    nombre varchar(60) not null,
-    descripcion varchar(120) null,
-    icono varchar(60) not null,
-    posicion integer not null,
-    PRIMARY KEY (idmenu)
-);
-
-insert into menu (nombre,icono,posicion) values("Clientes","menu-icon fa fa-globe",1);
-insert into menu (nombre,icono,posicion) values("Productos","menu-icon fa fa-flask",2);
-insert into menu (nombre,icono,posicion) values("Lista de Precios","menu-icon glyphicon glyphicon-list-alt",3);
-insert into menu (nombre,icono,posicion) values("Ordenes de Compra","menu-icon glyphicon glyphicon-tags",4);
-insert into menu (nombre,icono,posicion) values("Ordenes de Producción","menu-icon glyphicon glyphicon-user",5);
-insert into menu (nombre,icono,posicion) values("Configuración","menu-icon glyphicon glyphicon-cog",8);
-insert into menu (nombre,icono,posicion) values("Facturación","menu-icon glyphicon glyphicon-usd",6);
-insert into menu (nombre,icono,posicion) values("Reportes","menu-icon glyphicon glyphicon-paperclip",7);
-
-CREATE TABLE submenu(
-    idsubmenu mediumint(8) unsigned auto_increment,
-    idmenu mediumint(8) unsigned not null,
-    nombre varchar(60) not null,
-    descripcion varchar(120) null,
-    pagina varchar(200) not null,
-    abre integer not null,
-    PRIMARY KEY (idsubmenu),
-    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
-insert into submenu (idmenu,nombre,pagina,abre) values(1,"Empresas","listarempresas.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(1,"Sucursales","listarsucursales.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(1,"Contactos","listarcontactos.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(2,"Materiales","listarmateriales.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(2,"Patrones","listarpatrones.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(2,"Productos","listarproductos.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(3,"Lista de Precios","listarlistadeprecios.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(4,"Ordenes de Compra","listarordenesdecompra.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(5,"Ordenes de Producción","listarordenesdeproduccion.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(6,"Usuarios del Sistema","listarusuarios.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(6,"Parametrizacion","configuracionsistema.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Emitidas","listarfacturas.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Cobrar","pdfs/cuentasporcobrar.php",1);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Productos","reporteventasporproducto.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ventas por Colores","reporteventasporcolores.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Compra Canceladas","reporteoccanceladas.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Ordenes de Producción Canceladas","reporteopcanceladas.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(7,"Facturas Canceladas","listarfacturascanceladas.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Historicos","reportehistoricos.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas","reporteventasdesdehasta.php",0);
-insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Pagar","pdfs/cuentasporpagar.php",1);
-
-CREATE TABLE opsubmenu(
-    idopsubmenu mediumint(8) unsigned auto_increment,
-    idsubmenu mediumint(8) unsigned not null,
-    indice integer not null,
-    nombre varchar(30) not null,
-    PRIMARY KEY (idopsubmenu),
-    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT    
-);
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(1,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(1,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(1,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(1,4,"Informe en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(1,5,"Eliminar Empresa");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(2,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(2,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(2,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(2,4,"Eliminar Sucursal");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(3,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(3,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(3,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(3,4,"Eliminar Contacto");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(4,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(4,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(4,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(4,4,"Eliminar Material");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(5,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(5,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(5,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(5,4,"Informe en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(5,5,"Eliminar Patron de Producto");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,4,"Informe en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,5,"Eliminar Producto");
-insert into opsubmenu (idsubmenu,indice,nombre) values(6,6,"Visualizar Ficha Tecnica");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,4,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,5,"Excepciones");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,6,"Exportar en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,7,"Exportar en Excel");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,8,"Exportar Para Clientes PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,9,"Exportar Para Clientes Excel");
-insert into opsubmenu (idsubmenu,indice,nombre) values(7,10,"Eliminar Lista de Precios");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,3,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,4,"Exportar en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,5,"Cancelar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,6,"Generar Orden de Producción");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,7,"Facturar Orden de Compra");
-insert into opsubmenu (idsubmenu,indice,nombre) values(8,8,"Enviar por Email");
-
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,1,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,2,"Editar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,3,"Informe en PDF");
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,4,"Cancelar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,5,"Pagar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(9,6,"Enviar por Email");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(10,1,"Agregar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(10,2,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(10,3,"Editar");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(11,1,"Editar");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(12,1,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(12,2,"Descargar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(12,3,"Pagar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(12,4,"Cancelar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(12,5,"Enviar por Email");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(13,1,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(14,1,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(15,1,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(16,1,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(17,1,"Visualizar");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(18,1,"Listar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(18,2,"Nota de Credito");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(19,1,"Visualizar");
-insert into opsubmenu (idsubmenu,indice,nombre) values(20,1,"Visualizar");
-
-insert into opsubmenu (idsubmenu,indice,nombre) values(21,1,"Visualizar");
-
-CREATE TABLE menualto(
-    idmenualto mediumint(8) unsigned auto_increment,
-    idmenu mediumint(8) unsigned not null,
-    idusuario mediumint(8) unsigned not null,
-    PRIMARY KEY (idmenualto),
-    FOREIGN KEY (idmenu) REFERENCES menu(idmenu) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
-insert into menualto (idmenu,idusuario) values(1,1);
-insert into menualto (idmenu,idusuario) values(2,1);
-insert into menualto (idmenu,idusuario) values(3,1);
-insert into menualto (idmenu,idusuario) values(4,1);
-insert into menualto (idmenu,idusuario) values(5,1);
-insert into menualto (idmenu,idusuario) values(6,1);
-insert into menualto (idmenu,idusuario) values(7,1);
-
-CREATE TABLE privilegio(
-    idprivilegio mediumint(8) unsigned auto_increment,
-    idmenualto mediumint(8) unsigned not null, 
-    idsubmenu mediumint(8) unsigned not null,
-    accion01 integer not null,
-    accion02 integer not null,
-    accion03 integer not null,
-    accion04 integer not null,
-    accion05 integer not null,
-    accion06 integer not null,
-    accion07 integer not null,
-    accion08 integer not null,
-    accion09 integer not null,
-    accion10 integer not null,
-    PRIMARY KEY (idprivilegio),
-    FOREIGN KEY (idmenualto) REFERENCES menualto(idmenualto) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idsubmenu) REFERENCES submenu(idsubmenu) ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
-insert into privilegio (idmenualto,idsubmenu) values(1,1);
-insert into privilegio (idmenualto,idsubmenu) values(1,2);
-insert into privilegio (idmenualto,idsubmenu) values(1,3);
-insert into privilegio (idmenualto,idsubmenu) values(2,4);
-insert into privilegio (idmenualto,idsubmenu) values(2,5);
-insert into privilegio (idmenualto,idsubmenu) values(2,6);
-insert into privilegio (idmenualto,idsubmenu) values(3,7);
-insert into privilegio (idmenualto,idsubmenu) values(4,8);
-insert into privilegio (idmenualto,idsubmenu) values(5,9);
-
-
-CREATE TABLE tabla (
-    idtabla mediumint(8) unsigned auto_increment,
-    nombre varchar(30) not null,
-    descripcion varchar(200) null,
-    PRIMARY KEY (idtabla)  
-);
-
-insert into tabla (nombre) values("Empresas");
-insert into tabla (nombre) values("Sucursales");
-insert into tabla (nombre) values("Contactos");
-insert into tabla (nombre) values("Materiales");
-insert into tabla (nombre) values("Patrones");
-insert into tabla (nombre) values("Productos");
-
-CREATE TABLE accion (
-    idaccion mediumint(8) unsigned auto_increment,
-    nombre varchar(30) not null,
-    descripcion varchar(200) null,
-    PRIMARY KEY (idaccion)  
-);
-
-insert into accion (nombre, descripcion) values("Inicio de Sessión","Un usuario del sistema inicia sesión en el mismo.");
-insert into accion (nombre, descripcion) values("Cierre de Sessión","Un usuario del sistema finaliza su sesión en el mismo.");
-insert into accion (nombre, descripcion) values("Creación de Registro","Se inserta un nuevo registro en la base de datos.");
-insert into accion (nombre, descripcion) values("Edición de Registro","Se edita un registro ya existente en la base de datos.");
-insert into accion (nombre, descripcion) values("Eliminación de Registro","Se elimina un registro de la base de datos.");
-insert into accion (nombre, descripcion) values("Exportar en PDF","Se genera y exporta un reporte del sistema en fomato PDF.");
-insert into accion (nombre, descripcion) values("Exportar en Excel","Se genera y exporta un reporte del sistema en fomato excel.");
-
-CREATE TABLE bitacora (
-    idbitacora mediumint(8) unsigned auto_increment,
-    idusuario mediumint(8) unsigned not null,
-    idaccion mediumint(8) unsigned not null,
-    idtabla mediumint(8) unsigned null,
-    momento TIMESTAMP not null,
-    descripcion varchar(1200) not null,
-    PRIMARY KEY (idbitacora),
-    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idaccion) REFERENCES accion(idaccion) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idtabla) REFERENCES tabla(idtabla) ON UPDATE CASCADE ON DELETE RESTRICT
-);
