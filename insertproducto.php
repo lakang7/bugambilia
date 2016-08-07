@@ -262,8 +262,10 @@
                                                         <div id="contenedor01"></div>
                                                         <div style="width: 100%; margin-top: 10px">(*) Codigo del Producto </div>
                                                         <div style="width: 100%;"><input type="text" id="codigoproducto" name="codigoproducto" placeholder="Ingrese el codigo del producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>
-                                                        <div style="width: 100%; margin-top: 10px">(*) Descripcion del producto</div>
-                                                        <div style="width: 100%;"><input type="text" id="descripcion" name="descripcion" placeholder="Ingrese la descripcion del producto" style="width: 100%; font-size: 1.8ex;" maxlength="200" required="required" /></div>
+                                                        <div style="width: 100%; margin-top: 10px">(*) Nombre en español del producto</div>
+                                                        <div style="width: 100%;"><input type="text" id="descripcion" name="descripcion" placeholder="Ingrese el nombre en epañol del producto" style="width: 100%; font-size: 1.8ex;" maxlength="200" required="required" /></div>
+                                                        <div style="width: 100%; margin-top: 10px">Nombre en ingles del producto</div>
+                                                        <div style="width: 100%;"><input type="text" id="descripcioning" name="descripcioning" placeholder="Ingrese el nombre en ingles del producto" style="width: 100%; font-size: 1.8ex;" maxlength="200" /></div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">(*) Dimensión Largo (cm)</div>
                                                         <div style="width: 100%;"><input type="text" id="largo" name="largo" placeholder="Ingrese el largo del producto en centimetros" style="width: 100%; font-size: 1.8ex;" maxlength="5" required="required" /></div>                                                         
                                                         <div style="width: 100%; margin-top: 10px">(*) Dimensión Ancho (cm)</div>

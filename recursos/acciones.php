@@ -283,7 +283,7 @@ if ($tarea == 5) {
         } else {
             $peso = $_POST["peso"];
         }
-        $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica,regalias,estandarizado) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ",'".$_POST["regalias"]."','".$_POST["estandarizado"]."')";
+        $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica,regalias,estandarizado,descripcioning) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ",'".$_POST["regalias"]."','".$_POST["estandarizado"]."','".$_POST["descripcioning"]."')";
         $result_insertProducto = mysql_query($sql_insertProducto, $con) or die(mysql_error());
 
         if ($result_insertProducto == 1) {
@@ -730,7 +730,7 @@ if ($tarea == 12) {
     /*     * ************************************************** */
 
 
-    $sql_updateProducto = "update producto set idtipoproducto='" . $_POST["temporada"] . "', idpatronproducto='" . $_POST["patron"] . "', idmaterial='" . $_POST["material"] . "', codigo='" . $_POST["codigoproducto"] . "',descripcion='" . $_POST["descripcion"] . "',dimensionlargo='" . $_POST["largo"] . "',dimensionancho='" . $_POST["ancho"] . "',dimensionalto='" . $_POST["alto"] . "',peso='" . $peso . "',capacidad='" . $capacidad . "',regalias='".$_POST["regalias"]."', estandarizado='".$_POST["estandarizado"]."' where idproducto='" . $_GET["id"] . "'";
+    $sql_updateProducto = "update producto set idtipoproducto='" . $_POST["temporada"] . "', idpatronproducto='" . $_POST["patron"] . "', idmaterial='" . $_POST["material"] . "', codigo='" . $_POST["codigoproducto"] . "',descripcion='" . $_POST["descripcion"] . "',dimensionlargo='" . $_POST["largo"] . "',dimensionancho='" . $_POST["ancho"] . "',dimensionalto='" . $_POST["alto"] . "',peso='" . $peso . "',capacidad='" . $capacidad . "',regalias='".$_POST["regalias"]."', estandarizado='".$_POST["estandarizado"]."', descripcioning='".$_POST["descripcioning"]."' where idproducto='" . $_GET["id"] . "'";
     $result_updateProducto = mysql_query($sql_updateProducto, $con) or die(mysql_error());
 
     $sql_producto = "select * from producto where idproducto='" . $_GET["id"] . "'";

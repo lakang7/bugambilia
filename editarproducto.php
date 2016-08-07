@@ -326,8 +326,10 @@
                                                         </div>
                                                         <div style="width: 100%; margin-top: 10px">(*) Codigo del Producto </div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $producto["codigo"]; ?>" id="codigoproducto" name="codigoproducto" placeholder="Ingrese el codigo del producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>
-                                                        <div style="width: 100%; margin-top: 10px">(*) Descripcion del producto</div>
+                                                        <div style="width: 100%; margin-top: 10px">(*) Nombre en español del producto</div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $producto["descripcion"]; ?>"  id="descripcion" name="descripcion" placeholder="Ingrese la descripcion del producto" style="width: 100%; font-size: 1.8ex;" maxlength="200" required="required" /></div>
+                                                        <div style="width: 100%; margin-top: 10px">Nombre en ingles del producto</div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $producto["descripcioning"]; ?>"  id="descripcioning" name="descripcioning" placeholder="Ingrese la descripcion del producto" style="width: 100%; font-size: 1.8ex;" maxlength="200" /></div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">(*) Dimensión Largo (cm)</div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $producto["dimensionlargo"]; ?>" id="largo" name="largo" placeholder="Ingrese el largo del producto en centimetros" style="width: 100%; font-size: 1.8ex;" maxlength="5" required="required" /></div>                                                         
                                                         <div style="width: 100%; margin-top: 10px">(*) Dimensión Ancho (cm)</div>
