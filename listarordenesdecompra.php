@@ -294,7 +294,7 @@
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["lista"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["total"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".round($fila["total"],2)."</div>";
                                                                 echo "<div class='col-xs-2' >";
                                                                 
                                                                 echo "<div class='btn-group'>";

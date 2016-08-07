@@ -207,11 +207,11 @@
                             $result_LISTA = mysql_query($sql_LISTA, $con) or die(mysql_error());
                             if (mysql_num_rows($result_LISTA) > 0) {
                                 $lista = mysql_fetch_assoc($result_LISTA);
-                                $sqlEMPRESA = "select * from empresa where idempresa='" . $lista["idempresa"] . "'";
+                                /*$sqlEMPRESA = "select * from empresa where idempresa='" . $lista["idempresa"] . "'";
                                 $resultEMPRESA = mysql_query($sqlEMPRESA, $con) or die(mysql_error());
                                 if (mysql_num_rows($resultEMPRESA) > 0) {
                                     $empresa = mysql_fetch_assoc($resultEMPRESA);
-                                }
+                                }*/
                             }
 
                             $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
@@ -221,7 +221,7 @@
                             }
                             mysql_close($con);
                             ?>                                              
-                            <div class="page-header"><h1><?php echo $lista["nombre"]; ?><small><i class="ace-icon fa fa-angle-double-right"></i> <?php echo $empresa["nombrecomercial"]; ?></small></h1></div>
+                            <div class="page-header"><h1><?php echo $lista["nombre"]; ?><small><i class="ace-icon fa fa-angle-double-right"></i> <?php //echo $empresa["nombrecomercial"]; ?></small></h1></div>
 
                             <?php
                             $con = Conexion();
@@ -267,7 +267,7 @@
                                                     }
                                                 }
                                                 $concatena = $concatena . " )";
-                                                $sql_producto = "select producto.idproducto, tipoproducto.codig, producto.codigo, producto.descripcion, material.nombre, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.peso, producto.capacidad, producto.preciofabrica, patronproducto.idcategoriaproducto, producto.idtipoproducto from producto, tipoproducto, material, patronproducto where producto.idtipoproducto = tipoproducto.idtipoproducto and producto.idmaterial = material.idmaterial and producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto='" . $forma["idcategoriaproducto"] . "' and " . $concatena . " order by producto.codigo";
+                                                $sql_producto = "select producto.idproducto, tipoproducto.codig, producto.codigo, producto.descripcion, material.nombre, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.peso, producto.capacidad, producto.preciofabrica, patronproducto.idcategoriaproducto, producto.idtipoproducto, producto.regalias, producto.estandarizado from producto, tipoproducto, material, patronproducto where producto.idtipoproducto = tipoproducto.idtipoproducto and producto.idmaterial = material.idmaterial and producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto='" . $forma["idcategoriaproducto"] . "' and " . $concatena . " order by producto.codigo";
                                                 $result_producto = mysql_query($sql_producto, $con) or die(mysql_error());
                                                 if (mysql_num_rows($result_producto) > 0) {
                                                     if ($bandera02 == 0) {
@@ -297,27 +297,22 @@
                                                         echo "<div class='col-xs-3'>" . $producto["descripcion"] . "</div>";
                                                         echo "<div class='col-xs-2'>" . $producto["dimensionlargo"] . " x " . $producto["dimensionancho"] . " x " . $producto["dimensionalto"] . "</div>";
                                                         echo "<div class='col-xs-1'>" . $producto["capacidad"] . "</div>";
-                                                        echo "<div class='col-xs-1'>" . $producto["peso"] . "</div>";
-                                                        $acumulado = $producto["preciofabrica"];
-                                                        echo "<div class='col-xs-1'>" . round($acumulado, 2) . "</div>";
-                                                        $acumulado = $acumulado + $acumulado * ($configuracion["regalias"] / 100);
-                                                        echo "<div class='col-xs-1'>" . round($acumulado, 2) . "</div>";
-                                                        $acumulado = $acumulado + $acumulado * ($tipo["portipo"] / 100);
-                                                        echo "<div class='col-xs-1'>" . round($acumulado, 2) . "</div>";
-                                                        $sqlBUSCA = "select * from listatipos where idlistadeprecios='" . $_GET["id"] . "' and idtipoproducto='" . $producto["idtipoproducto"] . "'";
-                                                        $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
-                                                        if (mysql_num_rows($resultBUSCA) > 0) {
-                                                            $busca = mysql_fetch_assoc($resultBUSCA);
+                                                        echo "<div class='col-xs-1'>" . $producto["peso"] . "</div>";                                                        
+                                                        echo "<div class='col-xs-1'>" . $producto["preciofabrica"] . "</div>";
+                                                        echo "<div class='col-xs-1'>" . $producto["regalias"] . "</div>";                                      
+                                                        echo "<div class='col-xs-1'>" . $producto["estandarizado"] . "</div>";
+                                                        
+                                                        $sql_buscaprecio="select * from productoslista where idproducto='".$producto["idproducto"]."' and idlistadeprecios='".$_GET["id"]."'";
+                                                        $result_precio = mysql_query($sql_buscaprecio, $con) or die(mysql_error());
+                                                        $preciobuscado = mysql_fetch_assoc($result_precio); 
+                                                        
+                                                        if($preciobuscado["excepcion"]!=0){
+                                                            echo "<div class='col-xs-1' style='background-color: #ff0'>".$preciobuscado["excepcion"]."</div>";
+                                                        }else {
+                                                            echo "<div class='col-xs-1'>".$preciobuscado["precio"]."</div>";
                                                         }
-                                                        $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
-                                                        $sqlExcepcion = "select * from excepcionlista where idlistadeprecios='" . $_GET["id"] . "' and idproducto='" . $producto["idproducto"] . "'";
-                                                        $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
-                                                        if (mysql_num_rows($resultExcepcion) > 0) {
-                                                            $excepcion = mysql_fetch_assoc($resultExcepcion);
-                                                            echo "<div class='col-xs-1' style='background-color: #ff0'>" . round($excepcion["preciofinal"], 2) . "</div>";
-                                                        } else {
-                                                            echo "<div class='col-xs-1'>" . round($acumulado, 2) . "</div>";
-                                                        }
+                                                        
+
 
                                                         echo "</div>";
                                                     }

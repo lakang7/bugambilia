@@ -74,11 +74,11 @@ $sql_LISTA = "select * from listadeprecios where idlistadeprecios='" . $_GET["id
 $result_LISTA = mysql_query($sql_LISTA, $con) or die(mysql_error());
 if (mysql_num_rows($result_LISTA) > 0) {
     $lista = mysql_fetch_assoc($result_LISTA);
-    $sqlEMPRESA = "select * from empresa where idempresa='" . $lista["idempresa"] . "'";
+    /*$sqlEMPRESA = "select * from empresa where idempresa='" . $lista["idempresa"] . "'";
     $resultEMPRESA = mysql_query($sqlEMPRESA, $con) or die(mysql_error());
     if (mysql_num_rows($resultEMPRESA) > 0) {
         $empresa = mysql_fetch_assoc($resultEMPRESA);
-    }
+    }*/
 }
 
 $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
@@ -89,7 +89,7 @@ if (mysql_num_rows($result_Configuracion) > 0) {
 
 $pdf->SetXY($colum, $suma);
 $pdf->SetFont('courier', 'B', 14);
-$pdf->Cell(62, 8, $lista["nombre"] . " > " . $empresa["nombrecomercial"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(62, 8, $lista["nombre"] , 0, 1, "L", 0, '', 0);
 
 
 
@@ -135,7 +135,7 @@ if (mysql_num_rows($result_cattipo) > 0) {
                         }
                     }
                     $concatena = $concatena . " )";
-                    $sql_producto = "select producto.idproducto, tipoproducto.codig, producto.codigo, producto.descripcion, material.nombre, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.peso, producto.capacidad, producto.preciofabrica, patronproducto.idcategoriaproducto, producto.idtipoproducto from producto, tipoproducto, material, patronproducto where producto.idtipoproducto = tipoproducto.idtipoproducto and producto.idmaterial = material.idmaterial and producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto='" . $forma["idcategoriaproducto"] . "' and " . $concatena . " order by producto.codigo";
+                    $sql_producto = "select producto.idproducto, tipoproducto.codig, producto.codigo, producto.descripcion, material.nombre, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.peso, producto.capacidad, producto.preciofabrica, patronproducto.idcategoriaproducto, producto.idtipoproducto, producto.regalias, producto.estandarizado from producto, tipoproducto, material, patronproducto where producto.idtipoproducto = tipoproducto.idtipoproducto and producto.idmaterial = material.idmaterial and producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto='" . $forma["idcategoriaproducto"] . "' and " . $concatena . " order by producto.codigo";
                     $result_producto = mysql_query($sql_producto, $con) or die(mysql_error());
                     if (mysql_num_rows($result_producto) > 0) {
 //                         echo "<div class='namecategoria'>" . $forma["nombreespanol"] . "</div>";
@@ -206,16 +206,6 @@ if (mysql_num_rows($result_cattipo) > 0) {
                             $result_tipo = mysql_query($sql_tipo, $con) or die(mysql_error());
                             $tipo = mysql_fetch_assoc($result_tipo);
 
-                            $sqlBUSCA = "select * from listatipos where idlistadeprecios='" . $_GET["id"] . "' and idtipoproducto='" . $pro["idtipoproducto"] . "'";
-                            $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
-                            if (mysql_num_rows($resultBUSCA) > 0) {
-                                $busca = mysql_fetch_assoc($resultBUSCA);
-                            }
-                            $resultBUSCA = mysql_query($sqlBUSCA, $con) or die(mysql_error());
-                            if (mysql_num_rows($resultBUSCA) > 0) {
-                                $busca = mysql_fetch_assoc($resultBUSCA);
-                            }
-
                             $pdf->SetFont('courier', '', 7);
                             $pdf->SetXY($colum, $suma+=4);
                             $pdf->Cell(14, 4, $pro["codigo"], 1, 1, "L", 0, '', 0);
@@ -226,7 +216,7 @@ if (mysql_num_rows($result_cattipo) > 0) {
 
                             $pdf->SetFont('courier', '', 7);
                             $pdf->SetXY($colum+=50, $suma);
-                            $pdf->Cell(32, 4, $pro["dimensionlargo"] . " x " . $pro["dimensionancho"] . " x " . $pro["dimensionalto"], 1, 1, "L", 0, '', 0);
+                            $pdf->Cell(32, 4, number_format(round($pro["dimensionlargo"],1),1) . " x " .  number_format(round($pro["dimensionancho"],1),1) . " x " . number_format(round($pro["dimensionalto"],1),1), 1, 1, "L", 0, '', 0);
 
                             $pdf->SetFont('courier', '', 7);
                             $pdf->SetXY($colum+=32, $suma);
@@ -240,27 +230,26 @@ if (mysql_num_rows($result_cattipo) > 0) {
                             $pdf->SetXY($colum+=8, $suma);
                             $pdf->Cell(24, 4, number_format(round($pro["preciofabrica"],2),2,".",","), 1, 1, "C", 0, '', 0);
 
-                            $acumulado = $pro["preciofabrica"];
-                            $acumulado = $acumulado + $acumulado * ($configuracion["regalias"] / 100);
                             $pdf->SetXY($colum+=24, $suma);
-                            $pdf->Cell(14, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
-
-                            $acumulado = $acumulado + $acumulado * ($tipo["portipo"] / 100);
+                            $pdf->Cell(14, 4, number_format(round($pro["regalias"],2), 2, ".", ","), 1, 1, "C", 0, '', 0);
+                          
                             $pdf->SetXY($colum+=14, $suma);
-                            $pdf->Cell(22, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
+                            $pdf->Cell(22, 4, number_format(round($pro["estandarizado"],2), 2, ".", ","), 1, 1, "C", 0, '', 0);
 
-                            $acumulado = $acumulado + $acumulado * ($busca["porcentajeganancia"] / 100);
+                            
+                            $sql_buscaprecio="select * from productoslista where idproducto='".$pro["idproducto"]."' and idlistadeprecios='".$_GET["id"]."'";
+                            $result_precio = mysql_query($sql_buscaprecio, $con) or die(mysql_error());
+                            $preciobuscado = mysql_fetch_assoc($result_precio); 
+
                             $pdf->SetXY($colum+=22, $suma);
-                            $sqlExcepcion = "select * from excepcionlista where idlistadeprecios='" . $_GET["id"] . "' and idproducto='" . $pro["idproducto"] . "' and estatus=0";
-                            $resultExcepcion = mysql_query($sqlExcepcion, $con) or die(mysql_error());
-                            if (mysql_num_rows($resultExcepcion) > 0) {
-                                $excepcion = mysql_fetch_assoc($resultExcepcion);
-//                        echo "<div class='col-xs-1' style='background-color: #ff0'>" . round($excepcion["preciofinal"], 2) . "</div>";
+                            if($preciobuscado["excepcion"]!=0){
+                                //echo "<div class='col-xs-1' style='background-color: #ff0'>".$preciobuscado["excepcion"]."</div>";
                                 $pdf->SetFillColor(255,255,0);
-                                $pdf->Cell(12, 4, number_format(round($excepcion["preciofinal"],2), 2, ".", ","), 1, 1, "C", 1, '', 0);
-                            } else {
-                                $pdf->Cell(12, 4, number_format(round($acumulado,2), 2, ".", ","), 1, 1, "C", 0, '', 0);
-                            }
+                                $pdf->Cell(12, 4, number_format(round($preciobuscado["excepcion"],2), 2, ".", ","), 1, 1, "C", 1, '', 0);
+                            }else {
+                                //echo "<div class='col-xs-1'>".$preciobuscado["precio"]."</div>";
+                                $pdf->Cell(12, 4, number_format(round($preciobuscado["precio"],2), 2, ".", ","), 1, 1, "C", 0, '', 0);
+                            }                             
 
                             $colum = 10;
                         }
@@ -283,5 +272,5 @@ if (mysql_num_rows($result_cattipo) > 0) {
 
 
 
-$pdf->Output('Llista de Precios.pdf', 'I');
+$pdf->Output($lista["nombre"].'.pdf', 'I');
 ?>

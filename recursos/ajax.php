@@ -526,12 +526,15 @@
     if($_POST["tarea"]==15){
         echo "<div style='width: 100%; margin-top: 10px'>";
         echo "<label>Lista de Precios</label>";        
-        echo "<select class='chosen-select form-control' id='lista' name='lista' data-placeholder='Elija la lista de precios' required='required'>";
-        $sql_listaLISTAPRECIOS="select * from listadeprecios where idempresa='".$_POST["idempresa"]."'";
-        $result_listaLISTAPRECIOS=mysql_query($sql_listaLISTAPRECIOS,$con) or die(mysql_error());
-        if(mysql_num_rows($result_listaLISTAPRECIOS)>0){
-            while ($fila = mysql_fetch_assoc($result_listaLISTAPRECIOS)) {
-                echo "<option value='".$fila["idlistadeprecios"]."'>".$fila["nombre"]."</option>";                    
+        echo "<select class='chosen-select form-control' id='lista' name='lista' data-placeholder='Elija la lista de precios' required='required'>";        
+        $SQLuno="select * from empresaslista where idempresa='".$_POST["idempresa"]."'";
+        $resultUNO=mysql_query($SQLuno,$con) or die(mysql_error());
+        if(mysql_num_rows($resultUNO)>0){
+            while ($uno = mysql_fetch_assoc($resultUNO)) {
+                $sqlDOS="select * from listadeprecios where idlistadeprecios='".$uno["idlistadeprecios"]."'";
+                $resultDOS=mysql_query($sqlDOS,$con) or die(mysql_error());
+                $dos = mysql_fetch_assoc($resultDOS);
+                echo "<option value='".$dos["idlistadeprecios"]."'>".$dos["nombre"]."</option>";
             }
         }
         echo "</select>";

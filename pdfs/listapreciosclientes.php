@@ -71,11 +71,6 @@ $sql_LISTA = "select * from listadeprecios where idlistadeprecios='" . $_GET["id
 $result_LISTA = mysql_query($sql_LISTA, $con) or die(mysql_error());
 if (mysql_num_rows($result_LISTA) > 0) {
     $lista = mysql_fetch_assoc($result_LISTA);
-    $sqlEMPRESA = "select * from empresa where idempresa='" . $lista["idempresa"] . "'";
-    $resultEMPRESA = mysql_query($sqlEMPRESA, $con) or die(mysql_error());
-    if (mysql_num_rows($resultEMPRESA) > 0) {
-        $empresa = mysql_fetch_assoc($resultEMPRESA);
-    }
 }
 
 $sqlConfiguracion = "select * from configuracionsistema where idconfiguracionsistema=1";
@@ -86,7 +81,7 @@ if (mysql_num_rows($result_Configuracion) > 0) {
 
 $pdf->SetXY($colum, $suma);
 $pdf->SetFont('courier', 'B', 14);
-$pdf->Cell(62, 8, $lista["nombre"] . " > " . $empresa["nombrecomercial"], 0, 1, "L", 0, '', 0);
+$pdf->Cell(62, 8, $lista["nombre"], 0, 1, "L", 0, '', 0);
 
 
 
@@ -213,12 +208,9 @@ $pdf->Cell(62, 8, $lista["nombre"] . " > " . $empresa["nombrecomercial"], 0, 1, 
                         
                         $suma+=5.5;
                         $colum=10;
-                    }                    
-                    
+                    }                                        
                 }                                
-            }              
-
-             
+            }                          
          }
      }
      
@@ -229,5 +221,5 @@ $pdf->Cell(62, 8, $lista["nombre"] . " > " . $empresa["nombrecomercial"], 0, 1, 
     $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;
 
 
-    $pdf->Output('Lista de Precios.pdf', 'I');
+    $pdf->Output($lista["nombre"].'.pdf', 'I');
 ?>

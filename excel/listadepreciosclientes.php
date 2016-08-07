@@ -49,11 +49,6 @@ $estiloTituloColumnas = array(
     $result_LISTA=mysql_query($sql_LISTA,$con) or die(mysql_error());
     if(mysql_num_rows($result_LISTA)>0){
         $lista = mysql_fetch_assoc($result_LISTA);
-        $sqlEMPRESA="select * from empresa where idempresa='".$lista["idempresa"]."'";
-        $resultEMPRESA=mysql_query($sqlEMPRESA,$con) or die(mysql_error());
-        if(mysql_num_rows($resultEMPRESA)>0){
-            $empresa=mysql_fetch_assoc($resultEMPRESA);
-        }
     }    
     
     $sqlConfiguracion="select * from configuracionsistema where idconfiguracionsistema=1";
@@ -70,7 +65,7 @@ $estiloTituloColumnas = array(
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells('B'.$fila.':G2');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$fila,$lista["nombre"]);$fila++;
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells('B'.$fila.':G3');
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B3',"Empresa: ".$empresa["nombreempresa"]." / ".$empresa["identificador"]);$fila++;
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B3',"Empresa: ".$lista["texto"]);$fila++;
     $objPHPExcel->setActiveSheetIndex(0)->mergeCells('B'.$fila.':G4');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B4',"Generada: ".date("d")."/".date("m")."/".date("Y")." ".date("H").":".date("i"));$fila+=2;    
      
@@ -142,11 +137,11 @@ $estiloTituloColumnas = array(
                         $sql_tipo="select * from tipoproducto where idtipoproducto='".$pro["idtipoproducto"]."'";
                         $result_tipo=mysql_query($sql_tipo,$con) or die(mysql_error());
                         $tipo=mysql_fetch_assoc($result_tipo); 
-                        $sqlBUSCA="select * from listatipos where idlistadeprecios='".$_GET["id"]."' and idtipoproducto='".$pro["idtipoproducto"]."'";
+                        /*$sqlBUSCA="select * from listatipos where idlistadeprecios='".$_GET["id"]."' and idtipoproducto='".$pro["idtipoproducto"]."'";
                         $resultBUSCA=mysql_query($sqlBUSCA,$con) or die(mysql_error());
                         if(mysql_num_rows($resultBUSCA)>0){
                             $busca=mysql_fetch_assoc($resultBUSCA);                                                                                    
-                        }                                                
+                        } */                                               
                         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$fila,$pro["codigo"]);
                         $objPHPExcel->setActiveSheetIndex(0)->mergeCells('C'.$fila.':F'.$fila);
                         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$fila,$pro["descripcion"]);
@@ -174,7 +169,7 @@ $estiloTituloColumnas = array(
      }    
                        
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="listadeprecios.xlsx"');
+    header('Content-Disposition: attachment;filename="'.$lista["nombre"].'.xlsx"');
     header('Cache-Control: max-age=0');
     // If you're serving to IE 9, then the following may be needed
     header('Cache-Control: max-age=1');

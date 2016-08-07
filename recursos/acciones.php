@@ -787,7 +787,7 @@ if ($tarea == 12) {
 
 /* insertar lista de precios */
 if ($tarea == 13) {
-    $sql_insertLista = "insert into listadeprecios (idempresa,nombre) values('" . $_POST["empresa"] . "','" . $_POST["nombre"] . "')";
+    $sql_insertLista = "insert into listadeprecios (nombre,columnaprecios,columnaexcepcion,texto,registro) values('".$_POST["nombre"]."','".$_POST["precios"]."','".$_POST["excepciones"]."','',now())";
     $result_insertLista = mysql_query($sql_insertLista, $con) or die(mysql_error());
 
     if ($result_insertLista == 1) {
@@ -796,25 +796,25 @@ if ($tarea == 13) {
         $fila = mysql_fetch_assoc($result_ultimaLISTA);
         $indice = intval($fila["AUTO_INCREMENT"]);
         $indice--;
+        
+        $listaempresas = "";
+        for ($i = 0; $i < count($_POST["empresas"]); $i++) {
+            $sqlinsertEmpresaLista = "insert into empresaslista (idlistadeprecios,idempresa) values(" . $indice . "," . $_POST["empresas"][$i] . ")";
+            $result_insertEmpresaLista = mysql_query($sqlinsertEmpresaLista, $con) or die(mysql_error());
 
-        $sql_tipos = "select * from tipoproducto";
-        $result_tipos = mysql_query($sql_tipos, $con) or die(mysql_error());
-        if (mysql_num_rows($result_tipos) > 0) {
-            while ($tipo = mysql_fetch_assoc($result_tipos)) {
-                $sql_insertGANANCIA = "insert into listatipos (idlistadeprecios,idtipoproducto,porcentajeganancia) values(" . $indice . "," . $tipo["idtipoproducto"] . "," . $_POST["ganancia" . $tipo["idtipoproducto"]] . ")";
-                $result_insertGANANCIA = mysql_query($sql_insertGANANCIA, $con) or die(mysql_error());
-
-                $sql_ultimaASOCIACION = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'listatipos';";
-                $result_ultimaASOCIACION = mysql_query($sql_ultimaASOCIACION, $con) or die(mysql_error());
-                $fila2 = mysql_fetch_assoc($result_ultimaASOCIACION);
-                $indice2 = intval($fila2["AUTO_INCREMENT"]);
-                $indice2--;
-
-                $sql_insertHistorico = "insert into historicoporcentajeganancia (idlistatipos,porcentajeganancia,desde,hasta) values(" . $indice2 . ",'" . $_POST["ganancia" . $tipo["idtipoproducto"]] . "',now(),NULL);";
-                $result_insertHistorico = mysql_query($sql_insertHistorico, $con) or die(mysql_error());
+            $sql_consultaEmpresa = "select * from empresa where idempresa='" . $_POST["empresas"][$i] . "'";
+            $result_consultaEmpresa = mysql_query($sql_consultaEmpresa, $con) or die(mysql_error());
+            $empresa = mysql_fetch_assoc($result_consultaEmpresa);
+            if ($i < (count($_POST["empresas"]) - 1)) {
+                $listaempresas = $listaempresas . $empresa["nombrecomercial"] . ", ";
+            } else {
+                $listaempresas = $listaempresas . $empresa["nombrecomercial"];
             }
         }
-        //echo "Registro Satisfactorio de la lista de precios";
+        
+        $sqlUpdate="update listadeprecios set texto='".$listaempresas."' where idlistadeprecios='".$indice."'";
+        $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());
+
     ?>
         <script type="text/javascript">
             alert("Lista de Precios Registrada Satisfactoriamente.");
@@ -826,80 +826,29 @@ if ($tarea == 13) {
 
 /* editar lista de precios */
 if ($tarea == 14) {
-    /*     * *********EXTRACCION ANTES DE MODIFICAR************** */
-    $sql_beforeupdate = "select idempresa, nombre from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
-    $result_beforeupdate = mysql_query($sql_beforeupdate, $con) or die(mysql_error());
-
-    $sql_beforesubtipo = "select lt.porcentajeganancia from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios='" . $_GET["id"] . "'";
-    $result_beforesubtipo = mysql_query($sql_beforesubtipo, $con) or die(mysql_error());
-    /*     * ************************************************** */
-
-
-    $sql_updateListadePrecios = "update listadeprecios set nombre='" . $_POST["nombre"] . "',idempresa='" . $_POST["empresa"] . "' where idlistadeprecios='" . $_GET["id"] . "'";
+    $sql_updateListadePrecios = "update listadeprecios set nombre='" . $_POST["nombre"] . "', columnaprecios='".$_POST["precios"]."', columnaexcepcion='".$_POST["excepciones"]."' where idlistadeprecios='" . $_GET["id"] . "'";
     $result_updateListadePrecios = mysql_query($sql_updateListadePrecios, $con) or die(mysql_error());
 
-    $sql_tipos = "select * from tipoproducto";
-    $result_tipos = mysql_query($sql_tipos, $con) or die(mysql_error());
-    if (mysql_num_rows($result_tipos) > 0) {
-        while ($tipo = mysql_fetch_assoc($result_tipos)) {
-            $sql_actual = "select * from listatipos where idtipoproducto='" . $tipo["idtipoproducto"] . "' and idlistadeprecios='" . $_GET["id"] . "'";
-            $result_actual = mysql_query($sql_actual, $con) or die(mysql_error());
-            if (mysql_num_rows($result_actual) > 0) {
-                while ($actual = mysql_fetch_assoc($result_actual)) {
-                    if ($_POST["ganancia" . $tipo["idtipoproducto"]] != $actual["porcentajeganancia"]) {
-                        $sql_update = "update listatipos set porcentajeganancia='" . $_POST["ganancia" . $tipo["idtipoproducto"]] . "' where idlistatipos='" . $actual["idlistatipos"] . "'";
-                        $result_update = mysql_query($sql_update, $con) or die(mysql_error());
-                        $sql_update2 = "update historicoporcentajeganancia set hasta = now() where idlistatipos='" . $actual["idlistatipos"] . "' and  hasta is null";
-                        $result_update2 = mysql_query($sql_update2, $con) or die(mysql_error());
-                        $sql_insertNuevo = "insert into historicoporcentajeganancia (idlistatipos,porcentajeganancia,desde) values('" . $actual["idlistatipos"] . "','" . $_POST["ganancia" . $tipo["idtipoproducto"]] . "',now())";
-                        $result_insertNuevo = mysql_query($sql_insertNuevo, $con) or die(mysql_error());
-                    }
-                }
-            }
+    $sql_borraasociacion="delete from empresaslista where idlistadeprecios='".$_GET["id"]."'";
+    $result_borraasociacion = mysql_query($sql_borraasociacion, $con) or die(mysql_error());
+    
+    $listaempresas = "";
+    for ($i = 0; $i < count($_POST["empresas"]); $i++) {
+        $sqlinsertEmpresaLista = "insert into empresaslista (idlistadeprecios,idempresa) values(" . $_GET["id"] . "," . $_POST["empresas"][$i] . ")";
+        $result_insertEmpresaLista = mysql_query($sqlinsertEmpresaLista, $con) or die(mysql_error());
+
+        $sql_consultaEmpresa = "select * from empresa where idempresa='" . $_POST["empresas"][$i] . "'";
+        $result_consultaEmpresa = mysql_query($sql_consultaEmpresa, $con) or die(mysql_error());
+        $empresa = mysql_fetch_assoc($result_consultaEmpresa);
+        if ($i < (count($_POST["empresas"]) - 1)) {
+            $listaempresas = $listaempresas . $empresa["nombrecomercial"] . ", ";
+        } else {
+                $listaempresas = $listaempresas . $empresa["nombrecomercial"];
         }
-
-        /*         * *********EXTRACCION DESPUES DE MODIFICAR************** */
-        $sql_afterupdate = "select idempresa, nombre from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
-        $result_afterupdate = mysql_query($sql_afterupdate, $con) or die(mysql_error());
-
-
-        $sql_aftersubtipo = "select lt.porcentajeganancia PORCENTAJE from listadeprecios lp join listatipos lt on lp.idlistadeprecios=lt.idlistadeprecios join tipoproducto tp on tp.idtipoproducto=lt.idtipoproducto where lp.idlistadeprecios='" . $_GET["id"] . "'";
-        $result_aftersubtipo = mysql_query($sql_aftersubtipo, $con) or die(mysql_error());
-
-//
-        /*         * ************************************************** */
-        $oldregistro = mysql_fetch_row($result_beforeupdate);
-        $news = mysql_fetch_row($result_afterupdate);
-
-        $oldsubtipo = mysql_fetch_row($result_beforesubtipo);
-        $newsubtipo = mysql_fetch_row($result_aftersubtipo);
-
-
-        $campos = array("idempresa", "nombre");
-        $descripcion = "'Registro de Producto con el codigo (" . $_GET["id"] . ") ha sido modificado con los siguientes valores ";
-        $linea = "";
-        for ($index = 0; $index < count($oldregistro); $index++) {
-            if (strcmp(md5($oldregistro[$index]), md5($news[$index])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
-                $linea = $linea . $campos[$index] . " Valor Original (" . $oldregistro[$index] . "), Valor Nuevo (" . $news[$index] . ") -";
-            }
-        }
-
-
-        for ($index1 = 0; $index1 < count($oldsubtipo); $index1++) {
-
-//            echo $oldsubtipo[$index1]." - ".$newsubtipo[$index1];
-            if (strcmp(md5($oldsubtipo[$index1]), md5($newsubtipo[$index1])) != 0) {//si son diferentes en su valro calculado md5 entonces cambio 
-                $linea = $linea . " Porcentaje " . " Valor Original (" . $oldsubtipo[$index1] . "), Valor Nuevo (" . $newsubtipo[$index1] . ") -";
-//                echo $linea;
-            }
-        }
-
-        $descripcion = $descripcion . " " . $linea . "'";
-        $sql_insertBitacora = "insert into bitacora(idusuario,idaccion,idtabla,momento,descripcion) values('" . $_SESSION["usuario"] . "',4,6,now()," . $descripcion . ")";
-        showRegistro($sql_insertBitacora);
-        $result_insertBitacora = mysql_query($sql_insertBitacora, $con) or die(mysql_error());
-        /*         * *****************FIN SQL UPDATE REGISTRO ******************* */
     }
+        
+    $sqlUpdate="update listadeprecios set texto='".$listaempresas."' where idlistadeprecios='".$_GET["id"]."'";
+    $resultUpdate = mysql_query($sqlUpdate, $con) or die(mysql_error());        
     mysql_close($con);
     ?>
         <script type="text/javascript">
@@ -2060,31 +2009,10 @@ if($tarea==38){
         <?php
     }  
     
-    if($ordenesdecompra==0 && $ordenesdeproduccion==0){
+    if($ordenesdecompra==0 && $ordenesdeproduccion==0){              
         
-        $sql_exc="select * from excepcionlista where idlistadeprecios='".$_GET["id"]."'";
-        $result_exc = mysql_query($sql_exc, $con) or die(mysql_error());        
-        if (mysql_num_rows($result_exc) > 0) {
-            while ($excepcion = mysql_fetch_assoc($resultFactura)) {                
-                $sql_eliminamaExcepciones = "delete from historicoexcepcionlista where idexcepcionlista='" . $excepcion["idexcepcionlista"] . "'";
-                $result_eliminaExcepciones = mysql_query($sql_eliminamaExcepciones, $con) or die(mysql_error());            
-            }
-        }
-                        
-        $sql_eliminamaExcepciones = "delete from excepcionlista where idlistadeprecios='" . $_GET["id"] . "'";
-        $result_eliminaExcepciones = mysql_query($sql_eliminamaExcepciones, $con) or die(mysql_error());
-         
-        $sql_exc2="select * from listatipos where idlistadeprecios='".$_GET["id"]."'";
-        $result_ltipos = mysql_query($sql_exc2, $con) or die(mysql_error());        
-        if (mysql_num_rows($result_ltipos) > 0) {
-            while ($tipo = mysql_fetch_assoc($result_ltipos)) {
-                $sql_eliminaHisxGan = "delete from historicoporcentajeganancia where idlistatipos='" . $tipo["idlistatipos"] . "'";
-                $result_eliminaHisxGan = mysql_query($sql_eliminaHisxGan, $con) or die(mysql_error()); 
-            }
-        }        
-        
-        $sql_eliminaListaTipos = "delete from listatipos where idlistadeprecios='" . $_GET["id"] . "'";
-        $result_eliminaListaTipos = mysql_query($sql_eliminaListaTipos, $con) or die(mysql_error());         
+        $sql_eliminaAsociacion = "delete from empresaslista where idlistadeprecios='" . $_GET["id"] . "'";
+        $result_eliminaAsociacion = mysql_query($sql_eliminaAsociacion, $con) or die(mysql_error());         
         
         $sql_eliminaLista = "delete from listadeprecios where idlistadeprecios='" . $_GET["id"] . "'";
         $result_eliminaLista = mysql_query($sql_eliminaLista, $con) or die(mysql_error());         

@@ -1,0 +1,50 @@
+CREATE TABLE listadeprecios (
+    idlistadeprecios mediumint(8) unsigned auto_increment,
+    idempresa mediumint(8) unsigned not null,
+    nombre varchar(90) not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idlistadeprecios),
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE listatipos (
+    idlistatipos mediumint(8) unsigned auto_increment,
+    idlistadeprecios mediumint(8) unsigned not null,
+    idtipoproducto mediumint(8) unsigned not null,
+    porcentajeganancia numeric(5,3) not null,
+    PRIMARY KEY (idlistatipos),
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idtipoproducto) REFERENCES tipoproducto(idtipoproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE historicoporcentajeganancia (
+    idhistoricoporcentajeganancia mediumint(8) unsigned auto_increment,
+    idlistatipos mediumint(8) unsigned not null,
+    porcentajeganancia numeric(5,3) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (idhistoricoporcentajeganancia),
+    FOREIGN KEY (idlistatipos) REFERENCES listatipos(idlistatipos) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE excepcionlista (
+    idexcepcionlista mediumint(8) unsigned auto_increment,
+    idlistadeprecios mediumint(8) unsigned not null,
+    idproducto mediumint(8) unsigned not null,
+    preciofinal numeric(5,3) not null,
+    estatus integer not null,
+    registro TIMESTAMP not null,
+    PRIMARY KEY (idexcepcionlista),
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE historicoexcepcionlista(
+    idhistoricoexcepcionlista mediumint(8) unsigned auto_increment,
+    idexcepcionlista mediumint(8) unsigned not null,
+    preciofinal numeric(5,3) not null,
+    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (idhistoricoexcepcionlista),
+    FOREIGN KEY (idexcepcionlista) REFERENCES excepcionlista(idexcepcionlista) ON UPDATE CASCADE ON DELETE RESTRICT
+);

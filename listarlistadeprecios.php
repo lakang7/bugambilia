@@ -252,14 +252,14 @@
                                                     <div class="col-xs-6 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Nombre de la Lista</div>                                                                                                        
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select listadeprecios.idlistadeprecios, listadeprecios.nombre, empresa.nombrecomercial from listadeprecios,empresa where listadeprecios.idempresa = empresa.idempresa order by empresa.nombrecomercial asc";
+                                                    $sql_listaEMPRESA="select listadeprecios.idlistadeprecios, listadeprecios.nombre, listadeprecios.texto from listadeprecios order by texto asc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                                                             if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-4 columna_linea'>".$fila["nombrecomercial"]."</div>";
+                                                                echo "<div class='col-xs-4 columna_linea'>".$fila["texto"]."</div>";
                                                                 echo "<div class='col-xs-6 columna_linea'>".$fila["nombre"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
                                                                                                                                 
@@ -274,9 +274,9 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,4)==1){
                                                                     echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
                                                                 }
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,5)==1){
+                                                                /*if(habilitaMenu($_SESSION["usuario"],3,7,5)==1){
                                                                     echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
-                                                                }
+                                                                }*/
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
                                                                     echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en PDF</a></li>";
                                                                 }

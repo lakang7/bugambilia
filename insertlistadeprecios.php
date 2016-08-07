@@ -217,8 +217,8 @@
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos de la Lista de Precios</div>                                                       
-                                                        <div style="width: 100%; margin-top: 10px;">Empresa Asociada a la Lista</div>
-                                                        <select class="chosen-select form-control" id="empresa" name="empresa" data-placeholder="Elija la empresa para asociar a esta lista" required="required">
+                                                        <div style="width: 100%; margin-top: 10px;">Empresas Asociadas esta Lista de precios</div>
+                                                        <select multiple class="chosen-select form-control" id="empresas" name="empresas[]" data-placeholder="Elija las empresas asociadas a esta lista de precios" required="required">
                                                             <option value="">  </option>
                                                             <?php
                                                                 $con=Conexion();
@@ -234,17 +234,11 @@
                                                         </select>                                                        
                                                         <div style="width: 100%; margin-top: 10px">(*) Nombre para identificar esta lista de precios</div>
                                                         <div style="width: 100%;"><input type="text" id="nombre" name="nombre" placeholder="Nombre para la lista de precios" style="width: 100%; font-size: 1.8ex; margin-bottom: 0px" maxlength="40" required="required" /></div>
-                                                        <?php
-                                                            $sql_tipos="select * from tipoproducto";
-                                                            $result_tipos=mysql_query($sql_tipos,$con) or die(mysql_error());
-                                                                if(mysql_num_rows($result_tipos)>0){
-                                                                    while ($tipo = mysql_fetch_assoc($result_tipos)) {
-                                                                        echo "<div style='width: 100%; margin-top: 10px'>(*) Porcentaje de ganancia para ".$tipo["nombre"]." asociado a esta lista de precios</div>";
-                                                                        echo "<div style='width: 100%;'><input type='text' id='ganancia".$tipo["idtipoproducto"]."' name='ganancia".$tipo["idtipoproducto"]."' placeholder='Porcentaje de ganancia para ".$tipo["nombre"]."' style='width: 100%; font-size: 1.8ex; margin-bottom: 4px' maxlength='120' required='required' /></div>";
-                                                                    }
-                                                                }                                                            
-                                                        ?>
-                                                        
+
+                                                        <div style="width: 100%; margin-top: 10px">(*) Columna de la cual se tomaran los precios</div>
+                                                        <div style="width: 100%;"><input type="text" id="precios" name="precios" placeholder="Columna de precios" style="width: 100%; font-size: 1.8ex; margin-bottom: 0px" maxlength="5" required="required" /></div>
+                                                        <div style="width: 100%; margin-top: 10px">Columna de la cual se tomaran las excepciones en caso de existir para esta lista</div>
+                                                        <div style="width: 100%;"><input type="text" id="excepciones" name="excepciones" placeholder="Columna de excepciones" style="width: 100%; font-size: 1.8ex; margin-bottom: 0px" maxlength="5" /></div>                                                        
                                                         
                                                                                                                                                                                                                                                                                                                                            
                                                     </div>

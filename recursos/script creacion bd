@@ -614,6 +614,10 @@ CREATE TABLE empresa (
     FOREIGN KEY (idpais) REFERENCES pais(idpais) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Forbatch SA de CV','FORBATCH','5545483772','AASL900111CP5','1','CL001MX','1','1','Bancomer','0453');
+insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Colcafei SA de CV','COLCAFEI','5545483772','WWRL900111TYU','1','CL002MX','1','1','Bancomer','0532');
+insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Yudaltep SA de CV','YUDALTEP','5545483772','UYDA456111PRE','1','CL003MX','1','1','Bancomer','9712');
+
 CREATE TABLE sucursal (
     idsucursal mediumint(8) unsigned auto_increment,
     idempresa mediumint(8) unsigned not null,   
@@ -644,6 +648,8 @@ CREATE TABLE agenda (
     PRIMARY KEY (idagenda)    
 );
 
+insert into agenda (referencia,nombre,telefono1,telefono2,email,registro) values('Encargado de Ventas','Lakhsmi Angarita','5545483772','5423557343','lakang7@gmail.com',now());
+
 CREATE TABLE asociacionagenda (
     idasociacionagenda mediumint(8) unsigned auto_increment,
     tipo integer not null,
@@ -657,6 +663,8 @@ CREATE TABLE asociacionagenda (
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idestado) REFERENCES estado(idestado) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+insert into asociacionagenda (tipo,idagenda,idempresa,idsucursal,idestado) values('1','1','1',NULL,NULL);
 
 CREATE TABLE color (
     idcolor mediumint(8) unsigned auto_increment,
@@ -838,31 +846,32 @@ CREATE TABLE historicopreciofabrica (
 
 CREATE TABLE listadeprecios (
     idlistadeprecios mediumint(8) unsigned auto_increment,
-    idempresa mediumint(8) unsigned not null,
     nombre varchar(90) not null,
-    registro TIMESTAMP not null,
-    PRIMARY KEY (idlistadeprecios),
-    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT    
+    columnaprecios varchar(5) not null,
+    columnaexcepcion varchar(5) not null,
+    texto varchar(1200) not null,
+    registro TIMESTAMP not null,    
+    PRIMARY KEY (idlistadeprecios)    
 );
 
-CREATE TABLE listatipos (
-    idlistatipos mediumint(8) unsigned auto_increment,
+CREATE TABLE empresaslista (
+    idempresalista mediumint(8) unsigned auto_increment,
     idlistadeprecios mediumint(8) unsigned not null,
-    idtipoproducto mediumint(8) unsigned not null,
-    porcentajeganancia numeric(5,3) not null,
-    PRIMARY KEY (idlistatipos),
+    idempresa mediumint(8) unsigned not null,
+    PRIMARY KEY (idempresalista),
     FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idtipoproducto) REFERENCES tipoproducto(idtipoproducto) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE historicoporcentajeganancia (
-    idhistoricoporcentajeganancia mediumint(8) unsigned auto_increment,
-    idlistatipos mediumint(8) unsigned not null,
-    porcentajeganancia numeric(5,3) not null,
-    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
-    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (idhistoricoporcentajeganancia),
-    FOREIGN KEY (idlistatipos) REFERENCES listatipos(idlistatipos) ON UPDATE CASCADE ON DELETE RESTRICT
+CREATE TABLE productoslista (
+    idproductoslista mediumint(8) unsigned auto_increment,
+    idlistadeprecios mediumint(8) unsigned not null,
+    idproducto mediumint(8) unsigned not null,
+    precio numeric(4,2) not null,
+    excepcion numeric (4,2) null,
+    PRIMARY KEY (idproductoslista),   
+    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE configuracionsistema (
@@ -925,29 +934,6 @@ CREATE TABLE historicocambiodolar (
 
 insert into historicocambiodolar (cambio,desde,hasta) values(19.100,now(),null);
 
-CREATE TABLE excepcionlista (
-    idexcepcionlista mediumint(8) unsigned auto_increment,
-    idlistadeprecios mediumint(8) unsigned not null,
-    idproducto mediumint(8) unsigned not null,
-    preciofinal numeric(5,3) not null,
-    estatus integer not null,
-    registro TIMESTAMP not null,
-    PRIMARY KEY (idexcepcionlista),
-    FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idproducto) REFERENCES producto(idproducto) ON UPDATE CASCADE ON DELETE RESTRICT    
-);
-
-CREATE TABLE historicoexcepcionlista(
-    idhistoricoexcepcionlista mediumint(8) unsigned auto_increment,
-    idexcepcionlista mediumint(8) unsigned not null,
-    preciofinal numeric(5,3) not null,
-    desde TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
-    hasta TIMESTAMP null DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (idhistoricoexcepcionlista),
-    FOREIGN KEY (idexcepcionlista) REFERENCES excepcionlista(idexcepcionlista) ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
-
 CREATE TABLE ordendecompra(
     idordendecompra mediumint(8) unsigned auto_increment,
     codigooc varchar(12) not null,
@@ -964,10 +950,10 @@ CREATE TABLE ordendecompra(
     idagenda03 mediumint(8) unsigned null,
     idlistadeprecios mediumint(8) unsigned null,    
     idusuario mediumint(8) unsigned not null,
-    subtotal numeric(10,3) not null,
+    subtotal numeric(10,2) not null,
     poriva numeric(10,2) not null,
-    iva numeric(10,3) not null,
-    total numeric(10,3) not null,
+    iva numeric(10,2) not null,
+    total numeric(10,2) not null,
     prioridad integer not null,
     fechadeentrega date not null,
     condiciones integer not null,
@@ -1001,10 +987,10 @@ CREATE TABLE ordendeproduccion(
     idlistadeprecios mediumint(8) unsigned null,
     idusuariocrea mediumint(8) unsigned not null,
     idusuarioresponsable mediumint(8) unsigned not null, 
-    subtotal numeric(10,3) not null,
+    subtotal numeric(10,2) not null,
     poriva numeric(10,2) not null,
-    iva numeric(10,3) not null,
-    total numeric(10,3) not null,
+    iva numeric(10,2) not null,
+    total numeric(10,2) not null,
     prioridad integer not null,
     fechadeentrega date not null, 
     tipoempaque integer not null,
@@ -1027,7 +1013,7 @@ CREATE TABLE productosordenproduccion(
     idordendeproduccion mediumint(8) unsigned not null,
     idproducto mediumint(8) unsigned not null, 
     idcolor  mediumint(8) unsigned not null, 
-    preciofabrica numeric(5,3) not null,
+    preciofabrica numeric(5,2) not null,
     numerodeunidades integer not null,
     PRIMARY KEY (idproductosordenproduccion),
     FOREIGN KEY (idordendeproduccion) REFERENCES ordendeproduccion(idordendeproduccion) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -1040,8 +1026,8 @@ CREATE TABLE productosordencompra(
     idordendecompra mediumint(8) unsigned not null,
     idproducto mediumint(8) unsigned not null, 
     idcolor  mediumint(8) unsigned not null, 
-    preciofabrica numeric(5,3) not null,
-    precioventa numeric(5,3) not null,
+    preciofabrica numeric(5,2) not null,
+    precioventa numeric(5,2) not null,
     numerodeunidades integer not null,
     PRIMARY KEY (idproductosordencompra),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -1057,13 +1043,13 @@ CREATE TABLE factura(
     emision TIMESTAMP not null,     
     serie varchar(20) not null,
     folio mediumint(8) unsigned null,
-    subtotal numeric(10,3) not null,
+    subtotal numeric(10,2) not null,
     poriva numeric(10,2) not null,
-    iva numeric(10,3) not null,
-    total numeric(10,3) not null,
+    iva numeric(10,2) not null,
+    total numeric(10,2) not null,
     pdf varchar(60) not null,
     xml varchar(60) not null,
-    resta numeric(10,3) not null,
+    resta numeric(10,2) not null,
     estatus integer not null,
     PRIMARY KEY (idfactura),
     FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -1077,7 +1063,7 @@ CREATE TABLE pago(
     idfactura mediumint(8) unsigned not null,
     fecharegistro TIMESTAMP not null, 
     fechapago date not null,
-    monto numeric(10,3) not null, 
+    monto numeric(10,2) not null, 
     tipopago integer not null,
     referencia varchar(20) not null,
     PRIMARY KEY (idpago),  
@@ -1092,10 +1078,10 @@ CREATE TABLE notadecredito(
     emision TIMESTAMP not null,     
     serie varchar(20) not null,
     folio mediumint(8) unsigned null,
-    subtotal numeric(10,3) not null,
+    subtotal numeric(10,2) not null,
     poriva numeric(10,2) not null,
-    iva numeric(10,3) not null,
-    total numeric(10,3) not null,
+    iva numeric(10,2) not null,
+    total numeric(10,2) not null,
     pdf varchar(60) not null,
     xml varchar(60) not null,
     PRIMARY KEY (idnotadecredito),
@@ -1108,7 +1094,7 @@ CREATE TABLE pagoop(
     idordendeproduccion mediumint(8) unsigned not null,
     fecharegistro TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP, 
     fechapago date not null,
-    monto numeric(10,3) not null, 
+    monto numeric(10,2) not null, 
     tipopago integer not null,
     referencia varchar(20) not null,
     PRIMARY KEY (idpagoop),  
