@@ -2025,4 +2025,56 @@ if($tarea==38){
     }     
 }
 
+
+if ($tarea == 39) {
+    $sqlInsertPago="insert into pagoregalias (idusuario,idregalias,fecharegistro,fechapago,monto,tipopago,referencia) values('".$_SESSION["usuario"]."','".$_GET["idregalia"]."',now(),'".$_POST["id-date-picker-1"]."','".$_POST["cantidad"]."','".$_POST["tipodepago"]."','".$_POST["referencia"]."')";
+    $resultInsertPago = mysql_query($sqlInsertPago, $con) or die(mysql_error());
+    
+    $acumulaPagos=0;
+    $sqlPagos="select * from pagoregalias where idregalias='".$_GET["idregalia"]."'";
+    $resultPagos = mysql_query($sqlPagos, $con) or die(mysql_error());
+    if (mysql_num_rows($resultPagos) > 0) {
+        while ($pagos = mysql_fetch_assoc($resultPagos)) {
+            $acumulaPagos+=$pagos["monto"];
+        }
+    }
+    
+    $sqlRegalias="select * from regalias where idregalias='".$_GET["idregalia"]."'";
+    $resultRegalias=mysql_query($sqlRegalias, $con) or die(mysql_error());
+    $regalia = mysql_fetch_assoc($resultRegalias);
+    
+    $sqlUpdate="update regalias set resta='".($regalia["monto"]-round($acumulaPagos,3))."' , cancelado='".$acumulaPagos."' where idregalias='".$_GET["idregalia"]."'";
+    $resultUpdate=mysql_query($sqlUpdate, $con) or die(mysql_error());
+    ?>
+        <script type="text/javascript">
+            alert("Pago de Regalias Registrado Satisfactoriamente.");
+            document.location="../registrodepagoderegalias.php?id=<?php echo $_GET["idregalia"]; ?>";
+        </script>
+    <?php     
+    
+}
+
+
+if ($tarea == 40) {
+    $sqlpago="select * from pagoregalias where idpagoregalias='".$_GET["id"]."'";
+    $resultpago=mysql_query($sqlpago,$con) or die(mysql_error());
+    $pago = mysql_fetch_assoc($resultpago);
+    
+    $sqlregalia="select * from regalias where idregalias='".$pago["idregalias"]."'";
+    $resultregalia=mysql_query($sqlregalia,$con) or die(mysql_error());
+    $regalia = mysql_fetch_assoc($resultregalia);    
+    
+    $sqlUpdate="update regalias set cancelado='".($regalia["cancelado"]-$pago["monto"])."', resta='".($regalia["resta"]+$pago["monto"])."' where idregalias='".$pago["idregalias"]."'";
+    $resultUpdate=mysql_query($sqlUpdate,$con) or die(mysql_error());
+    
+    $sqlElimina="delete from pagoregalias where idpagoregalias='".$_GET["id"]."'";
+    $resultElimina=mysql_query($sqlElimina,$con) or die(mysql_error());
+    
+    ?>
+        <script type="text/javascript">
+            alert("Pago de Regalias Eliminado Satisfactoriamente.");
+            document.location="../registrodepagoderegalias.php?id=<?php echo $pago["idregalias"]; ?>";
+        </script>
+    <?php        
+}
 ?>

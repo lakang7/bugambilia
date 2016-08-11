@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Listado de Listas de Precios</title>
+		<title>Bugambilia Buffets - Listado de Pago de Regalias</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -197,27 +197,19 @@
 				<div class="main-content-inner">
 					<div class="page-content">
                                             <div class="container-fluid">
-                                                    <?php
-                                                        /*Acción Registrar Empresa*/
-                                                        if(habilitaMenu($_SESSION["usuario"],3,7,1)==1){
-                                                            echo "<a href='insertlistadeprecios.php'><button class='btn btn-white btn-info btn-bold'>";
-                                                            echo "<i class='ace-icon fa fa-floppy-o bigger-120 blue'></i>";
-                                                            echo "Agregar Nuevo Registro";
-                                                            echo "</button></a>";                                                            
-                                                        }
-                                                        
+                                                    <?php                                                                                                                
                                                         /*Listar Empresas*/
                                                         if(habilitaMenu($_SESSION["usuario"],3,7,2)==1){
-                                                            echo "<a href='listarlistadeprecios.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<a href='listarpagosderegalias.php'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
                                                             echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
                                                         }                                                        
                                                     ?>
                                                 <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">
-						<div class="page-header"><h1>Lista de Precios<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
+						<div class="page-header"><h1>Lista de Pago de Regalias<small><i class="ace-icon fa fa-angle-double-right"></i> Listado</small></h1></div>
                                                 <div class="row titulo_tabla">
-                                                    Lista de Precios
+                                                    Listado de Pago de Regalias
                                                 </div>    
                                                 <div class="row filtros_tabla">
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
@@ -238,29 +230,41 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="empresa.nombrecomercial">Empresa</option>
-                                                            <option value="listadeprecios.nombre">Nombre de la Lista</option>                                                            
+                                                            <option value="empresa.nombreempresa">Empresa</option>
+                                                            <option value="ordendeproduccion.codigoop">Orden de Producción</option>
+                                                            <option value="regalias.fechadecreacion">Fecha de Creación</option>
+                                                            <option value="regalias.monto">Monto</option>
+                                                            <option value="regalias.cancelado">Cancelado</option>
+                                                            <option value="regalias.resta">Resta</option>
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="empresa.nombrecomercial" >
+                                                <input type="hidden" id="campoordena" name="campoordena" value="empresa.nombreempresa" >
                                                 <input type="hidden" id="ordenordena" name="ordenordena" value="asc" >                                                
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-4 columna_cabecera" onclick="ordena('listadeprecios.texto')">Empresa<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
-                                                    <div class="col-xs-6 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Nombre de la Lista</div>                                                                                                        
+                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Orden de Producción</div> 
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('regalias.fechadecreacion')">Fecha de Creación</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.monto')">Monto</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.cancelado')">Cancelado</div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.resta')">Resta</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select listadeprecios.idlistadeprecios, listadeprecios.nombre, listadeprecios.texto from listadeprecios order by texto asc";
+                                                    $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa  order by regalias.fechadecreacion asc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                                                             if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-4 columna_linea'>".$fila["texto"]."</div>";
-                                                                echo "<div class='col-xs-6 columna_linea'>".$fila["nombre"]."</div>";
+                                                                echo "<div class='col-xs-3 columna_linea'>".$fila["nombreempresa"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["codigoop"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["fechadecreacion"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["monto"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["cancelado"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["resta"]."</div>";
                                                                 echo "<div class='col-xs-2' >";
                                                                                                                                 
                                                                 echo "<div class='btn-group'>";
@@ -269,33 +273,11 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],3,7,3)==1){
-                                                                    echo "<li><a href='editarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Editar</a></li>";
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,4)==1){
-                                                                    echo "<li><a href='visualizarlistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Visualizar</a></li>";
-                                                                }
-                                                                /*if(habilitaMenu($_SESSION["usuario"],3,7,5)==1){
-                                                                    echo "<li><a href='excepcioneslistadeprecios.php?id=".$fila["idlistadeprecios"]."'>Excepciones</a></li>";
-                                                                }*/
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,6)==1){
-                                                                    echo "<li><a href='pdfs/listaprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en PDF</a></li>";
-                                                                }
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,7)==1){
-                                                                    echo "<li><a href='excel/listadeprecios.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para uso interno en Excel</a></li>";
-                                                                }                                                                
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,8)==1){
-                                                                    echo "<li><a href='pdfs/listapreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en PDF</a></li>";
-                                                                }                                                                
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,9)==1){
-                                                                    echo "<li><a href='excel/listadepreciosclientes.php?id=".$fila["idlistadeprecios"]."' target='_blank'>Exportar para Clientes en Excel</a></li>";
-                                                                } 
-                                                                if(habilitaMenu($_SESSION["usuario"],3,7,10)==1){
-                                                                    echo "<li><a href='recursos/acciones.php?tarea=38&id=".$fila["idlistadeprecios"]."'>Eliminar Lista de Precios</a></li>";
-                                                                }                                                                
+                                                                    echo "<li><a href='registrodepagoderegalias.php?id=".$fila["idregalias"]."'>Pagar</a></li>";
+                                                                }                                                               
                                                                 
                                                                 echo "</ul>";                                                                                                                                
-                                                                echo "</div>";                                                                
-                                                                                                                                
+                                                                echo "</div>";                                                                                                                                                                                                
                                                                 echo "</div>";
                                                                 echo "</div>"; 
                                                             }
@@ -795,25 +777,25 @@
                             document.getElementById("ordenordena").value="desc";
                         }
                                                 
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"listas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"regalias",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                                                                                                        
                     }
                     
                     function limita(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"listas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"regalias",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});                        
                     }
                     
                     function filtrar(){
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"listas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"regalias",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     }
                     
                     function pagina(pagina){
                         document.getElementById("pagina").value=pagina;
-                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"listas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                        $("#contenedortabla").load("recursos/tablas.php", {tabla:"regalias",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     } 
                     
                     $('#filtro').keypress(function (e) {
                         if(e.which ==13){
-                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"listas",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
+                            $("#contenedortabla").load("recursos/tablas.php", {tabla:"regalias",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                         }                        
                     });                    
                 </script>
