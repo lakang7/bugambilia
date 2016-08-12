@@ -64,7 +64,13 @@
     $file = fopen("temporal/".$_GET["id"].".txt", "w");
     fwrite($file, "|EMISOR|".$RFCfacturacion."|Regimen General de Ley Personas Morales|" . PHP_EOL);
     fwrite($file, "|RECEPTOR|".$RFCReceptor."|".$empresa["nombreempresa"]."|".$empresa["fiscalcalle"]."|".$empresa["fiscalexterior"]."|".$empresa["fiscalinterior"]."|".$empresa["fiscalcolonia"]."|||".$empresa["fiscalciudad"]."|".$empresa["fiscalestado"]."|".$pais["nombre"]."|".$empresa["fiscalpostal"]."|" . PHP_EOL);
-    fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|El cambio de Dolares Americanos a Pesos Mexicanos es ".$configuracion["cambio"].", Orden de Compra: ".$orden["codigoexterno"].", Orden de Producción: ".$orden["codigoop"]."|FALSE|micorreo@pruebascorreo.com|||FACTURA|".$empresa["ultimos"]."|" . PHP_EOL);
+    
+    if($pais["idpais"]==1){
+        fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|El cambio de Dolares Americanos a Pesos Mexicanos es ".$configuracion["cambio"].", Orden de Compra: ".$orden["codigoexterno"].", Orden de Producción: ".$orden["codigoop"]."|FALSE|micorreo@pruebascorreo.com|||FACTURA|".$empresa["ultimos"]."|" . PHP_EOL);
+    } else {
+        fwrite($file, "|COMPROBANTE|3.2|Sin Serie|".date("Y")."-".date("m")."-".date("d")." ".  date("H").":".date("i").":".date("s")."|Pago en Una Sola Exhibicion|".$orden["subtotal"]."|".$orden["total"]."|Transferencia Electrónica|Ingreso|USD|".$configuracion["cambio"]."||".$iva."||100|El cambio de Dolares Americanos a Pesos Mexicanos es ".$configuracion["cambio"].", Orden de Compra: ".$orden["codigoexterno"].", Orden de Producción: ".$orden["codigoop"].", Identificador Fiscal: ".$empresa["identificador"]." |FALSE|micorreo@pruebascorreo.com|||FACTURA|".$empresa["ultimos"]."|" . PHP_EOL);
+    }
+    
     fwrite($file, "|EXPEDIDOEN|01|Desconocida|".$configuracion["facturacioncalle"]."|".$configuracion["facturacionext"]."|".$configuracion["facturacionint"]."|".$configuracion["facturacioncolonia"]."|||".$configuracion["facturacionestpais"]."||MEXICO|".$configuracion["facturacionpostal"]."|" . PHP_EOL);
     
     $sqlProductos="select * from productosordencompra where idordendecompra='".$_GET["id"]."'";
@@ -79,8 +85,12 @@
             $resultcolor=mysql_query($sqlcolor,$con) or die(mysql_error());             
             $color = mysql_fetch_assoc($resultcolor);            
             
+            if($pais["idpais"]==1){
+                fwrite($file,"|CONCEPTO|".$producto["numerodeunidades"]."|Pieza|".$prod["codigo"]."|".$prod["codigo"]." ".$color["codigo"]." ".$prod["descripcion"]."|".round($producto["precioventa"],2)."|".round(($producto["numerodeunidades"]*$producto["precioventa"]),2)."|IVA|".$iva."|".round((($producto["numerodeunidades"]*$producto["precioventa"])*($iva/100)),2)."|||" . PHP_EOL);
+            }else{
+                fwrite($file,"|CONCEPTO|".$producto["numerodeunidades"]."|Pieza|".$prod["codigo"]."|".$prod["codigo"]." ".$color["codigo"]." ".strtoupper(str_replace("ó","o",$prod["catexportacion"]))." ".$prod["descripcion"]." / ".$prod["descripcioning"]."|".round($producto["precioventa"],2)."|".round(($producto["numerodeunidades"]*$producto["precioventa"]),2)."|IVA|".$iva."|".round((($producto["numerodeunidades"]*$producto["precioventa"])*($iva/100)),2)."|||" . PHP_EOL);
+            }
             
-            fwrite($file,"|CONCEPTO|".$producto["numerodeunidades"]."|Pieza|".$prod["codigo"]."|".$prod["codigo"]." ".$color["codigo"]." ".$prod["descripcion"]."|".round($producto["precioventa"],2)."|".round(($producto["numerodeunidades"]*$producto["precioventa"]),2)."|IVA|".$iva."|".round((($producto["numerodeunidades"]*$producto["precioventa"])*($iva/100)),2)."|||" . PHP_EOL);
         }
     }                
     fclose($file);   

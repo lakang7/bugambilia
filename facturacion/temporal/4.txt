@@ -1,0 +1,8 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
+|COMPROBANTE|3.2|Sin Serie|2016-08-11 21:51:27|Pago en Una Sola Exhibicion|1512.16|1512.16|Transferencia Electrónica|Ingreso|USD|19.100||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 0000059, Orden de Producción: POMX-4003|FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|22|Pieza|CRD04|CRD04 FR TAZON Botanero 1/2 Bola L L Round Condiment Bowl|11.54|253.88|IVA|0|0|||
+|CONCEPTO|12|Pieza|CO006|CO006 LM PLATON Cacerola Oval # 6 Oval Casserole 6|52.49|629.88|IVA|0|0|||
+|CONCEPTO|12|Pieza|MJ602|MJ602 MW TAZON Charola 5 Divisiones c/Asa 5 Division Condiment|15.26|183.12|IVA|0|0|||
+|CONCEPTO|16|Pieza|TPUD25|TPUD25 SB PLATON Charola Rectangular (Tile) Deep Rectangular Tray 2.5" (to fit Tile)|27.83|445.28|IVA|0|0|||

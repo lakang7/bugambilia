@@ -1,0 +1,10 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
+|COMPROBANTE|3.2|Sin Serie|2016-08-11 21:59:48|Pago en Una Sola Exhibicion|2901.12|2901.12|Transferencia Electrónica|Ingreso|USD|19.100||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 0000060, Orden de Producción: POMX-4004, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|12|Pieza|BSI04|BSI04 BB PLATON Bari Cuadrado L / |73.15|877.8|IVA|0|0|||
+|CONCEPTO|12|Pieza|BT319|BT319 BB ENSALADERA Botanero Canoa Larga / L Boat|83.19|998.28|IVA|0|0|||
+|CONCEPTO|12|Pieza|BR011|BR011 PC TAZON Bowl Redondo XS / Round Bowl 6"|13.99|167.88|IVA|0|0|||
+|CONCEPTO|12|Pieza|CZ000|CZ000 ST ENSALADERA Cazuela Mexicana # 0 / Mexican Cazuela # 0|5.32|63.84|IVA|0|0|||
+|CONCEPTO|12|Pieza|CZ001|CZ001 MC ENSALADERA Cazuela Mexicana # 1 / Mexican Cazuela # 1|10.35|124.2|IVA|0|0|||
+|CONCEPTO|12|Pieza|TU003|TU003 FT PLATON Charola Carlota M / Medium Rectangular Tray w/handles|55.76|669.12|IVA|0|0|||

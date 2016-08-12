@@ -622,6 +622,7 @@ CREATE TABLE empresa (
 insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Forbatch SA de CV','FORBATCH','5545483772','AASL900111CP5','1','CL001MX','1','1','Bancomer','0453');
 insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Colcafei SA de CV','COLCAFEI','5545483772','WWRL900111TYU','1','CL002MX','1','1','Bancomer','0532');
 insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Yudaltep SA de CV','YUDALTEP','5545483772','UYDA456111PRE','1','CL003MX','1','1','Bancomer','9712');
+insert into empresa (nombreempresa,nombrecomercial,telefonoprincipal,identificador,idpais,codigo,iva,metododepago,banco,ultimos) values('Jc Global Resours','RESOURCES','5545483772','AASL900111CP5','2','CL004MX','1','1','Santander','0954');
 
 CREATE TABLE sucursal (
     idsucursal mediumint(8) unsigned auto_increment,
@@ -654,6 +655,7 @@ CREATE TABLE agenda (
 );
 
 insert into agenda (referencia,nombre,telefono1,telefono2,email,registro) values('Encargado de Ventas','Lakhsmi Angarita','5545483772','5423557343','lakang7@gmail.com',now());
+insert into agenda (referencia,nombre,telefono1,telefono2,email,registro) values('Encargado de Ventas','Daniela Angarita','5545483772','5423557343','isisdaniela7@hotmail.com',now());
 
 CREATE TABLE asociacionagenda (
     idasociacionagenda mediumint(8) unsigned auto_increment,
@@ -670,6 +672,7 @@ CREATE TABLE asociacionagenda (
 );
 
 insert into asociacionagenda (tipo,idagenda,idempresa,idsucursal,idestado) values('1','1','1',NULL,NULL);
+insert into asociacionagenda (tipo,idagenda,idempresa,idsucursal,idestado) values('1','2','2',NULL,NULL);
 
 CREATE TABLE color (
     idcolor mediumint(8) unsigned auto_increment,
@@ -821,6 +824,7 @@ CREATE TABLE producto (
     idtipoproducto mediumint(8) unsigned not null,
     idpatronproducto mediumint(8) unsigned not null,
     idmaterial mediumint(8) unsigned not null,
+    catexportacion varchar(30) not null,
     codigo varchar(30) not null,     
     descripcion varchar(200) not null, 
     descripcioning varchar(200) null,
