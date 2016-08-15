@@ -211,8 +211,21 @@
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
                                                         }                                                        
-                                                    ?> 
-                                                <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=12&id=<?php echo $_GET["id"]; ?>">
+                                                    ?>
+                                                <?php
+                                                if(isset($_GET["campofiltro"])){
+                                                    ?>
+                                                        <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=12&id=<?php echo $_GET["id"]; ?>&pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>&campofiltro=<?php echo $_GET["campofiltro"] ?>&filtro=<?php echo $_GET["filtro"] ?>">
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                        <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=12&id=<?php echo $_GET["id"]; ?>&pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>">
+                                                    <?php
+                                                }
+                                                
+                                                ?>
+                                                
+                                               
 						<div class="page-header"><h1>Productos<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">                                                                                                                                                                        
@@ -324,6 +337,8 @@
                                                             ?>
                                                             </div>
                                                         </div>
+                                                        <div style="width: 100%; margin-top: 10px">(*) Categoria de Exportación </div>
+                                                        <div style="width: 100%;"><input type="text" value="<?php echo $producto["catexportacion"]; ?>" id="catexportacion" name="catexportacion" placeholder="Ingrese la cetagoria de exportación para este producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>                                                        
                                                         <div style="width: 100%; margin-top: 10px">(*) Codigo del Producto </div>
                                                         <div style="width: 100%;"><input type="text" value="<?php echo $producto["codigo"]; ?>" id="codigoproducto" name="codigoproducto" placeholder="Ingrese el codigo del producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>
                                                         <div style="width: 100%; margin-top: 10px">(*) Nombre en español del producto</div>

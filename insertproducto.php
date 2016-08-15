@@ -260,6 +260,8 @@
                                                             </select>                                                                                                                         
                                                         </div>
                                                         <div id="contenedor01"></div>
+                                                        <div style="width: 100%; margin-top: 10px">(*) Categoria de Exportación </div>
+                                                        <div style="width: 100%;"><input type="text" id="catexportacion" name="catexportacion" placeholder="Ingrese la cetagoria de exportación para este producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>                                                                                                                
                                                         <div style="width: 100%; margin-top: 10px">(*) Codigo del Producto </div>
                                                         <div style="width: 100%;"><input type="text" id="codigoproducto" name="codigoproducto" placeholder="Ingrese el codigo del producto" style="width: 100%; font-size: 1.8ex;" maxlength="30" required="required" /></div>
                                                         <div style="width: 100%; margin-top: 10px">(*) Nombre en español del producto</div>

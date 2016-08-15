@@ -283,7 +283,7 @@ if ($tarea == 5) {
         } else {
             $peso = $_POST["peso"];
         }
-        $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica,regalias,estandarizado,descripcioning) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ",'".$_POST["regalias"]."','".$_POST["estandarizado"]."','".$_POST["descripcioning"]."')";
+        $sql_insertProducto = "insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica,regalias,estandarizado,descripcioning,catexportacion) values(" . $_POST["temporada"] . "," . $_POST["patron"] . "," . $_POST["material"] . ",'" . $_POST["codigoproducto"] . "','" . $_POST["descripcion"] . "'," . $_POST["largo"] . "," . $_POST["ancho"] . "," . $_POST["alto"] . "," . $peso . "," . $capacidad . "," . $_POST["precio"] . ",'".$_POST["regalias"]."','".$_POST["estandarizado"]."','".$_POST["descripcioning"]."','".$_POST["catexportacion"]."')";
         $result_insertProducto = mysql_query($sql_insertProducto, $con) or die(mysql_error());
 
         if ($result_insertProducto == 1) {
@@ -730,7 +730,7 @@ if ($tarea == 12) {
     /*     * ************************************************** */
 
 
-    $sql_updateProducto = "update producto set idtipoproducto='" . $_POST["temporada"] . "', idpatronproducto='" . $_POST["patron"] . "', idmaterial='" . $_POST["material"] . "', codigo='" . $_POST["codigoproducto"] . "',descripcion='" . $_POST["descripcion"] . "',dimensionlargo='" . $_POST["largo"] . "',dimensionancho='" . $_POST["ancho"] . "',dimensionalto='" . $_POST["alto"] . "',peso='" . $peso . "',capacidad='" . $capacidad . "',regalias='".$_POST["regalias"]."', estandarizado='".$_POST["estandarizado"]."', descripcioning='".$_POST["descripcioning"]."' where idproducto='" . $_GET["id"] . "'";
+    $sql_updateProducto = "update producto set idtipoproducto='" . $_POST["temporada"] . "', idpatronproducto='" . $_POST["patron"] . "', idmaterial='" . $_POST["material"] . "', codigo='" . $_POST["codigoproducto"] . "',descripcion='" . $_POST["descripcion"] . "',dimensionlargo='" . $_POST["largo"] . "',dimensionancho='" . $_POST["ancho"] . "',dimensionalto='" . $_POST["alto"] . "',peso='" . $peso . "',capacidad='" . $capacidad . "',regalias='".$_POST["regalias"]."', estandarizado='".$_POST["estandarizado"]."', descripcioning='".$_POST["descripcioning"]."', catexportacion='".$_POST["catexportacion"]."' where idproducto='" . $_GET["id"] . "'";
     $result_updateProducto = mysql_query($sql_updateProducto, $con) or die(mysql_error());
 
     $sql_producto = "select * from producto where idproducto='" . $_GET["id"] . "'";
@@ -777,12 +777,24 @@ if ($tarea == 12) {
 
 
     //echo "Producto Editado Satisfactoriamente";
-    ?>
+    
+    if(isset($_GET["campofiltro"])){
+        ?>
         <script type="text/javascript">
             alert("Producto Editado Satisfactoriamente.");
-            document.location="../listarproductos.php";
+            document.location="../listarproductos.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>&campofiltro=<?php echo $_GET["campofiltro"] ?>&filtro=<?php echo $_GET["filtro"] ?>";
         </script>
-    <?php    
+        <?php         
+    }else{
+        ?>
+        <script type="text/javascript">
+            alert("Producto Editado Satisfactoriamente.");
+            document.location="../listarproductos.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>";
+        </script>
+        <?php         
+    }
+    
+   
 }
 
 /* insertar lista de precios */
@@ -1970,14 +1982,27 @@ if($tarea==37){
         $sql_eliminamaHistorico = "delete from historicopreciofabrica where idproducto='" . $_GET["id"] . "'";
         $result_eliminaHistorico = mysql_query($sql_eliminamaHistorico, $con) or die(mysql_error());
         
+        $sql_eliminamaProductosLista = "delete from productoslista where idproducto='" . $_GET["id"] . "'";
+        $result_eliminaProductosLista = mysql_query($sql_eliminamaProductosLista, $con) or die(mysql_error());        
+        
         $sql_eliminaProducto = "delete from producto where idproducto='" . $_GET["id"] . "'";
         $result_eliminaProducto = mysql_query($sql_eliminaProducto, $con) or die(mysql_error()); 
-        ?>
-        <script type="text/javascript">
-            alert("Producto Eliminado Satisfactoriamente.");
-            document.location="../listarproductos.php";
-        </script>
-        <?php         
+                
+        if(isset($_GET["campofiltro"])){
+            ?>
+            <script type="text/javascript">
+                alert("Producto Eliminado Satisfactoriamente.");
+                document.location="../listarproductos.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>&campofiltro=<?php echo $_GET["campofiltro"] ?>&filtro=<?php echo $_GET["filtro"] ?>";
+            </script>
+            <?php         
+        }else{
+            ?>
+            <script type="text/javascript">
+                alert("Producto Eliminado Satisfactoriamente.");
+                document.location="../listarproductos.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>";
+            </script>
+            <?php         
+        }                                
     }    
 }
 

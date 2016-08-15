@@ -816,7 +816,7 @@ CREATE TABLE tipoproducto (
 
 insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (1,"CATVIEJO15","Catalogo 2015",4.3);
 insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (1,"CATNUEVO16","Catalogo 2016",7);
-insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (3,"ANODIZADOA","Productos Anodizados",7);
+insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (3,"ANODIZADO","Productos Anodizados",7);
 insert into tipoproducto (idcategoriatipo,codig,nombre,portipo) values (2,"ESPECIALES","Productos Especiales",7);
 
 CREATE TABLE producto (

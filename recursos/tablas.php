@@ -174,12 +174,12 @@
         }               
         
         //echo $sql_listaEMPRESA;
+
         
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
-            while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                //echo $cuenta." --> ".(($_POST["pagina"]*$_POST["elementos"])-$_POST["elementos"])."  --  ".($_POST["pagina"]*$_POST["elementos"])."</br>";
+            while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {                
                 if($cuenta<($_POST["elementos"]*$_POST["pagina"]) && ($cuenta >=(($_POST["pagina"]*$_POST["elementos"])-$_POST["elementos"]) && $cuenta<($_POST["pagina"]*$_POST["elementos"]))){
                     echo "<div class='row linea_tabla'>";
                     echo "<div class='col-xs-2 columna_linea'>".$fila["nombre"]."</div>";
@@ -630,7 +630,11 @@
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
                     if(habilitaMenu($_SESSION["usuario"],2,6,3)==1){
-                        echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";                    
+                        if($_POST["filtro"]==""){
+                            echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."'>Editar</a></li>";                    
+                        }else{
+                            echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."&campofiltro=".$_POST["camfiltro"]."&filtro=".$_POST["filtro"]."'>Editar</a></li>";                    
+                        }                        
                     }
                     if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
                         echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
@@ -638,8 +642,12 @@
                     if(habilitaMenu($_SESSION["usuario"],2,6,6)==1){
                         echo "<li><a href='fichatecnicaproducto.php?id=".$fila["idproducto"]."'>Ficha Tecnica del Producto</a></li>";
                     }                    
-                    if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
-                        echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
+                    if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){                        
+                        if($_POST["filtro"]==""){
+                            echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."'>Eliminar Producto</a></li>";
+                        }else{
+                            echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."&campofiltro=".$_POST["camfiltro"]."&filtro=".$_POST["filtro"]."'>Eliminar Producto</a></li>";
+                        }                        
                     }                     
                     echo "</ul>";                                                                                                                                
                     echo "</div>";

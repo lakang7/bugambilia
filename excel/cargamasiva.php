@@ -1,3 +1,11 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p>Lista de productos no registrados</p>
 <?php
     require_once('../recursos/phpexcel/Classes/PHPExcel.php');
     require_once('../recursos/funciones.php');
@@ -6,10 +14,30 @@
     $objReader = PHPExcel_IOFactory::createReader($XLFileType);  
     $objReader->setLoadSheetsOnly('Hoja1');  
     $objPHPExcel = $objReader->load('../recursos/listadeprecios/MASTER Lista Sistema Lak.xlsx');  
-
+    $contador=0;
     //Aqui viene lo que te interesa 
     $limitefilas=800;
-    $objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Hoja1');  
+    $objWorksheet = $objPHPExcel->setActiveSheetIndexByName('Hoja1'); 
+    
+    
+    echo "<table style='width:100%' border='1'>";
+    echo "<tr>";
+    echo "<th>Linea</th>";
+    echo "<th>Codigo B</th>";
+    echo "<th>Exportacion C</th>";
+    echo "<th>Tipo de Producto E</th>";
+    echo "<th>Forma del Producto F</th>";
+    echo "<th>Patrón del Producto G</th>";
+    echo "<th>Nombre del Producto</th>";
+    echo "<th>Precio V</th>"; 
+    echo "<th>Largo P</th>";
+    echo "<th>Ancho Q</th>";
+    echo "<th>Alto R</th>";
+    echo "</tr>";
+        
+    
+    
+    
     for($i=11;$i<$limitefilas;$i++){
         $codigoproducto=  trim($objPHPExcel->getActiveSheet()->getCell('B'.$i)->getFormattedValue());
         $exportacion=trim($objPHPExcel->getActiveSheet()->getCell('C'.$i)->getFormattedValue());
@@ -91,12 +119,13 @@
                 $result_ultimoproducto = mysql_query($sql_insertHistoricoPF, $con) or die(mysql_error());
             }else if(mysql_num_rows($resultBuscaProducto)>0){ /*Producto SI Existe*/
                 $producto=mysql_fetch_assoc($resultBuscaProducto);                
-                if($producto["preciofabrica"]!=$precioproducto){
+                if($producto["preciofabrica"]!=round($precioproducto,2)){
+                    //echo "Son diferentes: ".$producto["codigo"]." - ".$producto["preciofabrica"]." - ".$precioproducto."</br>";
                     $sql_cierraprefa = "update historicopreciofabrica set hasta = now() where hasta is null and idproducto='".$producto["idproducto"]."'";
                     $result_cierraprefa = mysql_query($sql_cierraprefa, $con) or die(mysql_error());
-                    $sql_insertprefa = "insert into historicopreciofabrica (idproducto,preciofabrica,desde,hasta) values ('" . $producto["idproducto"] . "','" . $precioproducto . "',now(),NULL)";
+                    $sql_insertprefa = "insert into historicopreciofabrica (idproducto,preciofabrica,desde,hasta) values ('" . $producto["idproducto"] . "','" . round($precioproducto,2) . "',now(),NULL)";
                     $result_insertprefa = mysql_query($sql_insertprefa, $con) or die(mysql_error());
-                    $sql_updateProducto = "update producto set preciofabrica='" . $precioproducto . "' where idproducto='" . $producto["idproducto"] . "'";
+                    $sql_updateProducto = "update producto set preciofabrica='" . round($precioproducto,2) . "' where idproducto='" . $producto["idproducto"] . "'";
                     $result_updateProducto = mysql_query($sql_updateProducto, $con) or die(mysql_error());
                 }
                 $sqlUpdateProducto="update producto set descripcion='".$nompreproductoesp."', descripcioning='".$nompreproductoing."', dimensionlargo='".$largoproducto."', dimensionancho='".$altoproducto."', dimensionalto='".$altoproducto."', peso='".$pesoproducto."', capacidad='".$capacidadproducto."', regalias='".$regaliasproducto."', estandarizado='".$estandarizadoproducto."' where idproducto='".$producto["idproducto"]."'";
@@ -110,8 +139,31 @@
                     $resultUpdateProducto=mysql_query($sqlUpdateProducto,$con) or die(mysql_error());                     
                 }                 
             }
+        }else{
+            
+            if($codigoproducto!=NULL && $codigoproducto!="" && strlen($codigoproducto)<10 && $codigoproducto!="Clave"){
+                //echo "No Cumple -> Codigo: ".$codigoproducto." Linea: ".$i."</br>";
+                $contador++;
+                
+                echo "<tr>";
+                echo "<td>".$i."</td>";
+                echo "<td>".$codigoproducto."</td>";
+                echo "<td>".$exportacion."</td>";
+                echo "<td>".$tipoproducto."</td>";
+                echo "<td>".$formaproducto."</td>";
+                echo "<td>".$patronproductoesp."</td>";
+                echo "<td>".$nompreproductoesp."</td>";
+                echo "<td>".$precioproducto."</td>";
+                echo "<td>".$largoproducto."</td>";
+                echo "<td>".$anchoproducto."</td>";
+                echo "<td>".$altoproducto."</td>";    
+                echo "</tr>";                
+                
+            }            
         }
     }
+    
+    echo "</table>";
     
     $sql_Listas="select * from listadeprecios";
     $result_listas= mysql_query($sql_Listas, $con) or die(mysql_error());
@@ -146,7 +198,7 @@
                     if(mysql_num_rows($result_buscaregistro)==0){                    
                         $precio=number_format(round($columnalistaprecio,2),2);
                         $excepcion="";                
-                        $sql_insertlisp="insert into productoslista (idlistadeprecios,idproducto,precio) values('".$lista["idlistadeprecios"]."','".$producto["idproducto"]."','".$precio."')";
+                        $sql_insertlisp="insert into productoslista (idlistadeprecios,idproducto,precio) values('".$lista["idlistadeprecios"]."','".$producto["idproducto"]."','".round($precio,2)."')";
                         if($lista["columnaexcepcion"]!=""){
                             $excepcion=number_format(round(trim($objPHPExcel->getActiveSheet()->getCell($lista["columnaexcepcion"].$i)->getFormattedValue()),2),2);
                             $sql_insertlisp="insert into productoslista (idlistadeprecios,idproducto,precio,excepcion) values('".$lista["idlistadeprecios"]."','".$producto["idproducto"]."','".$precio."','".$excepcion."')";
@@ -155,10 +207,10 @@
                     }else if(mysql_num_rows($result_buscaregistro)>0){
                         $registroencontrado=mysql_fetch_assoc($result_buscaregistro);
                         $precio=number_format(round($columnalistaprecio,2),2);  
-                        $sqlUpdate="update productoslista set precio='".$precio."' where idlistadeprecios='".$registroencontrado["idproductoslista"]."'";
+                        $sqlUpdate="update productoslista set precio='".round($precio,2)."' where idlistadeprecios='".$registroencontrado["idproductoslista"]."'";
                         if($lista["columnaexcepcion"]!=""){
                             $excepcion=number_format(round(trim($objPHPExcel->getActiveSheet()->getCell($lista["columnaexcepcion"].$i)->getFormattedValue()),2),2);
-                            $sqlUpdate="update productoslista set precio='".$precio."', excepcion='".$excepcion."' where idproductoslista='".$registroencontrado["idproductoslista"]."'";                        
+                            $sqlUpdate="update productoslista set precio='".round($precio,2)."', excepcion='".$excepcion."' where idproductoslista='".$registroencontrado["idproductoslista"]."'";                        
                         }
                         $result_update= mysql_query($sqlUpdate, $con) or die(mysql_error());
                     }                                                                               
@@ -166,6 +218,11 @@
             }/*fin del for*/
         }
     }
+    
+    echo "</br>No se registraron: ".$contador;
           
 
 ?>
+
+            </body>
+</html>

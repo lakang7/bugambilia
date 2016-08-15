@@ -223,10 +223,37 @@
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
                                                     <div style="width: 10%; float: left; margin-right: 1ex">
                                                         <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
+                                                            <?php
+                                                                if(isset($_GET["elementos"])){
+                                                                    if($_GET["elementos"]==10){
+                                                                        echo "<option value='10' selected='selected'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==25){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25' selected='selected'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==50){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50' selected='selected'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==100){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100' selected='selected'>100</option>";                                                                        
+                                                                    }
+                                                                }else{
+                                                                    echo "<option value='10'>10</option>";
+                                                                    echo "<option value='25'>25</option>";
+                                                                    echo "<option value='50'>50</option>";
+                                                                    echo "<option value='100'>100</option>";
+                                                                }                                                            
+                                                            ?>
+
                                                         </select>
                                                     </div>                                                    
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
@@ -234,45 +261,146 @@
                                                         <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex" >
-                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
+                                                        <?php
+                                                            $whereAUX="";
+                                                            if(isset($_GET["filtro"])){
+                                                                $whereAUX=" and ".$_GET["campofiltro"]." LIKE '%".$_GET["filtro"]."%' ";
+                                                                echo "<input type='text' id='filtro' name='filtro' placeholder='' style='width: 100%;' maxlength='40' value='".$_GET["filtro"]."' />";
+                                                            }else{
+                                                                echo "<input type='text' id='filtro' name='filtro' placeholder='' style='width: 100%;' maxlength='40' />";
+                                                            }
+                                                        ?>
+                                                        
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="producto.codigo">Código</option>
-                                                            <option value="material.nombre">Material</option>
-                                                            <option value="tipoproducto.codig">Tipo</option>
-                                                            <option value="producto.descripcion">Producto</option>
-                                                            <option value="categoriaproducto.nombreespanol">Tipo de Producto</option>
-                                                            <option value="producto.dimensionlargo">Largo (cm)</option>
-                                                            <option value="producto.dimensionancho">Ancho (cm)</option>
-                                                            <option value="producto.dimensionalto">Alto (cm)</option>
-                                                            <option value="producto.preciofabrica">Precio de Fabrica</option>
+                                                            <?php
+                                                                if(isset($_GET["campofiltro"])){
+                                                                    if($_GET["campofiltro"]=="producto.codigo"){
+                                                                        echo "<option value='producto.codigo' selected='selected'>Código</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.codigo'>Código</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="material.nombre"){
+                                                                        echo "<option value='material.nombre' selected='selected'>Material</option>";
+                                                                    }else{
+                                                                        echo "<option value='material.nombre'>Material</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="tipoproducto.codig"){
+                                                                        echo "<option value='tipoproducto.codig' selected='selected'>Tipo</option>";
+                                                                    }else{
+                                                                        echo "<option value='tipoproducto.codig'>Código</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="producto.descripcion"){
+                                                                        echo "<option value='producto.descripcion' selected='selected'>Producto</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.descripcion'>Producto</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="categoriaproducto.nombreespanol"){
+                                                                        echo "<option value='categoriaproducto.nombreespanol' selected='selected'>Tipo de Producto</option>";
+                                                                    }else{
+                                                                        echo "<option value='categoriaproducto.nombreespanol'>Tipo de Producto</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="producto.dimensionlargo"){
+                                                                        echo "<option value='producto.dimensionlargo' selected='selected'>Largo (cm)</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.dimensionlargo'>Largo (cm)</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="producto.dimensionancho"){
+                                                                        echo "<option value='producto.dimensionancho' selected='selected'>Ancho (cm)</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.dimensionancho'>Código</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="producto.dimensionalto"){
+                                                                        echo "<option value='producto.dimensionalto' selected='selected'>Alto (cm)</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.dimensionalto'>Alto (cm)</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="producto.preciofabrica"){
+                                                                        echo "<option value='producto.preciofabrica' selected='selected'>Precio de Fabrica</option>";
+                                                                    }else{
+                                                                        echo "<option value='producto.preciofabrica'>Código</option>"; 
+                                                                    }                                                                    
+                                                                }else{
+                                                                    echo "<option value='producto.codigo'>Código</option>";
+                                                                    echo "<option value='material.nombre'>Material</option>";
+                                                                    echo "<option value='tipoproducto.codig'>Tipo</option>";
+                                                                    echo "<option value='producto.descripcion'>Producto</option>";
+                                                                    echo "<option value='categoriaproducto.nombreespanol'>Tipo de Producto</option>";
+                                                                    echo "<option value='producto.dimensionlargo'>Largo (cm)</option>";
+                                                                    echo "<option value='producto.dimensionancho'>Ancho (cm)</option>";
+                                                                    echo "<option value='producto.dimensionalto'>Alto (cm)</option>";
+                                                                    echo "<option value='producto.preciofabrica'>Precio de Fabrica</option>";
+                                                                }
+                                                            
+                                                            ?>
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="producto.codigo" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="asc" >                                                
-                                                <input type="hidden" id="pagina" name="pagina" value="1" >
+                                                <?php
+                                                    $ordena="producto.codigo";
+                                                    $orderbyAux=" order by producto.codigo ";
+                                                    if(isset($_GET["campoordena"])){
+                                                        $orderbyAux=" order by ".$_GET["campoordena"];
+                                                        $ordena=$_GET["campoordena"];
+                                                        echo "<input type='hidden' id='campoordena' name='campoordena' value='".$_GET["campoordena"]."' >";
+                                                    }else{
+                                                        echo "<input type='hidden' id='campoordena' name='campoordena' value='producto.codigo' >";
+                                                    }
+                                                    
+                                                    $orden="asc";
+                                                    if(isset($_GET["orden"])){
+                                                        $orderbyAux=$orderbyAux." ".$_GET["orden"]." ";
+                                                        $orden=$_GET["orden"];
+                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='".$_GET["orden"]."' >";
+                                                    }else{
+                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='asc' >";
+                                                    } 
+                                                    
+                                                    if(isset($_GET["pagina"])){
+                                                        echo "<input type='hidden' id='pagina' name='pagina' value='".$_GET["pagina"]."' >";
+                                                    }else{
+                                                        echo "<input type='hidden' id='pagina' name='pagina' value='1' >";
+                                                    }                                                                                                                                                             
+                                                ?>
                                                 <div id="contenedortabla">
                                                 <div class="centrar"></div>
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.codigo')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('material.nombre')">Material</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('tipoproducto.codig')">Tipo</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('producto.descripcion')">Producto</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('categoriaproducto.nombreespanol')">Forma del Producto</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionlargo')">Largo (cm)</div>  
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionancho')">Ancho (cm)</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.dimensionalto')">Alto (cm)</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('producto.preciofabrica')">Precio de Fabrica</div>                                                     
+                                                    <?php
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.codigo')'>Código<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('material.nombre')'>Material</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('tipoproducto.codig')'>Tipo</div>";
+                                                    echo "<div class='col-xs-2 columna_cabecera' onclick='ordena('producto.descripcion')'>Producto</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('categoriaproducto.nombreespanol')'>Forma del Producto</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionlargo')'>Largo (cm)</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionancho')'>Ancho (cm)</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionalto')'>Alto (cm)</div>";
+                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.preciofabrica')'>Precio de Fabrica</div>";
+                                                    
+                                                    
+                                                    
+                                                    ?>
+                                                    
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select producto.codigo, producto.descripcion, categoriaproducto.nombreespanol, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.preciofabrica, producto.idproducto, material.nombre, tipoproducto.codig from producto, patronproducto, categoriaproducto, material, tipoproducto where producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto = categoriaproducto.idcategoriaproducto and producto.idmaterial = material.idmaterial and producto.idtipoproducto = tipoproducto.idtipoproducto order by producto.codigo";
+                                                
+                                                    $pagina=1;
+                                                    $elementos=10;
+                                                    if(isset($_GET["pagina"])){
+                                                        $pagina=$_GET["pagina"];
+                                                    }
+                                                    if(isset($_GET["elementos"])){
+                                                        $elementos=$_GET["elementos"];
+                                                    }                                                    
+                                                    
+                                                                                                    
+                                                    $sql_listaEMPRESA="select producto.codigo, producto.descripcion, categoriaproducto.nombreespanol, producto.dimensionlargo, producto.dimensionancho, producto.dimensionalto, producto.preciofabrica, producto.idproducto, material.nombre, tipoproducto.codig from producto, patronproducto, categoriaproducto, material, tipoproducto where producto.idpatronproducto = patronproducto.idpatronproducto and patronproducto.idcategoriaproducto = categoriaproducto.idcategoriaproducto and producto.idmaterial = material.idmaterial and producto.idtipoproducto = tipoproducto.idtipoproducto ".$whereAUX." ".$orderbyAux;
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
-                                                            if($cuenta<10){
+                                                            if($cuenta<($elementos*$pagina) && ($cuenta >=(($pagina*$elementos)-$elementos) && $cuenta<($pagina*$elementos))){
+                                                            //if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["nombre"]."</div>";
@@ -290,7 +418,11 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],2,6,3)==1){
-                                                                    echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."'>Editar</a></li>";
+                                                                    if(isset($_GET["campofiltro"])){
+                                                                        echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."&pagina=".$pagina."&elementos=".$elementos."&campoordena=".$ordena."&orden=".$orden."&campofiltro=".$_GET["campofiltro"]."&filtro=".$_GET["filtro"]."'>Editar</a></li>";
+                                                                    }else{
+                                                                        echo "<li><a href='editarproducto.php?id=".$fila["idproducto"]."&pagina=".$pagina."&elementos=".$elementos."&campoordena=".$ordena."&orden=".$orden."'>Editar</a></li>";
+                                                                    }                                                                    
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],2,6,4)==1){
                                                                     echo "<li><a href='pdfs/producto.php?id=".$fila["idproducto"]."' target='_blank'>Informe en PDF</a></li>";                                                                                                                                
@@ -298,8 +430,12 @@
                                                                 if(habilitaMenu($_SESSION["usuario"],2,6,6)==1){
                                                                     echo "<li><a href='fichatecnicaproducto.php?id=".$fila["idproducto"]."'>Ficha Tecnica del Producto</a></li>";
                                                                 }                                                                
-                                                                if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){
-                                                                    echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."'>Eliminar Producto</a></li>";
+                                                                if(habilitaMenu($_SESSION["usuario"],2,6,5)==1){                                                                    
+                                                                    if(isset($_GET["campofiltro"])){
+                                                                        echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."&pagina=".$pagina."&elementos=".$elementos."&campoordena=".$ordena."&orden=".$orden."&campofiltro=".$_GET["campofiltro"]."&filtro=".$_GET["filtro"]."'>Eliminar Producto</a></li>";
+                                                                    }else{
+                                                                        echo "<li><a href='recursos/acciones.php?tarea=37&id=".$fila["idproducto"]."&pagina=".$pagina."&elementos=".$elementos."&campoordena=".$ordena."&orden=".$orden."'>Eliminar Producto</a></li>";
+                                                                    }
                                                                 }
 
                                                                 echo "</ul>";                                                                                                                                
@@ -323,7 +459,7 @@
                                
                                                         
                                                     $numeropaginas=  ceil($numeroelementos/10);
-                                                    $pagina=1;
+                                                    //$pagina=1;
                                                     echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
                                                     echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
                                                     for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){
@@ -815,6 +951,8 @@
                     }
                     
                     function pagina(pagina){
+                       // alert(window.location.href);
+                        
                         document.getElementById("pagina").value=pagina;
                         $("#contenedortabla").load("recursos/tablas.php", {tabla:"productos",campo:document.getElementById("campoordena").value,orden:document.getElementById("ordenordena").value,elementos:document.getElementById("elementos").value,camfiltro:document.getElementById("camfiltro").value,filtro:document.getElementById("filtro").value,pagina:document.getElementById("pagina").value}, function(){});
                     } 
