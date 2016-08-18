@@ -967,6 +967,7 @@
                                                                 
                     if(habilitaMenu($_SESSION["usuario"],4,8,4)==1){
                         echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";
+                        echo "<li><a href='excel/ordendecompra.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar Excel</a></li>";
                     }
                                                                 
                     if($band==1){
@@ -981,7 +982,11 @@
                                 echo "<li><a href='facturacion/facturar.php?id=".$fila["idorden"]."' target='_blank'>Facturar Orden de Compra</a></li>";
                             }                            
                         }
-                    }                                                               
+                    }
+                    
+                    if(habilitaMenu($_SESSION["usuario"],4,8,8)==1){                                                                
+                        echo "<li><a href='pdfs/ordendecompra.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                    }                    
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
@@ -1172,6 +1177,7 @@
                     echo "<ul class='dropdown-menu dropdown-default'>";
                     if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
                         echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                
+                        echo "<li><a href='excel/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar Excel</a></li>";
                     }
                     if(habilitaMenu($_SESSION["usuario"],5,9,5)==1){
                         echo "<li><a href='registrodepagofabrica.php?idorden=".$fila["idorden"]."'>Pagar</a></li>";
@@ -1851,9 +1857,9 @@
         
         $sql_listaEMPRESA="";
         if($_POST["filtro"]==""){                                            
-            $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa order by ".$_POST["campo"]." ".$_POST["orden"]; 
+            $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and regalias.estatus=1 order by ".$_POST["campo"]." ".$_POST["orden"]; 
         }else{                                               
-            $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"]; 
+            $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and regalias.estatus=1 and ".$_POST["camfiltro"]." LIKE '%".$_POST["filtro"]."%' order by ".$_POST["campo"]." ".$_POST["orden"]; 
         }               
         
         //echo $sql_listaEMPRESA;

@@ -279,7 +279,8 @@
                                                                 echo "</button>";
                                                                 echo "<ul class='dropdown-menu dropdown-default'>";
                                                                 if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
-                                                                    echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar PDF</a></li>";                                                                
+                                                                    echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar PDF</a></li>";                                                               
+                                                                    echo "<li><a href='excel/ordendeproduccion.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar Excel</a></li>";
                                                                 }
                                                                 if(habilitaMenu($_SESSION["usuario"],5,9,5)==1){
                                                                     echo "<li><a href='registrodepagofabrica.php?idorden=".$fila["idorden"]."'>Pagar</a></li>";

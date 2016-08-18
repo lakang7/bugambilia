@@ -252,7 +252,7 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.resta')">Resta</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa  order by regalias.fechadecreacion asc";
+                                                    $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and regalias.estatus=1  order by regalias.fechadecreacion asc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;

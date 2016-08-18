@@ -1003,12 +1003,19 @@ if ($tarea == 16) {
 /*Cancelar orden de compra lo que implica cancelar la orden de producción en caso de existir*/
 if ($tarea == 17) {
     
-    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$_GET["id"]."'";
+    $sqlBucaOP="select * from ordendeproduccion where idordendecompra='".$_GET["id"]."' and estatus=1";
+    $resultBuscaOP = mysql_query($sqlBucaOP, $con) or die(mysql_error());    
+    $ordendeprodcuccion = mysql_fetch_assoc($resultBuscaOP);
+        
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$_GET["id"]."' and estatus=1 ";
     $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());  
     
-    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$_GET["id"]."'";
-    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
-            
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$_GET["id"]."' and estatus=1";
+    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error()); 
+    
+    $sqlCancelarRegalias="update regalias set estatus='2' where idordendeproduccion='".$ordendeprodcuccion["idordendeproduccion"]."'";
+    $resultCancelarRegalias = mysql_query($sqlCancelarRegalias, $con) or die(mysql_error()); 
+    
     $sqlFactura="select * from factura where idordendecompra='".$_GET["id"]."' and estatus=1";
     $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
     if (mysql_num_rows($resultFactura) > 0) {
@@ -1555,11 +1562,14 @@ if ($tarea == 27) {
     $resultORDENPRODUCCION = mysql_query($sqlORDENPRODUCCION, $con) or die(mysql_error());
     $ORDENP = mysql_fetch_assoc($resultORDENPRODUCCION);        
     
-    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."'";
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$ORDENP["idordendecompra"]."' and estatus=1";
     $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());
     
-    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendeproduccion='".$_GET["id"]."'";
-    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());     
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendeproduccion='".$_GET["id"]."' and estatus=1";
+    $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());    
+    
+    $sqlCancelarRegalias="update regalias set estatus='2' where idordendeproduccion='".$_GET["id"]."' and estatus=1";
+    $resultCancelarRegalias = mysql_query($sqlCancelarRegalias, $con) or die(mysql_error());    
     
     $sqlFactura="select * from factura where idordendecompra='".$ORDENP["idordendecompra"]."' and estatus=1";
     $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
@@ -1592,10 +1602,17 @@ if ($tarea == 28) {
     $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
     $FACT = mysql_fetch_assoc($resultFactura);    
     
-    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."'";
+    $sqlBuscaOP="select * from ordendeproduccion where idordendecompra='".$FACT["idordendecompra"]."' and estatus=1";
+    $resultBuscaOP = mysql_query($sqlBuscaOP, $con) or die(mysql_error());
+    $BUSCAOP = mysql_fetch_assoc($resultBuscaOP);   
+           
+    $sqlCancelarOP="update ordendeproduccion set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."' and estatus=1";
     $resultCancelarOP = mysql_query($sqlCancelarOP, $con) or die(mysql_error());   
     
-    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."'";
+    $sqlRegalias="update regalias set estatus='2' where idordendeproduccion='".$BUSCAOP["idordendeproduccion"]."' and estatus=1";    
+    $resultRegalias = mysql_query($sqlRegalias, $con) or die(mysql_error());
+    
+    $sqlCancelarOC="update ordendecompra set estatus='2' where idordendecompra='".$FACT["idordendecompra"]."' and estatus=1";
     $resultCancelarOC = mysql_query($sqlCancelarOC, $con) or die(mysql_error());
     
     $sqlCancelarFA="update factura set estatus='2' where idfactura='".$_GET["id"]."' and estatus=1";

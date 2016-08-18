@@ -117,16 +117,18 @@
     $pdf->SetFont('courier', 'B', 8);
     $pdf->SetXY(140,$suma);
     $pdf->Cell(35, 4,"Fecha de Pedido", 0, 1,"L", 0, '', 0);
+    $date = new DateTime($orden["fechaderegistro"]);
     $pdf->SetXY(175,$suma);
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->Cell(25, 4,$orden["fechaderegistro"], 0, 1,"L", 0, '', 0); $suma+=4;
+    $pdf->Cell(25, 4,$date->format('d-m-Y'), 0, 1,"L", 0, '', 0); $suma+=4;
     
     $pdf->SetFont('courier', 'B', 8);
     $pdf->SetXY(140,$suma);
     $pdf->Cell(35, 4,"Fecha de Entrega", 0, 1,"L", 0, '', 0);
+    $date = new DateTime($orden["fechadeentrega"]);
     $pdf->SetXY(175,$suma);
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->Cell(25, 4,$orden["fechadeentrega"], 0, 1,"L", 0, '', 0); $suma+=7;    
+    $pdf->Cell(25, 4,$date->format('d-m-Y'), 0, 1,"L", 0, '', 0); $suma+=7;    
     
     $pdf->Line(10, $suma, 200, $suma);
     

@@ -1025,6 +1025,7 @@ CREATE TABLE regalias(
     cancelado numeric(10,2) not null,
     resta numeric(10,2) not null,
     fechadecreacion TIMESTAMP not null,
+    estatus integer not null,
     PRIMARY KEY (idregalias),
     FOREIGN KEY (idordendeproduccion) REFERENCES ordendeproduccion(idordendeproduccion) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT    

@@ -71,7 +71,7 @@
             }
         } 
         
-        $sql_insertRegalias="insert into regalias (idordendeproduccion,monto,cancelado,resta,fechadecreacion,idempresa) values('".$indice."','".number_format(round(($total*0.10),2),2)."','0','".number_format(round(($total*0.10),2),2)."',now(),'".$ORDEN["idempresa"]."')";
+        $sql_insertRegalias="insert into regalias (idordendeproduccion,monto,cancelado,resta,fechadecreacion,idempresa,estatus) values('".$indice."','".number_format(round(($total*0.10),2),2)."','0','".number_format(round(($total*0.10),2),2)."',now(),'".$ORDEN["idempresa"]."',1)";
         $result_insertRegalias=mysql_query($sql_insertRegalias,$con) or die(mysql_error());
         
     ?>

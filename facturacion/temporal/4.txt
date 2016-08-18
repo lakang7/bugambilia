@@ -1,8 +1,9 @@
 |EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
-|COMPROBANTE|3.2|Sin Serie|2016-08-11 21:51:27|Pago en Una Sola Exhibicion|1512.16|1512.16|Transferencia Electrónica|Ingreso|USD|19.100||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 0000059, Orden de Producción: POMX-4003|FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
+|COMPROBANTE|3.2|Sin Serie|2016-08-16 17:37:40|Pago en Una Sola Exhibicion|1543.27|1790.19|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00004, Orden de Producción: POMX-4003|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
 |EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|22|Pieza|CRD04|CRD04 FR TAZON Botanero 1/2 Bola L L Round Condiment Bowl|11.54|253.88|IVA|0|0|||
-|CONCEPTO|12|Pieza|CO006|CO006 LM PLATON Cacerola Oval # 6 Oval Casserole 6|52.49|629.88|IVA|0|0|||
-|CONCEPTO|12|Pieza|MJ602|MJ602 MW TAZON Charola 5 Divisiones c/Asa 5 Division Condiment|15.26|183.12|IVA|0|0|||
-|CONCEPTO|16|Pieza|TPUD25|TPUD25 SB PLATON Charola Rectangular (Tile) Deep Rectangular Tray 2.5" (to fit Tile)|27.83|445.28|IVA|0|0|||
+|CONCEPTO|12|Pieza|BSI02|BSI02 ST Bari Cuadrado S|27.71|332.52|IVA|16|53.2|||
+|CONCEPTO|10|Pieza|BRD23|BRD23 BR Bowl Italiano M|44.26|442.6|IVA|16|70.82|||
+|CONCEPTO|10|Pieza|BR011|BR011 PC Bowl Redondo XS|13.99|139.9|IVA|16|22.38|||
+|CONCEPTO|10|Pieza|TU014|TU014 MC Charola Reina L|53.66|536.6|IVA|16|85.86|||
+|CONCEPTO|15|Pieza|SD014|SD014 PC Cuchara Grande 11.5"|6.11|91.65|IVA|16|14.66|||

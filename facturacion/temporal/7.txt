@@ -1,0 +1,8 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
+|COMPROBANTE|3.2|Sin Serie|2016-08-17 21:11:48|Pago en Una Sola Exhibicion|2338.20|2712.31|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00007, Orden de Producción: POMX-4006|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|30|Pieza|CR001|CR001 BB Canoa S|18.62|558.6|IVA|16|89.38|||
+|CONCEPTO|30|Pieza|MJ602|MJ602 MC Charola 5 Divisiones c/Asa|15.26|457.8|IVA|16|73.25|||
+|CONCEPTO|30|Pieza|PU001|PU001 SB Charola Gourmet S|14.99|449.7|IVA|16|71.95|||
+|CONCEPTO|30|Pieza|COMP12|COMP12 J Cilindro Taybarnes|29.07|872.1|IVA|16|139.54|||

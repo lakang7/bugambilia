@@ -1,7 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
-|COMPROBANTE|3.2|Sin Serie|2016-08-11 21:27:03|Pago en Una Sola Exhibicion|2766.18|2766.18|Transferencia Electrónica|Ingreso|USD|19.100||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 0000057, Orden de Producción: POMX-4001|FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|15|Pieza|BSI03|BSI03 WW PLATóN Bari Cuadrado M|41.14|617.1|IVA|0|0|||
-|CONCEPTO|15|Pieza|ST023|ST023 LT PLATóN Berenjena c/Placa Redonda|90.16|1352.4|IVA|0|0|||
-|CONCEPTO|18|Pieza|BRD23|BRD23 FR ENSALADERA Bowl Italiano M|44.26|796.68|IVA|0|0|||

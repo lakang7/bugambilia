@@ -104,14 +104,16 @@
     $pdf->Cell(35, 4,"Fecha de Pedido", 0, 1,"L", 0, '', 0);
     $pdf->SetXY(175,$suma);
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->Cell(25, 4,$orden["fechaderegistro"], 0, 1,"L", 0, '', 0); $suma+=4;
+    $date = new DateTime($orden["fechaderegistro"]);
+    $pdf->Cell(25, 4,$date->format('d-m-Y'), 0, 1,"L", 0, '', 0); $suma+=4;
     
     $pdf->SetFont('courier', 'B', 8);
     $pdf->SetXY(140,$suma);
     $pdf->Cell(35, 4,"Fecha de Entrega", 0, 1,"L", 0, '', 0);
     $pdf->SetXY(175,$suma);
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->Cell(25, 4,$orden["fechadeentrega"], 0, 1,"L", 0, '', 0); $suma+=7;    
+    $date = new DateTime($orden["fechadeentrega"]);
+    $pdf->Cell(25, 4,$date->format('d-m-Y'), 0, 1,"L", 0, '', 0); $suma+=7;    
     
     $pdf->Line(10, $suma, 200, $suma);
     
@@ -458,14 +460,7 @@
     $pdf->Cell(193, 4,"Observaciones", 1, 1,"C", 0, '', 0); $suma+=4; 
     
     $pdf->SetFont('courier', 'N', 8);
-    $pdf->MultiCell(193, 4,$observaciones, 1, "L", 0, 0, 10, $suma, true); 
-    
-    
-    
-    
-    
-    
-       
+    $pdf->MultiCell(193, 4,$observaciones, 1, "L", 0, 0, 10, $suma, true);                                
     
     if($_GET["aux"]==0){
         $pdf->Output('Orden de Produccion '.$orden["codigoop"].'.pdf', 'I');                 

@@ -1,6 +1,6 @@
 |EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
 |RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
-|COMPROBANTE|3.2|Sin Serie|2016-08-15 14:39:45|Pago en Una Sola Exhibicion|3565.58|4136.07|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00003, Orden de Producción: POMX-4002|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
+|COMPROBANTE|3.2|Sin Serie|2016-08-16 09:58:06|Pago en Una Sola Exhibicion|3565.58|4136.07|Transferencia Electrónica|Ingreso|USD|19.100||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 688|FALSE|micorreo@pruebascorreo.com|||CREDITO|0453|
 |EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
 |CONCEPTO|60|Pieza|BSI03|BSI03 FR Bari Cuadrado M|41.14|2468.4|IVA|16|394.94|||
 |CONCEPTO|15|Pieza|BRD23|BRD23 ST Bowl Italiano M|44.26|663.9|IVA|16|106.22|||
