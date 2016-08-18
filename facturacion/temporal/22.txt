@@ -1,0 +1,5 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:07:26|Pago en Una Sola Exhibicion|805.80|934.73|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00022, Orden de Producción: POMX-4021|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|30|Pieza|IU103|IU103 ST Bowl Rectangular|26.86|805.8|IVA|16|128.93|||

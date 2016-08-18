@@ -1,0 +1,5 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 16:37:21|Pago en Una Sola Exhibicion|5409.60|6275.14|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00033, Orden de Producción: POMX-4032, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|60|Pieza|ST023|ST023 BR PLATON Berenjena c/Placa Redonda / Kidney Display|90.16|5409.6|IVA|16|865.54|||

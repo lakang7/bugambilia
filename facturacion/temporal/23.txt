@@ -1,0 +1,6 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:08:22|Pago en Una Sola Exhibicion|1095.52|1270.80|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00023, Orden de Producción: POMX-4022|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|12|Pieza|BSI02|BSI02 FR Bari Cuadrado S|27.71|332.52|IVA|16|53.2|||
+|CONCEPTO|50|Pieza|MJ602|MJ602 T Charola 5 Divisiones c/Asa|15.26|763|IVA|16|122.08|||

@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Bugambilia Buffets - Reporte de Ventas</title>
+		<title>Bugambilia Buffets - Reporte de Ventas Por Empresa</title>
 		<meta name="description" content="top menu &amp; navigation" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -195,8 +195,8 @@
                             
 				<div class="main-content-inner">
 					<div class="page-content">                                            
-                                            <form enctype="multipart/form-data" target="_blank" method="post" id="form_crearPatron" action="pdfs/reportedeventas.php">
-						<div class="page-header"><h1>Reporte De Ventas Desde - Hasta<small><i class="ace-icon fa fa-angle-double-right"></i> Generación</small></h1></div>
+                                            <form enctype="multipart/form-data" target="_blank" method="post" id="form_crearPatron" action="pdfs/reportedeventasporempresa.php">
+						<div class="page-header"><h1>Reporte De Ventas Por Empresa Desde - Hasta<small><i class="ace-icon fa fa-angle-double-right"></i> Generación</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">                                                                                                                                                                                                                                
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px">Datos Para La Generación del Reporte</div>                                                        

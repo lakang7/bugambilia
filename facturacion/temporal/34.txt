@@ -1,0 +1,11 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 16:41:35|Pago en Una Sola Exhibicion|4131.72|4792.80|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00044, Orden de Producción: POMX-4033, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|12|Pieza|BUI04|BUI04 BR PLATON Bari Rectangular L / |42|504|IVA|16|80.64|||
+|CONCEPTO|12|Pieza|ST023|ST023 MC PLATON Berenjena c/Placa Redonda / Kidney Display|90.16|1081.92|IVA|16|173.11|||
+|CONCEPTO|12|Pieza|CO006|CO006 BB PLATON Cacerola Oval # 6 / Oval Casserole 6|52.49|629.88|IVA|16|100.78|||
+|CONCEPTO|12|Pieza|CO003|CO003 WW PLATON Cacerola Oval # 3 / Oval Casserole 3|23.96|287.52|IVA|16|46|||
+|CONCEPTO|12|Pieza|CO004|CO004 WW PLATON Cacerola Oval # 4 / Oval Casserole 4|30.33|363.96|IVA|16|58.23|||
+|CONCEPTO|12|Pieza|CO005|CO005 WW PLATON Cacerola Oval # 5 / Oval Casserole 5|39.39|472.68|IVA|16|75.63|||
+|CONCEPTO|12|Pieza|CO007|CO007 WW PLATON Cacerola Oval # 7 / Oval Casserole 7|65.98|791.76|IVA|16|126.68|||

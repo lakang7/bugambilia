@@ -367,20 +367,16 @@
                                                 <div class="centrar"></div>
                                                 <div class="row cabecera_tabla">
                                                     <?php
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.codigo')'>Código<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('material.nombre')'>Material</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('tipoproducto.codig')'>Tipo</div>";
-                                                    echo "<div class='col-xs-2 columna_cabecera' onclick='ordena('producto.descripcion')'>Producto</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('categoriaproducto.nombreespanol')'>Forma del Producto</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionlargo')'>Largo (cm)</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionancho')'>Ancho (cm)</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.dimensionalto')'>Alto (cm)</div>";
-                                                    echo "<div class='col-xs-1 columna_cabecera' onclick='ordena('producto.preciofabrica')'>Precio de Fabrica</div>";
-                                                    
-                                                    
-                                                    
-                                                    ?>
-                                                    
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('producto.codigo')>Código<i class='ace-icon glyphicon glyphicon-download' style='float: right'></i></div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('material.nombre')>Material</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('tipoproducto.codig')>Tipo</div>";
+                                                        echo "<div class='col-xs-2 columna_cabecera' onclick=ordena('producto.descripcion')>Producto</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('categoriaproducto.nombreespanol')>Forma del Producto</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('producto.dimensionlargo')>Largo (cm)</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('producto.dimensionancho')>Ancho (cm)</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('producto.dimensionalto')>Alto (cm)</div>";
+                                                        echo "<div class='col-xs-1 columna_cabecera' onclick=ordena('producto.preciofabrica')>Precio de Fabrica</div>";                                                                                                                                                            
+                                                    ?>                                                    
 						</div>
                                                 <?php 
                                                 

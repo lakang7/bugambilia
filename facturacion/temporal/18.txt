@@ -1,0 +1,12 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Yudaltep SA de CV|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 13:57:29|Pago en Una Sola Exhibicion|4920.15|5707.37|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00018, Orden de Producción: POMX-4017|FALSE|micorreo@pruebascorreo.com|||FACTURA|9712|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|15|Pieza|BUI03|BUI03 FR Bari Rectangular M|26.3|394.5|IVA|16|63.12|||
+|CONCEPTO|15|Pieza|ST023|ST023 SB Berenjena c/Placa Redonda|90.16|1352.4|IVA|16|216.38|||
+|CONCEPTO|15|Pieza|BR014|BR014 PC Bowl Redondo L|59.08|886.2|IVA|16|141.79|||
+|CONCEPTO|15|Pieza|TU002|TU002 WW Charola Carlota S|35.99|539.85|IVA|16|86.38|||
+|CONCEPTO|15|Pieza|IR014|IR014 WW Cilindro Aderezo  1 .5 Lts|33.44|501.6|IVA|16|80.26|||
+|CONCEPTO|15|Pieza|COM211|COM211 WW Contenedor Cuadrado Mini Alto XS|6.57|98.55|IVA|16|15.77|||
+|CONCEPTO|15|Pieza|COM002|COM002 WW Contenedor Redondo Mini Corto S|12.87|193.05|IVA|16|30.89|||
+|CONCEPTO|15|Pieza|PS005|PS005 WW Curazao Cuadrado Plano XL|63.6|954|IVA|16|152.64|||

@@ -70,10 +70,11 @@ $dia=date("d");
 $mes=date("m");
 $ano=date("Y");    
 
-
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido desde: </b>".$_POST["id-date-picker-1"], 1, 0, false, true, "L");
+$date01 = new DateTime($_POST["id-date-picker-1"]);
+$date02 = new DateTime($_POST["id-date-picker-2"]);
+$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido desde: </b>".$date01->format('d-m-Y'), 1, 0, false, true, "L");
 $altura+=4.5;
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido hasta: </b>".$_POST["id-date-picker-2"], 1, 0, false, true, "L");
+$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido hasta: </b>".$date02->format('d-m-Y'), 1, 0, false, true, "L");
 $altura+=4.5;
 $pdf->writeHTMLCell(190,4,10,$altura,"<b>Total de Ventas en el perido: </b>".$numeroElementos, 1, 0, false, true, "L");
 $altura+=4.5;
@@ -106,7 +107,8 @@ while ($venta = mysql_fetch_assoc($resultVentas)) {
 
     $altura+=4.5;
     $pdf->SetXY(10,$altura);
-    $pdf->Cell(25, 4,$venta["fechaderegistro"], 1, 1, "C", 0, '', 0);
+    $date = new DateTime($venta["fechaderegistro"]);
+    $pdf->Cell(25, 4,$date->format('d-m-Y'), 1, 1, "C", 0, '', 0);
     $pdf->SetXY(35,$altura);
     $pdf->Cell(25, 4,$venta["codigoexterno"], 1, 1, "C", 0, '', 0);
     $pdf->SetXY(60,$altura);

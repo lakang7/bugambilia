@@ -1,0 +1,6 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
+|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:00:44|Pago en Una Sola Exhibicion|1444.84|1676.01|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00019, Orden de Producción: POMX-4018, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|6|Pieza|BSI03|BSI03 ST PLATON Bari Cuadrado M / |41.14|246.84|IVA|16|39.49|||
+|CONCEPTO|50|Pieza|BR012|BR012 FR TAZON Bowl Redondo S / Round Bowl 9"|23.96|1198|IVA|16|191.68|||
