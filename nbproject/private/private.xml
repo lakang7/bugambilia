@@ -12,7 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/bugambilia/pdfs/regaliasporpagar.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/recursos/tablas.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/editarordendecompra.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/pdfs/ordendecompra.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/recursos/acciones.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/listarproductos.php</file>
+            <file>file:/C:/xampp/htdocs/bugambilia/listarordenesdecompra.php</file>
         </group>
     </open-files>
 </project-private>

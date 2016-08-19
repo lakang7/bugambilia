@@ -1438,12 +1438,23 @@ if ($tarea == 22) {
         
     }
     
+    
+    if(isset($_GET["campofiltro"])){
     ?>
         <script type="text/javascript">
             alert("Orden de Compra Editada Satisfactoriamente.");
-            document.location="../listarordenesdecompra.php";
+            document.location="../listarordenesdecompra.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>&campofiltro=<?php echo $_GET["campofiltro"] ?>&filtro=<?php echo $_GET["filtro"] ?>";
         </script>
-    <?php   
+    <?php         
+    }else{
+    ?>
+        <script type="text/javascript">
+            alert("Orden de Compra Editada Satisfactoriamente.");
+            document.location="../listarordenesdecompra.php?pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>";
+        </script>
+    <?php         
+    }     
+    
 }
 
 

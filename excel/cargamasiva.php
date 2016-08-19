@@ -207,7 +207,7 @@
                     }else if(mysql_num_rows($result_buscaregistro)>0){
                         $registroencontrado=mysql_fetch_assoc($result_buscaregistro);
                         $precio=number_format(round($columnalistaprecio,2),2);  
-                        $sqlUpdate="update productoslista set precio='".round($precio,2)."' where idlistadeprecios='".$registroencontrado["idproductoslista"]."'";
+                        $sqlUpdate="update productoslista set precio='".round($precio,2)."' where idproductoslista='".$registroencontrado["idproductoslista"]."'";
                         if($lista["columnaexcepcion"]!=""){
                             $excepcion=number_format(round(trim($objPHPExcel->getActiveSheet()->getCell($lista["columnaexcepcion"].$i)->getFormattedValue()),2),2);
                             $sqlUpdate="update productoslista set precio='".round($precio,2)."', excepcion='".$excepcion."' where idproductoslista='".$registroencontrado["idproductoslista"]."'";                        

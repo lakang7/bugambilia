@@ -232,8 +232,20 @@
                                                                 $orden = mysql_fetch_assoc($result_ORDEN);                                                                                                                                           
                                                             }
                                                             mysql_close($con);
-                                                        ?>                                            
-                                            <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=22&id=<?php echo $_GET["id"]; ?>">
+                                            
+                                                            
+                                                if(isset($_GET["campofiltro"])){
+                                                ?>
+                                                    <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=22&id=<?php echo $_GET["id"]; ?>&pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>&campofiltro=<?php echo $_GET["campofiltro"] ?>&filtro=<?php echo $_GET["filtro"] ?>">
+                                                <?php
+                                                }else{
+                                                ?>
+                                                    <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=22&id=<?php echo $_GET["id"]; ?>&pagina=<?php echo $_GET["pagina"] ?>&elementos=<?php echo $_GET["elementos"] ?>&campoordena=<?php echo $_GET["campoordena"] ?>&orden=<?php echo $_GET["orden"] ?>">
+                                                <?php
+                                                }
+                                                            
+                                                ?>    
+                                                                                                                                                                                
 						<div class="page-header"><h1>Orden de Compra<small><i class="ace-icon fa fa-angle-double-right"></i> Registro</small></h1></div>
 						<div class="row">
                                                     <div class="col-md-6" style="border: 0px solid #CCC">
@@ -481,7 +493,7 @@
                                                                 echo "<div style='width: 100%; margin-top: 10px'>";
                                                                 echo "<label>Lista de Precios</label>";        
                                                                 echo "<select class='chosen-select form-control' disabled='true' id='lista' name='lista' data-placeholder='Elija la lista de precios' required='required'>";
-                                                                $sql_listaLISTAPRECIOS="select * from listadeprecios where idempresa='".$orden["idempresa"]."'";
+                                                                $sql_listaLISTAPRECIOS="select * from listadeprecios where idlistadeprecios='".$orden["idlistadeprecios"]."'";
                                                                 $result_listaLISTAPRECIOS=mysql_query($sql_listaLISTAPRECIOS,$con) or die(mysql_error());
                                                                 if(mysql_num_rows($result_listaLISTAPRECIOS)>0){
                                                                     while ($fila = mysql_fetch_assoc($result_listaLISTAPRECIOS)) {

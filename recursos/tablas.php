@@ -958,7 +958,11 @@
                     echo "<ul class='dropdown-menu dropdown-default'>";
                     
                     if(habilitaMenu($_SESSION["usuario"],4,8,3)==1){
-                        echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."'>Editar</a></li>";
+                        if($_POST["filtro"]==""){
+                            echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."&campofiltro=".$_POST["camfiltro"]."&filtro=".$_POST["filtro"]."'>Editar</a></li>";
+                        }else{
+                            echo "<li><a href='editarordendecompra.php?id=".$fila["idorden"]."&pagina=".$_POST["pagina"]."&elementos=".$_POST["elementos"]."&campoordena=".$_POST["campo"]."&orden=".$_POST["orden"]."'>Editar</a></li>";
+                        }                        
                     }
                                                                 
                     if(habilitaMenu($_SESSION["usuario"],4,8,5)==1){                                                                    
@@ -1176,7 +1180,7 @@
                     echo "</button>";
                     echo "<ul class='dropdown-menu dropdown-default'>";
                     if(habilitaMenu($_SESSION["usuario"],5,9,3)==1){
-                        echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar PDF</a></li>";                                                                
+                        echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=0' target='_blank'>Exportar PDF</a></li>";                                                                
                         echo "<li><a href='excel/ordendeproduccion.php?id=".$fila["idorden"]."' target='_blank'>Exportar Excel</a></li>";
                     }
                     if(habilitaMenu($_SESSION["usuario"],5,9,5)==1){
@@ -1185,6 +1189,9 @@
                     if(habilitaMenu($_SESSION["usuario"],5,9,4)==1){
                         echo "<li><a href='#my-modal2' role='button' data-toggle='modal' onclick=prueba2(".$fila["idorden"].")>Cancelar</a></li>";
                     }
+                    if(habilitaMenu($_SESSION["usuario"],5,9,6)==1){
+                        echo "<li><a href='pdfs/ordendeproduccion.php?id=".$fila["idorden"]."&aux=1' target='_blank'>Enviar por Email</a></li>";
+                    }                    
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
