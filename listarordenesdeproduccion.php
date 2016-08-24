@@ -216,10 +216,36 @@
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Mostrando</label>
                                                     <div style="width: 10%; float: left; margin-right: 1ex">
                                                         <select class="chosen-select form-control" onchange="limita()" id="elementos" name="elementos" data-placeholder="Número de elementos para mostrar">
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
+                                                            <?php    
+                                                            if(isset($_GET["elementos"])){
+                                                                    if($_GET["elementos"]==10){
+                                                                        echo "<option value='10' selected='selected'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==25){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25' selected='selected'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==50){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50' selected='selected'>50</option>";
+                                                                        echo "<option value='100'>100</option>";                                                                        
+                                                                    }else if($_GET["elementos"]==100){
+                                                                        echo "<option value='10'>10</option>";
+                                                                        echo "<option value='25'>25</option>";
+                                                                        echo "<option value='50'>50</option>";
+                                                                        echo "<option value='100' selected='selected'>100</option>";                                                                        
+                                                                    }
+                                                                }else{
+                                                                    echo "<option value='10'>10</option>";
+                                                                    echo "<option value='25'>25</option>";
+                                                                    echo "<option value='50'>50</option>";
+                                                                    echo "<option value='100'>100</option>";
+                                                                }                                                            
+                                                            ?>
                                                         </select>
                                                     </div>                                                    
                                                     <label style="float: left; margin-right: 1ex; color: #000; font-size: 1.8ex;line-height: 5ex">Registros</label>
@@ -227,24 +253,103 @@
                                                         <button class="btn btn-sm btn-success" type="button" onclick="filtrar()"><i class="ace-icon fa fa-check "></i>Filtrar</button>
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex" >
-                                                        <input type="text" id="filtro" name="filtro" placeholder="" style="width: 100%;" maxlength="40" />
+                                                        <?php
+                                                            $whereAUX="";
+                                                            if(isset($_GET["filtro"])){
+                                                                $whereAUX=" and ".$_GET["campofiltro"]." LIKE '%".$_GET["filtro"]."%' ";
+                                                                echo "<input type='text' id='filtro' name='filtro' placeholder='' style='width: 100%;' maxlength='40' value='".$_GET["filtro"]."' />";
+                                                            }else{
+                                                                echo "<input type='text' id='filtro' name='filtro' placeholder='' style='width: 100%;' maxlength='40' />";
+                                                            }
+                                                        ?>
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
-                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="ordendeproduccion.codigoop">Código orden de Producción</option>
-                                                            <option value="ordendecompra.codigoexterno">Código orden de Compra</option>
-                                                            <option value="empresa.nombreempresa">Empresa</option>
-                                                            <option value="agenda.nombre">Contacto</option>
-                                                            <option value="listadeprecios.nombre">Lista de Precios</option>
-                                                            <option value="ordendeproduccion.fechaderegistro">Registro</option>
-                                                            <option value="ordendeproduccion.fechadeentrega">Entrega</option>
-                                                            <option value="ordendeproduccion.total">Total</option>                                                            
+                                                        <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">                                                            
+                                                            <?php
+                                                                if(isset($_GET["campofiltro"])){
+                                                                    if($_GET["campofiltro"]=="ordendeproduccion.codigoop"){
+                                                                        echo "<option value='ordendeproduccion.codigoop' selected='selected'>Código orden de Producción</option>";
+                                                                    }else{
+                                                                        echo "<option value='ordendeproduccion.codigoop'>Código orden de Producción</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="ordendecompra.codigoexterno"){
+                                                                        echo "<option value='ordendecompra.codigoexterno' selected='selected'>Código orden de Compra</option>";
+                                                                    }else{
+                                                                        echo "<option value='ordendecompra.codigoexterno'>Código orden de Compra</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="empresa.nombreempresa"){
+                                                                        echo "<option value='empresa.nombreempresa' selected='selected'>Empresa</option>";
+                                                                    }else{
+                                                                        echo "<option value='empresa.nombreempresa'>Empresa</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="agenda.nombre"){
+                                                                        echo "<option value='agenda.nombre' selected='selected'>Contacto</option>";
+                                                                    }else{
+                                                                        echo "<option value='agenda.nombre'>Contacto</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="listadeprecios.nombre"){
+                                                                        echo "<option value='listadeprecios.nombre' selected='selected'>Lista de Precios</option>";
+                                                                    }else{
+                                                                        echo "<option value='listadeprecios.nombre'>Lista de Precios</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="ordendeproduccion.fechaderegistro"){
+                                                                        echo "<option value='ordendeproduccion.fechaderegistro' selected='selected'>Registro</option>";
+                                                                    }else{
+                                                                        echo "<option value='ordendeproduccion.fechaderegistro'>Registro</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="ordendeproduccion.fechadeentrega"){
+                                                                        echo "<option value='ordendeproduccion.fechadeentrega' selected='selected'>Entrega</option>";
+                                                                    }else{
+                                                                        echo "<option value='ordendeproduccion.fechadeentrega'>Entrega</option>"; 
+                                                                    }
+                                                                    if($_GET["campofiltro"]=="ordendeproduccion.total"){
+                                                                        echo "<option value='ordendeproduccion.total' selected='selected'>Total</option>";
+                                                                    }else{
+                                                                        echo "<option value='ordendeproduccion.total'>Total</option>"; 
+                                                                    }                                                                   
+                                                                }else{
+                                                                    echo "<option value='ordendeproduccion.codigoop'>Código orden de Producción</option>";
+                                                                    echo "<option value='ordendecompra.codigoexterno'>Código orden de Compra</option>";
+                                                                    echo "<option value='empresa.nombreempresa'>Empresa</option>";
+                                                                    echo "<option value='agenda.nombre'>Contacto</option>";
+                                                                    echo "<option value='listadeprecios.nombre'>Lista de Precios</option>";
+                                                                    echo "<option value='ordendeproduccion.fechaderegistro'>Registro</option>";
+                                                                    echo "<option value='ordendeproduccion.fechadeentrega'>Entrega</option>";
+                                                                    echo "<option value='ordendeproduccion.total'>Total</option>";
+                                                                }                                                            
+                                                            ?>                                                            
+                                                            
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="ordendeproduccion.fechaderegistro" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
-                                                <input type="hidden" id="pagina" name="pagina" value="1" >
+                                                <?php
+                                                    $ordena="ordendeproduccion.fechaderegistro";
+                                                    $orderbyAux=" order by ordendeproduccion.fechaderegistro ";
+                                                    if(isset($_GET["campoordena"])){
+                                                        $orderbyAux=" order by ".$_GET["campoordena"];
+                                                        $ordena=$_GET["campoordena"];
+                                                        echo "<input type='hidden' id='campoordena' name='campoordena' value='".$_GET["campoordena"]."' >";
+                                                    }else{
+                                                        echo "<input type='hidden' id='campoordena' name='campoordena' value='ordendeproduccion.fechaderegistro' >";
+                                                    }
+                                                    
+                                                    $orden="asc";
+                                                    if(isset($_GET["orden"])){
+                                                        
+                                                        $orden=$_GET["orden"];
+                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='".$_GET["orden"]."' >";
+                                                    }else{
+                                                        $orderbyAux=" order by ordendeproduccion.fechaderegistro DESC";
+                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='desc' >";
+                                                    } 
+                                                    
+                                                    if(isset($_GET["pagina"])){
+                                                        echo "<input type='hidden' id='pagina' name='pagina' value='".$_GET["pagina"]."' >";
+                                                    }else{
+                                                        echo "<input type='hidden' id='pagina' name='pagina' value='1' >";
+                                                    }                                                                                                                                                             
+                                                ?>                                                
+
                                                 <div id="contenedortabla">                                                                                                                                                                                                                                                                                                                    
                                                 <div class="row cabecera_tabla">
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Codigo OP</div>
@@ -257,12 +362,23 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendeproduccion.total')">Total</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendecompra.codigoexterno as codigoexterno, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ordendeproduccion.idordendecompra = ordendecompra.idordendecompra order by ordendeproduccion.fechaderegistro DESC";
+                                                
+                                                    $pagina=1;
+                                                    $elementos=10;
+                                                    if(isset($_GET["pagina"])){
+                                                        $pagina=$_GET["pagina"];
+                                                    }
+                                                    if(isset($_GET["elementos"])){
+                                                        $elementos=$_GET["elementos"];
+                                                    }                                                  
+                                                
+                                                
+                                                    $sql_listaORDENES="select ordendeproduccion.idordendeproduccion as idorden, ordendeproduccion.codigoop as codigo, ordendecompra.codigoexterno as codigoexterno, ordendeproduccion.fechadeentrega as fecha, ordendeproduccion.fechaderegistro as registro, ordendeproduccion.total as total, empresa.nombreempresa as empresa, agenda.nombre as contacto, listadeprecios.nombre as lista from ordendecompra, ordendeproduccion, empresa, agenda, listadeprecios where ordendeproduccion.estatus=1 and ordendeproduccion.idempresa = empresa.idempresa and ordendeproduccion.idagenda01 = agenda.idagenda and ordendeproduccion.idlistadeprecios = listadeprecios.idlistadeprecios and ordendeproduccion.idordendecompra = ordendecompra.idordendecompra ".$whereAUX." ".$orderbyAux;
                                                     $result_listaORDENES=mysql_query($sql_listaORDENES,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaORDENES)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaORDENES)) {
-                                                            if($cuenta<10){
+                                                            if($cuenta<($elementos*$pagina) && ($cuenta >=(($pagina*$elementos)-$elementos) && $cuenta<($pagina*$elementos))){
                                                                 echo "<div class='row linea_tabla'>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
@@ -313,7 +429,7 @@
                                
                                                         
                                                     $numeropaginas=  ceil($numeroelementos/10);
-                                                    $pagina=1;
+                                                    //$pagina=1;
                                                     echo "<ul class='pagination pull-right' style='margin-right: 10px;margin-top: 0px;margin-bottom: 0px'>";
                                                     echo "<li class='prev' onclick='pagina(1)'><a><i class='ace-icon fa fa-angle-double-left'></i></a></li>";
                                                     for($i=($pagina-3);$i<$numeropaginas && $i<($pagina+2);$i++){

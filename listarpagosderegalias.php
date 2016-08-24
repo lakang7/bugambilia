@@ -239,20 +239,20 @@
                                                         </select>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <input type="hidden" id="campoordena" name="campoordena" value="empresa.nombreempresa" >
-                                                <input type="hidden" id="ordenordena" name="ordenordena" value="asc" >                                                
+                                                <input type="hidden" id="campoordena" name="campoordena" value="regalias.fechadecreacion" >
+                                                <input type="hidden" id="ordenordena" name="ordenordena" value="desc" >                                                
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
+                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Orden de Producción</div> 
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('regalias.fechadecreacion')">Fecha de Creación</div>
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('regalias.fechadecreacion')">Fecha de Creación<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.monto')">Monto</div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.cancelado')">Cancelado</div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.resta')">Resta</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and regalias.estatus=1  order by regalias.fechadecreacion asc";
+                                                    $sql_listaEMPRESA="select regalias.idregalias, ordendeproduccion.codigoop, empresa.nombreempresa, regalias.monto, regalias.cancelado, regalias.resta, regalias.fechadecreacion from regalias, ordendeproduccion, empresa where regalias.idordendeproduccion = ordendeproduccion.idordendeproduccion and empresa.idempresa = regalias.idempresa and regalias.estatus=1  order by regalias.fechadecreacion desc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;

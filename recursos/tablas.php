@@ -55,7 +55,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -84,7 +84,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";  
+                    echo "</div>"; 
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -96,7 +97,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -175,7 +176,7 @@
         
         //echo $sql_listaEMPRESA;
 
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -201,7 +202,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";                    
+                    echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -213,7 +215,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -276,7 +278,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -302,6 +304,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -313,7 +316,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -393,7 +396,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -423,6 +426,7 @@
                     echo "</div>";                    
                     echo "</div>";
                     echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -434,7 +438,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -607,7 +611,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -653,6 +657,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -664,7 +669,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -718,7 +723,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -760,7 +765,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";  
+                    echo "</div>";
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -772,7 +778,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -920,7 +926,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -995,6 +1001,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1006,7 +1013,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -1157,7 +1164,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -1195,7 +1202,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";  
+                    echo "</div>"; 
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1207,7 +1215,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -1297,7 +1305,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -1322,6 +1330,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";  
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1333,7 +1342,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -1505,7 +1514,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -1536,7 +1545,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";  
+                    echo "</div>"; 
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1548,7 +1558,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -1720,7 +1730,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -1751,7 +1761,8 @@
                     echo "</ul>";                                                                                                                                
                     echo "</div>";
                     echo "</div>";
-                    echo "</div>";  
+                    echo "</div>"; 
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1763,7 +1774,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         
@@ -1870,7 +1881,7 @@
         }               
         
         //echo $sql_listaEMPRESA;
-        
+        $impresos=0;
         $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
         if(mysql_num_rows($result_listaEMPRESA)>0){
             $cuenta=0;
@@ -1898,6 +1909,7 @@
                     echo "</div>";                                                                                                                                                                                                
                     echo "</div>";
                     echo "</div>"; 
+                    $impresos++;
                 }
                 $cuenta++;
             }
@@ -1909,7 +1921,7 @@
             if($_POST["elementos"]>$numeroelementos){
                 echo "Mostrando ".$numeroelementos." de ".$numeroelementos." elementos";
             }else{
-                echo "Mostrando ".$_POST["elementos"]." de ".$numeroelementos." elementos";
+                echo "Mostrando ".$impresos." de ".$numeroelementos." elementos";
             }
                                
                                                         

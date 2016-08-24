@@ -212,6 +212,14 @@
                                                             echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
                                                             echo "Listar Registros";
                                                             echo "</button></a>";                                                            
+                                                        }     
+                                                        
+                                                        /*Actualizar base de datos*/
+                                                        if(habilitaMenu($_SESSION["usuario"],2,6,2)==1){
+                                                            echo "<a href='excel/cargamasiva.php?pagina=productos'><button class='btn btn-white btn-info btn-bold' style='margin-left: 8px;'>";
+                                                            echo "<i class='ace-icon fa fa-list-alt bigger-120 blue'></i>";
+                                                            echo "Actualizar base de datos";
+                                                            echo "</button></a>";                                                            
                                                         }                                                        
                                                     ?>
                                                 <form method="post" id="form_crearEmpresa" action="recursos/acciones.php?tarea=1">

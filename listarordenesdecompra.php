@@ -341,13 +341,14 @@
                                                         echo "<input type='hidden' id='campoordena' name='campoordena' value='ordendecompra.fechaderegistro' >";
                                                     }
                                                     
-                                                    $orden="asc";
+                                                    $orden="ASC";
                                                     if(isset($_GET["orden"])){
                                                         $orderbyAux=$orderbyAux." ".$_GET["orden"]." ";
                                                         $orden=$_GET["orden"];
                                                         echo "<input type='hidden' id='ordenordena' name='ordenordena' value='".$_GET["orden"]."' >";
                                                     }else{
-                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='asc' >";
+                                                        $orderbyAux=" order by ordendecompra.fechaderegistro DESC";
+                                                        echo "<input type='hidden' id='ordenordena' name='ordenordena' value='desc' >";
                                                     } 
                                                     
                                                     if(isset($_GET["pagina"])){
