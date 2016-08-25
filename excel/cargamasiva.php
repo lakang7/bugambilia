@@ -57,7 +57,7 @@
         $estandarizadoproducto=trim($objPHPExcel->getActiveSheet()->getCell('W'.$i)->getFormattedValue());
         
         
-        if($exportacion!="" && $exportacion!="C" && $codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto)){
+        if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto)){
             $materiales="";
             $idmaterial="";
             if($tipoproducto=="CATVIEJO15" || $tipoproducto=="CATNUEVO16" || $tipoproducto=="ESPECIALES"){
@@ -83,7 +83,7 @@
                     $indice = intval($fila["AUTO_INCREMENT"]);
                     $indice--;                
                     $IDPATRON=$indice;
-                    $sqlinsertmatpatron="insert into materialespatron (idpatronproducto,idmaterial) values('".$indice."','".$idmaterial."')";
+                    $sqlinsertmatpatron="insert into materialespatron (idpatronproducto,idmaterial) values('".$indice."','".$idmaterial."')";                    
                     $resultinsertmatpatron = mysql_query($sqlinsertmatpatron, $con) or die(mysql_error());                                                            
                 }            
             }else if(mysql_num_rows($resultpatronproducto)>0){ /*Patron producto existe*/
@@ -188,7 +188,7 @@
                 $estandarizadoproducto=trim($objPHPExcel->getActiveSheet()->getCell('W'.$i)->getFormattedValue());
                 $columnalistaprecio=trim($objPHPExcel->getActiveSheet()->getCell($lista["columnaprecios"].$i)->getFormattedValue());
             
-                if($exportacion!="" && $exportacion!="C" && $codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto) && is_numeric($columnalistaprecio)){
+                if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto) && is_numeric($columnalistaprecio)){
                     $sqlproducto="select * from producto where codigo='".$codigoproducto."'";
                     $resultproducto= mysql_query($sqlproducto, $con) or die(mysql_error());
                     $producto=mysql_fetch_assoc($resultproducto);

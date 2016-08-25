@@ -1,0 +1,7 @@
+[25-08-2016 16:41:46] Se ha producido un error al intentar procesar el archivo.
+Código: G00
+Módulo:ALMACENAMIENTO
+Mensaje: Sucedio un error de almacenamiento. - A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+
+Para más información sobre este error consultar:
+https://facturador.zendesk.com

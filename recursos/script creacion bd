@@ -66,6 +66,7 @@ insert into submenu (idmenu,nombre,pagina,abre) values(8,"Cuentas por Pagar","pd
 insert into submenu (idmenu,nombre,pagina,abre) values(5,"Pago de Regalias","listarpagosderegalias.php",0);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Regalias por Pagar","pdfs/regaliasporpagar.php",1);
 insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas Por Empresa","reporteventasporempresadesdehasta.php",0);
+insert into submenu (idmenu,nombre,pagina,abre) values(8,"Reporte de Ventas Por Empresa y Sucursales","reporteventasporempresadesdehastasucursal.php",0);
 
 CREATE TABLE opsubmenu(
     idopsubmenu mediumint(8) unsigned auto_increment,
@@ -169,6 +170,7 @@ insert into opsubmenu (idsubmenu,indice,nombre) values(22,2,"Pagar");
 
 insert into opsubmenu (idsubmenu,indice,nombre) values(23,1,"Visualizar");
 insert into opsubmenu (idsubmenu,indice,nombre) values(24,1,"Visualizar");
+insert into opsubmenu (idsubmenu,indice,nombre) values(25,1,"Visualizar");
 
 CREATE TABLE menualto(
     idmenualto mediumint(8) unsigned auto_increment,
@@ -231,7 +233,7 @@ insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04
 insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(5,22,1,1,1,1,1,1,1,1,1,1);
 insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,23,1,1,1,1,1,1,1,1,1,1);
 insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,24,1,1,1,1,1,1,1,1,1,1);
-
+insert into privilegio (idmenualto,idsubmenu,accion01,accion02,accion03,accion04,accion05,accion06,accion07,accion08,accion09,accion10) values(8,25,1,1,1,1,1,1,1,1,1,1);
 
 
 CREATE TABLE tabla (
@@ -831,7 +833,7 @@ CREATE TABLE producto (
     idtipoproducto mediumint(8) unsigned not null,
     idpatronproducto mediumint(8) unsigned not null,
     idmaterial mediumint(8) unsigned not null,
-    catexportacion varchar(30) not null,
+    catexportacion varchar(30) null,
     codigo varchar(30) not null,     
     descripcion varchar(200) not null, 
     descripcioning varchar(200) null,
