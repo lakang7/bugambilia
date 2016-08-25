@@ -501,7 +501,7 @@
             'port' => $configuracion["puerto"],
             'auth' => true,
             'username' => $configuracion["correo"],
-            'password' => $configuracion["seguridad"]
+            'password' => $configuracion["password"]
         ));
 
         $mail = $smtp->send($to, $headers, $body);

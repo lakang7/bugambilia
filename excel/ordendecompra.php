@@ -6,9 +6,17 @@
     $objPHPExcel = new PHPExcel();
     $objPHPExcel->getProperties()->setCreator("Sistema Bugambilia") // Nombre del autor
     ->setLastModifiedBy("Sistema Bugambilia") //Ultimo usuario que lo modificó
-    ->setTitle("Lista de Precios") // Titulo
-    ->setSubject("Lista de Precios") //Asunto
-    ->setDescription("Lista de Precios");
+    ->setTitle("Orden de Compra") // Titulo
+    ->setSubject("Orden de Compra") //Asunto
+    ->setDescription("Orden de Compra");
+    
+$objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);  
+$objPHPExcel->getActiveSheet()->getPageSetup()->setScale(70);
+$objPHPExcel->getActiveSheet()->getPageMargins()->setHeader(0.76);
+$objPHPExcel->getActiveSheet()->getPageMargins()->setTop(0.50);
+$objPHPExcel->getActiveSheet()->getPageMargins()->setRight(0.30);
+$objPHPExcel->getActiveSheet()->getPageMargins()->setLeft(0.30);
+$objPHPExcel->getActiveSheet()->getPageMargins()->setBottom(1.91);
     
 $estiloSuperior = array(
     'borders' => array(
@@ -530,7 +538,18 @@ $estiloTituloColumnasNegrita = array(
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$fila,$orden["observaciones"]);
     $objPHPExcel->getActiveSheet()->getStyle('B'.$fila.':N'.$fila)->applyFromArray($estiloTituloColumnas);    
     $fila++; 
-    
+
+    //$sheet = $objPHPExcel->setSheetIndexAndTitle(1, "Worksheet"); // first sheet
+    $objDrawing = new PHPExcel_Worksheet_Drawing();
+    $objDrawing->setName('Logo');
+    $objDrawing->setDescription('Logo');
+    $logo = '../imagenes/apariencia/logobugambilia.png'; // Provide path to your logo file
+    $objDrawing->setPath($logo);
+    $objDrawing->setOffsetX(8);    // setOffsetX works properly
+    $objDrawing->setOffsetY(300);  //setOffsetY has no effect
+    $objDrawing->setCoordinates('B1');
+    $objDrawing->setHeight(75); // logo height
+    $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());     
     
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="ordendecompra'.$orden["codigoexterno"].'.xlsx"');

@@ -140,15 +140,51 @@ while ($EMP = mysql_fetch_assoc($resultEMPRESAS)) {
             $pdf->SetXY(178,$altura);
             $pdf->Cell(22, 4,"$".$venta["total"], 1, 1, "R", 0, '', 0);
             $acumulaEmpresa+=$venta["total"];
+            
+        if($altura>260){
+            $pdf->AddPage('P', 'A4');
+            $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+            $pagina++;
+            $altura=22;
+            $pdf->SetXY(120,$altura); $altura+=7;
+            $pdf->SetFont('courier', 'I', 10);
+            $pdf->Cell(80, 6, "Informe de Ventas Detallado Por Empresas", 0, 1, "R", 0, '', 0);
+
+            $pdf->SetFont('courier', '', 10);
+            $pdf->Line(10,$altura, 200, $altura);//$altura+=10;
+            $altura+=4; 
+            $pdf->Line(10,280, 200,280);
+            $pdf->SetXY(120,280);
+            $pdf->Cell(80, 6, "Página 0".$pagina, 0, 1, "R", 0, '', 0);        
+        }            
+            
+            
         }
         $altura+=4.5;
         $pdf->SetXY(178,$altura);
         $pdf->Cell(22, 4,"$".$acumulaEmpresa, 1, 1, "R", 0, '', 0);
         $altura+=10;
+        
+        if($altura>260){
+            $pdf->AddPage('P', 'A4');
+            $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53, 14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);
+            $pagina++;
+            $altura=22;
+            $pdf->SetXY(120,$altura); $altura+=7;
+            $pdf->SetFont('courier', 'I', 10);
+            $pdf->Cell(80, 6, "Informe de Ventas Detallado Por Empresas", 0, 1, "R", 0, '', 0);
+
+            $pdf->SetFont('courier', '', 10);
+            $pdf->Line(10,$altura, 200, $altura);//$altura+=10;
+            $altura+=4; 
+            $pdf->Line(10,280, 200,280);
+            $pdf->SetXY(120,280);
+            $pdf->Cell(80, 6, "Página 0".$pagina, 0, 1, "R", 0, '', 0);        
+        }        
     }
 }
 
 
-$pdf->Output('Cuentas por Cobrar.pdf', 'I');
+$pdf->Output('Reporte de Ventas por Empresa.pdf', 'I');
 
 ?>
