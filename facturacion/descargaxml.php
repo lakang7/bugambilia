@@ -16,7 +16,7 @@
         ignore_user_abort(true);
         set_time_limit(0); // disable the time limit for this script        
                 
-        $fullPath="salidaxml/".$configuracion["carpetabusqueda"]."/".$factura["xml"];
+        $fullPath="C:/xampp/htdocs/bugambilia/facturacion/salidaxml/".$configuracion["carpetabusqueda"]."/".$factura["xml"];
         if ($fd = fopen ($fullPath, "r")) {
             $fsize = filesize($fullPath);
             $path_parts = pathinfo($fullPath);

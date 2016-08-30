@@ -32,8 +32,8 @@ $headers = array(
         
 $mime = new Mail_mime();
 $mime -> setHTMLBody("Estimado cliente, adjunto le estamos enviando su factura de Bugambilia, (Immanti SA de CV)  Serie: ".$factura["serie"]." Folio: ".$factura["folio"].".\n");        
-$mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\facturacion\\salidapdf\\GOYA780416GM0\\".$factura["pdf"],'pdf');
-$mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\facturacion\\salidaxml\\GOYA780416GM0\\".$factura["xml"],'xml');
+$mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\facturacion\\salidapdf\\".$configuracion["carpetabusqueda"]."\\".$factura["pdf"],'pdf');
+$mime -> addAttachment("C:\\xampp\\htdocs\\bugambilia\\facturacion\\salidaxml\\".$configuracion["carpetabusqueda"]."\\".$factura["xml"],'xml');
 $body = $mime->get();
 $headers = $mime -> headers($headers);        
         

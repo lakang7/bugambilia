@@ -1,9 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
-|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:42:57|Pago en Una Sola Exhibicion|3251.52|3771.76|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00030, Orden de Producción: POMX-4029, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|18|Pieza|BSI02|BSI02 PC PLATON Bari Cuadrado S / |27.71|498.78|IVA|16|79.8|||
-|CONCEPTO|18|Pieza|CO003|CO003 FR PLATON Cacerola Oval # 3 / Oval Casserole 3|23.96|431.28|IVA|16|69|||
-|CONCEPTO|18|Pieza|TU004|TU004 PC PLATON Charola Carlota L / Large Rectangular Tray w/handles|95.04|1710.72|IVA|16|273.72|||
-|CONCEPTO|18|Pieza|COMP12|COMP12 ST ENSALADERA Cilindro Taybarnes / Round Dressing Insert no Rim|29.07|523.26|IVA|16|83.72|||
-|CONCEPTO|18|Pieza|COM001|COM001 ST ENSALADERA Contenedor Redondo Mini Corto XS / |4.86|87.48|IVA|16|14|||

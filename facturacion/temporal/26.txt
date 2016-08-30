@@ -1,8 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
-|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:16:19|Pago en Una Sola Exhibicion|1722.00|1997.52|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00026, Orden de Producción: POMX-4025, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|15|Pieza|BUI04|BUI04 ST PLATON Bari Rectangular L / |42|630|IVA|16|100.8|||
-|CONCEPTO|15|Pieza|BR011|BR011 PC TAZON Bowl Redondo XS / Round Bowl 6"|13.99|209.85|IVA|16|33.58|||
-|CONCEPTO|15|Pieza|PU001|PU001 MC FRUTERO Charola Gourmet S / S Gourmet Platter|14.99|224.85|IVA|16|35.98|||
-|CONCEPTO|15|Pieza|TPUD35|TPUD35 T PLATON Charola Rectangular (Tile) / Deep Rectangular Tray 4" (to fit Tile)|43.82|657.3|IVA|16|105.17|||

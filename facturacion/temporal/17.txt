@@ -1,9 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Yudaltep SA de CV|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
-|COMPROBANTE|3.2|Sin Serie|2016-08-18 13:49:08|Pago en Una Sola Exhibicion|2545.80|2953.13|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00017, Orden de Producción: POMX-4016|FALSE|micorreo@pruebascorreo.com|||FACTURA|9712|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|12|Pieza|CO003|CO003 BB Cacerola Oval # 3|23.96|287.52|IVA|16|46|||
-|CONCEPTO|12|Pieza|CO004|CO004 BB Cacerola Oval # 4|30.33|363.96|IVA|16|58.23|||
-|CONCEPTO|12|Pieza|CO005|CO005 FR Cacerola Oval # 5|39.39|472.68|IVA|16|75.63|||
-|CONCEPTO|12|Pieza|CO006|CO006 BR Cacerola Oval # 6|52.49|629.88|IVA|16|100.78|||
-|CONCEPTO|12|Pieza|CO007|CO007 LT Cacerola Oval # 7|65.98|791.76|IVA|16|126.68|||

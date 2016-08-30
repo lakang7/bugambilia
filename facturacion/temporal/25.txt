@@ -1,6 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|XEXX010101000|Jc Global Resours|||||||||Estados Unidos||
-|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:12:42|Pago en Una Sola Exhibicion|394.90|458.08|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00025, Orden de Producción: POMX-4024, Identificador Fiscal: AASL900111CP5 |FALSE|micorreo@pruebascorreo.com|||FACTURA|0954|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|10|Pieza|BUI02|BUI02 S PLATON Bari Rectangular S / |17.14|171.4|IVA|16|27.42|||
-|CONCEPTO|10|Pieza|TPUD02|TPUD02 PC PLATON Cacerola Rectangular S (Tile) / S Rectangular Casserole (Tile)|22.35|223.5|IVA|16|35.76|||

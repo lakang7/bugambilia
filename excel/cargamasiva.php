@@ -57,13 +57,13 @@
         $estandarizadoproducto=trim($objPHPExcel->getActiveSheet()->getCell('W'.$i)->getFormattedValue());
         
         
-        if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto)){
+        if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto)){
             $materiales="";
             $idmaterial="";
             if($tipoproducto=="CATVIEJO15" || $tipoproducto=="CATNUEVO16" || $tipoproducto=="ESPECIALES"){
                 $materiales="Clasico";
                 $idmaterial=1;
-            }else if($tipoproducto=="ANODIZADOA"){
+            }else if($tipoproducto=="ANODIZADO"){
                 $materiales="Anodizado";
                 $idmaterial=2;
             }            
@@ -99,6 +99,7 @@
                 $tipo=mysql_fetch_assoc($result_tipoproducto);                
                 
                 $sql_insertProducto="insert into producto (idtipoproducto,idpatronproducto,idmaterial,codigo,descripcion,descripcioning,dimensionlargo,dimensionancho,dimensionalto,peso,capacidad,preciofabrica,registro,regalias,estandarizado,catexportacion) values('".$tipo["idtipoproducto"]."','".$IDPATRON."','".$idmaterial."','".$codigoproducto."','".$nompreproductoesp."','".$nompreproductoing."','".$largoproducto."','".$anchoproducto."','".$altoproducto."','".$pesoproducto."','".$capacidadproducto."','".$precioproducto."',now(),'".$regaliasproducto."','".$estandarizadoproducto."','".$exportacion."')";
+                //echo $sql_insertProducto."</br>";
                 $result_insertProducto=mysql_query($sql_insertProducto,$con) or die(mysql_error());                
                 $sql_ultimoproducto= "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'producto';";
                 $result_ultimoproducto = mysql_query($sql_ultimoproducto, $con) or die(mysql_error());
@@ -188,7 +189,7 @@
                 $estandarizadoproducto=trim($objPHPExcel->getActiveSheet()->getCell('W'.$i)->getFormattedValue());
                 $columnalistaprecio=trim($objPHPExcel->getActiveSheet()->getCell($lista["columnaprecios"].$i)->getFormattedValue());
             
-                if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($largoproducto) && is_numeric($anchoproducto) && is_numeric($altoproducto) && is_numeric($columnalistaprecio)){
+                if($codigoproducto!="" && $tipoproducto!="" && $formaproducto!="" && $patronproductoesp!="" && is_numeric($precioproducto) && is_numeric($columnalistaprecio)){
                     $sqlproducto="select * from producto where codigo='".$codigoproducto."'";
                     $resultproducto= mysql_query($sqlproducto, $con) or die(mysql_error());
                     $producto=mysql_fetch_assoc($resultproducto);

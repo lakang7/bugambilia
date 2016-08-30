@@ -1,8 +1,0 @@
-|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
-|RECEPTOR|AASL900111CP5|Forbatch SA de CV|||||||||México||
-|COMPROBANTE|3.2|Sin Serie|2016-08-18 14:21:09|Pago en Una Sola Exhibicion|2690.40|3120.86|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 00028, Orden de Producción: POMX-4027|FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
-|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
-|CONCEPTO|15|Pieza|BUI04|BUI04 PC Bari Rectangular L|42|630|IVA|16|100.8|||
-|CONCEPTO|20|Pieza|CO004|CO004 PC Cacerola Oval # 4|30.33|606.6|IVA|16|97.06|||
-|CONCEPTO|20|Pieza|CZ002|CZ002 LT Cazuela Mexicana # 2|27.67|553.4|IVA|16|88.54|||
-|CONCEPTO|20|Pieza|BSD25|BSD25 FR China Bowl XL|45.02|900.4|IVA|16|144.06|||
