@@ -279,7 +279,93 @@
     $result_pro=mysql_query($sql_pro,$con) or die(mysql_error());
     $numerproductos=mysql_num_rows($result_pro);
     $cuenta=1;
-    if($numerproductos<=42){
+    
+    
+    while ($proorden = mysql_fetch_assoc($result_pro)) {
+        $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
+        $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
+        $producto = mysql_fetch_assoc($resultproducto);
+            
+        $sqlmaterial="select * from material where idmaterial='".$producto["idmaterial"]."'";
+        $resultMaterial=mysql_query($sqlmaterial,$con) or die(mysql_error());
+        $material = mysql_fetch_assoc($resultMaterial);
+            
+        $sqlcolor="select * from color where idcolor='".$proorden["idcolor"]."'";
+        $resultColor=mysql_query($sqlcolor,$con) or die(mysql_error());
+        $color = mysql_fetch_assoc($resultColor);            
+            
+        $suma=$suma+4;
+        $pdf->SetFont('courier', '', 7);
+        $pdf->SetXY(10,$suma);
+        $pdf->Cell(7, 4,$cuenta, 1, 1,"R", 0, '', 0);
+        $pdf->SetXY(17,$suma);
+        $pdf->Cell(18, 4,$material["nombre"], 1, 1,"L", 0, '', 0);
+        $pdf->SetXY(35,$suma);
+        $pdf->Cell(18, 4,$producto["codigo"], 1, 1,"L", 0, '', 0); 
+        $pdf->SetXY(53,$suma);
+        $pdf->Cell(65, 4,$producto["descripcion"], 1, 1,"L", 0, '', 0); 
+        $pdf->SetXY(118,$suma);
+        $pdf->Cell(11, 4,$color["codigo"], 1, 1,"C", 0, '', 0);  
+        $pdf->SetXY(129,$suma);
+        $pdf->Cell(11, 4,$producto["dimensionlargo"], 1, 1,"R", 0, '', 0);
+        $pdf->SetXY(140,$suma);
+        $pdf->Cell(11, 4,$producto["dimensionancho"], 1, 1,"R", 0, '', 0); 
+        $pdf->SetXY(151,$suma);
+        $pdf->Cell(11, 4,$producto["dimensionalto"], 1, 1,"R", 0, '', 0); 
+        $pdf->SetXY(162,$suma);
+        $pdf->Cell(10, 4,$proorden["numerodeunidades"], 1, 1,"C", 0, '', 0); 
+        $pdf->SetXY(172,$suma);
+        $pdf->Cell(14, 4,"$".$proorden["precioventa"], 1, 1,"C", 0, '', 0); 
+        $pdf->SetXY(186,$suma);
+        $pdf->Cell(17, 4,"$".($proorden["precioventa"]*$proorden["numerodeunidades"]), 1, 1,"R", 0, '', 0);
+        $cuenta++;  
+        if($suma>=265){
+            $pdf->AddPage('P', 'A4');
+            $pdf->Image('../imagenes/apariencia/logobugambilia.png', 10, 14, 53,14, 'PNG', 'http://www.gaagdesarrolloempresarial.com', '', true, 150, '', false, false, 0, false, false, false);    
+            $pdf->SetFont('courier', 'B', 10); 
+    
+            $suma=10;
+            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetXY(140,$suma);
+            $pdf->Cell(35, 4,"Orden de Compra", 0, 1,"L", 0, '', 0);
+            $pdf->SetXY(175,$suma);
+            $pdf->SetFont('courier', 'N', 8);
+            $pdf->Cell(25, 4,$orden["codigoexterno"],0, 1,"L", 0, '', 0); $suma+=4;
+    
+            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetXY(140,$suma);
+            $pdf->Cell(35, 4,"Orden de Producción", 0, 1,"L", 0, '', 0);
+            $pdf->SetXY(175,$suma);
+            $pdf->SetFont('courier', 'N', 8);
+            $pdf->Cell(25, 4,$orden["codigoop"], 0, 1,"L", 0, '', 0); $suma+=4;  
+    
+            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetXY(140,$suma);
+            $pdf->Cell(35, 4,"Fecha de Pedido", 0, 1,"L", 0, '', 0);
+            $pdf->SetXY(175,$suma);
+            $pdf->SetFont('courier', 'N', 8);
+            $pdf->Cell(25, 4,$orden["fechaderegistro"], 0, 1,"L", 0, '', 0); $suma+=4;
+    
+            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetXY(140,$suma);
+            $pdf->Cell(35, 4,"Fecha de Entrega", 0, 1,"L", 0, '', 0);
+            $pdf->SetXY(175,$suma);
+            $pdf->SetFont('courier', 'N', 8);
+            $pdf->Cell(25, 4,$orden["fechadeentrega"], 0, 1,"L", 0, '', 0); $suma+=7;    
+            
+            $pdf->Line(10, $suma, 200, $suma);   
+            
+            $pdf->SetFont('courier', '', 9);
+            $pdf->Line(10, 285, 200, 285);
+            $pdf->SetXY(170,287);
+            $pdf->Cell(30, 4,"Página Nro. 0".$pagina, 0, 1,"R", 0, '', 0);  $pagina++;              
+            
+            
+            $suma=30;            
+        }
+    }    
+    
+/*    if($numerproductos<=42){
         while ($proorden = mysql_fetch_assoc($result_pro)) {
             $sqlproducto="select * from producto where idproducto='".$proorden["idproducto"]."'";
             $resultproducto=mysql_query($sqlproducto,$con) or die(mysql_error());
@@ -449,7 +535,7 @@
             }             
         }            
     }     
-    
+    */
     $suma=$suma+4;
     $pdf->SetXY(172,$suma);
     $pdf->Cell(14, 4,"Subtotal", 0, 1,"R", 0, '', 0); 

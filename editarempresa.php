@@ -298,7 +298,8 @@
                                                         <div style="width: 100%; margin-top: 10px">Últimos 4 digitos de la cuenta</div>
                                                         <div style="width: 100%;"><input value="<?php echo $empresa["ultimos"]; ?>"  type="text" id="ultimos" name="ultimos" placeholder="Últimos cuatro digitos de la cuenta principal del cliente" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="4" /></div>                                                        
                                                         
-                                                        
+                                                        <div style="width: 100%; margin-top: 10px">Comentarios de exportación para las facturas</div>
+                                                        <div style="width: 100%;"><input value="<?php echo $empresa["comexportacion"] ?>" type="text" id="comentarios" name="comentarios" placeholder="Comentarios de exportación" style="width: 100%; font-size: 1.8ex; margin-bottom: 10px"  maxlength="60" /></div>                                                                                                                
                                                         
                                                         <div style="width: 100%; border-bottom: 1px solid #CCC; margin-bottom: 15px; margin-top: 10px">Dirección Fiscal</div>                                                        
                                                         <div style="width: 100%">

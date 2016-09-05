@@ -599,7 +599,14 @@
 	
                                                             </select>                                                                                                                         
                                                             </div>                                                                                                                                                                                                                                                                                                                                                                          
-                                                        </div>                                                         
+                                                        </div>  
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">                                                             
+                                                            <label>Comentarios de facturación</label>
+                                                            <div style="width: 100%">
+                                                                <input type="text" id="comentarios" value="<?php echo $orden["comfacturacion"]; ?>" name="comentarios" placeholder="Comentarios para la factura"  maxlength="1200" style="width: 100%" />
+                                                            </div>                                                                                                                                                                                        
+                                                        </div>                                                          
                                                         
                                                         <div style="width: 100%; margin-top: 10px; margin-bottom: 5px">
                                                             <label>Productos en la Orden de Compra</label>

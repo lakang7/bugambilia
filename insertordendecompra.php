@@ -272,6 +272,14 @@
                                                             </div>                                                                                                                                                                                                                                                                                                                                                                          
                                                         </div>
                                                         
+                                                        <div style="width: 100%; margin-top: 10px">                                                             
+                                                            <label>Archivo para procesar</label>
+                                                            <div style="width: 100%">
+                                                                <input type="text" id="paraprocesar" value="" name="paraprocesar" placeholder="Indique el nombre del archivo a procesar"  maxlength="300" style="width: 100%" />
+                                                            </div>                                                                                                                                                                                        
+                                                        </div>                                                         
+                                                        
+                                                        
                                                         <div style="width: 100%; margin-top: 10px">                                                                                                                       
                                                             <label>(*) Prioridad</label>
                                                             <div style="width: 100%;">
@@ -345,19 +353,28 @@
                                                                 <option value="2">Orden de compra de muestra</option>	
                                                             </select>                                                                                                                         
                                                             </div>                                                                                                                                                                                                                                                                                                                                                                          
-                                                        </div>                                                        
+                                                        </div>  
+                                                        
+                                                        <div style="width: 100%; margin-top: 10px">                                                             
+                                                            <label>Comentarios de facturación</label>
+                                                            <div style="width: 100%">
+                                                                <input type="text" id="comentarios" name="comentarios" placeholder="Comentarios para la factura"  maxlength="1200" style="width: 100%" />
+                                                            </div>                                                                                                                                                                                        
+                                                        </div>                                                          
                                                         
                                                         <div style="width: 100%; margin-top: 10px; margin-bottom: 5px">
                                                             <label>Productos en la Orden de Compra</label>
                                                         </div>
                                                         <div id="oculto00"></div>
-                                                        <input type="hidden" name="oculto01" id="oculto01" value="0"/><!-- numero de la unidad -->
-                                                        <input type="hidden" name="oculto02" id="oculto02" value=""/> <!-- id productos -->
-                                                        <input type="hidden" name="oculto03" id="oculto03" value=""/> <!-- codigo productos -->
-                                                        <input type="hidden" name="oculto04" id="oculto04" value=""/> <!-- descripcion productos -->
-                                                        <input type="hidden" name="oculto05" id="oculto05" value=""/> <!-- colores producto -->
-                                                        <input type="hidden" name="oculto06" id="oculto06" value=""/> <!-- precio productos -->
-                                                        <input type="hidden" name="oculto07" id="oculto07" value=""/> <!-- unidades por producto -->
+                                                        <div id="masiva">
+                                                            <input type="hidden" name="oculto01" id="oculto01" value="0"/><!-- numero de la unidad -->
+                                                            <input type="hidden" name="oculto02" id="oculto02" value=""/> <!-- id productos -->
+                                                            <input type="hidden" name="oculto03" id="oculto03" value=""/> <!-- codigo productos -->
+                                                            <input type="hidden" name="oculto04" id="oculto04" value=""/> <!-- descripcion productos -->
+                                                            <input type="hidden" name="oculto05" id="oculto05" value=""/> <!-- colores producto -->
+                                                            <input type="hidden" name="oculto06" id="oculto06" value=""/> <!-- precio productos -->
+                                                            <input type="hidden" name="oculto07" id="oculto07" value=""/> <!-- unidades por producto -->
+                                                        </div>
                                                         <div id="productosenorden">
                                                         </div>
                                                         <div id="totalizacion" style="background-color: #eaeaea; font-size: 16px; padding: 1ex; width: 100%; height: 125px">
@@ -369,6 +386,7 @@
                                                         <div style="width: 100%; margin-top: 10px;">
                                                             <div id="agrega01" style="visibility: visible">Seleccione una empresa para poder agregar productos a la orden de compra</div>
                                                             <a id="agrega02" href="#my-modal" role="button" class="btn btn-sm btn-primary" data-toggle="modal" style="visibility: hidden">Agregar Productos a la Orden de Compra</a>                                                            
+                                                            <a id="agrega03" role="button" onclick=cargar() class="btn btn-sm btn-primary" style="visibility: hidden">Cargar Productos a la Orden de Compra</a>
                                                         </div>
                                                         
                                                                                                                                                                         
@@ -501,6 +519,40 @@
                                                                 $("#patron_chosen").width("100%");
                                                                 $("#producto_chosen").width("100%");
                                                                 $("#color_chosen").width("100%");
+                                                            }
+                                                            
+                                                            function cargar(){
+                                                                if(document.getElementById("paraprocesar").value!==""){                                                                    
+                                                                    $("#masiva").load("excel/leerordendecompra.php", {archivo: document.getElementById("paraprocesar").value, tipo:document.getElementById("tipoordenc").value },function(){
+                                                                        var listaIDS=document.getElementById("oculto02").value.split("_"); 
+                                                                        var listaCODIGOS=document.getElementById("oculto03").value.split("_"); 
+                                                                        var listaDESCRIPCIONES=document.getElementById("oculto04").value.split("_");
+                                                                        var listaCOLORES=document.getElementById("oculto05").value.split("_");
+                                                                        var listaPRECIOS=document.getElementById("oculto06").value.split("_");
+                                                                        var listaUNIDADES=document.getElementById("oculto07").value.split("_");
+                                                                        var acumulado=parseFloat("0");
+                                                                        for(var j=1;j<listaIDS.length;j++){
+                                                                            acumulado+=parseFloat(listaPRECIOS[j]*listaUNIDADES[j]); 
+                                                                            $("#productosenorden").append("<div style='width: 100%; margin-bottom: 5px; border-bottom: 1px solid #CCC; font-size: 12px'><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Item Numero:</label> "+j+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Codigo:</label> "+listaCODIGOS[j]+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Color:</label> "+listaCOLORES[j]+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Descripcion:</label> "+listaDESCRIPCIONES[j]+"</div><div style='width: 100%'><label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Numero de Unidades:</label> "+listaUNIDADES[j]+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Unitario:</label> $"+listaPRECIOS[j]+" / <label style='font-weight: bold; margin-bottom: 0px; font-size: 12px'>Costo Total:</label> $"+parseFloat(listaPRECIOS[j]*listaUNIDADES[j]).toFixed(2)+"</div><div style='width: 100%'><div class='btn btn-minier btn-danger' style='margin-bottom: 5px; margin-top: 1px' onclick='eliminar("+j+")'>Eliminar</div></div></div>");
+                                                                        }
+                                                                        
+                                                                        var iva=0;
+                                                                        var total=0;                                                                        
+                                                                        if(document.getElementById("appiva").value==="S"){
+                                                                            var porcentaje=(parseFloat(document.getElementById("poriva").value)/100);
+                                                                            iva = acumulado*porcentaje;
+                                                                            total = acumulado + iva;
+                                                                        }else{
+                                                                            iva = 0;
+                                                                            total = acumulado + iva;                                                                            
+                                                                        }                                                                        
+                                                                        
+                                                                        $("#totalizacion").html("<div class='left' style='width: 50%; float: left'>Productos: <label style='font-size: 22px; font-weight: bold'>"+(j-1)+"</label></div><div class='right' style='width: 50%; float: left; text-align: right'>Subtotal:   <label style='font-size: 22px; font-weight: bold'>$"+parseFloat(acumulado).toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Iva:   <label style='font-size: 22px; font-weight: bold'>$"+iva.toFixed(2)+"</label></div><div class='right' style='width: 100%; float: left; text-align: right'>Total:   <label style='font-size: 22px; font-weight: bold'>$"+total.toFixed(2)+"</label></div>");
+                                                                    }); 
+                                                                }else{
+                                                                    alert("debe indicar el archivo que quiere procesar.");
+                                                                }
+                                                                
                                                             }
                                                             
                                                             function agregar(){                                                                
@@ -1171,8 +1223,6 @@
                         
                         
                                 $('#empresa').change(function(){
-
-
                                     var $selectedOption = $(this).find('option:selected');
                                     var selectedValue = $selectedOption.val();
                                     
@@ -1216,9 +1266,33 @@
                                         
                                     }); 
                                     
-                                    $('#agrega01').css('visibility', 'hidden');
-                                    $('#agrega02').css('visibility', 'visible');                                                                                                           
+                                    if(document.getElementById("empresa").value!=""){
+                                        if(document.getElementById("tipoorden").value==="1"){
+                                            $('#agrega01').css('visibility', 'hidden');
+                                            $('#agrega02').css('visibility', 'visible'); 
+                                            $('#agrega03').css('visibility', 'hidden');
+                                        }else if(document.getElementById("tipoorden").value==="2"){
+                                            $('#agrega01').css('visibility', 'hidden');
+                                            $('#agrega02').css('visibility', 'hidden'); 
+                                            $('#agrega03').css('visibility', 'visible');                                                                            
+                                        }
+                                    }
+                                    
                                 });  
+                                
+                                $('#tipoorden').change(function(){
+                                    if(document.getElementById("empresa").value!=""){
+                                        if(document.getElementById("tipoorden").value==="1"){
+                                            $('#agrega01').css('visibility', 'hidden');
+                                            $('#agrega02').css('visibility', 'visible'); 
+                                            $('#agrega03').css('visibility', 'hidden');
+                                        }else if(document.getElementById("tipoorden").value==="2"){
+                                            $('#agrega01').css('visibility', 'hidden');
+                                            $('#agrega02').css('visibility', 'hidden'); 
+                                            $('#agrega03').css('visibility', 'visible');                                                                            
+                                        }
+                                    }
+                                });
                                 
                                 $('#forma').change(function(){
                                     var $selectedOption = $(this).find('option:selected');

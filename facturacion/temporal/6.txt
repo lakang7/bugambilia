@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|XEXX010101000|Prueba|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|Brasil|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-09-05 15:51:43|Pago en Una Sola Exhibicion|228.30|228.30|Transferencia Electrónica|Ingreso|USD|19.100||0||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Compra: 000057, Orden de Producción: POMX-4005, Identificador Fiscal: AASL900111CP5 FOB Puerto Veracruz. este es el grupo de información extra para la emisión de la factura, y prueba de la edición de los mismos. |FALSE|micorreo@pruebascorreo.com|||FACTURA||
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|5|Pieza|CSP02|CSP02 FR  Base Cubo Cuadrado Diseño S / Desing Cube Square S|33.65|168.25|IVA|0|0|||
+|CONCEPTO|5|Pieza|CUP04|CUP04 LT  Base Cubo Rectangular Diseño L / Desing Cube Rectangular L|0|0|IVA|0|0|||
+|CONCEPTO|5|Pieza|A-BH003|A-BH003 PC PLATON Botanero 4 Hojas GM / Condiment 4 leafs|12.01|60.05|IVA|0|0|||

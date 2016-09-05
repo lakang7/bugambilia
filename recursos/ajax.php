@@ -761,7 +761,7 @@
         $configuracion = mysql_fetch_assoc($resultConfiguracion);            
         echo "<input type='hidden' name='appiva' id='appiva' value='S'/>";
         echo "<input type='hidden' name='poriva' id='poriva' value='".$configuracion["poriva"]."'/>";        
-    }    
-    
+    }  
+      
     mysql_close($con);    
 ?>

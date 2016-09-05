@@ -624,6 +624,7 @@ CREATE TABLE empresa (
     metododepago integer not null,
     banco varchar(30),
     ultimos varchar(4),
+    comexportacion varchar(60),
     PRIMARY KEY (idempresa),
     FOREIGN KEY (idpais) REFERENCES pais(idpais) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -979,6 +980,7 @@ CREATE TABLE ordendecompra(
     observaciones varchar(300) not null,
     estatus integer not null,
     conpago integer not null,
+    comfacturacion varchar(1200),
     PRIMARY KEY (idordendecompra),
     FOREIGN KEY (idempresa) REFERENCES empresa(idempresa) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idsucursal) REFERENCES sucursal(idsucursal) ON UPDATE CASCADE ON DELETE RESTRICT,
