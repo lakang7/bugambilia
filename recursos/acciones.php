@@ -975,8 +975,28 @@ if ($tarea == 16) {
             }
         }
         $nuevafecha = new DateTime($_POST["id-date-picker-1"]);
-        $nuevafecha->modify('+' . $mayor . ' day');
-
+        $fechaaunx01=$nuevafecha->modify('+' . $mayor . ' day');
+        $diaenlasemana=date_format($nuevafecha, 'w');
+        
+        if($diaenlasemana==0){          /*Domingo*/
+            $nuevafecha->modify('+ 5 day');
+        }else if($diaenlasemana==1){    /*Lunes*/
+            $nuevafecha->modify('+ 4 day');
+        }else if($diaenlasemana==2){    /*Martes*/
+            $nuevafecha->modify('+ 3 day');
+        }else if($diaenlasemana==3){    /*Miercoles*/
+            $nuevafecha->modify('+ 2 day');
+        }else if($diaenlasemana==4){    /*Jueves*/
+            $nuevafecha->modify('+ 1 day');
+        }else if($diaenlasemana==5){    /*Viernes*/
+            $nuevafecha->modify('+ 7 day');
+        }else if($diaenlasemana==6){    /*Sabado*/
+            $nuevafecha->modify('+ 6 day');
+        }
+        
+        $sql_insertControlFechas="insert into controlfechas (idordendecompra,fechadecreacion,fechaderegistro,fechadeentrega,nuevafechaoc) values('".$indice."',now(),'".$_POST["id-date-picker-1"]."','".$fechaaunx01->format('Y-m-d')."','".$nuevafecha->format('Y-m-d')."')";
+        $result_insertControlFechas = mysql_query($sql_insertControlFechas, $con) or die(mysql_error());
+        
         $sql_updateOrdenCompra = "update ordendecompra set fechadeentrega='" . $nuevafecha->format('Y-m-d') . "' where idordendecompra='" . $indice . "'";
         $result_updateOrdenCompra = mysql_query($sql_updateOrdenCompra, $con) or die(mysql_error());
     } else if ($_POST["prioridad"] == 2) { /* Se establece una fecha fija de entrega */

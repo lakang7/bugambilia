@@ -762,6 +762,31 @@
         echo "<input type='hidden' name='appiva' id='appiva' value='S'/>";
         echo "<input type='hidden' name='poriva' id='poriva' value='".$configuracion["poriva"]."'/>";        
     }  
+    
+    if($_POST["tarea"]==24){
+        $liscodigos= explode("_",$_POST["codigos"]);
+        $liscolores= explode("_",$_POST["colores"]);
+        $lisdescrip= explode("_",$_POST["descripciones"]);
+        $lisunidade= explode("_",$_POST["unidades"]); 
+        $lisprecios= explode("_",$_POST["precios"]);
+        
+        echo "<div style='width:100%'>Posición</div>";
+        echo "<input type='text' name='campos' id='campos' value='".$_POST["posicion"]."' style='width:100%' disabled='disabled'/>";
+        echo "<div style='width:100%'>Código Producto</div>";
+        echo "<input type='text' name='camcod' id='camcod' value='".$liscodigos[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
+        echo "<div style='width:100%'>Color</div>";
+        echo "<input type='text' name='camcol' id='camcol' value='".$liscolores[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
+        echo "<div style='width:100%'>Descripción</div>";
+        echo "<input type='text' name='camdes' id='camdes' value='".$lisdescrip[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
+        echo "<div style='width:100%'>Número de unidades</div>";
+        echo "<input type='text' name='camuni' id='camuni' onchange=semodifica() value='".$lisunidade[$_POST["posicion"]]."' style='width:100%'/>";
+        echo "<div style='width:100%'>Precio Unitario</div>";
+        echo "<input type='text' name='campre' id='campre' onchange=semodifica() value='".$lisprecios[$_POST["posicion"]]."' style='width:100%'/>";        
+        echo "<div style='width:100%'>Costo Total</div>";
+        echo "<input type='text' name='camcos' id='camcos' value='".($lisprecios[$_POST["posicion"]]*$lisunidade[$_POST["posicion"]])."' style='width:100%' disabled='disabled'/>";        
+        echo "<button class='btn btn-info' style='margin-top: 15px' data-dismiss='modal' onclick=actelemento()>Actualizar</button>";
+        
+    }
       
     mysql_close($con);    
 ?>

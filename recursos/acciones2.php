@@ -39,18 +39,45 @@
         $auxEstado="";
         $sql_insertProduccion = "";
         
+        
+        $sql_controlfechas="select * from controlfechas where idordendecompra='".$_GET["idorden"]."'";
+        $result_controlfechas=mysql_query($sql_controlfechas,$con) or die(mysql_error());
+        if(mysql_num_rows($result_controlfechas)>0){
+            $controlfecha = mysql_fetch_assoc($result_controlfechas);
+            $nuevafecha = new DateTime($controlfecha["fechadeentrega"]);
+            $diaenlasemana=date_format($nuevafecha, 'w');
+            if($diaenlasemana==0){          /*Domingo*/
+                $nuevafecha->modify('- 2 day');
+            }else if($diaenlasemana==1){    /*Lunes*/
+                $nuevafecha->modify('- 3 day');
+            }else if($diaenlasemana==2){    /*Martes*/
+                $nuevafecha->modify('- 4 day');
+            }else if($diaenlasemana==3){    /*Miercoles*/
+                $nuevafecha->modify('- 5 day');
+            }else if($diaenlasemana==4){    /*Jueves*/
+                $nuevafecha->modify('- 6 day');
+            }else if($diaenlasemana==5){    /*Viernes*/
+                $nuevafecha->modify('- 7 day');
+            }else if($diaenlasemana==6){    /*Sabado*/
+                $nuevafecha->modify('- 1 day');
+            }            
+        }
+        $sqlupdatefechas="update controlfechas set nuevafechaop='".$nuevafecha->format('Y-m-d')."' where idcontrolfechas='".$controlfecha["idcontrolfechas"]."'";
+        $result_updatefechas=mysql_query($sqlupdatefechas,$con) or die(mysql_error());
+        
+        
         if($ORDEN["idsucursal"]!=NULL && $ORDEN["idsucursal"]!=""){
             if($ORDEN["idestado"]!=NULL && $ORDEN["idestado"]!="" ){
-                $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idestado"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."','".$_GET["tipo"]."','1');";
+                $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idestado,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idestado"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$nuevafecha->format('Y-m-d')."','".$_GET["tipo"]."','1');";
             }else{
-                $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."','".$_GET["tipo"]."','1');";
+                $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idsucursal,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idsucursal"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$nuevafecha->format('Y-m-d')."','".$_GET["tipo"]."','1');";
             }
         }else{
-            $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."','".$_GET["tipo"]."','1');";
+            $sql_insertProduccion = "insert into ordendeproduccion (idordendecompra,codigoop,fechadecreacion,fechaderegistro,idempresa,idagenda01,idagenda02,idagenda03,idlistadeprecios,idusuariocrea,idusuarioresponsable,subtotal,poriva,iva,total,prioridad,fechadeentrega,tipoempaque,estatus) values ('".$_GET["idorden"]."','".$ORDEN["codigoop"]."',now(),now(),'".$ORDEN["idempresa"]."','".$ORDEN["idagenda01"]."','".$ORDEN["idagenda02"]."','".$ORDEN["idagenda03"]."','".$ORDEN["idlistadeprecios"]."','".$_SESSION["usuario"]."','".$_GET["idcontacto"]."','".$subTotal."','".$poriva."','".$iva."','".$total."','".$ORDEN["prioridad"]."','".$ORDEN["fechadeentrega"]."','".$nuevafecha->format('Y-m-d')."','1');";
         }
            	
-        $result_insertProduccion = mysql_query($sql_insertProduccion,$con) or die(mysql_error());  
-        
+        $result_insertProduccion = mysql_query($sql_insertProduccion,$con) or die(mysql_error()); 
+                        
         $sql_ultimoMATERIAL="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bugambiliasis' AND TABLE_NAME = 'ordendeproduccion';";
         $result_ultimoMATERIAL=mysql_query($sql_ultimoMATERIAL,$con) or die(mysql_error());	
         $fila = mysql_fetch_assoc($result_ultimoMATERIAL);

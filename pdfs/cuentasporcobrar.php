@@ -91,6 +91,10 @@ while ($factura = mysql_fetch_assoc($resultFacturas)) {
     $resultAgenda = mysql_query($sqlAgenda, $con) or die(mysql_error());
     $agenda = mysql_fetch_assoc($resultAgenda);
     
+    $sqlOrdenC="select * from ordendecompra where idordendecompra='".$factura["idordendecompra"]."'";
+    $resultOrdenC = mysql_query($sqlOrdenC, $con) or die(mysql_error());
+    $ordenC = mysql_fetch_assoc($resultOrdenC);    
+    
     $meses[1]="Enero";
     $meses[2]="Febrero";
     $meses[3]="Marzo";
@@ -105,10 +109,12 @@ while ($factura = mysql_fetch_assoc($resultFacturas)) {
     $meses[12]="Diciembre";    
     
     $pdf->SetXY(10,$altura);
-    $pdf->writeHTMLCell(193,4,10,$altura,"<b>Fecha de Emisión: </b>".$fecha02[2]." de ".$meses[intval($fecha02[1])]." de ".$fecha02[0]." <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serie:</b> ".$factura["serie"]." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> Folio:</b> ".$factura["folio"], 1, 0, false, true, "L");
+    $pdf->writeHTMLCell(193,4,10,$altura,"<b>Fecha de Emisión: </b>".$fecha02[2]." de ".$meses[intval($fecha02[1])]." de ".$fecha02[0]." <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serie:</b> ".$factura["serie"]." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> Folio:</b> ".$factura["folio"], 1, 0, false, true, "L");
     $pdf->SetXY(10,$altura); $altura+=4.5;
     $pdf->Line(10,$altura,10, $altura+20);
     $pdf->Line(203,$altura,203, $altura+20);
+    $pdf->writeHTMLCell(193,3.5,10,$altura,"<b>Orden de Producción: </b>".$ordenC["codigoop"], 0, 0, false, true, "L");
+    $pdf->SetXY(10,$altura); $altura+=3.5;    
     $pdf->writeHTMLCell(193,3.5,10,$altura,"<b>Empresa: </b>".$empresa["nombreempresa"], 0, 0, false, true, "L");
     $pdf->SetXY(10,$altura); $altura+=3.5;
     $pdf->writeHTMLCell(193,3.5,10,$altura,"<b>Persona de Contacto: </b>".$agenda["nombre"]." (".$agenda["referencia"].")", 0, 0, false, true, "L");

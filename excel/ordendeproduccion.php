@@ -297,15 +297,15 @@ $estiloTituloColumnasNegrita = array(
     $fila++; $fila++;
     
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$fila,"#");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$fila,"Material");
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$fila,"Piezas");  
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$fila,"Clave");
-    $objPHPExcel->setActiveSheetIndex(0)->mergeCells('E'.$fila.':G'.$fila);
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$fila,"Descripcion");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('H'.$fila,"Color");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$fila,"Largo");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('J'.$fila,"Ancho");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$fila,"Alto");
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('L'.$fila,"Piezas");
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$fila,"Color");
+    $objPHPExcel->setActiveSheetIndex(0)->mergeCells('F'.$fila.':H'.$fila);
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$fila,"Descripcion");        
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$fila,"Material");
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('J'.$fila,"Largo");
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$fila,"Ancho");
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('L'.$fila,"Alto");
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.$fila,"Precio");
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('N'.$fila,"Total");
     $objPHPExcel->getActiveSheet()->getStyle('B'.$fila.':N'.$fila)->applyFromArray($estiloTituloColumnas);
@@ -331,15 +331,15 @@ $estiloTituloColumnasNegrita = array(
         $color = mysql_fetch_assoc($resultColor);         
         
         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.$fila,$cuenta);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$fila,$material["nombre"]);
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.$fila,$proorden["numerodeunidades"]);
         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.$fila,$producto["codigo"]);
-        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('E'.$fila.':G'.$fila);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$fila,$producto["descripcion"]);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('H'.$fila,$color["codigo"]);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$fila,$producto["dimensionlargo"]);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('J'.$fila,$producto["dimensionancho"]);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$fila,$producto["dimensionalto"]);
-        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('L'.$fila,$proorden["numerodeunidades"]);
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E'.$fila,$color["codigo"]);
+        $objPHPExcel->setActiveSheetIndex(0)->mergeCells('F'.$fila.':H'.$fila);
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F'.$fila,$producto["descripcion"]);        
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('I'.$fila,$material["nombre"]);        
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('J'.$fila,$producto["dimensionlargo"]);
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('K'.$fila,$producto["dimensionancho"]);
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('L'.$fila,$producto["dimensionalto"]);
         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('M'.$fila,$proorden["preciofabrica"]);
         $objPHPExcel->setActiveSheetIndex(0)->setCellValue('N'.$fila,($proorden["preciofabrica"]*$proorden["numerodeunidades"]));        
         $objPHPExcel->getActiveSheet()->getStyle('B'.$fila.':N'.$fila)->applyFromArray($estiloTituloColumnas);

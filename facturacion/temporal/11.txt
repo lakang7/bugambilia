@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-10-07 11:14:31|Pago en Una Sola Exhibicion|1125.30|1305.35|Transferencia Electrónica|Ingreso|USD|19.100||16||100|El cambio de Dolares Americanos a Pesos Mexicanos es 19.100, Orden de Producción: POMX-4010. |FALSE|micorreo@pruebascorreo.com|||FACTURA|0453|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|6|Pieza|BSI04|BSI04 FR Bari Cuadrado L|73.15|438.9|IVA|16|70.22|||
+|CONCEPTO|6|Pieza|BUSS33|BUSS33 FR Base Sólida Rectanguar (Set 3 piezas)|101.04|606.24|IVA|16|97|||
+|CONCEPTO|6|Pieza|H-BU201|H-BU201 G Budinera Oval Denver chica|13.36|80.16|IVA|16|12.83|||

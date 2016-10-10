@@ -955,7 +955,7 @@ insert into historicocambiodolar (cambio,desde,hasta) values(19.100,now(),null);
 
 CREATE TABLE ordendecompra(
     idordendecompra mediumint(8) unsigned auto_increment,
-    codigooc varchar(12) not null,
+    codigooc varchar(12) null,
     codigoop varchar(12) not null,
     codigoexterno varchar(12) not null,
     fechadecreacion TIMESTAMP not null,
@@ -1026,6 +1026,18 @@ CREATE TABLE ordendeproduccion(
     FOREIGN KEY (idlistadeprecios) REFERENCES listadeprecios(idlistadeprecios) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idusuariocrea) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (idusuarioresponsable) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+create TABLE controlfechas(
+    idcontrolfechas mediumint(8) unsigned auto_increment,
+    idordendecompra mediumint(8) unsigned null,
+    fechadecreacion TIMESTAMP null DEFAULT CURRENT_TIMESTAMP, 
+    fechaderegistro date null,
+    fechadeentrega date null,
+    nuevafechaoc date null,
+    nuevafechaop date null,
+    PRIMARY KEY (idcontrolfechas),
+    FOREIGN KEY (idordendecompra) REFERENCES ordendecompra(idordendecompra) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE regalias(

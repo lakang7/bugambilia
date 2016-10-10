@@ -74,14 +74,14 @@ $ano=date("Y");
 
 $date01 = new DateTime($_POST["id-date-picker-1"]);
 $date02 = new DateTime($_POST["id-date-picker-2"]);
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido desde: </b>".$date01->format('d-m-Y'), 1, 0, false, true, "L");
-$altura+=4.5;
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Reporte Emitido hasta: </b>".$date02->format('d-m-Y'), 1, 0, false, true, "L");
-$altura+=4.5;
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Total de Ventas en el perido: </b>".$numeroElementos, 1, 0, false, true, "L");
-$altura+=4.5;
-$pdf->writeHTMLCell(190,4,10,$altura,"<b>Monto de Ventas en el perido: </b>$".$acumulaTotal, 1, 0, false, true, "L");
-$altura+=9.5;
+$pdf->writeHTMLCell(190,6,10,$altura,"<b>Reporte Emitido desde: </b>".$date01->format('d-m-Y'), 1, 0, false, true, "L");
+$altura+=6;
+$pdf->writeHTMLCell(190,6,10,$altura,"<b>Reporte Emitido hasta: </b>".$date02->format('d-m-Y'), 1, 0, false, true, "L");
+$altura+=6;
+$pdf->writeHTMLCell(190,6,10,$altura,"<b>Total de Ventas en el perido: </b>".$numeroElementos, 1, 0, false, true, "L");
+$altura+=6;
+$pdf->writeHTMLCell(190,6,10,$altura,"<b>Monto de Ventas en el perido: </b>$".$acumulaTotal, 1, 0, false, true, "L");
+$altura+=16;
 
     
 $sqlEMPRESAS="select * from empresa order by nombreempresa";
@@ -98,17 +98,17 @@ while ($EMP = mysql_fetch_assoc($resultEMPRESAS)) {
         $altura+=6;
         $pdf->SetFont('courier', 'B', 10);
         $pdf->SetXY(10,$altura);
-        $pdf->Cell(25, 4,"Fecha", 1, 1, "C", 0, '', 0);
+        $pdf->Cell(25, 6,"Fecha", 1, 1, "C", 0, '', 0);
+        //$pdf->SetXY(35,$altura);
+        //$pdf->Cell(25, 6,"O.Compra", 1, 1, "C", 0, '', 0);
         $pdf->SetXY(35,$altura);
-        $pdf->Cell(25, 4,"O.Compra", 1, 1, "C", 0, '', 0);
-        $pdf->SetXY(60,$altura);
-        $pdf->Cell(28, 4,"O.Produccion", 1, 1, "C", 0, '', 0);
-        $pdf->SetXY(88,$altura);
-        $pdf->Cell(30, 4,"Factura", 1, 1, "C", 0, '', 0);
-        $pdf->SetXY(118,$altura);
-        $pdf->Cell(60, 4,"Empresa", 1, 1, "C", 0, '', 0);
+        $pdf->Cell(28, 6,"O.Produccion", 1, 1, "C", 0, '', 0);
+        $pdf->SetXY(63,$altura);
+        $pdf->Cell(30, 6,"Factura", 1, 1, "C", 0, '', 0);
+        $pdf->SetXY(93,$altura);
+        $pdf->Cell(85, 6,"Empresa", 1, 1, "C", 0, '', 0);
         $pdf->SetXY(178,$altura);
-        $pdf->Cell(22, 4,"Monto", 1, 1, "C", 0, '', 0);
+        $pdf->Cell(22, 6,"Monto", 1, 1, "C", 0, '', 0);
         $pdf->SetFont('courier', '', 9);
 
         $acumulaEmpresa=0;
@@ -119,26 +119,26 @@ while ($EMP = mysql_fetch_assoc($resultEMPRESAS)) {
             $sqlFactura="select * from factura where idordendecompra='".$venta["idordendecompra"]."' and estatus=1";
             $resultFactura = mysql_query($sqlFactura, $con) or die(mysql_error());
         
-            $altura+=4.5;
+            $altura+=6;
             $pdf->SetXY(10,$altura);
             $date = new DateTime($venta["fechaderegistro"]);
-            $pdf->Cell(25, 4,$date->format('d-m-Y'), 1, 1, "C", 0, '', 0);
+            $pdf->Cell(25, 6,$date->format('d-m-Y'), 1, 1, "C", 0, '', 0);
             $pdf->SetXY(35,$altura);
-            $pdf->Cell(25, 4,$venta["codigoexterno"], 1, 1, "C", 0, '', 0);
-            $pdf->SetXY(60,$altura);
-            $pdf->Cell(28, 4,$venta["codigoop"], 1, 1, "C", 0, '', 0);
-            $pdf->SetXY(88,$altura);    
+            //$pdf->Cell(25, 6,$venta["codigoexterno"], 1, 1, "C", 0, '', 0);
+           // $pdf->SetXY(60,$altura);
+            $pdf->Cell(28, 6,$venta["codigoop"], 1, 1, "C", 0, '', 0);
+            $pdf->SetXY(63,$altura);    
     
             if(mysql_num_rows($resultFactura)>0){
                 $factura = mysql_fetch_assoc($resultFactura);
-                $pdf->Cell(30, 4,$factura["serie"]."-".$factura["folio"], 1, 1, "C", 0, '', 0);
+                $pdf->Cell(30, 6,$factura["serie"]."-".$factura["folio"], 1, 1, "C", 0, '', 0);
             }else{
-                $pdf->Cell(30, 4,"Sin Emitir", 1, 1, "C", 0, '', 0);
+                $pdf->Cell(30, 6,"Sin Emitir", 1, 1, "C", 0, '', 0);
             }            
-            $pdf->SetXY(118,$altura);
-            $pdf->Cell(60, 4,$empresa["nombreempresa"], 1, 1, "L", 0, '', 0);
+            $pdf->SetXY(93,$altura);
+            $pdf->Cell(85, 6,$empresa["nombrecomercial"], 1, 1, "L", 0, '', 0);
             $pdf->SetXY(178,$altura);
-            $pdf->Cell(22, 4,"$".$venta["total"], 1, 1, "R", 0, '', 0);
+            $pdf->Cell(22, 6,"$".$venta["total"], 1, 1, "R", 0, '', 0);
             $acumulaEmpresa+=$venta["total"];
             
         if($altura>260){
@@ -160,9 +160,9 @@ while ($EMP = mysql_fetch_assoc($resultEMPRESAS)) {
             
             
         }
-        $altura+=4.5;
+        $altura+=6;
         $pdf->SetXY(178,$altura);
-        $pdf->Cell(22, 4,"$".$acumulaEmpresa, 1, 1, "R", 0, '', 0);
+        $pdf->Cell(22, 6,"$".$acumulaEmpresa, 1, 1, "R", 0, '', 0);
         $altura+=10;
         
         if($altura>260){
