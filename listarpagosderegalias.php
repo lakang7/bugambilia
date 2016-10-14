@@ -230,8 +230,8 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="empresa.nombreempresa">Empresa</option>
                                                             <option value="ordendeproduccion.codigoop">Orden de Producción</option>
+                                                            <option value="empresa.nombreempresa">Empresa</option>                                                            
                                                             <option value="regalias.fechadecreacion">Fecha de Creación</option>
                                                             <option value="regalias.monto">Monto</option>
                                                             <option value="regalias.cancelado">Cancelado</option>
@@ -244,8 +244,8 @@
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
-                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Orden de Producción</div> 
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('ordendeproduccion.codigoop')">Orden de Producción</div>
+                                                    <div class="col-xs-3 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>                                                     
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('regalias.fechadecreacion')">Fecha de Creación<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.monto')">Monto</div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('regalias.cancelado')">Cancelado</div>
@@ -259,8 +259,8 @@
                                                         while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                                                             if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-3 columna_linea'>".$fila["nombreempresa"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["codigoop"]."</div>";
+                                                                echo "<div class='col-xs-3 columna_linea'>".$fila["nombreempresa"]."</div>";                                                                
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["fechadecreacion"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["monto"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["cancelado"]."</div>";

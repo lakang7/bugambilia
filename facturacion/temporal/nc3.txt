@@ -1,0 +1,7 @@
+|EMISOR|GOYA780416GM0|Regimen General de Ley Personas Morales|
+|RECEPTOR|AASL900111CP5|Forbatch SA de CV|Av. Eugenia|1160|302|Narvarte Poniente|||Ciudad de Mexico|Distrito Federal|México|03020|
+|COMPROBANTE|3.2|Sin Serie|2016-10-13 20:46:55|Pago en Una Sola Exhibicion|252.64|293.06|Transferencia Electrónica|Ingreso|USD|19.100||16||100|Esta Nota de Credito Cancela la Factura Serie: SIN SERIE Folio: 5147|FALSE|micorreo@pruebascorreo.com|||CREDITO|0453|
+|EXPEDIDOEN|01|Desconocida|Av. Uno|54|206|San Pedro de los Pinos|||México, D.F.||MEXICO|03800|
+|CONCEPTO|2|Pieza|BSI04|BSI04 BB Bari Cuadrado L|73.15|146.3|IVA|16|23.41|||
+|CONCEPTO|2|Pieza|BUI02|BUI02 SB Bari Rectangular S|17.14|34.28|IVA|16|5.48|||
+|CONCEPTO|6|Pieza|A-BH003|A-BH003 FT Botanero 4 Hojas GM|12.01|72.06|IVA|16|11.53|||

@@ -276,11 +276,6 @@
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">                                                                                                                        
                                                             <?php
                                                                 if(isset($_GET["campofiltro"])){
-                                                                    if($_GET["campofiltro"]=="ordendecompra.codigoexterno"){
-                                                                        echo "<option value='ordendecompra.codigoexterno' selected='selected'>Código orden de Compra</option>";
-                                                                    }else{
-                                                                        echo "<option value='ordendecompra.codigoexterno'>Código orden de Compra</option>"; 
-                                                                    }
                                                                     if($_GET["campofiltro"]=="ordendecompra.codigoop"){
                                                                         echo "<option value='ordendecompra.codigoop' selected='selected'>Código orden de Producción</option>";
                                                                     }else{
@@ -316,8 +311,7 @@
                                                                     }else{
                                                                         echo "<option value='ordendecompra.total'>Total</option>"; 
                                                                     }                                                                   
-                                                                }else{
-                                                                    echo "<option value='ordendecompra.codigoexterno'>Código orden de Compra</option>";
+                                                                }else{                                                                    
                                                                     echo "<option value='ordendecompra.codigoop'>Código orden de Producción</option>";
                                                                     echo "<option value='empresa.nombreempresa'>Empresa</option>";
                                                                     echo "<option value='agenda.nombre'>Contacto</option>";
@@ -359,11 +353,11 @@
                                                 ?>                                                                                                
                                                 <div id="contenedortabla">                                                                                                                                                           
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Código OC</div>
+                                                    <!--<div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoexterno')">Código OC</div>-->
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.codigoop')">Código OP</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('empresa.nombreempresa')">Empresa</div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('agenda.nombre')">Contacto</div>
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
+                                                    <div class="col-xs-2 columna_cabecera" onclick="ordena('listadeprecios.nombre')">Lista de Precios</div>  
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechaderegistro')">Registro<i class="ace-icon glyphicon glyphicon-upload" style="float: right"></i></div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.fechadeentrega')">Entrega</div>
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('ordendecompra.total')">Total</div>
@@ -401,11 +395,11 @@
                                                                 }                                                                 
 
                                                                 echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
+                                                                //echo "<div class='col-xs-1 columna_linea'>".$fila["codigo"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["codigoop"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["empresa"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["contacto"]."</div>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["lista"]."</div>";
+                                                                echo "<div class='col-xs-2 columna_linea'>".$fila["lista"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["registro"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["fecha"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".round($fila["total"],2)."</div>";

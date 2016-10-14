@@ -233,7 +233,7 @@
                                                     </div>                                                            
                                                     <div style="width: 20%; float: right; margin-right: 1ex">
                                                         <select class="chosen-select form-control" id="camfiltro" name="camfiltro" data-placeholder="Escoja la columna para filtrar">
-                                                            <option value="codigoexterno">Código</option>
+                                                            <option value="codigoop">Código</option>
                                                             <option value="nombreempresa">Empresa</option>
                                                             <option value="emision">Fecha de Emisión</option>
                                                             <option value="serie">Serie</option>
@@ -250,7 +250,7 @@
                                                 <input type="hidden" id="pagina" name="pagina" value="1" >
                                                 <div id="contenedortabla">
                                                 <div class="row cabecera_tabla">
-                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('codigoexterno')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
+                                                    <div class="col-xs-1 columna_cabecera" onclick="ordena('codigoop')">Código<i class="ace-icon glyphicon glyphicon-download" style="float: right"></i></div>
                                                     <div class="col-xs-2 columna_cabecera" onclick="ordena('nombreempresa')">Empresa</div>                                                    
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('emision')">Fecha de Emisión</div> 
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('serie')">Serie</div>
@@ -261,14 +261,14 @@
                                                     <div class="col-xs-1 columna_cabecera" onclick="ordena('resta')">Resta</div>
 						</div>
                                                 <?php 
-                                                    $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.estatus=1 and factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
+                                                    $sql_listaEMPRESA="select factura.idfactura, factura.resta, agenda.nombre, empresa.nombreempresa, ordendecompra.codigoexterno, ordendecompra.codigoop, factura.emision, factura.serie, factura.folio, factura.subtotal, factura.iva, factura.total from empresa, factura, agenda, ordendecompra where factura.estatus=1 and factura.idempresa = empresa.idempresa and factura.idordendecompra = ordendecompra.idordendecompra and factura.idagenda = agenda.idagenda order by factura.emision desc";
                                                     $result_listaEMPRESA=mysql_query($sql_listaEMPRESA,$con) or die(mysql_error());
                                                     if(mysql_num_rows($result_listaEMPRESA)>0){
                                                         $cuenta=0;
                                                         while ($fila = mysql_fetch_assoc($result_listaEMPRESA)) {
                                                             if($cuenta<10){
                                                                 echo "<div class='row linea_tabla'>";
-                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigoexterno"]."</div>";
+                                                                echo "<div class='col-xs-1 columna_linea'>".$fila["codigoop"]."</div>";
                                                                 echo "<div class='col-xs-2 columna_linea'>".$fila["nombreempresa"]."</div>";                                                                
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["emision"]."</div>";
                                                                 echo "<div class='col-xs-1 columna_linea'>".$fila["serie"]."</div>";

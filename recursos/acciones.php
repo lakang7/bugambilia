@@ -974,8 +974,10 @@ if ($tarea == 16) {
                 $mayor = $material["dias"];
             }
         }
-        $nuevafecha = new DateTime($_POST["id-date-picker-1"]);
-        $fechaaunx01=$nuevafecha->modify('+' . $mayor . ' day');
+        $nuevafecha = new DateTime($_POST["id-date-picker-1"]);        
+        $fechaaunx01= new DateTime($_POST["id-date-picker-1"]);
+        $fechaaunx01->modify('+' . $mayor . ' day');
+        $nuevafecha->modify('+' . $mayor . ' day');        
         $diaenlasemana=date_format($nuevafecha, 'w');
         
         if($diaenlasemana==0){          /*Domingo*/
