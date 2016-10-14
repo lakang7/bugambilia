@@ -937,22 +937,27 @@
                                                             
                                                             function semodifica(){
                                                                 var evalu=document.getElementById("campos").value;
+                                                                var listacolores=document.getElementById("oculto05").value.split("_");
                                                                 var listaprecios=document.getElementById("oculto06").value.split("_");
                                                                 var listaunidades=document.getElementById("oculto07").value.split("_");
                                                                 var nuevoprecios="";
                                                                 var nuevounidade="";
+                                                                var nuevocolores="";
                                                                 for(var j=0;j<listaprecios.length;j++){
                                                                     if(listaprecios[j]!==""){
                                                                         if(j==evalu){
                                                                             nuevoprecios=nuevoprecios+"_"+document.getElementById("campre").value;
                                                                             nuevounidade=nuevounidade+"_"+document.getElementById("camuni").value;                                                                            
+                                                                            nuevocolores=nuevocolores+"_"+document.getElementById("camcol").value; 
                                                                         }else{
                                                                             nuevoprecios=nuevoprecios+"_"+listaprecios[j];
                                                                             nuevounidade=nuevounidade+"_"+listaunidades[j];                                                                            
+                                                                            nuevocolores=nuevocolores+"_"+listacolores[j];
                                                                         }
                                                                     }
                                                                 }
                                                                 document.getElementById("camcos").value = (Math.round((document.getElementById("camuni").value * document.getElementById("campre").value)*100)/100);
+                                                                document.getElementById("oculto05").value = nuevocolores;
                                                                 document.getElementById("oculto06").value = nuevoprecios;
                                                                 document.getElementById("oculto07").value = nuevounidade;                                                                
                                                             }

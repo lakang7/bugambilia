@@ -774,10 +774,30 @@
         echo "<input type='text' name='campos' id='campos' value='".$_POST["posicion"]."' style='width:100%' disabled='disabled'/>";
         echo "<div style='width:100%'>Código Producto</div>";
         echo "<input type='text' name='camcod' id='camcod' value='".$liscodigos[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
-        echo "<div style='width:100%'>Color</div>";
-        echo "<input type='text' name='camcol' id='camcol' value='".$liscolores[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
         echo "<div style='width:100%'>Descripción</div>";
         echo "<input type='text' name='camdes' id='camdes' value='".$lisdescrip[$_POST["posicion"]]."' style='width:100%' disabled='disabled'/>";
+        echo "<div style='width:100%'>Color</div>";
+        ?>
+        <div style="width: 100%;">
+            <select class="chosen-select form-control" style="width: 100%" id="camcol" name="camcol" onchange="semodifica()" data-placeholder="Seleccione el color" required="required">
+                <option value="">  </option>
+                <?php                                                                                    
+                $sql_listaCOLOR="select * from color order by nombre";
+                $result_listaCOLOR=mysql_query($sql_listaCOLOR,$con) or die(mysql_error());
+                if(mysql_num_rows($result_listaCOLOR)>0){
+                    while ($color = mysql_fetch_assoc($result_listaCOLOR)) {
+                        if($liscolores[$_POST["posicion"]]==$color["nombre"]){
+                            echo "<option value='".$color["nombre"]."' selected='selected'>".$color["codigo"]." ".$color["nombre"]."</option>";
+                        }else{
+                            echo "<option value='".$color["nombre"]."'>".$color["codigo"]." ".$color["nombre"]."</option>";
+                        }
+                        
+                    }
+                }                                                                                                                                                   
+                ?>
+            </select>                                                         
+        </div>    
+        <?php        
         echo "<div style='width:100%'>Número de unidades</div>";
         echo "<input type='text' name='camuni' id='camuni' onchange=semodifica() value='".$lisunidade[$_POST["posicion"]]."' style='width:100%'/>";
         echo "<div style='width:100%'>Precio Unitario</div>";
@@ -785,7 +805,7 @@
         echo "<div style='width:100%'>Costo Total</div>";
         echo "<input type='text' name='camcos' id='camcos' value='".($lisprecios[$_POST["posicion"]]*$lisunidade[$_POST["posicion"]])."' style='width:100%' disabled='disabled'/>";        
         echo "<button class='btn btn-info' style='margin-top: 15px' data-dismiss='modal' onclick=actelemento()>Actualizar</button>";
-        
+
     }
       
     mysql_close($con);    
